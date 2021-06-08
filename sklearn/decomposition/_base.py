@@ -120,6 +120,19 @@ class _BasePCA(TransformerMixin, BaseEstimator, metaclass=ABCMeta):
             X_transformed /= np.sqrt(self.explained_variance_)
         return X_transformed
 
+    def quantum_transform(self, X, epsilon_delta, compute_error):
+
+        check_is_fitted(self)
+
+        X = self._validate_data(X, dtype=[np.float64, np.float32], reset=False)
+        if self.mean_ is not None:
+            X = X - self.mean_
+        X_transformed = np.dot(X, self.components_.T)
+        if self.whiten:
+            X_transformed /= np.sqrt(self.explained_variance_)
+        return X_transformed
+
+
     def inverse_transform(self, X):
         """Transform data back to its original space.
 

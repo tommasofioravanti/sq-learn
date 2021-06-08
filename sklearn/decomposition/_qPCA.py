@@ -1,4 +1,4 @@
-""" Principal Component Analysis.
+""" Quantum Principal Component Analysis.
 """
 
 # Author: Alexandre Gramfort <alexandre.gramfort@inria.fr>
@@ -9,10 +9,10 @@
 #         Giorgio Patrini <giorgio.patrini@anu.edu.au>
 #
 # License: BSD 3 clause
-
+import warnings
 from math import log, sqrt
 import numbers
-
+import functools
 import numpy as np
 from scipy import linalg
 from scipy.special import gammaln
@@ -26,6 +26,7 @@ from ..utils.extmath import fast_logdet, randomized_svd, svd_flip
 from ..utils.extmath import stable_cumsum
 from ..utils.validation import check_is_fitted
 from ..utils.validation import _deprecate_positional_args
+from ..QuantumUtility.Utility import *
 
 
 def _assess_dimension(spectrum, rank, n_samples):
@@ -340,7 +341,8 @@ class PCA(_BasePCA):
         self.iterated_power = iterated_power
         self.random_state = random_state
 
-    def fit(self, X, y=None):
+    def fit(self, X, y=None, quantum_retained_variance=False, eps=0, theta=0, eta=0,
+            theta_estimate=False, eps_theta=0, p=0, estimate_all=False, delta=0, error=False):
         """Fit the model with X.
 
         Parameters
@@ -351,15 +353,42 @@ class PCA(_BasePCA):
 
         y : Ignored
 
+        quantum_retained_variance : Bool flag. If true it computes the retained variance
+                                    in the quantum version of the algorithm (Theorem 9 of QADRA)
+        eps: float. Error to introduce for the singular values estimation. Must be greater than zero
+            if the quantum_retained_variance is true.
+
+        theta: float. Smallest singular values to retain in order to compute the retained variance.
+                Same constraints as for eps.
+
+        eta: float. Used to compute the relative error of the estimated variance. If it is zero
+                    the retained variance is returned without any error.
+
+        theta_estimate: Boolean flag. If true compute the estimation of theta as in Theorem 10 of QADRA.
+
+        eps_theta: error to introduce in the estimation of theta in Theorem 10.
+
         Returns
         -------
         self : object
             Returns the instance itself.
         """
-        self._fit(X)
+        if quantum_retained_variance:
+            if eps <= 0:
+                raise ValueError("eps must be > than 0")
+            if theta <= 0:
+                raise ValueError("theta must be > than 0")
+        if theta_estimate:
+            if p <= 0:
+                raise ValueError("p must be > then 0")
+            if eps_theta <= 0:
+                raise ValueError("eps_theta must be > then 0")
+        self._fit(X,quantum_retained_variance=quantum_retained_variance,eps=eps,theta=theta,eta=eta,
+                  theta_estimate=theta_estimate,eps_theta=eps_theta,ret_var=p,estimate_all=estimate_all,
+                  delta=delta,error=error)
         return self
 
-    def fit_transform(self, X, y=None):
+    def fit_transform(self, X, y=None, quantum_retained_variance=False, eps=0, theta=0, eta=0,theta_estimate=False, eps_theta=0,ret_var=0,estimate_all=False,delta=0,error=False):
         """Fit the model with X and apply the dimensionality reduction on X.
 
         Parameters
@@ -380,19 +409,20 @@ class PCA(_BasePCA):
         This method returns a Fortran-ordered array. To convert it to a
         C-ordered array, use 'np.ascontiguousarray'.
         """
-        U, S, Vt = self._fit(X)
+        U, S, Vt = self._fit(X, quantum_retained_variance=quantum_retained_variance, eps=eps, theta=theta, eta=eta,theta_estimate=theta_estimate,eps_theta=eps_theta ,ret_var=ret_var,estimate_all=estimate_all,delta=delta,error=error)
         U = U[:, :self.n_components_]
 
         if self.whiten:
             # X_new = X * V / S * sqrt(n_samples) = U * sqrt(n_samples)
             U *= sqrt(X.shape[0] - 1)
         else:
-            # X_new =  X * V= U * S * Vt * V = U * S
+            # X_new = X * V = U * S * Vt * V = U * S
             U *= S[:self.n_components_]
 
-        return U
+        return U/self.spectral_norm
 
-    def _fit(self, X):
+    def _fit(self, X, quantum_retained_variance, eps, theta, eta,theta_estimate, eps_theta
+             ,ret_var, estimate_all, delta, error):
         """Dispatch to the right submethod depending on the chosen solver."""
 
         # Raise an error for sparse input.
@@ -427,14 +457,16 @@ class PCA(_BasePCA):
 
         # Call different fits for either full or truncated SVD
         if self._fit_svd_solver == 'full':
-            return self._fit_full(X, n_components)
+            return self._fit_full(X, n_components,quantum_retained_variance,eps,theta,eta,
+                                  theta_estimate, eps_theta,ret_var,estimate_all,delta,error)
         elif self._fit_svd_solver in ['arpack', 'randomized']:
             return self._fit_truncated(X, n_components, self._fit_svd_solver)
         else:
             raise ValueError("Unrecognized svd_solver='{0}'"
                              "".format(self._fit_svd_solver))
 
-    def _fit_full(self, X, n_components):
+    def _fit_full(self, X, n_components, quantum_retained_variance, eps, theta, eta,
+                  theta_estimate, eps_theta, ret_var, estimate_all, delta, error):
         """Fit the model by computing full SVD on X."""
         n_samples, n_features = X.shape
 
@@ -463,7 +495,8 @@ class PCA(_BasePCA):
         U, Vt = svd_flip(U, Vt)
 
         components_ = Vt
-
+        ##
+        left_sv = U
         # Get variance explained by singular values
         explained_variance_ = (S ** 2) / (n_samples - 1)
         total_var = explained_variance_.sum()
@@ -497,6 +530,32 @@ class PCA(_BasePCA):
         self.explained_variance_ratio_ = \
             explained_variance_ratio_[:n_components]
         self.singular_values_ = singular_values_[:n_components]
+        ##Scaled singular values for assumptions purposes
+        self.left_sv = left_sv[:n_components]
+        self.spectral_norm = self.singular_values_[0]
+        self.scaled_singular_values = self.singular_values_ / self.spectral_norm
+
+        # THEOREM 9, 10 ,11 in fit function
+        if quantum_retained_variance:
+            if eta != 0:
+                p, p_sign = self.Theorem9(eps=eps, theta=theta, eta=eta)
+                self.quantum_variance_ret = p
+                self.quantum_variance_ret_with_err = p_sign
+            else:
+                p = self.Theorem9(eps=eps, theta=theta)
+                self.quantum_variance_ret = p
+
+        if theta_estimate:
+            self.est_theta = self.Theorem10(eps_theta=eps_theta, p=ret_var)
+
+        if estimate_all:
+            if error == False:
+                self.estimate_right_sv,self.estimate_left_sv,self.estimate_s_values,self.estimate_fs = self.Theorem11(
+                    delta=delta, eps=eps, theta=theta, error=error)
+            else:
+                self.est_r_sv_with_error, self.est_l_sv_with_error, self.est_svalues_with_error, self.est_fs_with_error=self.Theorem11(
+                    delta=delta, eps=eps, theta=theta, error=error
+                )
 
         return U, S, Vt
 
@@ -552,6 +611,7 @@ class PCA(_BasePCA):
 
         self.n_samples_, self.n_features_ = n_samples, n_features
         self.components_ = Vt
+        self.left_sv=U
         self.n_components_ = n_components
 
         # Get variance explained by singular values
@@ -568,7 +628,13 @@ class PCA(_BasePCA):
         else:
             self.noise_variance_ = 0.
 
+
+        ###Scaled singular values for assumptions purposes
+        self.spectral_norm = self.singular_values_[0]
+        self.scaled_singular_values = self.singular_values_ / self.spectral_norm
+
         return U, S, Vt
+
 
     def score_samples(self, X):
         """Return the log-likelihood of each sample.
@@ -621,3 +687,159 @@ class PCA(_BasePCA):
 
     def _more_tags(self):
         return {'preserves_dtype': [np.float64, np.float32]}
+
+    def transform(self, X, classic_transform=False, epsilon_delta=0, compute_error=True,
+                  quantum_representation=False, quantum_flag=False, norm='None', psi=0):
+
+        if classic_transform or (epsilon_delta == 0 and psi == 0):
+            if epsilon_delta != 0 or compute_error or quantum_representation or quantum_flag or norm or psi!=0:
+                warnings.warn("Warning! You are using the classical transform, so the quantum parameter are useless.")
+            return super().transform(X)
+
+        else:
+            dict_res = {}
+            X_ = super().transform(X)
+            X_final = X_/self.spectral_norm
+
+            #print(error,f_norm)
+            if quantum_representation:  ###Corollario 15
+                if psi != 0:
+                    result = self.compute_quantum_representation(X_final,psi=psi,epsilon_delta=epsilon_delta,type=norm)
+                    dict_res.update({'QR_result': result})
+                else:
+                    raise ValueError("You must specify the error psi to insert in the matrix representation")
+            ###TODO:togliere compute_error visto che è inglobato in compute_quantum_representation
+
+            if compute_error: ###Lemma 13
+
+                A_sign, error, f_norm = self.compute_error(X_final, epsilon_delta)
+                r = [A_sign, error, f_norm]
+                dict_res.update({'Compute_error_result' : r})
+            else:
+                A_sign, error, f_norm = self.compute_error(X_final, epsilon_delta)
+                dict_res.update({'Compute_error_result' : A_sign})
+        return dict_res
+
+    #TODO Mettere compute_error dentro compute_quantum_representation
+    def compute_error(self,U,epsilon_delta):
+        #error=epsilon+delta
+        tot_error = np.sqrt(self.n_components_) * (epsilon_delta)
+        #print(tot_error)
+        A_sign = make_noisy_mat(U,tot_error)
+        f_norm = np.linalg.norm(U-A_sign)
+        return A_sign,epsilon_delta,f_norm
+
+    ### Corollary 16 of QADRA
+    def compute_quantum_representation(self, X, psi,epsilon_delta,type='None'):
+        #X_ = super().transform(X)
+        #X_final = X_ / self.spectral_norm
+        if type == 'est_representation':
+            A_sign,epsilon_delta,f_norm=self.compute_error(X,epsilon_delta)
+            return A_sign,epsilon_delta,f_norm
+        elif type == 'q_state':
+            Y_sign = make_noisy_mat(X, psi)
+            f_norm = np.linalg.norm(Y_sign)
+            Yi_ = []
+            norm_Y = []
+
+            for i in range(len(Y_sign)):
+                norm_Y.append(np.linalg.norm(Y_sign[i,:],ord=2)/f_norm)
+                Yi_.append(Y_sign[i,:]/f_norm)
+            q_state = QuantumState(registers=Yi_,amplitudes=norm_Y)
+            return q_state
+        elif type == 'None':
+            Y_sign = make_noisy_mat(X, psi)
+            return Y_sign
+        elif type == 'f_norm':
+            Y_sign = make_noisy_mat(X, psi)
+            f_norm = np.linalg.norm(Y_sign)
+            return Y_sign/f_norm
+
+    ### Theorem 9
+
+    def Theorem9(self, eps, theta, eta=0):
+        est_selected_sing_values = make_noisy_vec(self.scaled_singular_values, eps)
+        selected_sing_values = self.scaled_singular_values[est_selected_sing_values >= theta]
+
+        pow2 = lambda x: x**2
+        selected_sing_values_squared = np.apply_along_axis(pow2, 0, selected_sing_values)
+
+        # selected_sing_values_squared=[x**2 for x in selected_sing_values]
+        # sing_values_squared=[x**2 for x in self.singular_values_]
+
+        sing_values_squared = np.apply_along_axis(pow2, 0, self.scaled_singular_values)
+        p = sum(selected_sing_values_squared)/sum(sing_values_squared)
+        if eta != 0:
+            noise = eta * p
+            error = truncnorm.rvs(-noise, noise, size=1)
+            p_sign = p+error
+
+            return p, p_sign
+        else:
+            return p
+
+    ##Theorem 10
+
+    def Theorem10(self,eps_theta,p):
+
+        theta = np.min(self.scaled_singular_values[self.explained_variance_ratio_.cumsum() <= p].tolist())
+
+
+        error = truncnorm.rvs(-eps_theta, eps_theta, size=1)
+
+        return theta+error
+
+
+
+
+    def Theorem11(self, delta, eps, theta, error=False):
+        #p = self.Theorem9(eps, theta)
+
+        topk_singular_values = self.scaled_singular_values[self.scaled_singular_values > theta]
+        topk_factor_score = self.explained_variance_ratio_[self.scaled_singular_values > theta]
+        topk_right_singular_vectors = self.components_[self.scaled_singular_values > theta]
+        topk_left_singular_vectors = self.left_sv[self.scaled_singular_values > theta]
+        #print(np.linalg.norm(topk_left_singular_vectors,ord=2),np.linalg.norm(topk_right_singular_vectors,ord=2)
+        #      ,np.linalg.norm(topk_singular_values,ord=2),np.linalg.norm(topk_factor_score,ord=2))
+
+        right_singular_vectors_est = make_noisy_mat(topk_right_singular_vectors, delta,unitary=True)
+        left_singular_vectors_est = make_noisy_mat(topk_left_singular_vectors, delta,unitary=True)
+        singular_value_estimation = make_noisy_vec(topk_singular_values, eps)
+        factor_score_estimation = make_noisy_vec(topk_factor_score, 2*eps)
+        if error == False:
+            return right_singular_vectors_est, left_singular_vectors_est, singular_value_estimation, factor_score_estimation
+        else:
+            norm2_singular_vectors = np.linalg.norm(right_singular_vectors_est - topk_right_singular_vectors,ord=2)
+            norm2_left_singular_vectors = np.linalg.norm(left_singular_vectors_est - topk_left_singular_vectors,ord=2)
+            norm2_singular_values = np.linalg.norm(singular_value_estimation - topk_singular_values,ord=2)
+            norm2_factor_score_estimation = np.linalg.norm(factor_score_estimation-topk_factor_score,ord=2)
+
+            return (right_singular_vectors_est, norm2_singular_vectors), (left_singular_vectors_est, norm2_left_singular_vectors), (singular_value_estimation, norm2_singular_values), (factor_score_estimation, norm2_factor_score_estimation)
+
+
+
+    def RetainedVariance(self,measurements,variance):
+        q_state = QuantumState(registers=self.singular_values_,amplitudes=self.singular_values_)
+        estimations = estimate_wald(q_state.measure(measurements))
+        exp_var = 0
+        i = 0
+        sv = sorted(estimations.keys(), reverse=True)
+
+        ## riordino sv in modo decrescente tenendo il valore più piccolo di sv all'inizio
+        #new_sv = sv[::-1]
+        #new_sv = new_sv[-1:] + new_sv[:-1]
+
+        ##accedo con map a tutti i valori del dizionario con chiave in new_sv
+        dict_elem = np.array(list(map(estimations.get, sv)))
+        new_arr = dict_elem[dict_elem.cumsum() <= variance]
+        k = len(new_arr)
+        exp_var = new_arr.sum()
+        '''
+        while exp_var <= variance:
+            exp_var += estimations[sv[-i]]
+            i += 1
+        k = i
+        '''
+        return k,exp_var
+
+
