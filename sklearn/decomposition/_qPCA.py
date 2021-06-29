@@ -368,6 +368,15 @@ class PCA(_BasePCA):
 
         eps_theta: error to introduce in the estimation of theta in Theorem 10.
 
+        p: percentage of retained variance to estimate theta.
+
+        estimate_all: Bool flag. If true it estimates the singular vectors (left and right), the singular values and the factor score (Theorem 11 QADRA)
+
+        delta: Float. Is the error to insert in the estimation of the singular vectors, the singular values and the factor score
+
+        error: Bool flag. If true return the L2 norm of the difference of the estimation of singular vectors, values and fator score with the correct ones.
+
+
         Returns
         -------
         self : object
@@ -688,11 +697,46 @@ class PCA(_BasePCA):
     def _more_tags(self):
         return {'preserves_dtype': [np.float64, np.float32]}
 
-    def transform(self, X, classic_transform=False, epsilon_delta=0, compute_error=True,
-                  quantum_representation=False, quantum_flag=False, norm='None', psi=0):
+    def transform(self, X, classic_transform=True, epsilon_delta=0,
+                  quantum_representation=False, norm='None', psi=0):
+
+        """Fit the model with X.
+
+               Parameters
+               ----------
+               X : array-like of shape (n_samples, n_features)
+                   Training data, where n_samples is the number of samples
+                   and n_features is the number of features.
+
+               classic_transform: bool flag. If true, the classic transform is applied, otherwise quantum transform is applied.
+
+               epsilon_delta: float. Error to estimate the matrix (np.sqrt(n_components)*epsilon_delta
+
+               quantum_representation: bool flag. If true it returns a different quantum representation of the data X depend on the norm flag.
+
+               norm : {'est_representation', 'q_state', 'None', 'f_norm'}, default='None'
+                     If est_representation :
+                        Estimates the U*Sigma matrix (lemma 13 QADRA)
+
+                    If q_state :
+                        Create and return the quantum state.
+
+
+                    If None :
+                        return only the estimate matrix with psi error
+
+                    If randomized :
+                        return only the estimate matrix (with psi error) divided by its f-norm
+
+               Returns
+               -------
+               If classic_transform:
+                   Returns the transformed matrix, otherwise return a dictionary with all the result based on what you want to estimate.
+
+               """
 
         if classic_transform or (epsilon_delta == 0 and psi == 0):
-            if epsilon_delta != 0 or compute_error or quantum_representation or quantum_flag or norm or psi!=0:
+            if epsilon_delta != 0 or quantum_representation or norm or psi!=0:
                 warnings.warn("Warning! You are using the classical transform, so the quantum parameter are useless.")
             return super().transform(X)
 
@@ -705,22 +749,11 @@ class PCA(_BasePCA):
             if quantum_representation:  ###Corollario 15
                 if psi != 0:
                     result = self.compute_quantum_representation(X_final,psi=psi,epsilon_delta=epsilon_delta,type=norm)
-                    dict_res.update({'QR_result': result})
+                    dict_res.update({'quantum_representation_results': result})
                 else:
                     raise ValueError("You must specify the error psi to insert in the matrix representation")
-            ###TODO:togliere compute_error visto che è inglobato in compute_quantum_representation
-
-            if compute_error: ###Lemma 13
-
-                A_sign, error, f_norm = self.compute_error(X_final, epsilon_delta)
-                r = [A_sign, error, f_norm]
-                dict_res.update({'Compute_error_result' : r})
-            else:
-                A_sign, error, f_norm = self.compute_error(X_final, epsilon_delta)
-                dict_res.update({'Compute_error_result' : A_sign})
         return dict_res
 
-    #TODO Mettere compute_error dentro compute_quantum_representation
     def compute_error(self,U,epsilon_delta):
         #error=epsilon+delta
         tot_error = np.sqrt(self.n_components_) * (epsilon_delta)
@@ -729,10 +762,7 @@ class PCA(_BasePCA):
         f_norm = np.linalg.norm(U-A_sign)
         return A_sign,epsilon_delta,f_norm
 
-    ### Corollary 16 of QADRA
     def compute_quantum_representation(self, X, psi,epsilon_delta,type='None'):
-        #X_ = super().transform(X)
-        #X_final = X_ / self.spectral_norm
         if type == 'est_representation':
             A_sign,epsilon_delta,f_norm=self.compute_error(X,epsilon_delta)
             return A_sign,epsilon_delta,f_norm
@@ -799,8 +829,7 @@ class PCA(_BasePCA):
         topk_factor_score = self.explained_variance_ratio_[self.scaled_singular_values > theta]
         topk_right_singular_vectors = self.components_[self.scaled_singular_values > theta]
         topk_left_singular_vectors = self.left_sv[self.scaled_singular_values > theta]
-        #print(np.linalg.norm(topk_left_singular_vectors,ord=2),np.linalg.norm(topk_right_singular_vectors,ord=2)
-        #      ,np.linalg.norm(topk_singular_values,ord=2),np.linalg.norm(topk_factor_score,ord=2))
+
 
         right_singular_vectors_est = make_noisy_mat(topk_right_singular_vectors, delta,unitary=True)
         left_singular_vectors_est = make_noisy_mat(topk_left_singular_vectors, delta,unitary=True)
@@ -829,7 +858,7 @@ class PCA(_BasePCA):
         #new_sv = sv[::-1]
         #new_sv = new_sv[-1:] + new_sv[:-1]
 
-        ##accedo con map a tutti i valori del dizionario con chiave in new_sv
+        #accedo con map a tutti i valori del dizionario con chiave in new_sv
         dict_elem = np.array(list(map(estimations.get, sv)))
         new_arr = dict_elem[dict_elem.cumsum() <= variance]
         k = len(new_arr)

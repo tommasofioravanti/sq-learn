@@ -34,6 +34,7 @@ from ..utils import gen_batches
 from ..utils.extmath import squared_norm
 from ..utils import check_random_state
 from ..utils import deprecated
+from ..QuantumUtility.Utility import *
 from ..utils.validation import check_is_fitted, _check_sample_weight
 from ..utils._openmp_helpers import _openmp_effective_n_threads
 from ..exceptions import ConvergenceWarning
@@ -529,7 +530,7 @@ def _kmeans_single_elkan(X, sample_weight, centers_init, max_iter=300,
 
 def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
                          verbose=False, x_squared_norms=None, tol=1e-4,
-                         n_threads=1,precompute_distances=True, delta = None, eta=None, eps3_eps4=None):
+                         n_threads=1,precompute_distances=True, delta = None, eta=None):
     """A single run of k-means lloyd, assumes preparation completed prior.
 
     Parameters
@@ -607,24 +608,24 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
             counter_iter=counter_iter+1
 
             centers_old = centers.copy()
-            labels, distance, inertia = _labels_inertia(X, sample_weight, x_squared_norms, centers,
-                                precompute_distances=precompute_distances,
+            labels, distance, inertia = _labels_inertia(X, centers,
                                 distances=distances, delta=delta)
             labels = [int(lb) for lb in labels]
 
             # computation of the means is also called the M-step of EM
             if sp.issparse(X):
-                '''
+                warnings.warn("No quantum simulation")
+
                 centers = _k_means._centers_sparse(X, sample_weight, labels,
                                                   n_clusters, distances)
-                '''
-            else:
-                error = np.sqrt(eta)*eps3_eps4
-                centers = _centers_dense_sdrena(X, sample_weight, labels,
-                                                n_clusters, distances, error)
 
-            # print("did we just finished an iteration?")
-            # pdb.set_trace()
+            else:
+                eps3_eps4 = delta/2
+
+                error = np.sqrt(eta) * eps3_eps4
+
+                centers = _centers_dense_sdrena(X, labels,error)
+
 
             if verbose:
                 print("Iteration %2d, inertia %.3f" % (i, inertia))
@@ -647,53 +648,14 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
             # rerun E-step in case of non-convergence so that predicted labels
             # match cluster centers
             best_labels, distances, best_inertia = \
-                _labels_inertia(X, sample_weight, x_squared_norms, best_centers,
-                                precompute_distances=precompute_distances,
+                _labels_inertia(X, best_centers,
                                 distances=distances, delta=delta)
         if verbose:
             if counter_iter == max_iter:
                 print("Reached {} iterations of d-means".format(counter_iter))
         return best_labels, best_inertia, best_centers, i + 1
-        '''
-            lloyd_iter(X, sample_weight, x_squared_norms, centers, centers_new,
-                       weight_in_clusters, labels, center_shift, n_threads)
 
-            if verbose:
-                inertia = _inertia(X, sample_weight, centers, labels)
-                print(f"Iteration {i}, inertia {inertia}.")
-
-            centers, centers_new = centers_new, centers
-
-            if np.array_equal(labels, labels_old):
-                # First check the labels for strict convergence.
-                if verbose:
-                    print(f"Converged at iteration {i}: strict convergence.")
-                strict_convergence = True
-                break
-            else:
-                # No strict convergence, check for tol based convergence.
-                center_shift_tot = (center_shift**2).sum()
-                if center_shift_tot <= tol:
-                    if verbose:
-                        print(f"Converged at iteration {i}: center shift "
-                              f"{center_shift_tot} within tolerance {tol}.")
-                    break
-
-            labels_old[:] = labels
-
-        if not strict_convergence:
-            # rerun E-step so that predicted labels match cluster centers
-            lloyd_iter(X, sample_weight, x_squared_norms, centers, centers,
-                       weight_in_clusters, labels, center_shift, n_threads,
-                       update_centers=False)
-
-    inertia = _inertia(X, sample_weight, centers, labels)
-    '''
-    #return labels, inertia, centers, i + 1
-
-
-def _labels_inertia(X, sample_weight, x_squared_norms, centers,
-                    precompute_distances, distances, delta, n_threads=None):
+def _labels_inertia(X, centers, distances, delta, n_threads=None):
     """E step of the K-means EM algorithm.
 
     Compute the labels and the inertia of the given samples and centers.
@@ -703,6 +665,7 @@ def _labels_inertia(X, sample_weight, x_squared_norms, centers,
     X : {ndarray, sparse matrix} of shape (n_samples, n_features)
         The input samples to assign to the labels. If sparse matrix, must
         be in CSR format.
+
 
     sample_weight : ndarray of shape (n_samples,)
         The weights for each observation in X.
@@ -737,26 +700,18 @@ def _labels_inertia(X, sample_weight, x_squared_norms, centers,
     center_shift = np.zeros_like(weight_in_clusters)
 
     if sp.issparse(X):
+        warnings.warn("Attention! We are not running the quantum simulation")
         _labels = lloyd_iter_chunked_sparse
         inertia = _inertia_sparse
     else:
-
-        ##### QUI HACKED ASSIGNED LABELS.
-
         #_labels = lloyd_iter_chunked_dense
         #_inertia = _inertia_dense
-        labels,distances,inertia = hacked_assign_labels_array(X, sample_weight, x_squared_norms,centers,
+        labels,distances,inertia = hacked_assign_labels_array(X,centers,
                                                               delta)
-    '''
-    _labels(X, sample_weight, x_squared_norms, centers, centers,
-            weight_in_clusters, labels, center_shift, n_threads,
-            update_centers=False)
 
-    inertia = _inertia(X, sample_weight, centers, labels)
-    '''
     return labels,distances, inertia
 
-def hacked_assign_labels_array( X, sample_weight, x_squared_norms,  centers, delta):
+def hacked_assign_labels_array( X,centers, delta):
     """Compute label assignment and inertia for a dense array
     Return the inertia (sum of squared distances to the centers).
     """
@@ -814,7 +769,7 @@ def hacked_assign_labels_array( X, sample_weight, x_squared_norms,  centers, del
 
     return labels, distances, inertia
 
-def _centers_dense_sdrena(X, sample_weight, labels, n_clusters,  distances,error):
+def _centers_dense_sdrena(X, labels,error):
     """M step of the K-means EM algorithm (hacked)
     Computation of cluster centers / means.
     Parameters
@@ -836,53 +791,23 @@ def _centers_dense_sdrena(X, sample_weight, labels, n_clusters,  distances,error
     ## TODO: add support for CSR input
     ## TODO : re-add support for weighted delta means
 
-    #n_samples = X.shape[0]
+
     n_features = X.shape[1]
 
     centers = np.ndarray(shape=(len(np.unique(labels)), n_features))
-    #print("ok")
-    #pdb.set_trace()
-
-    #dtype = np.float32 if floating is float else np.float64
-    #centers = np.zeros((n_clusters, n_features), dtype=dtype)
-    #weight_in_cluster = np.zeros((n_clusters,), dtype=dtype)
-
-    #for i in range(n_samples):
-    #    c = labels[i]
-    #    weight_in_cluster[c] += sample_weight[i]
-    #empty_clusters = np.where(weight_in_cluster == 0)[0]
-    # maybe also relocate small clusters?
-
-    #if len(empty_clusters):
-    #    # find points to reassign empty clusters to
-    #    far_from_centers = distances.argsort()[::-1]
-
-    #    for i, cluster_id in enumerate(empty_clusters):
-    #        # XXX two relocated clusters could be close to each other
-    #        far_index = far_from_centers[i]
-    #        new_center = X[far_index]
-    #        centers[cluster_id] = new_center
-    #        weight_in_cluster[cluster_id] = sample_weight[far_index]
-
-    #for i in range(n_samples):
-    #    for j in range(n_features):
-    #        centers[labels[i], j] += X[i, j] #* sample_weight[i]
-
 
     for label in np.unique(labels):
-        #print(label)
+
         vectors_of_cluster = [pos for pos, val in enumerate(labels) if val == label] # np.where(labels == label )
-        #vectors_of_cluster = list(vectors_of_cluster[0])
+
         centroid = np.sum(X[vectors_of_cluster], axis=0)
-        #pdb.set_trace()
 
         centers[int(label)] = np.true_divide(centroid, len(vectors_of_cluster))
-    centers = make_noisy_vec(centers, error)
 
-    #centers /= weight_in_cluster[:, np.newaxis]
-    #print("lets see..")
 
-    #pdb.set_trace()
+    centers = L2_tomographyMatrix_rightSign(centers,delta=error)
+    #centers = make_noisy_vec(centers, error)
+
     return centers
 
 class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
@@ -1050,7 +975,7 @@ class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
     def __init__(self, n_clusters=8, *, init='k-means++', n_init=10,
                  max_iter=300, tol=1e-4, precompute_distances='deprecated',
                  verbose=0, random_state=None, copy_x=True,
-                 n_jobs='deprecated', algorithm='auto', delta=None, eta=None, eps3_eps4=None):
+                 n_jobs='deprecated', algorithm='auto', delta=None):
 
         self.n_clusters = n_clusters
         self.init = init
@@ -1064,8 +989,9 @@ class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
         self.n_jobs = n_jobs
         self.algorithm = algorithm
         self.delta=delta
-        self.eta=eta
-        self.eps3_eps4=eps3_eps4
+
+        #self.eta=eta
+        #self.eps3_eps4=eps3_eps4
 
     def _check_params(self, X):
         # precompute_distances
@@ -1268,6 +1194,9 @@ class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
                                 order='C', copy=self.copy_x,
                                 accept_large_sparse=False)
 
+        #Define eta = max_i ||v_i||^2
+        self.eta = max(np.linalg.norm(X, axis=1)**2)
+
         self._check_params(X)
         random_state = check_random_state(self.random_state)
         sample_weight = _check_sample_weight(sample_weight, X, dtype=X.dtype)
@@ -1298,7 +1227,7 @@ class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
 
         best_inertia = None
 
-        ### SI STIMANO I CENTROIDI INIZIALI CON KMEANS++
+        # SI STIMANO I CENTROIDI INIZIALI CON KMEANS++
         for i in range(self._n_init):
             # Initialize centers
             centers_init = self._init_centroids(
@@ -1311,7 +1240,7 @@ class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
             labels, inertia, centers, n_iter_ = kmeans_single(
                 X, sample_weight, centers_init, max_iter=self.max_iter,
                 verbose=self.verbose, tol=self._tol,
-                x_squared_norms=x_squared_norms, n_threads=self._n_threads,delta=self.delta,eta=self.eta,eps3_eps4=self.eps3_eps4)
+                x_squared_norms=x_squared_norms, n_threads=self._n_threads, delta=self.delta, eta=self.eta)
 
             # determine if these results are the best so far
             if best_inertia is None or inertia < best_inertia:
@@ -1420,7 +1349,7 @@ class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
 
 
 
-    def predict(self, X, sample_weight=None):
+    def predict(self, X, sample_weight=None,delta= None):
         """Predict the closest cluster each sample in X belongs to.
 
         In the vector quantization literature, `cluster_centers_` is called
@@ -1441,14 +1370,21 @@ class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
         labels : ndarray of shape (n_samples,)
             Index of the cluster each sample belongs to.
         """
+
         check_is_fitted(self)
 
         X = self._check_test_data(X)
         x_squared_norms = row_norms(X, squared=True)
         sample_weight = _check_sample_weight(sample_weight, X, dtype=X.dtype)
+        distances = np.zeros(shape=(X.shape[0],), dtype=X.dtype)
+        if delta == None:
+            delta = 0
 
-        return _labels_inertia_predict(X, sample_weight, x_squared_norms,
-                               self.cluster_centers_, self._n_threads)[0]
+        labels, distance, inertia = _labels_inertia(X, self.cluster_centers_,
+                                distances=distances, delta=delta)
+
+        labels = [int(lb) for lb in labels]
+        return labels
 
     def score(self, X, y=None, sample_weight=None):
         """Opposite of the value of X on the K-means objective.
