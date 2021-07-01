@@ -530,7 +530,7 @@ def _kmeans_single_elkan(X, sample_weight, centers_init, max_iter=300,
 
 def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
                          verbose=False, x_squared_norms=None, tol=1e-4,
-                         n_threads=1,precompute_distances=True, delta = None, eta=None):
+                         n_threads=1,precompute_distances=True, delta = None, eta=None,squared_distances=1):
     """A single run of k-means lloyd, assumes preparation completed prior.
 
     Parameters
@@ -581,6 +581,8 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
     n_iter : int
         Number of iterations run.
     """
+    if delta == None:
+        delta = 0
     n_clusters = centers_init.shape[0]
     distances = np.zeros(shape=(X.shape[0],), dtype=X.dtype)
     # Buffers to avoid new allocations at each iteration.
@@ -609,7 +611,7 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
 
             centers_old = centers.copy()
             labels, distance, inertia = _labels_inertia(X, centers,
-                                distances=distances, delta=delta)
+                                distances=distances, delta=delta,squared_distances=squared_distances)
             labels = [int(lb) for lb in labels]
 
             # computation of the means is also called the M-step of EM
@@ -620,11 +622,12 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
                                                   n_clusters, distances)
 
             else:
-                eps3_eps4 = delta/2
+                #eps3_eps4 = delta/2
 
-                error = np.sqrt(eta) * eps3_eps4
+                #error = np.sqrt(eta) * eps3_eps4
+                error = delta/2
 
-                centers = _centers_dense_sdrena(X, labels,error)
+                centers = _centers_dense_sdrena(X, labels, error)
 
 
             if verbose:
@@ -649,13 +652,13 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
             # match cluster centers
             best_labels, distances, best_inertia = \
                 _labels_inertia(X, best_centers,
-                                distances=distances, delta=delta)
+                                distances=distances, delta=delta,squared_distances=squared_distances)
         if verbose:
             if counter_iter == max_iter:
                 print("Reached {} iterations of d-means".format(counter_iter))
         return best_labels, best_inertia, best_centers, i + 1
 
-def _labels_inertia(X, centers, distances, delta, n_threads=None):
+def _labels_inertia(X, centers, distances, delta,squared_distances, n_threads=None):
     """E step of the K-means EM algorithm.
 
     Compute the labels and the inertia of the given samples and centers.
@@ -707,30 +710,20 @@ def _labels_inertia(X, centers, distances, delta, n_threads=None):
         #_labels = lloyd_iter_chunked_dense
         #_inertia = _inertia_dense
         labels,distances,inertia = hacked_assign_labels_array(X,centers,
-                                                              delta)
+                                                              delta,squared_distances)
 
     return labels,distances, inertia
 
-def hacked_assign_labels_array( X,centers, delta):
+def hacked_assign_labels_array(X ,centers, delta,squared_distances):
     """Compute label assignment and inertia for a dense array
     Return the inertia (sum of squared distances to the centers).
     """
-
-    n_samples = X.shape[0]
-    inertia = 0.0
-
-    center_squared_norms = []
-
-    #for center_idx in range(n_clusters):
-    #    center_squared_norms[center_idx] = dot(n_features, &centers[center_idx, 0], center_stride,
-    #        &centers[center_idx, 0], center_stride)
-    center_squared_norms = np.square(np.linalg.norm(centers))
-
     distances = sc.spatial.distance.cdist(X, centers, "euclidean")
 
 
 
     def delta_means(distances_from_centroids, delta):
+
         min = np.min(distances_from_centroids)
         mins  = np.where(distances_from_centroids <= min+delta)
         mins = mins[0] # Where returns a TUPLE with one element, just popping..
@@ -758,16 +751,25 @@ def hacked_assign_labels_array( X,centers, delta):
 
     #### SI RITORNA la label assegnata al punto con distanza minima dai centri[[1 2 2],..] per esempio
     ### dice che il primo punto ha label 1 ed ha distanza minima 2 dai centri.
+    if squared_distances == 1:
+        distances = np.square(distances)
     results = np.apply_along_axis(delta_means, 1, distances, delta)
 
 
 
     labels, inertias, selected_inertias = results[:, 0], results[:, 1], results[:, 2]
 
-    inertia = np.sum(np.square(inertias))
-    selected_inertia = np.sum(np.square(selected_inertias))
+    if squared_distances == 1:
+        inertia = np.sum(inertias)
+        delta_inertia = np.sum(selected_inertias)
+    else:  # we are doing inertia on non squared-distances, so we need to take the square..
+        inertia = np.sum(np.square(inertias))
+        delta_inertia = np.sum(np.square(selected_inertias))
 
-    return labels, distances, inertia
+    #inertia = np.sum(np.square(inertias))
+    #selected_inertia = np.sum(np.square(selected_inertias))
+
+    return labels, distances, delta_inertia
 
 def _centers_dense_sdrena(X, labels,error):
     """M step of the K-means EM algorithm (hacked)
@@ -805,8 +807,8 @@ def _centers_dense_sdrena(X, labels,error):
         centers[int(label)] = np.true_divide(centroid, len(vectors_of_cluster))
 
 
-    centers = L2_tomographyMatrix_rightSign(centers,delta=error)
-    #centers = make_noisy_vec(centers, error)
+    #centers = L2_tomographyMatrix_rightSign(centers,delta=error)
+    centers = make_noisy_vec(centers, error)
 
     return centers
 
@@ -975,7 +977,7 @@ class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
     def __init__(self, n_clusters=8, *, init='k-means++', n_init=10,
                  max_iter=300, tol=1e-4, precompute_distances='deprecated',
                  verbose=0, random_state=None, copy_x=True,
-                 n_jobs='deprecated', algorithm='auto', delta=None):
+                 n_jobs='deprecated', algorithm='auto', delta=None, squared_distances=1):
 
         self.n_clusters = n_clusters
         self.init = init
@@ -989,7 +991,7 @@ class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
         self.n_jobs = n_jobs
         self.algorithm = algorithm
         self.delta=delta
-
+        self.squared_distances=squared_distances
         #self.eta=eta
         #self.eps3_eps4=eps3_eps4
 
@@ -1195,6 +1197,7 @@ class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
                                 accept_large_sparse=False)
 
         #Define eta = max_i ||v_i||^2
+        #print(np.linalg.norm(X, axis=1))
         self.eta = max(np.linalg.norm(X, axis=1)**2)
 
         self._check_params(X)
@@ -1240,7 +1243,7 @@ class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
             labels, inertia, centers, n_iter_ = kmeans_single(
                 X, sample_weight, centers_init, max_iter=self.max_iter,
                 verbose=self.verbose, tol=self._tol,
-                x_squared_norms=x_squared_norms, n_threads=self._n_threads, delta=self.delta, eta=self.eta)
+                x_squared_norms=x_squared_norms, n_threads=self._n_threads, delta=self.delta, eta=self.eta,squared_distances=self.squared_distances)
 
             # determine if these results are the best so far
             if best_inertia is None or inertia < best_inertia:
@@ -1349,7 +1352,7 @@ class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
 
 
 
-    def predict(self, X, sample_weight=None,delta= None):
+    def predict(self, X, sample_weight=None,delta= None,squared_distances = 1):
         """Predict the closest cluster each sample in X belongs to.
 
         In the vector quantization literature, `cluster_centers_` is called
@@ -1381,7 +1384,7 @@ class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
             delta = 0
 
         labels, distance, inertia = _labels_inertia(X, self.cluster_centers_,
-                                distances=distances, delta=delta)
+                                distances=distances, delta=delta,squared_distances=squared_distances)
 
         labels = [int(lb) for lb in labels]
         return labels

@@ -63,35 +63,42 @@ def coupon_collect(quantum_state):
     return counter
 
 def make_noisy_vec(vec, noise,unitary=False):
-    if unitary:
-        new_vec = L2_tomographyVector_rightSign(vec, delta=noise)
+    #if unitary:
+        #new_vec = vec/np.linalg.norm(vec,ord=2)
+        #new_vec = L2_tomographyVector_rightSign(vec, delta=noise)
         #print(np.linalg.norm(new_vec,ord=2))
-    else:
-        noise_per_component = noise / np.sqrt(len(vec))
-        if noise_per_component != 0:
-            errors = truncnorm.rvs(-noise_per_component, noise_per_component, size=len(vec))
-            somma = lambda x, y: x + y
-            # new_vec = np.array([vec[i] + errors[i] for i in range(len(vec))])
-            new_vec = np.apply_along_axis(somma, 0, vec, errors)
 
-            # make the vector of unitary norm
-            # new_vec = new_vec / np.linalg.norm(new_vec, ord=2)
-        else:
-            new_vec = vec
+    noise_per_component = noise / np.sqrt(len(vec))
+    if noise_per_component != 0:
+
+        errors = truncnorm.rvs(-noise_per_component, noise_per_component, size=len(vec))
+        somma = lambda x, y: x + y
+        # new_vec = np.array([vec[i] + errors[i] for i in range(len(vec))])
+        new_vec = np.apply_along_axis(somma, 0, vec, errors)
+
+        # make the vector of unitary norm
+        if unitary:
+
+            new_vec = new_vec / np.linalg.norm(new_vec, ord=2)
+    else:
+        new_vec = vec
 
     return new_vec
 
 #Given a matrix it makes it noisy by adding gaussian error to each component
 def make_noisy_mat(A, noise, unitary=False):
-    if unitary:
+    '''if unitary:
         vector_list = []
         for i in range(A.shape[0]):
             vector_list.append(make_noisy_vec(A[i], noise=noise, unitary=unitary))
+            print(i)
         B = np.array(vector_list)
     else:
-        vector_A = A.reshape(A.shape[0]*A.shape[1])
-        vector_B = make_noisy_vec(vector_A, noise,unitary)
-        B = vector_B.reshape(A.shape[0],A.shape[1])
+    '''
+
+    vector_A = A.reshape(A.shape[0]*A.shape[1])
+    vector_B = make_noisy_vec(vector_A, noise,unitary)
+    B = vector_B.reshape(A.shape[0],A.shape[1])
     return B
 
 
