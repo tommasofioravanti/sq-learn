@@ -18,6 +18,7 @@ from ._dict_learning import (dict_learning, dict_learning_online,
 from ._factor_analysis import FactorAnalysis
 from ..utils.extmath import randomized_svd
 from ._lda import LatentDirichletAllocation
+from ._qPCA import qPCA
 
 
 __all__ = ['DictionaryLearning',
@@ -28,6 +29,7 @@ __all__ = ['DictionaryLearning',
            'MiniBatchSparsePCA',
            'NMF',
            'PCA',
+           'qPCA',
            'SparseCoder',
            'SparsePCA',
            'dict_learning',

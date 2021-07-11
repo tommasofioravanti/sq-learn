@@ -75,11 +75,13 @@ def make_noisy_vec(vec, noise,unitary=False):
         somma = lambda x, y: x + y
         # new_vec = np.array([vec[i] + errors[i] for i in range(len(vec))])
         new_vec = np.apply_along_axis(somma, 0, vec, errors)
-
+        #print(np.linalg.norm(new_vec,ord=2))
         # make the vector of unitary norm
-        if unitary:
+        #if unitary:
+            ##TODO: da rivedere
+        #    new_vec = new_vec / np.linalg.norm(new_vec, ord=2)
+            #print("aaa",np.linalg.norm(new_vec, ord=2))
 
-            new_vec = new_vec / np.linalg.norm(new_vec, ord=2)
     else:
         new_vec = vec
 
@@ -109,9 +111,11 @@ def create_rand_vec(n_vec, len_vec,scale=None,type = 'uniform'):
             vv = np.random.uniform(-1, 1, (len_vec))
         elif type == 'exp':
             vv = np.random.exponential(scale=scale,size=len_vec)
+        #elif type =='int':
+            #vv = np.random.randint(1, 100000000000, 784)
         vv = vv/np.linalg.norm(vv,ord=2)
         v.append(vv)
-        print(np.linalg.norm(vv,ord=2))
+
     return v
 
 
@@ -140,11 +144,12 @@ def L2_tomogrphy_fakeSign(V, N = None, delta=None):
     return x_sign
 
 
-def L2_tomogrphy_parallel(V, N = None, delta=None, n_jobs=None):
+def L2_tomogrphy_parallel(V, N = None, delta=None,frac=0.01 ,n_jobs=None):
 
     if np.round(np.linalg.norm(V, ord=2)) == 1.0 or np.round(np.linalg.norm(V, ord=2)) == 0.9:
         pass
     else:
+
         V = V / np.linalg.norm(V, ord = 2)
 
     d = len(V)
@@ -155,7 +160,7 @@ def L2_tomogrphy_parallel(V, N = None, delta=None, n_jobs=None):
     q_state = QuantumState(amplitudes=V, registers=index)
     dict_res = {}
 
-
+    assert (frac > 0)
     if n_jobs == None:
         #Case not parallel
         return L2_tomographyVector_rightSign(V=V,delta=delta)
@@ -164,8 +169,8 @@ def L2_tomogrphy_parallel(V, N = None, delta=None, n_jobs=None):
     else:
         n_cpu = n_jobs
         assert ( cpu_count() >= n_cpu)
-
-    for i in range(100000, N, 100000):
+    block = int(N * frac)
+    for i in range(block, N, block):
         with Pool(n_cpu) as prc:
             measure_lists = prc.starmap(auxiliary_fun, list(zip([q_state]*n_cpu, [int(i/n_cpu)]*n_cpu)))
             P_ = prc.map(estimate_wald,measure_lists)
@@ -173,6 +178,7 @@ def L2_tomogrphy_parallel(V, N = None, delta=None, n_jobs=None):
         P = sum(P_, Counter())
         P = {x: P[x] / n_cpu for x in P}
         P_i = np.zeros(d)
+        #P_i = list(np.vectorize(vectorize_aux_fun)(P, index))
         # Manage the mismatch problem of the length of the measurements for some values
         '''
         if len(P) < d:
@@ -188,7 +194,7 @@ def L2_tomogrphy_parallel(V, N = None, delta=None, n_jobs=None):
         P_i = list(map(lambda x: np.sqrt(x), P_i))
         '''
 
-        P_i[list(P.keys())]=list(P.values())
+        P_i[list(P.keys())]=np.sqrt(list(P.values()))
         # Part2 of algorithm 4.1
         max_index = max(index)
         digits = len(str(max_index)) + 1
@@ -216,7 +222,7 @@ def L2_tomogrphy_parallel(V, N = None, delta=None, n_jobs=None):
 
         d_ = list(map(dictionary.get, str_))
 
-        P_i = [P_i[e] if x > 0.4 * P_i[e] ** 2 * N else P_i[e] * -1 for e, x in enumerate(d_)]
+        P_i = [P_i[e] if x > 0.4 * P_i[e] ** 2 * i else P_i[e] * -1 for e, x in enumerate(d_)]
         print(i)
         #print(i, np.linalg.norm(P_i,ord=2))
 
@@ -390,4 +396,3 @@ def auxiliary_fun(q_state,i):
     return P
 def vectorize_aux_fun(dic,i):
     return np.sqrt(dic[i]) if i in dic else 0
-

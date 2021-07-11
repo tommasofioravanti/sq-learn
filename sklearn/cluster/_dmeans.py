@@ -739,7 +739,7 @@ def hacked_assign_labels_array(X ,centers, delta,squared_distances):
         else:
             print("Error")
 
-        # DELTAA!!!!
+
         selected_label = random.choice(mins)
 
         #label = np.where(distances_from_centroids == selected_min)

@@ -112,7 +112,7 @@ def _infer_dimension(spectrum, n_samples):
     return ll.argmax()
 
 
-class PCA(_BasePCA):
+class qPCA(_BasePCA):
     """Principal component analysis (PCA).
 
     Linear dimensionality reduction using Singular Value Decomposition of the
