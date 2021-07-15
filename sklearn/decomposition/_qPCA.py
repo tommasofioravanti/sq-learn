@@ -735,7 +735,7 @@ class qPCA(_BasePCA):
 
                """
 
-        if classic_transform or (epsilon_delta == 0 and psi == 0):
+        if classic_transform:
             if epsilon_delta != 0 or quantum_representation or norm or psi!=0:
                 warnings.warn("Warning! You are using the classical transform, so the quantum parameter are useless.")
             return super().transform(X)
@@ -747,11 +747,11 @@ class qPCA(_BasePCA):
 
             #print(error,f_norm)
             if quantum_representation:  ###Corollario 15
-                if psi != 0:
-                    result = self.compute_quantum_representation(X_final,psi=psi,epsilon_delta=epsilon_delta,type=norm)
-                    dict_res.update({'quantum_representation_results': result})
-                else:
-                    raise ValueError("You must specify the error psi to insert in the matrix representation")
+                assert (psi > 0 if norm!= 'est_representation' else psi >=0)
+                result = self.compute_quantum_representation(X_final,psi=psi,epsilon_delta=epsilon_delta,type=norm)
+                dict_res.update({'quantum_representation_results': result})
+
+
         return dict_res
 
     def compute_error(self,U,epsilon_delta):

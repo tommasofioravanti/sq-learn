@@ -17,6 +17,7 @@ import numpy as np
 import scipy.sparse as sp
 import scipy as sc
 import random
+import time
 from threadpoolctl import threadpool_limits
 from threadpoolctl import threadpool_info
 
@@ -386,7 +387,7 @@ def k_means(X, n_clusters, *, sample_weight=None, init='k-means++',
         Number of iterations corresponding to the best results.
         Returned only if `return_n_iter` is set to True.
     """
-    est = DMeans(
+    est = DMeans_(
         n_clusters=n_clusters, init=init, n_init=n_init, max_iter=max_iter,
         verbose=verbose, precompute_distances=precompute_distances, tol=tol,
         random_state=random_state, copy_x=copy_x, n_jobs=n_jobs,
@@ -610,8 +611,10 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
             counter_iter=counter_iter+1
 
             centers_old = centers.copy()
+
             labels, distance, inertia = _labels_inertia(X, centers,
                                 distances=distances, delta=delta,squared_distances=squared_distances)
+
             labels = [int(lb) for lb in labels]
 
             # computation of the means is also called the M-step of EM
@@ -626,9 +629,10 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
 
                 #error = np.sqrt(eta) * eps3_eps4
                 error = delta/2
-
+                start = time.time()
                 centers = _centers_dense_sdrena(X, labels, error)
-
+            end = time.time()
+            print(end - start,i)
 
             if verbose:
                 print("Iteration %2d, inertia %.3f" % (i, inertia))
@@ -709,8 +713,12 @@ def _labels_inertia(X, centers, distances, delta,squared_distances, n_threads=No
     else:
         #_labels = lloyd_iter_chunked_dense
         #_inertia = _inertia_dense
+        s = time.time()
         labels,distances,inertia = hacked_assign_labels_array(X,centers,
                                                               delta,squared_distances)
+
+        e = time.time()
+        print('hacked:',e-s)
 
     return labels,distances, inertia
 
@@ -742,17 +750,15 @@ def hacked_assign_labels_array(X ,centers, delta,squared_distances):
 
         selected_label = random.choice(mins)
 
-        #label = np.where(distances_from_centroids == selected_min)
-        #pdb.set_trace()
-
-
-        # label, correct inertia, selected inertia
         return int(selected_label), min, distances_from_centroids[selected_label]
 
     #### SI RITORNA la label assegnata al punto con distanza minima dai centri[[1 2 2],..] per esempio
     ### dice che il primo punto ha label 1 ed ha distanza minima 2 dai centri.
     if squared_distances == 1:
         distances = np.square(distances)
+
+    #np.save('distances',distances)
+
     results = np.apply_along_axis(delta_means, 1, distances, delta)
 
 
@@ -812,7 +818,7 @@ def _centers_dense_sdrena(X, labels,error):
 
     return centers
 
-class DMeans(TransformerMixin, ClusterMixin, BaseEstimator):
+class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
     """K-Means clustering.
 
     Read more in the :ref:`User Guide <k_means>`.
@@ -1683,7 +1689,7 @@ def _mini_batch_convergence(model, iteration_idx, n_iter, tol,
     return False
 
 
-class MiniBatchKMeans(DMeans):
+class MiniBatchKMeans(DMeans_):
     """
     Mini-Batch K-Means clustering.
 
@@ -2203,3 +2209,4 @@ class MiniBatchKMeans(DMeans):
                 'zero sample_weight is not equivalent to removing samples',
             }
         }
+

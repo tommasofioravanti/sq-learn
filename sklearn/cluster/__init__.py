@@ -15,7 +15,7 @@ from ._optics import (OPTICS, cluster_optics_dbscan, compute_optics_graph,
                       cluster_optics_xi)
 from ._bicluster import SpectralBiclustering, SpectralCoclustering
 from ._birch import Birch
-from ._dmeans import DMeans
+from ._dmeans import DMeans_
 
 __all__ = ['AffinityPropagation',
            'AgglomerativeClustering',
@@ -26,7 +26,7 @@ __all__ = ['AffinityPropagation',
            'cluster_optics_xi',
            'compute_optics_graph',
            'KMeans',
-           'DMeans',
+           'DMeans_',
            'FeatureAgglomeration',
            'MeanShift',
            'MiniBatchKMeans',
