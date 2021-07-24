@@ -17,12 +17,15 @@ import numpy as np
 import scipy.sparse as sp
 import scipy as sc
 import random
+random.seed(1234)
 import time
 from threadpoolctl import threadpool_limits
 from threadpoolctl import threadpool_info
 
 from ..QuantumUtility.Utility import *
+import random
 
+#random.seed(1234)
 from ..base import BaseEstimator, ClusterMixin, TransformerMixin
 from ..metrics.pairwise import euclidean_distances
 from ..metrics.pairwise import _euclidean_distances
@@ -629,10 +632,9 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
 
                 #error = np.sqrt(eta) * eps3_eps4
                 error = delta/2
-                start = time.time()
+
                 centers = _centers_dense_sdrena(X, labels, error)
-            end = time.time()
-            print(end - start,i)
+
 
             if verbose:
                 print("Iteration %2d, inertia %.3f" % (i, inertia))
@@ -713,12 +715,10 @@ def _labels_inertia(X, centers, distances, delta,squared_distances, n_threads=No
     else:
         #_labels = lloyd_iter_chunked_dense
         #_inertia = _inertia_dense
-        s = time.time()
+
         labels,distances,inertia = hacked_assign_labels_array(X,centers,
                                                               delta,squared_distances)
 
-        e = time.time()
-        print('hacked:',e-s)
 
     return labels,distances, inertia
 
@@ -728,7 +728,13 @@ def hacked_assign_labels_array(X ,centers, delta,squared_distances):
     """
     distances = sc.spatial.distance.cdist(X, centers, "euclidean")
 
+    def delta_means1(distances_from_centroids, delta):
 
+        B = distances_from_centroids.tolist()
+        mins = np.min(B, axis=1)
+        mins_ = [select_labels(np.where(i <= mins[e] + delta)[0]) for e, i in enumerate(B)]
+
+        return mins_,mins,mins
 
     def delta_means(distances_from_centroids, delta):
 
@@ -752,18 +758,19 @@ def hacked_assign_labels_array(X ,centers, delta,squared_distances):
 
         return int(selected_label), min, distances_from_centroids[selected_label]
 
-    #### SI RITORNA la label assegnata al punto con distanza minima dai centri[[1 2 2],..] per esempio
-    ### dice che il primo punto ha label 1 ed ha distanza minima 2 dai centri.
+    # SI RITORNA la label assegnata al punto con distanza minima dai centri[[1 2 2],..] per esempio
+    # dice che il primo punto ha label 1 ed ha distanza minima 2 dai centri.
     if squared_distances == 1:
         distances = np.square(distances)
 
-    #np.save('distances',distances)
-
-    results = np.apply_along_axis(delta_means, 1, distances, delta)
+        labels,inertias,selected_inertias = delta_means1(distances,delta)
 
 
+        #results = np.apply_along_axis(delta_means, 1, distances, delta)
 
-    labels, inertias, selected_inertias = results[:, 0], results[:, 1], results[:, 2]
+
+
+    #labels, inertias, selected_inertias = results[:, 0], results[:, 1], results[:, 2]
 
     if squared_distances == 1:
         inertia = np.sum(inertias)
@@ -2210,3 +2217,11 @@ class MiniBatchKMeans(DMeans_):
             }
         }
 
+
+
+def select_labels(a):
+    try:
+        labels = random.choice(a)
+        return labels
+    except ValueError:
+        print('Error')

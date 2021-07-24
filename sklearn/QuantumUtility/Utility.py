@@ -166,7 +166,7 @@ def L2_tomogrphy_parallel(V, N = None, delta=None,stop_when_reached_accuracy=Tru
     #block = int(N * frac)
     measure_indexes = np.geomspace(1, N, num=100, dtype=int)
     measure_indexes = check_measure(measure_indexes)
-
+    #measure_inde= measure_indexes[50:-1]
     for i in measure_indexes:
         if i < n_cpu:
             P = estimate_wald(q_state.measure(n_times=int(i)))
