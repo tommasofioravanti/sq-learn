@@ -698,7 +698,7 @@ class qPCA(_BasePCA):
         return {'preserves_dtype': [np.float64, np.float32]}
 
     def transform(self, X, classic_transform=True, epsilon_delta=0,
-                  quantum_representation=False, norm='None', psi=0):
+                  quantum_representation=False, norm='None', psi=0,tomography = False):
 
         """Fit the model with X.
 
@@ -748,23 +748,28 @@ class qPCA(_BasePCA):
             #print(error,f_norm)
             if quantum_representation:  ###Corollario 15
                 assert (psi > 0 if norm!= 'est_representation' else psi >=0)
-                result = self.compute_quantum_representation(X_final,psi=psi,epsilon_delta=epsilon_delta,type=norm)
+                result = self.compute_quantum_representation(X_final,psi=psi,epsilon_delta=epsilon_delta,
+                                                             type=norm,tomography = tomography)
                 dict_res.update({'quantum_representation_results': result})
 
 
         return dict_res
 
-    def compute_error(self,U,epsilon_delta):
+    def compute_error(self,U,epsilon_delta,tomography):
         #error=epsilon+delta
-        tot_error = np.sqrt(self.n_components_) * (epsilon_delta)
+        if tomography:
+            A_sign = make_noisy_mat(U, epsilon_delta, tomography)
+        else:
+
+            tot_error = np.sqrt(self.n_components_) * (epsilon_delta)
         #print(tot_error)
-        A_sign = make_noisy_mat(U,tot_error)
+            A_sign = make_noisy_mat(U,tot_error,tomography)
         f_norm = np.linalg.norm(U-A_sign)
         return A_sign,epsilon_delta,f_norm
 
-    def compute_quantum_representation(self, X, psi,epsilon_delta,type='None'):
+    def compute_quantum_representation(self, X, psi,epsilon_delta,tomography,type='None'):
         if type == 'est_representation':
-            A_sign,epsilon_delta,f_norm=self.compute_error(X,epsilon_delta)
+            A_sign,epsilon_delta,f_norm=self.compute_error(X,epsilon_delta,tomography)
             return A_sign,epsilon_delta,f_norm
         elif type == 'q_state':
             Y_sign = make_noisy_mat(X, psi)
@@ -778,10 +783,10 @@ class qPCA(_BasePCA):
             q_state = QuantumState(registers=Yi_,amplitudes=norm_Y)
             return q_state
         elif type == 'None':
-            Y_sign = make_noisy_mat(X, psi)
+            Y_sign = make_noisy_mat(X, psi,tomography)
             return Y_sign
         elif type == 'f_norm':
-            Y_sign = make_noisy_mat(X, psi)
+            Y_sign = make_noisy_mat(X, psi,tomography)
             f_norm = np.linalg.norm(Y_sign)
             return Y_sign/f_norm
 
