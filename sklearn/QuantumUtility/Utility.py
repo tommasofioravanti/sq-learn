@@ -63,9 +63,11 @@ def coupon_collect(quantum_state):
         counter += 1
     return counter
 
-def make_noisy_vec(vec, noise,tomography=False):
+def make_noisy_vec(vec, noise,tomography=False,stop_when_reached_accuracy=True):
+    """This function is used to estimate vec with tomography or with Gaussian Noise Approximation."""
+
     if tomography:
-        tomography_res = L2_tomogrphy_Noparallel(vec, delta=noise)
+        tomography_res = L2_tomogrphy_Noparallel(vec, delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy)
         new_vec = np.array(list(tomography_res.values())[-1])#take the last elements of the dictionary
         #new_vec = np.array(tomography_res)
     else:
@@ -84,22 +86,11 @@ def make_noisy_vec(vec, noise,tomography=False):
     return new_vec
 
 #Given a matrix it makes it noisy by adding gaussian error to each component
-def make_noisy_mat(A, noise, tomography=False):
-    '''
-    if tomography:
-        vector_list = []
-        noise = noise /np.sqrt(A.shape[1])
-        print(noise)
-        for i in range(A.shape[0]):
-            vector_list.append(make_noisy_vec(A[i], noise=noise, tomography=tomography))
-            print(i)
-        B = np.array(vector_list)
-    else:
+def make_noisy_mat(A, noise, tomography=False,stop_when_reached_accuracy=True):
 
-    '''
     vector_A = A.reshape(A.shape[0]*A.shape[1])
-    vector_B = make_noisy_vec(vector_A, noise,tomography)
-    B = vector_B.reshape(A.shape[0],A.shape[1])
+    vector_B = make_noisy_vec(vector_A, noise, tomography,stop_when_reached_accuracy=stop_when_reached_accuracy)
+    B = vector_B.reshape(A.shape[0], A.shape[1])
     return B
 
 
@@ -298,7 +289,28 @@ def L2_tomographyVector_rightSign(V, N = None, delta=None):
 
 
 def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=True):
+    """ Official version of the tomography function.
+        Parameters
+        ----------
+        V : array-like that has to be estimated.
 
+        N : int value. Number of measures of the quantum state. If None it is computed in the function itself.
+
+        delta: float value. It represent the error that you want to introduce to estimate the representation of vector V.
+
+        stop_when_reached_accuracy: bool flag. If True it stops the execution of the tomography when the L2-norm of the
+                                               difference between V and its estimation is less or equal then delta. Otherwise
+                                               N measures are done (very memory intensive for large vectors).
+        Returns
+        -------
+        dict_res : dictionary of shape {N_measure: vector_estimation}.
+
+        Notes
+        -----
+        This method returns an estimation of the true array V using quantum tomography.
+
+
+    """
     if np.round(np.linalg.norm(V, ord=2)) == 1.0 or np.round(np.linalg.norm(V, ord=2)) == 0.9:
         pass
     else:
@@ -470,3 +482,5 @@ def L2_tomogrphy_faster(V, N = None, delta=None,frac=0.01 ,n_jobs=None):
         print(i, end-start)
 
     return dict_res
+
+

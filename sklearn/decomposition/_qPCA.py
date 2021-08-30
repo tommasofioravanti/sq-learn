@@ -342,7 +342,7 @@ class qPCA(_BasePCA):
         self.random_state = random_state
 
     def fit(self, X, y=None, quantum_retained_variance=False, eps=0, theta=0, eta=0,
-            theta_estimate=False, eps_theta=0, p=0, estimate_all=False, delta=0, error=False):
+            theta_estimate=False, eps_theta=0, p=0, estimate_all=False, delta=0, error=False,tomography = False):
         """Fit the model with X.
 
         Parameters
@@ -353,29 +353,42 @@ class qPCA(_BasePCA):
 
         y : Ignored
 
-        quantum_retained_variance : Bool flag. If true it computes the retained variance
-                                    in the quantum version of the algorithm (Theorem 9 of QADRA)
-        eps: float. Error to introduce for the singular values estimation. Must be greater than zero
+        quantum_retained_variance : bool, default=False.
+            If true it computes the retained variance in the quantum version of the algorithm (Theorem 9 of QADRA)
+
+        eps: float, default=0.
+            Error to introduce for the singular values estimation. Must be greater than zero
             if the quantum_retained_variance is true.
 
-        theta: float. Smallest singular values to retain in order to compute the retained variance.
-                Same constraints as for eps.
+        theta: float, default=0.
+            Smallest singular values to retain in order to compute the retained variance. Same constraints as for eps.
 
-        eta: float. Used to compute the relative error of the estimated variance. If it is zero
-                    the retained variance is returned without any error.
+        eta: float, default=0.
+            Used to compute the relative error of the estimated variance. If it is zero,
+             the retained variance is returned without any error.
 
-        theta_estimate: Boolean flag. If true compute the estimation of theta as in Theorem 10 of QADRA.
+        theta_estimate: bool, default=False.
+            If true compute the estimation of theta as in Theorem 10 of QADRA.
 
-        eps_theta: error to introduce in the estimation of theta in Theorem 10.
+        eps_theta: float, default=0.
+            Error to introduce in the estimation of theta in Theorem 10.
 
-        p: percentage of retained variance to estimate theta.
+        p: float, default=0.
+            Percentage of retained variance to estimate theta.
 
-        estimate_all: Bool flag. If true it estimates the singular vectors (left and right), the singular values and the factor score (Theorem 11 QADRA)
+        estimate_all: bool, default=False.
+            If true it estimates the singular vectors (left and right), the singular values and the factor score (Theorem 11 QADRA)
 
-        delta: Float. Is the error to insert in the estimation of the singular vectors, the singular values and the factor score
+        delta: float, default=0.
+            Is the error to insert in the estimation of the singular vectors, singular values and factor score.
 
-        error: Bool flag. If true return the L2 norm of the difference of the estimation of singular vectors, values and fator score with the correct ones.
+        error: bool, default=False.
+            If true return the L2 norm of the difference of the estimation of singular vectors,
+             singular values and fator score with the correct ones.
 
+        tomography: bool, default=False.
+            If true means that the quantum estimations are done using tomography,
+            otherwise the estimations are approximated with a Truncated Gaussian Noise.
 
         Returns
         -------
@@ -394,7 +407,7 @@ class qPCA(_BasePCA):
                 raise ValueError("eps_theta must be > then 0")
         self._fit(X,quantum_retained_variance=quantum_retained_variance,eps=eps,theta=theta,eta=eta,
                   theta_estimate=theta_estimate,eps_theta=eps_theta,ret_var=p,estimate_all=estimate_all,
-                  delta=delta,error=error)
+                  delta=delta,error=error, tomography = tomography)
         return self
 
     def fit_transform(self, X, y=None, quantum_retained_variance=False, eps=0, theta=0, eta=0,theta_estimate=False, eps_theta=0,ret_var=0,estimate_all=False,delta=0,error=False):
@@ -431,7 +444,7 @@ class qPCA(_BasePCA):
         return U/self.spectral_norm
 
     def _fit(self, X, quantum_retained_variance, eps, theta, eta,theta_estimate, eps_theta
-             ,ret_var, estimate_all, delta, error):
+             ,ret_var, estimate_all, delta, error,tomography):
         """Dispatch to the right submethod depending on the chosen solver."""
 
         # Raise an error for sparse input.
@@ -467,7 +480,7 @@ class qPCA(_BasePCA):
         # Call different fits for either full or truncated SVD
         if self._fit_svd_solver == 'full':
             return self._fit_full(X, n_components,quantum_retained_variance,eps,theta,eta,
-                                  theta_estimate, eps_theta,ret_var,estimate_all,delta,error)
+                                  theta_estimate, eps_theta,ret_var,estimate_all,delta,error,tomography)
         elif self._fit_svd_solver in ['arpack', 'randomized']:
             return self._fit_truncated(X, n_components, self._fit_svd_solver)
         else:
@@ -475,7 +488,7 @@ class qPCA(_BasePCA):
                              "".format(self._fit_svd_solver))
 
     def _fit_full(self, X, n_components, quantum_retained_variance, eps, theta, eta,
-                  theta_estimate, eps_theta, ret_var, estimate_all, delta, error):
+                  theta_estimate, eps_theta, ret_var, estimate_all, delta, error,tomography):
         """Fit the model by computing full SVD on X."""
         n_samples, n_features = X.shape
 
@@ -547,15 +560,15 @@ class qPCA(_BasePCA):
         # THEOREM 9, 10 ,11 in fit function
         if quantum_retained_variance:
             if eta != 0:
-                p, p_sign = self.Theorem9(eps=eps, theta=theta, eta=eta)
+                p, p_sign = self.Quantum_factor_score_ratio(eps=eps, theta=theta, eta=eta)
                 self.quantum_variance_ret = p
                 self.quantum_variance_ret_with_err = p_sign
             else:
-                p = self.Theorem9(eps=eps, theta=theta)
+                p = self.Quantum_factor_score_ratio(eps=eps, theta=theta)
                 self.quantum_variance_ret = p
 
         if theta_estimate:
-            self.est_theta = self.Theorem10(eps_theta=eps_theta, p=ret_var)
+            self.est_theta = self.Singular_values_threshold(eps_theta=eps_theta, p=ret_var)
 
         if estimate_all:
             if error == False:
@@ -708,11 +721,14 @@ class qPCA(_BasePCA):
                    Training data, where n_samples is the number of samples
                    and n_features is the number of features.
 
-               classic_transform: bool flag. If true, the classic transform is applied, otherwise quantum transform is applied.
+               classic_transform: bool, default=True.
+                    If true, the classic transform is applied, otherwise quantum transform is applied.
 
-               epsilon_delta: float. Error to estimate the matrix (np.sqrt(n_components)*epsilon_delta
+               epsilon_delta: float, default=0.
+                    Error to estimate the matrix (np.sqrt(n_components)*epsilon_delta
 
-               quantum_representation: bool flag. If true it returns a different quantum representation of the data X depend on the norm flag.
+               quantum_representation: bool, default=False.
+                    If true it returns a different quantum representation of the data X, depending on the norm flag.
 
                norm : {'est_representation', 'q_state', 'None', 'f_norm'}, default='None'
                      If est_representation :
@@ -731,7 +747,8 @@ class qPCA(_BasePCA):
                Returns
                -------
                If classic_transform:
-                   Returns the transformed matrix, otherwise return a dictionary with all the result based on what you want to estimate.
+                   Returns the transformed matrix,
+                    otherwise return a dictionary with all the result based on what you want to estimate.
 
                """
 
@@ -783,17 +800,17 @@ class qPCA(_BasePCA):
             q_state = QuantumState(registers=Yi_,amplitudes=norm_Y)
             return q_state
         elif type == 'None':
-            Y_sign = make_noisy_mat(X, psi,tomography)
+            Y_sign = make_noisy_mat(X, psi, tomography)
             return Y_sign
         elif type == 'f_norm':
-            Y_sign = make_noisy_mat(X, psi,tomography)
+            Y_sign = make_noisy_mat(X, psi, tomography)
             f_norm = np.linalg.norm(Y_sign)
             return Y_sign/f_norm
 
-    ### Theorem 9
+    #Theorem 9
 
-    def Theorem9(self, eps, theta, eta=0):
-        est_selected_sing_values = make_noisy_vec(self.scaled_singular_values, eps)
+    def Quantum_factor_score_ratio(self, eps, theta, tomography, eta=0):
+        est_selected_sing_values = make_noisy_vec(self.scaled_singular_values, eps, tomography=tomography)
         selected_sing_values = self.scaled_singular_values[est_selected_sing_values >= theta]
 
         pow2 = lambda x: x**2
@@ -815,7 +832,7 @@ class qPCA(_BasePCA):
 
     ##Theorem 10
 
-    def Theorem10(self,eps_theta,p):
+    def Singular_values_threshold(self,eps_theta,p):
 
         theta = np.min(self.scaled_singular_values[self.explained_variance_ratio_.cumsum() <= p].tolist())
 
@@ -826,9 +843,9 @@ class qPCA(_BasePCA):
 
 
 
-
-    def Theorem11(self, delta, eps, theta, error=False):
-        #p = self.Theorem9(eps, theta)
+    #Theorem 11
+    def topk_sv_extractors(self, delta, eps, theta,tomography ,error=False):
+        #p = self.Quantum_factor_score_ratio(eps, theta)
 
         topk_singular_values = self.scaled_singular_values[self.scaled_singular_values > theta]
         topk_factor_score = self.explained_variance_ratio_[self.scaled_singular_values > theta]
@@ -836,10 +853,10 @@ class qPCA(_BasePCA):
         topk_left_singular_vectors = self.left_sv[self.scaled_singular_values > theta]
 
 
-        right_singular_vectors_est = make_noisy_mat(topk_right_singular_vectors, delta,unitary=True)
-        left_singular_vectors_est = make_noisy_mat(topk_left_singular_vectors, delta,unitary=True)
-        singular_value_estimation = make_noisy_vec(topk_singular_values, eps)
-        factor_score_estimation = make_noisy_vec(topk_factor_score, 2*eps)
+        right_singular_vectors_est = make_noisy_mat(topk_right_singular_vectors, delta, tomography=tomography)
+        left_singular_vectors_est = make_noisy_mat(topk_left_singular_vectors, delta, tomography=tomography)
+        singular_value_estimation = make_noisy_vec(topk_singular_values, eps, tomography=tomography)
+        factor_score_estimation = make_noisy_vec(topk_factor_score, 2*eps, tomography=tomography)
         if error == False:
             return right_singular_vectors_est, left_singular_vectors_est, singular_value_estimation, factor_score_estimation
         else:

@@ -532,7 +532,7 @@ def _kmeans_single_elkan(X, sample_weight, centers_init, max_iter=300,
     return labels, inertia, centers, i + 1
 
 
-def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
+def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, tomography, stop_when_reached_accuracy ,max_iter=300,
                          verbose=False, x_squared_norms=None, tol=1e-4,
                          n_threads=1,precompute_distances=True, delta = None, eta=None,squared_distances=1):
     """A single run of k-means lloyd, assumes preparation completed prior.
@@ -611,6 +611,7 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
     counter_iter=0
     with threadpool_limits(limits=1, user_api="blas"):
         for i in range(max_iter):
+
             counter_iter=counter_iter+1
 
             centers_old = centers.copy()
@@ -633,9 +634,9 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
                 #error = np.sqrt(eta) * eps3_eps4
                 error = delta/2
 
-                centers = _centers_dense_sdrena(X, labels, error)
+                centers = _centers_update(X, labels, error, intermediate_error=intermediate_err,tomography=tomography, stop_when_reached_accuracy =stop_when_reached_accuracy)
 
-
+                print(i)
             if verbose:
                 print("Iteration %2d, inertia %.3f" % (i, inertia))
 
@@ -645,7 +646,7 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
                 best_inertia = inertia
 
             center_shift_total = squared_norm(centers_old - centers)
-
+            print(center_shift_total,tol)
             if center_shift_total <= tol:
                 if verbose:
                     print("Converged at iteration %d: "
@@ -662,6 +663,7 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, max_iter=300,
         if verbose:
             if counter_iter == max_iter:
                 print("Reached {} iterations of d-means".format(counter_iter))
+        #print(i)
         return best_labels, best_inertia, best_centers, i + 1
 
 def _labels_inertia(X, centers, distances, delta,squared_distances, n_threads=None):
@@ -784,7 +786,7 @@ def hacked_assign_labels_array(X ,centers, delta,squared_distances):
 
     return labels, distances, delta_inertia
 
-def _centers_dense_sdrena(X, labels,error):
+def _centers_update(X, labels,error,intermediate_error,tomography,stop_when_reached_accuracy):
     """M step of the K-means EM algorithm (hacked)
     Computation of cluster centers / means.
     Parameters
@@ -819,9 +821,9 @@ def _centers_dense_sdrena(X, labels,error):
 
         centers[int(label)] = np.true_divide(centroid, len(vectors_of_cluster))
 
-
-    #centers = L2_tomographyMatrix_rightSign(centers,delta=error)
-    centers = make_noisy_vec(centers, error)
+    if intermediate_error:
+        #print('OK, intermediate error')
+        centers = make_noisy_mat(centers, error, tomography=tomography)
 
     return centers
 
@@ -919,6 +921,23 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
         intensive due to the allocation of an extra array of shape
         (n_samples, n_clusters).
 
+    delta : float, default=None
+        The error that you want to insert in the labels estimation and in the centroid updates.
+
+    tomography: bool, default=None.
+        True if you want to estimate the labels and the centroids update using the tomography, otherwise
+        Truncated Gaussian Noise approximation is used.
+
+    intermediate_error: bool, default=None.
+        True to add delta/2 error in the centroid update step. If false the centroid estimation is done without adding
+        any error. Set it to false if you want to reduce the execution time of the algorithm.
+
+    stop_when_reached_accuracy: bool, default=True.
+        When True it stops the tomography when the L2-norm of the difference between the true and the estimated vector
+        is less or equal than the tomography error, otherwise it computes the tomography using all the N measures of the
+        quantum state.
+
+
         For now "auto" (kept for backward compatibiliy) chooses "elkan" but it
         might change in the future for a better heuristic.
 
@@ -990,7 +1009,8 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
     def __init__(self, n_clusters=8, *, init='k-means++', n_init=10,
                  max_iter=300, tol=1e-4, precompute_distances='deprecated',
                  verbose=0, random_state=None, copy_x=True,
-                 n_jobs='deprecated', algorithm='auto', delta=None, squared_distances=1):
+                 n_jobs='deprecated', algorithm='auto', delta=None, squared_distances=1,
+                 intermediate_error=False, tomography=False, stop_when_reached_accuracy=True):
 
         self.n_clusters = n_clusters
         self.init = init
@@ -1005,6 +1025,9 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
         self.algorithm = algorithm
         self.delta=delta
         self.squared_distances=squared_distances
+        self.intermediate_error=intermediate_error
+        self.tomography = tomography
+        self.stop_when_reached_accuracy = stop_when_reached_accuracy
         #self.eta=eta
         #self.eps3_eps4=eps3_eps4
 
@@ -1256,7 +1279,9 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
             labels, inertia, centers, n_iter_ = kmeans_single(
                 X, sample_weight, centers_init, max_iter=self.max_iter,
                 verbose=self.verbose, tol=self._tol,
-                x_squared_norms=x_squared_norms, n_threads=self._n_threads, delta=self.delta, eta=self.eta,squared_distances=self.squared_distances)
+                x_squared_norms=x_squared_norms, n_threads=self._n_threads, delta=self.delta,
+                eta=self.eta,squared_distances=self.squared_distances,intermediate_err=self.intermediate_error,
+                tomography = self.tomography, stop_when_reached_accuracy = self.stop_when_reached_accuracy)
 
             # determine if these results are the best so far
             if best_inertia is None or inertia < best_inertia:

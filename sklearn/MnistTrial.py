@@ -15,8 +15,8 @@ pca.n_components = 61
 pca_model = pca.fit(X)
 error=0.8
 #Transform the features
-X_train_pca = pca_model.transform(X,classic_transform=False, epsilon_delta=error,
-                  quantum_representation=True, norm='est_representation', tomography=True)
+X_train_pca = pca_model.transform(X,classic_transform=False, epsilon_delta=error,quantum_representation=True, norm='est_representation',
+                                  tomography=True)
 
 knn = KNeighborsClassifier(n_neighbors=7)
 score = cross_validate(knn, X_train_pca['quantum_representation_results'][0],y,cv=StratifiedKFold(n_splits=10,shuffle=True, random_state=1234), n_jobs=4)
