@@ -366,13 +366,11 @@ def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=Tr
         if stop_when_reached_accuracy:
 
             sample = np.linalg.norm(V - P_i, ord=2)
-            print(sample, i)
+            #print(sample, i)
             if sample > delta:
                 pass
             else:
                 break
-
-
     return dict_res
 
 

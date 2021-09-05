@@ -341,7 +341,7 @@ class qPCA(_BasePCA):
         self.iterated_power = iterated_power
         self.random_state = random_state
 
-    def fit(self, X, y=None, quantum_retained_variance=False, eps=0, theta=0, eta=0,
+    def fit(self, X, y=None, classic_ret_variance_components = None ,quantum_retained_variance=False, eps=0, theta=0, eta=0,
             theta_estimate=False, eps_theta=0, p=0, estimate_all=False, delta=0, error=False,tomography = False):
         """Fit the model with X.
 
@@ -352,6 +352,10 @@ class qPCA(_BasePCA):
             and n_features is the number of features.
 
         y : Ignored
+
+        classic_ret_variance_components: float, default = None.
+            It computes the number of principal components to retain the classic_ret_variance_components percentage
+            of variance. If None, it doesn't anything.
 
         quantum_retained_variance : bool, default=False.
             If true it computes the retained variance in the quantum version of the algorithm (Theorem 9 of QADRA)
@@ -405,7 +409,7 @@ class qPCA(_BasePCA):
                 raise ValueError("p must be > then 0")
             if eps_theta <= 0:
                 raise ValueError("eps_theta must be > then 0")
-        self._fit(X,quantum_retained_variance=quantum_retained_variance,eps=eps,theta=theta,eta=eta,
+        self._fit(X,classic_ret_variance_components = classic_ret_variance_components,quantum_retained_variance=quantum_retained_variance,eps=eps,theta=theta,eta=eta,
                   theta_estimate=theta_estimate,eps_theta=eps_theta,ret_var=p,estimate_all=estimate_all,
                   delta=delta,error=error, tomography = tomography)
         return self
@@ -443,7 +447,7 @@ class qPCA(_BasePCA):
 
         return U/self.spectral_norm
 
-    def _fit(self, X, quantum_retained_variance, eps, theta, eta,theta_estimate, eps_theta
+    def _fit(self, X, classic_ret_variance_components ,quantum_retained_variance, eps, theta, eta,theta_estimate, eps_theta
              ,ret_var, estimate_all, delta, error,tomography):
         """Dispatch to the right submethod depending on the chosen solver."""
 
@@ -479,15 +483,15 @@ class qPCA(_BasePCA):
 
         # Call different fits for either full or truncated SVD
         if self._fit_svd_solver == 'full':
-            return self._fit_full(X, n_components,quantum_retained_variance,eps,theta,eta,
-                                  theta_estimate, eps_theta,ret_var,estimate_all,delta,error,tomography)
+            return self._fit_full(X, n_components, classic_ret_variance_components, quantum_retained_variance, eps, theta, eta,
+                                  theta_estimate, eps_theta, ret_var, estimate_all, delta, error, tomography)
         elif self._fit_svd_solver in ['arpack', 'randomized']:
             return self._fit_truncated(X, n_components, self._fit_svd_solver)
         else:
             raise ValueError("Unrecognized svd_solver='{0}'"
                              "".format(self._fit_svd_solver))
 
-    def _fit_full(self, X, n_components, quantum_retained_variance, eps, theta, eta,
+    def _fit_full(self, X, n_components,classic_ret_variance_components,quantum_retained_variance, eps, theta, eta,
                   theta_estimate, eps_theta, ret_var, estimate_all, delta, error,tomography):
         """Fit the model by computing full SVD on X."""
         n_samples, n_features = X.shape
@@ -556,6 +560,9 @@ class qPCA(_BasePCA):
         self.left_sv = left_sv[:n_components]
         self.spectral_norm = self.singular_values_[0]
         self.scaled_singular_values = self.singular_values_ / self.spectral_norm
+
+        if classic_ret_variance_components != None:
+            self.components_retained_ = self.RetainedVariance(classic_ret_variance_components)
 
         # THEOREM 9, 10 ,11 in fit function
         if quantum_retained_variance:
@@ -711,7 +718,7 @@ class qPCA(_BasePCA):
         return {'preserves_dtype': [np.float64, np.float32]}
 
     def transform(self, X, classic_transform=True, epsilon_delta=0,
-                  quantum_representation=False, norm='None', psi=0,tomography = False):
+                  quantum_representation=False, norm='None', psi=0, tomography = False):
 
         """Fit the model with X.
 
@@ -832,11 +839,9 @@ class qPCA(_BasePCA):
 
     ##Theorem 10
 
-    def Singular_values_threshold(self,eps_theta,p):
+    def Singular_values_threshold(self, eps_theta, p):
 
         theta = np.min(self.scaled_singular_values[self.explained_variance_ratio_.cumsum() <= p].tolist())
-
-
         error = truncnorm.rvs(-eps_theta, eps_theta, size=1)
 
         return theta+error
@@ -869,7 +874,7 @@ class qPCA(_BasePCA):
 
 
 
-    def RetainedVariance(self,measurements,variance):
+    def QRetainedVariance(self,measurements,variance):
         q_state = QuantumState(registers=self.singular_values_,amplitudes=self.singular_values_)
         estimations = estimate_wald(q_state.measure(measurements))
         exp_var = 0
@@ -892,5 +897,27 @@ class qPCA(_BasePCA):
         k = i
         '''
         return k,exp_var
+
+    def RetainedVariance(self, variance):
+        ratio_cumsum = stable_cumsum(self.explained_variance_ratio_)
+        n_components = np.searchsorted(ratio_cumsum, variance,
+                                       side='right') + 1
+
+        '''
+        ret_variance = 0
+        n_components = 0
+        variance_ratio = self.explained_variance_ratio_
+        for i in range(len(variance_ratio)):
+            if ret_variance < variance:
+                ret_variance += variance_ratio[i]
+                n_components += 1
+
+        '''
+        return n_components
+
+
+
+
+
 
 
