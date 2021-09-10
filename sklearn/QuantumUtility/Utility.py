@@ -8,7 +8,9 @@ import numpy as np
 from joblib import Parallel
 from multiprocessing import *
 import os
-#random.seed(a=1234, version=2)
+
+
+# random.seed(a=1234, version=2)
 
 class QuantumState(object):
     """This class simulates a simple Quantum Register"""
@@ -27,10 +29,11 @@ class QuantumState(object):
         assert (abs(sum(self.probabilities) - 1) < 0.0000000001)
 
     def measure(self, n_times=1):
-        #return random.choices(self.registers,weights=self.probabilities,k=n_times)
+        # TODO: evaluate if there is benefits to move to scipy sampling rountine
+        # return random.choices(self.registers,weights=self.probabilities,k=n_times)
         LocalProcRandGen = np.random.RandomState()
         return LocalProcRandGen.choice(self.registers, p=self.probabilities, size=n_times)
-        #return np.random.choice(self.registers, p=self.probabilities, size=n_times)
+        # return np.random.choice(self.registers, p=self.probabilities, size=n_times)
 
     def get_state(self):
         return {self.registers[i]: self.probabilities[i] for i in range(len(self.registers))}
@@ -38,13 +41,12 @@ class QuantumState(object):
 
 def estimate_wald(measurements):
     counter = Counter(measurements)
-    #keys = list(counter.keys())
-    #values = list(np.asarray(list(counter.values()))/len(measurements))
-    #estimate = dict(zip(keys,values))
+    # keys = list(counter.keys())
+    # values = list(np.asarray(list(counter.values()))/len(measurements))
+    # estimate = dict(zip(keys,values))
     estimate = {x: counter[x] / len(measurements) for x in counter}
     return estimate
 
-###[1 4 5 6 2 3 4 1 4 8 9 6] 12    [1 4 5] [6 2 3] [4 1 4] [8 9 6]
 
 ## Introduce +-epsilon error in a value
 def introduce_error(value, epsilon):
@@ -63,13 +65,15 @@ def coupon_collect(quantum_state):
         counter += 1
     return counter
 
-def make_noisy_vec(vec, noise,tomography=False,stop_when_reached_accuracy=True):
+
+def make_noisy_vec(vec, noise, tomography, stop_when_reached_accuracy=True):
     """This function is used to estimate vec with tomography or with Gaussian Noise Approximation."""
 
     if tomography:
-        tomography_res = L2_tomogrphy_Noparallel(vec, delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy)
-        new_vec = np.array(list(tomography_res.values())[-1])#take the last elements of the dictionary
-        #new_vec = np.array(tomography_res)
+        tomography_res = L2_tomogrphy_Noparallel(vec, delta=noise,
+                                                 stop_when_reached_accuracy=stop_when_reached_accuracy)
+        new_vec = np.array(list(tomography_res.values())[-1])  # take the last elements of the dictionary
+
     else:
 
         noise_per_component = noise / np.sqrt(len(vec))
@@ -85,60 +89,59 @@ def make_noisy_vec(vec, noise,tomography=False,stop_when_reached_accuracy=True):
 
     return new_vec
 
-#Given a matrix it makes it noisy by adding gaussian error to each component
-def make_noisy_mat(A, noise, tomography=False,stop_when_reached_accuracy=True):
 
-    vector_A = A.reshape(A.shape[0]*A.shape[1])
-    vector_B = make_noisy_vec(vector_A, noise, tomography,stop_when_reached_accuracy=stop_when_reached_accuracy)
+# Given a matrix it makes it noisy by adding gaussian error to each component
+def make_noisy_mat(A, noise, tomography, stop_when_reached_accuracy=True):
+    vector_A = A.reshape(A.shape[0] * A.shape[1])
+    vector_B = make_noisy_vec(vector_A, noise, tomography, stop_when_reached_accuracy=stop_when_reached_accuracy)
     B = vector_B.reshape(A.shape[0], A.shape[1])
     return B
 
 
-def create_rand_vec(n_vec, len_vec,scale=None,type = 'uniform'):
-    v=[]
+def create_rand_vec(n_vec, len_vec, scale=None, type='uniform'):
+    v = []
     for i in range(n_vec):
         if type == 'uniform':
             vv = np.random.uniform(-1, 1, (len_vec))
         elif type == 'exp':
-            vv = np.random.exponential(scale=scale,size=len_vec)
-        vv = vv/np.linalg.norm(vv, ord=2)
+            vv = np.random.exponential(scale=scale, size=len_vec)
+        vv = vv / np.linalg.norm(vv, ord=2)
         v.append(vv)
 
     return v
 
 
-def L2_tomogrphy_fakeSign(V, N = None, delta=None):
+def L2_tomogrphy_fakeSign(V, N=None, delta=None):
     d = len(V)
-    #index = np.arange(0,d)
+    # index = np.arange(0,d)
     if N is None:
-        N = (36*d*np.log(d)) / (delta**2)
+        N = (36 * d * np.log(d)) / (delta ** 2)
 
     q_state = QuantumState(amplitudes=V, registers=V)
     P = estimate_wald(q_state.measure(n_times=int(N)))
-    #P = {V[k]: v for (k, v) in P.items()}
+    # P = {V[k]: v for (k, v) in P.items()}
 
-    #Manage the mismatch problem of the length of the measurements for some values
+    # Manage the mismatch problem of the length of the measurements for some values
     if len(P) < d:
         keys = set(list(P.keys()))
         v_set = set(V)
         missing_values = list(v_set - keys)
-        P.update({l : 0 for l in missing_values})
+        P.update({l: 0 for l in missing_values})
 
-    P_sqrt = {k : (-np.sqrt(v) if k<0 else np.sqrt(v)) for (k, v) in P.items()}
+    P_sqrt = {k: (-np.sqrt(v) if k < 0 else np.sqrt(v)) for (k, v) in P.items()}
 
-    x_sign=list(map(P_sqrt.get,V))
-    #x_sign = np.array(list(P_sqrt.values()))
-    #print(np.linalg.norm(x_sign,ord=2))
+    x_sign = list(map(P_sqrt.get, V))
+    # x_sign = np.array(list(P_sqrt.values()))
+    # print(np.linalg.norm(x_sign,ord=2))
     return x_sign
 
 
-def L2_tomogrphy_parallel(V, N = None, delta=None,stop_when_reached_accuracy=True,n_jobs=-1):
-
+def L2_tomogrphy_parallel(V, N=None, delta=None, stop_when_reached_accuracy=True, n_jobs=-1):
     if np.round(np.linalg.norm(V, ord=2)) == 1.0 or np.round(np.linalg.norm(V, ord=2)) == 0.9:
         pass
     else:
 
-        V = V / np.linalg.norm(V, ord = 2)
+        V = V / np.linalg.norm(V, ord=2)
 
     d = len(V)
     index = np.arange(0, d)
@@ -149,13 +152,13 @@ def L2_tomogrphy_parallel(V, N = None, delta=None,stop_when_reached_accuracy=Tru
     dict_res = {}
 
     if n_jobs == None:
-        #Case not parallel
-        return L2_tomographyVector_rightSign(V=V,delta=delta)
-    elif n_jobs ==-1:
+        # Case not parallel
+        return L2_tomographyVector_rightSign(V=V, delta=delta)
+    elif n_jobs == -1:
         n_cpu = cpu_count()
     else:
         n_cpu = n_jobs
-        assert ( cpu_count() >= n_cpu)
+        assert (cpu_count() >= n_cpu)
     measure_indexes = np.geomspace(1, N, num=100, dtype=np.int64)
     measure_indexes = check_measure(measure_indexes)
 
@@ -165,14 +168,14 @@ def L2_tomogrphy_parallel(V, N = None, delta=None,stop_when_reached_accuracy=Tru
         else:
             ll = check_division(i, n_cpu)
             with Pool(n_cpu) as prc:
-                measure_lists = prc.starmap(auxiliary_fun, list(zip([q_state]*n_cpu, ll)))
-                P_ = prc.map(estimate_wald,measure_lists)
+                measure_lists = prc.starmap(auxiliary_fun, list(zip([q_state] * n_cpu, ll)))
+                P_ = prc.map(estimate_wald, measure_lists)
             P_ = [Counter(c) for c in P_]
             P = sum(P_, Counter())
             P = {x: P[x] / n_cpu for x in P}
         P_i = np.zeros(d)
 
-        P_i[list(P.keys())]=np.sqrt(list(P.values()))
+        P_i[list(P.keys())] = np.sqrt(list(P.values()))
         # Part2 of algorithm 4.1
         max_index = max(index)
         digits = len(str(max_index)) + 1
@@ -188,8 +191,8 @@ def L2_tomogrphy_parallel(V, N = None, delta=None,stop_when_reached_accuracy=Tru
         else:
 
             with Pool(n_cpu) as proc:
-                measure = proc.starmap(auxiliary_fun, list(zip([new_quantum_state]*n_cpu, ll)))
-                #measure = new_quantum_state.measure(int(i))  # ritorna una lista tipo ['01','02','02',...] lunga N
+                measure = proc.starmap(auxiliary_fun, list(zip([new_quantum_state] * n_cpu, ll)))
+                # measure = new_quantum_state.measure(int(i))  # ritorna una lista tipo ['01','02','02',...] lunga N
                 measure = np.concatenate(measure)
 
         str_ = [str(ind).zfill(digits) for ind in index]
@@ -205,38 +208,34 @@ def L2_tomogrphy_parallel(V, N = None, delta=None,stop_when_reached_accuracy=Tru
 
         P_i = [P_i[e] if x > 0.4 * P_i[e] ** 2 * i else P_i[e] * -1 for e, x in enumerate(d_)]
         print(i)
-        #print(i, np.linalg.norm(P_i,ord=2))
-
-
+        # print(i, np.linalg.norm(P_i,ord=2))
 
         dict_res.update({i: P_i})
         if stop_when_reached_accuracy:
 
             sample = np.linalg.norm(V - P_i, ord=2)
-            print(sample,i)
+            print(sample, i)
             if sample > delta:
                 pass
             else:
                 break
 
-
     return dict_res
 
 
-
-def L2_tomographyVector_rightSign(V, N = None, delta=None):
+def L2_tomographyVector_rightSign(V, N=None, delta=None):
     if np.round(np.linalg.norm(V, ord=2)) == 1.0 or np.round(np.linalg.norm(V, ord=2)) == 0.9:
         pass
     else:
 
-        V = V / np.linalg.norm(V, ord = 2)
+        V = V / np.linalg.norm(V, ord=2)
     d = len(V)
     index = np.arange(d)
     if N is None:
-        N = (36*d*np.log(d)) / (delta**2)
+        N = (36 * d * np.log(d)) / (delta ** 2)
 
     q_state = QuantumState(amplitudes=V, registers=index)
-    #N=18000000
+    # N=18000000
     '''
     n_cpu = cpu_count()
     with Pool(n_cpu) as prc:
@@ -250,26 +249,26 @@ def L2_tomographyVector_rightSign(V, N = None, delta=None):
     P = estimate_wald(q_state.measure(n_times=int(N)))
 
     P_i = np.zeros(d)
-    P_i[list(P.keys())]=np.sqrt(list(P.values()))
-    #P_i = list(np.vectorize(vectorize_aux_fun)(P,index))
+    P_i[list(P.keys())] = np.sqrt(list(P.values()))
+    # P_i = list(np.vectorize(vectorize_aux_fun)(P,index))
     # Part2
 
     max_index = max(index)
     digits = len(str(max_index)) + 1
-    registers = [str(i).zfill(digits) for i in index] +  [re.sub('0','1',str(i).zfill(digits),1) for i in index]
+    registers = [str(i).zfill(digits) for i in index] + [re.sub('0', '1', str(i).zfill(digits), 1) for i in index]
 
-    amplitudes = np.asarray([V[i] + P_i [i] for i in range(len(V))] + [V[i] - P_i [i] for i in range(len(V))])
+    amplitudes = np.asarray([V[i] + P_i[i] for i in range(len(V))] + [V[i] - P_i[i] for i in range(len(V))])
 
     ## V deve essere unitario
     amplitudes *= 0.5
 
-    new_quantum_state = QuantumState(registers=registers , amplitudes=amplitudes)
+    new_quantum_state = QuantumState(registers=registers, amplitudes=amplitudes)
     '''
     with Pool(n_cpu) as proc:
         measure = proc.starmap(auxiliary_fun, list(zip([new_quantum_state] * n_cpu, [int(N / n_cpu)] * n_cpu)))
     measure = np.concatenate(measure)
     '''
-    measure = new_quantum_state.measure(int(N))  #ritorna una lista tipo ['01','02','02',...] lunga N
+    measure = new_quantum_state.measure(int(N))  # ritorna una lista tipo ['01','02','02',...] lunga N
     str_ = [str(ind).zfill(digits) for ind in index]
     dictionary = dict(Counter(measure))
     if len(dictionary) < len(registers):
@@ -315,7 +314,7 @@ def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=Tr
         pass
     else:
 
-        V = V / np.linalg.norm(V, ord = 2)
+        V = V / np.linalg.norm(V, ord=2)
 
     d = len(V)
     index = np.arange(0, d)
@@ -326,15 +325,16 @@ def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=Tr
     dict_res = {}
 
     measure_indexes = np.geomspace(1, N, num=100, dtype=np.int64)
+
     measure_indexes = check_measure(measure_indexes)
 
-    #print(measure_indexes)
+    # print(measure_indexes)
     for i in measure_indexes:
         P = estimate_wald(q_state.measure(n_times=int(i)))
 
         P_i = np.zeros(d)
 
-        P_i[list(P.keys())]=np.sqrt(list(P.values()))
+        P_i[list(P.keys())] = np.sqrt(list(P.values()))
         # Part2 of algorithm 4.1
         max_index = max(index)
         digits = len(str(max_index)) + 1
@@ -347,7 +347,6 @@ def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=Tr
         new_quantum_state = QuantumState(registers=registers, amplitudes=amplitudes)
 
         measure = new_quantum_state.measure(n_times=int(i))
-
 
         str_ = [str(ind).zfill(digits) for ind in index]
         dictionary = dict(Counter(measure))
@@ -366,7 +365,7 @@ def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=Tr
         if stop_when_reached_accuracy:
 
             sample = np.linalg.norm(V - P_i, ord=2)
-            #print(sample, i)
+            # print(sample, i)
             if sample > delta:
                 pass
             else:
@@ -374,12 +373,14 @@ def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=Tr
     return dict_res
 
 
-def auxiliary_fun(q_state,i):
-    P= q_state.measure(n_times=int(i))
+def auxiliary_fun(q_state, i):
+    P = q_state.measure(n_times=int(i))
     return P
 
-def vectorize_aux_fun(dic,i):
+
+def vectorize_aux_fun(dic, i):
     return np.sqrt(dic[i]) if i in dic else 0
+
 
 def check_measure(arr):
     for i in range(len(arr) - 1):
@@ -389,22 +390,23 @@ def check_measure(arr):
             arr[i + 1] = arr[i] + 1000
     return arr
 
+
 def check_division(v, n_jobs):
-    a = float(v)/n_jobs
-    d = a-int(a)
-    remaining = int(d*n_jobs)
+    a = float(v) / n_jobs
+    d = a - int(a)
+    remaining = int(d * n_jobs)
     process_values = [int(a) for _ in range(n_jobs)]
     for i in range(remaining):
-        process_values[i]+= 1
+        process_values[i] += 1
     return process_values
 
-def L2_tomogrphy_faster(V, N = None, delta=None,frac=0.01 ,n_jobs=None):
 
+def L2_tomogrphy_faster(V, N=None, delta=None, frac=0.01, n_jobs=None):
     if np.round(np.linalg.norm(V, ord=2)) == 1.0 or np.round(np.linalg.norm(V, ord=2)) == 0.9:
         pass
     else:
 
-        V = V / np.linalg.norm(V, ord = 2)
+        V = V / np.linalg.norm(V, ord=2)
 
     d = len(V)
     index = np.arange(0, d)
@@ -416,31 +418,31 @@ def L2_tomogrphy_faster(V, N = None, delta=None,frac=0.01 ,n_jobs=None):
 
     assert (frac > 0)
     if n_jobs == None:
-        #Case not parallel
-        return L2_tomographyVector_rightSign(V=V,delta=delta)
-    elif n_jobs ==-1:
+        # Case not parallel
+        return L2_tomographyVector_rightSign(V=V, delta=delta)
+    elif n_jobs == -1:
         n_cpu = cpu_count()
     else:
         n_cpu = n_jobs
-        assert ( cpu_count() >= n_cpu)
+        assert (cpu_count() >= n_cpu)
     block = int(N * frac)
     with Pool(n_cpu) as prc:
-        measure_lists = prc.starmap(auxiliary_fun, list(zip([q_state] * n_cpu, [int(N/ n_cpu)] * n_cpu)))
+        measure_lists = prc.starmap(auxiliary_fun, list(zip([q_state] * n_cpu, [int(N / n_cpu)] * n_cpu)))
     measure_lists = np.concatenate(measure_lists, axis=0)
     counter = 0
     for i in range(block, N, block):
         start = time.time()
-        counter+=1
+        counter += 1
         with Pool(n_cpu) as prc:
 
-            measure_ =np.array_split(measure_lists[0:i+1], n_cpu)
-            P_ = prc.map(estimate_wald,measure_)
+            measure_ = np.array_split(measure_lists[0:i + 1], n_cpu)
+            P_ = prc.map(estimate_wald, measure_)
         P_ = [Counter(c) for c in P_]
         P = sum(P_, Counter())
         P = {x: P[x] / n_cpu for x in P}
         P_i = np.zeros(d)
 
-        P_i[list(P.keys())]=np.sqrt(list(P.values()))
+        P_i[list(P.keys())] = np.sqrt(list(P.values()))
         # Part2 of algorithm 4.1
         max_index = max(index)
         digits = len(str(max_index)) + 1
@@ -451,16 +453,14 @@ def L2_tomogrphy_faster(V, N = None, delta=None,frac=0.01 ,n_jobs=None):
         amplitudes *= 0.5
 
         new_quantum_state = QuantumState(registers=registers, amplitudes=amplitudes)
-        if counter==1:
-
+        if counter == 1:
             with Pool(n_cpu) as proc:
-                measure = proc.starmap(auxiliary_fun, list(zip([new_quantum_state]*n_cpu, [int(N/n_cpu)]*n_cpu)))
-                #measure = new_quantum_state.measure(int(i))  # ritorna una lista tipo ['01','02','02',...] lunga N
+                measure = proc.starmap(auxiliary_fun, list(zip([new_quantum_state] * n_cpu, [int(N / n_cpu)] * n_cpu)))
+                # measure = new_quantum_state.measure(int(i))  # ritorna una lista tipo ['01','02','02',...] lunga N
                 measure = np.concatenate(measure)
 
-
         str_ = [str(ind).zfill(digits) for ind in index]
-        mea = measure[0:i+1]
+        mea = measure[0:i + 1]
         dictionary = dict(Counter(mea))
 
         if len(dictionary) < len(registers):
@@ -473,12 +473,10 @@ def L2_tomogrphy_faster(V, N = None, delta=None,frac=0.01 ,n_jobs=None):
 
         P_i = [P_i[e] if x > 0.4 * P_i[e] ** 2 * i else P_i[e] * -1 for e, x in enumerate(d_)]
         print(i)
-        #print(i, np.linalg.norm(P_i,ord=2))
+        # print(i, np.linalg.norm(P_i,ord=2))
 
         dict_res.update({i: P_i})
         end = time.time()
-        print(i, end-start)
+        print(i, end - start)
 
     return dict_res
-
-
