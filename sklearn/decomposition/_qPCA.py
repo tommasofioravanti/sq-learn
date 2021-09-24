@@ -286,6 +286,7 @@ class qPCA(_BasePCA):
     <http://www.miketipping.com/papers/met-mppca.pdf>`_
     via the score and score_samples methods.
 
+    # TODO: see here for Lazcos algorithm
     For svd_solver == 'arpack', refer to `scipy.sparse.linalg.svds`.
 
     For svd_solver == 'randomized', see:
@@ -333,7 +334,7 @@ class qPCA(_BasePCA):
     @_deprecate_positional_args
     def __init__(self, n_components=None, *, copy=True, whiten=False,
                  svd_solver='auto', tol=0.0, iterated_power='auto',
-                 random_state=None):
+                 random_state=None, name=None):
         self.n_components = n_components
         self.copy = copy
         self.whiten = whiten
@@ -341,6 +342,7 @@ class qPCA(_BasePCA):
         self.tol = tol
         self.iterated_power = iterated_power
         self.random_state = random_state
+        self.name = name
         if random_state:
             random.seed(random_state)
 
@@ -458,7 +460,9 @@ class qPCA(_BasePCA):
              eps_theta
              , ret_var, estimate_all, delta, error, tomography):
         """Dispatch to the right submethod depending on the chosen solver."""
-
+        self.delta = delta
+        self.eps_theta = eps_theta
+        self.eps = eps
         # Raise an error for sparse input.
         # This is more informative than the generic one raised by check_array.
         if issparse(X):
@@ -575,6 +579,9 @@ class qPCA(_BasePCA):
             self.components_retained_ = self.RetainedVariance(classic_ret_variance_components)
 
         # THEOREM 9, 10 ,11 in fit function
+        if theta_estimate:
+            self.est_theta = self.Singular_values_threshold(eps_theta=eps_theta, p=ret_var)
+
         if quantum_retained_variance:
             if eta != 0:
                 p, p_sign = self.Quantum_factor_score_ratio(eps=eps, theta=theta, eta=eta)
@@ -584,8 +591,7 @@ class qPCA(_BasePCA):
                 p = self.Quantum_factor_score_ratio(eps=eps, theta=theta)
                 self.quantum_variance_ret = p
 
-        if theta_estimate:
-            self.est_theta = self.Singular_values_threshold(eps_theta=eps_theta, p=ret_var)
+        self.quantum_components = self.QRetainedVariance(1000, ret_var)
 
         if estimate_all:
             if error == False:
@@ -823,13 +829,12 @@ class qPCA(_BasePCA):
             return Y_sign / f_norm
 
     # Theorem 9
-    def Quantum_factor_score_ratio(self, eps, theta, tomography, eta=0):
+    def Quantum_factor_score_ratio(self, eps, theta, tomography=False, eta=0):
         est_selected_sing_values = make_noisy_vec(self.scaled_singular_values, eps, tomography=tomography)
         selected_sing_values = self.scaled_singular_values[est_selected_sing_values >= theta]
 
         pow2 = lambda x: x ** 2
         selected_sing_values_squared = np.apply_along_axis(pow2, 0, selected_sing_values)
-
 
         sing_values_squared = np.apply_along_axis(pow2, 0, self.scaled_singular_values)
         p = sum(selected_sing_values_squared) / sum(sing_values_squared)
@@ -845,23 +850,23 @@ class qPCA(_BasePCA):
     ##Theorem 10
 
     def Singular_values_threshold(self, eps_theta, p):
-
+        # n_comp ,var = self.QRetainedVariance(1000,p)
+        # nn = self.RetainedVariance(p)
         ratio_cumsum = stable_cumsum(self.explained_variance_ratio_)
         n_components = np.searchsorted(ratio_cumsum, p,
                                        side='right') + 1
         theta = np.min(self.scaled_singular_values[:n_components].tolist())
-        # print(theta)
 
         if eps_theta > 0:
             # special case
             if p == 1:
                 error = truncnorm.rvs(0, eps_theta, size=1)
             else:
-
                 error = truncnorm.rvs(-eps_theta, eps_theta, size=1)
         #    print(error)
         else:
             error = 0
+        print("Theta:", (theta + error), "Error:", error)
         return theta + error
 
     # Theorem 11
@@ -875,6 +880,11 @@ class qPCA(_BasePCA):
                 raise ValueError("Theta must be defined to extract top k sv")
 
         topk_singular_values = self.scaled_singular_values[self.scaled_singular_values > theta]
+        if len(topk_singular_values) < 2:
+            raise ValueError(
+                "The quantum subroutine is cosidering only " + str(len(topk_singular_values)) + " components."
+                                                                                                "Restart the computation.")
+
         topk_factor_score = self.explained_variance_[self.scaled_singular_values > theta]
         topk_right_singular_vectors = self.components_[self.scaled_singular_values > theta]
         topk_left_singular_vectors = self.left_sv[self.scaled_singular_values > theta]
@@ -883,13 +893,18 @@ class qPCA(_BasePCA):
         left_singular_vectors_est = make_noisy_mat(topk_left_singular_vectors, delta, tomography=tomography)
         singular_value_estimation = make_noisy_vec(topk_singular_values, eps, tomography=False)
         factor_score_estimation = make_noisy_vec(topk_factor_score, 2 * eps, tomography=False)
+        self.p = self.Quantum_factor_score_ratio(eps=eps, theta=theta)
+        '''
         factor_score_estimation = np.array([element if element > 0 else 0 for element in factor_score_estimation])
+
+        
+
         index_ = factor_score_estimation.argsort()[::-1]
         right_singular_vectors_est = right_singular_vectors_est[index_]
         left_singular_vectors_est = left_singular_vectors_est[index_]
 
         factor_score_estimation = np.array(sorted(factor_score_estimation, reverse=True))
-
+        '''
         if error == False:
             return right_singular_vectors_est, left_singular_vectors_est, singular_value_estimation, factor_score_estimation
         else:
@@ -916,16 +931,22 @@ class qPCA(_BasePCA):
 
         # accedo con map a tutti i valori del dizionario con chiave in new_sv
         dict_elem = np.array(list(map(estimations.get, sv)))
-        new_arr = dict_elem[dict_elem.cumsum() <= variance]
-        k = len(new_arr)
-        exp_var = new_arr.sum()
+        exp_var = 0
+        i = 0
+        while exp_var <= variance:
+            exp_var += dict_elem[i]
+            i += 1
+            # new_arr = dict_elem[dict_elem.cumsum() <= variance]
+            # k = len(new_arr)
+            # exp_var = new_arr.sum()
+        k = i
         '''
         while exp_var <= variance:
             exp_var += estimations[sv[-i]]
             i += 1
         k = i
         '''
-        return k, exp_var
+        return k
 
     def RetainedVariance(self, variance):
         ratio_cumsum = stable_cumsum(self.explained_variance_ratio_)

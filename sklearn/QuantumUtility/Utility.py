@@ -6,6 +6,7 @@ import time
 from scipy.stats import truncnorm
 import numpy as np
 from joblib import Parallel
+import statistics
 from multiprocessing import *
 import os
 
@@ -30,9 +31,9 @@ class QuantumState(object):
 
     def measure(self, n_times=1):
         # TODO: evaluate if there is benefits to move to scipy sampling rountine
-        # return random.choices(self.registers,weights=self.probabilities,k=n_times)
-        LocalProcRandGen = np.random.RandomState()
-        return LocalProcRandGen.choice(self.registers, p=self.probabilities, size=n_times)
+        return random.choices(self.registers, weights=self.probabilities, k=n_times)
+        # LocalProcRandGen = np.random.RandomState()
+        # return LocalProcRandGen.choice(self.registers, p=self.probabilities, size=n_times)
         # return np.random.choice(self.registers, p=self.probabilities, size=n_times)
 
     def get_state(self):
@@ -80,6 +81,7 @@ def make_noisy_vec(vec, noise, tomography, stop_when_reached_accuracy=True):
         if noise_per_component != 0:
 
             errors = truncnorm.rvs(-noise_per_component, noise_per_component, size=len(vec))
+            print('noise_per_comp:', noise_per_component, 'errors:', errors)
             somma = lambda x, y: x + y
             # new_vec = np.array([vec[i] + errors[i] for i in range(len(vec))])
             new_vec = np.apply_along_axis(somma, 0, vec, errors)
@@ -287,7 +289,7 @@ def L2_tomographyVector_rightSign(V, N=None, delta=None):
     return P_i
 
 
-def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=True):
+def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2'):
     """ Official version of the tomography function.
         Parameters
         ----------
@@ -306,7 +308,8 @@ def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=Tr
 
         Notes
         -----
-        This method returns an estimation of the true array V using quantum tomography.
+        This method returns an estimation of the true array V using quantum tomography algorithm 4.1 proposed in
+        "A Quantum Interior Point Method for LPs and SDPs" paper.
 
 
     """
@@ -315,7 +318,6 @@ def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=Tr
     else:
 
         V = V / np.linalg.norm(V, ord=2)
-
     d = len(V)
     index = np.arange(0, d)
     if N is None:
@@ -363,8 +365,10 @@ def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=Tr
 
         dict_res.update({i: P_i})
         if stop_when_reached_accuracy:
-
-            sample = np.linalg.norm(V - P_i, ord=2)
+            if norm == 'L2':
+                sample = np.linalg.norm(V - P_i, ord=2)
+            else:
+                sample = np.linalg.norm(V - P_i, ord=np.inf)
             # print(sample, i)
             if sample > delta:
                 pass
@@ -480,3 +484,35 @@ def L2_tomogrphy_faster(V, N=None, delta=None, frac=0.01, n_jobs=None):
         print(i, end - start)
 
     return dict_res
+
+
+def Amp_est_error(SV_list, epsilon, gamma):
+    estimates = []
+    for sv in SV_list:
+
+        z = np.log(1 / gamma) / (2 * (8 / np.pi ** 2 - 0.5) ** 2)
+        if math.ceil(z) % 2 == 0:
+            Q = math.ceil(z) + 1
+        else:
+            Q = math.ceil(z)
+
+        M = math.ceil((np.pi / (2 * epsilon)) * (1 + np.sqrt(1 + 4 * epsilon)))
+        print(np.sqrt(sv))
+        theta_a = math.asin(np.sqrt(sv))
+        p = []
+        for j in range(1, M+1):
+            a_j = np.sin(np.pi * j / M) ** 2
+            p_aj = np.abs(math.sin(M * AmplitudeAmpDist(j / M, theta_a / np.pi)) / (
+                    M * math.sin(AmplitudeAmpDist(j / M, theta_a / np.pi)))) ** 2
+
+            p.append(p_aj)
+        print(p)
+        a_tilde = random.choices(p, k=Q)
+        print(a_tilde)
+        estimates.append(statistics.median(a_tilde))
+    return estimates
+
+
+# TODO: scrivere bene questa funzione
+def AmplitudeAmpDist(w1, w2):
+    return math.ceil(w2 - w1)
