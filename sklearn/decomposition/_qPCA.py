@@ -526,6 +526,7 @@ class qPCA(_BasePCA):
                                  % (n_components, type(n_components)))
 
         # Center data
+        # self.spect_norm = max([np.linalg.norm(np.dot(X, x)) / np.linalg.norm(x) for x in X])
         self.mean_ = np.mean(X, axis=0)
         X -= self.mean_
 
@@ -541,7 +542,6 @@ class qPCA(_BasePCA):
         total_var = explained_variance_.sum()
         explained_variance_ratio_ = explained_variance_ / total_var
         singular_values_ = S.copy()  # Store the singular values.
-
         # Postprocess the number of components required
         if n_components == 'mle':
             n_components = \
@@ -676,7 +676,7 @@ class qPCA(_BasePCA):
         else:
             self.noise_variance_ = 0.
 
-        ###Scaled singular values for assumptions purposes
+        #Scaled singular values for assumptions purposes
         self.spectral_norm = self.singular_values_[0]
         self.scaled_singular_values = self.singular_values_ / self.spectral_norm
 
@@ -735,7 +735,7 @@ class qPCA(_BasePCA):
         return {'preserves_dtype': [np.float64, np.float32]}
 
     def transform(self, X, classic_transform=True, epsilon_delta=0,
-                  quantum_representation=False, norm='None', psi=0, tomography=False):
+                  quantum_representation=False, norm='None', psi=0, tomography=False, use_classical_components=True):
 
         """Fit the model with X.
 
@@ -767,6 +767,10 @@ class qPCA(_BasePCA):
 
                     If randomized :
                         return only the estimate matrix (with psi error) divided by its f-norm
+                use_classical_components: bool, default=True.
+                        If True, and classical_transform is False, it computes the classic transformation of the matrix X
+                        and then an error is applied to this new matrix. If False, it computes the trasformation using the
+                        estimated components with a certain error computed using Theorem 11 of QADRA.
 
                Returns
                -------
@@ -783,17 +787,22 @@ class qPCA(_BasePCA):
 
         else:
             dict_res = {}
-            X_ = super().transform(X)
+            X_ = super().transform(X, use_classical_components)
             X_final = X_ / self.spectral_norm
 
-            # print(error,f_norm)
-            if quantum_representation:  ###Corollario 15
+            if use_classical_components == False:
+                return X_final
+
+            if quantum_representation:  #Corollario 15
                 assert (psi > 0 if norm != 'est_representation' else psi >= 0)
                 result = self.compute_quantum_representation(X_final, psi=psi, epsilon_delta=epsilon_delta,
                                                              type=norm, tomography=tomography)
                 dict_res.update({'quantum_representation_results': result})
 
-        return dict_res
+                return dict_res
+
+    def inverse_transform(self, X, use_classical_components=True):
+        return super().inverse_transform(X, use_classical_components)
 
     def compute_error(self, U, epsilon_delta, tomography):
         # error=epsilon+delta
@@ -862,58 +871,53 @@ class qPCA(_BasePCA):
         if eps_theta > 0:
             # special case
             if p == 1:
-                error = truncnorm.rvs(0, eps_theta, size=1)
+                #error = truncnorm.rvs(0, eps_theta, size=1)
+                error = truncnorm.rvs(-eps_theta, eps_theta, size=1)
             else:
                 error = truncnorm.rvs(-eps_theta, eps_theta, size=1)
-                if error > 0:
-                    error = -error
+
+                #if error > 0:
+                    #error = -error
         #    print(error)
         else:
             error = 0
-        print("Theta:", (theta + error), "Error:", error)
+        print("Theta: ", (theta + error), "Error: ", error)
+
         return theta + error
 
     # Theorem 11
-
-    # TODO: The estimated factor score results from the stimated singular values squared.
     def topk_sv_extractors(self, delta, eps, theta, tomography, X, error=False):
-        print(np.linalg.norm(X))
         # p = self.Quantum_factor_score_ratio(eps, theta)
         if theta == 0:
-            if self.est_theta > 0:
+            if self.est_theta != 0:
                 theta = self.est_theta
 
             else:
                 raise ValueError("Theta must be defined to extract top k sv")
 
         topk_singular_values = self.scaled_singular_values[self.scaled_singular_values > theta]
+
         if len(topk_singular_values) < 2:
             raise ValueError(
                 "The quantum subroutine is cosidering only " + str(len(topk_singular_values)) + " components."
                                                                                                 "Restart the computation.")
-        theta_ = [2 * math.acos(sv) for sv in topk_singular_values]
+
         topk_factor_score = self.explained_variance_[self.scaled_singular_values > theta]
         topk_right_singular_vectors = self.components_[self.scaled_singular_values > theta]
         topk_left_singular_vectors = self.left_sv[self.scaled_singular_values > theta]
-
         right_singular_vectors_est = make_noisy_mat(topk_right_singular_vectors, delta, tomography=tomography)
         left_singular_vectors_est = make_noisy_mat(topk_left_singular_vectors, delta, tomography=tomography)
-        singular_value_estimation = [Amp_est_error(topk_sv, epsilon=eps) for topk_sv in
-                                     topk_singular_values]
-        aaa = [Amp_est_error(th, eps) for th in theta_]
-        sss = [math.cos(a / 2) for a in aaa]
-        # factor_score_est = [sv**2 for sv in singular_value_estimation]
-        factor_score_estimation = [Amp_est_error(topk_fs, epsilon=eps) for topk_fs in
-                                   topk_factor_score]
 
-        # singular_value_estimation1 = make_noisy_vec(topk_singular_values, eps, tomography=False)
-        # factor_score_estimation = make_noisy_vec(topk_factor_score, 2 * eps, tomography=False)
+        ###
+        #theta_from_sv = np.array([Wrapper_AmpEst(sv, 'singular_values') for sv in topk_singular_values])
+        #singular_value_estimation_ = [Amp_est_error(th, eps) for th in theta_from_sv]
+        ###
+        singular_value_estimation = make_noisy_vec(topk_singular_values, eps, tomography=False)
+        #factor_score_estimation = np.array([sv ** 2 for sv in singular_value_estimation])
+        factor_score_estimation = make_noisy_vec(topk_factor_score, 2 * eps, tomography=False)
         self.p = self.Quantum_factor_score_ratio(eps=eps, theta=theta)
         '''
         factor_score_estimation = np.array([element if element > 0 else 0 for element in factor_score_estimation])
-
-        
-
         index_ = factor_score_estimation.argsort()[::-1]
         right_singular_vectors_est = right_singular_vectors_est[index_]
         left_singular_vectors_est = left_singular_vectors_est[index_]
@@ -940,27 +944,15 @@ class qPCA(_BasePCA):
         i = 0
         sv = sorted(estimations.keys(), reverse=True)
 
-        ## riordino sv in modo decrescente tenendo il valore più piccolo di sv all'inizio
-        # new_sv = sv[::-1]
-        # new_sv = new_sv[-1:] + new_sv[:-1]
-
-        # accedo con map a tutti i valori del dizionario con chiave in new_sv
         dict_elem = np.array(list(map(estimations.get, sv)))
         exp_var = 0
         i = 0
         while exp_var <= variance:
             exp_var += dict_elem[i]
             i += 1
-            # new_arr = dict_elem[dict_elem.cumsum() <= variance]
-            # k = len(new_arr)
-            # exp_var = new_arr.sum()
+
         k = i
-        '''
-        while exp_var <= variance:
-            exp_var += estimations[sv[-i]]
-            i += 1
-        k = i
-        '''
+
         return k
 
     def RetainedVariance(self, variance):

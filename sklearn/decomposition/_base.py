@@ -94,7 +94,7 @@ class _BasePCA(TransformerMixin, BaseEstimator, metaclass=ABCMeta):
             Returns the instance itself.
         """
 
-    def transform(self, X):
+    def transform(self, X, use_classical_components = True):
         """Apply dimensionality reduction to X.
 
         X is projected on the first principal components previously extracted
@@ -105,7 +105,8 @@ class _BasePCA(TransformerMixin, BaseEstimator, metaclass=ABCMeta):
         X : array-like, shape (n_samples, n_features)
             New data, where n_samples is the number of samples
             and n_features is the number of features.
-
+        use_classical_components: bool, default = True.
+            See documentation in transform method in qPCA.
         Returns
         -------
         X_new : array-like, shape (n_samples, n_components)
@@ -115,25 +116,18 @@ class _BasePCA(TransformerMixin, BaseEstimator, metaclass=ABCMeta):
         X = self._validate_data(X, dtype=[np.float64, np.float32], reset=False)
         if self.mean_ is not None:
             X = X - self.mean_
-        X_transformed = np.dot(X, self.components_.T)
-        if self.whiten:
-            X_transformed /= np.sqrt(self.explained_variance_)
+        if use_classical_components:
+            X_transformed = np.dot(X, self.components_.T)
+            if self.whiten:
+                X_transformed /= np.sqrt(self.explained_variance_)
+        else:
+            X_transformed = np.dot(X, self.estimate_right_sv.T)
+            if self.whiten:
+                X_transformed /= np.sqrt(self.factor_score_estimation)
+
         return X_transformed
 
-    def quantum_transform(self, X, epsilon_delta, compute_error):
-
-        check_is_fitted(self)
-
-        X = self._validate_data(X, dtype=[np.float64, np.float32], reset=False)
-        if self.mean_ is not None:
-            X = X - self.mean_
-        X_transformed = np.dot(X, self.components_.T)
-        if self.whiten:
-            X_transformed /= np.sqrt(self.explained_variance_)
-        return X_transformed
-
-
-    def inverse_transform(self, X):
+    def inverse_transform(self, X, use_classical_components=True):
         """Transform data back to its original space.
 
         In other words, return an input X_original whose transform would be X.
@@ -143,6 +137,8 @@ class _BasePCA(TransformerMixin, BaseEstimator, metaclass=ABCMeta):
         X : array-like, shape (n_samples, n_components)
             New data, where n_samples is the number of samples
             and n_components is the number of components.
+        use_classical_components: bool, default = True.
+            See documentation in transform method in qPCA.
 
         Returns
         -------
@@ -153,8 +149,16 @@ class _BasePCA(TransformerMixin, BaseEstimator, metaclass=ABCMeta):
         If whitening is enabled, inverse_transform will compute the
         exact inverse operation, which includes reversing whitening.
         """
-        if self.whiten:
-            return np.dot(X, np.sqrt(self.explained_variance_[:, np.newaxis]) *
-                            self.components_) + self.mean_
+        if use_classical_components:
+
+            if self.whiten:
+                return np.dot(X, np.sqrt(self.explained_variance_[:, np.newaxis]) *
+                                self.components_) + self.mean_
+            else:
+                return np.dot(X, self.components_) + self.mean_
         else:
-            return np.dot(X, self.components_) + self.mean_
+            if self.whiten:
+                return np.dot(X, np.sqrt(self.factor_score_estimation[:, np.newaxis]) *
+                                self.estimate_right_sv) + self.mean_
+            else:
+                return np.dot(X, self.estimate_right_sv) + self.mean_

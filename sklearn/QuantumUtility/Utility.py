@@ -503,18 +503,18 @@ def amplitute_est_wrapper(a, epsilon, gamma, Q_mode='default'):
     return estimate
 
 
-def Amp_est_error(a, epsilon):
+def Amp_est_error(theta, epsilon, Q=1):
     M = math.ceil((np.pi / (2 * epsilon)) * (1 + np.sqrt(1 + 4 * epsilon)))
-
-    theta_a = math.asin(np.sqrt(a))
 
     p = []
     a_j = []
 
     for j in range(1, M + 1):
-        a_j.append(math.sin(np.pi * j / M) ** 2)
-        distance = AmplitudeAmpDist(j / M, theta_a / np.pi)
+        a_j_current=  math.sin(np.pi * j / M) ** 2
+        a_j.append(a_j_current)
+        distance = AmplitudeAmpDist( a_j_current/ M, theta / np.pi)
         if distance != 0:
+            #If j == M and theta = 0 -> distance = 0
             p_aj = np.abs(math.sin(M * distance) / (M * math.sin(distance))) ** 2
         else:
             pass
@@ -525,40 +525,17 @@ def Amp_est_error(a, epsilon):
     return a_tilde
 
 
-def Amp_est_errorProva(x, y, epsilon, gamma):
-    print(np.inner(x, y))
-    a = (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2 - 2 * np.inner(x, y)) / (
-            2 * (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2))
-    z = np.log(1 / gamma) / (2 * (8 / np.pi ** 2 - 0.5) ** 2)
-    eps_a = (epsilon * max(1, np.abs(np.inner(x, y))) / (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2))
-    if math.ceil(z) % 2 == 0:
-        Q = math.ceil(z) + 1
-    else:
-        Q = math.ceil(z)
-    Q = 5
-    M = math.ceil((np.pi / (2 * eps_a)) * (1 + np.sqrt(1 + 4 * eps_a)))
-
-    theta_a = math.asin(np.sqrt(a))
-    # theta_a = 1 / math.sin(np.sqrt(a))
-    p = []
-    for j in range(1, M + 1):
-        p_aj = np.abs(math.sin(M * AmplitudeAmpDist(j / M, theta_a / np.pi)) / (
-                M * math.sin(AmplitudeAmpDist(j / M, theta_a / np.pi)))) ** 2
-
-        p.append(p_aj)
-    a_tilde = random.choices(p, k=Q)
-    estimates = statistics.median(a_tilde)
-    s = ((np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2) * (1 - 2 * estimates) / 2)
-    return s
-
-
 def AmplitudeAmpDist(w0, w1):
     if w0 == w1:
         raise ValueError("Attention, w1 and w0 are equal. Probably you have to change epsilon value to avoid a division"
                          " by zero.")
     c = -np.ceil(w1 - w0)
     f = -np.floor(w1 - w0)
-
     distance = min(np.abs(c + w1 - w0), np.abs(f + w1 - w0))
-
     return distance
+
+
+def Wrapper_AmpEst(argument, type):
+    if type == 'singular_values':
+        theta_i = 2 * math.acos(argument)
+        return theta_i
