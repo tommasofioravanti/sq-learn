@@ -31,9 +31,9 @@ class QuantumState(object):
 
     def measure(self, n_times=1):
         # TODO: evaluate if there is benefits to move to scipy sampling rountine
-        return random.choices(self.registers, weights=self.probabilities, k=n_times)
-        # LocalProcRandGen = np.random.RandomState()
-        # return LocalProcRandGen.choice(self.registers, p=self.probabilities, size=n_times)
+        # return random.choices(self.registers, weights=self.probabilities, k=n_times)
+        LocalProcRandGen = np.random.RandomState()
+        return LocalProcRandGen.choice(self.registers, p=self.probabilities, size=n_times)
         # return np.random.choice(self.registers, p=self.probabilities, size=n_times)
 
     def get_state(self):
@@ -67,37 +67,74 @@ def coupon_collect(quantum_state):
     return counter
 
 
-def make_noisy_vec(vec, noise, tomography, stop_when_reached_accuracy=True):
-    """This function is used to estimate vec with tomography or with Gaussian Noise Approximation."""
+def make_gaussian_est(vec, noise):
+    """This function is used to estimate vec with tomography or with Gaussian Noise Approximation.
+    Parameters
+    ----------
+    vec : array-like that has to be estimated.
 
-    if tomography:
-        tomography_res = L2_tomogrphy_Noparallel(vec, delta=noise,
-                                                 stop_when_reached_accuracy=stop_when_reached_accuracy)
-        new_vec = np.array(list(tomography_res.values())[-1])  # take the last elements of the dictionary
+    noise : float. It represent the error that you want to introduce to estimate the representation of vector V.
 
-    else:
-
-        noise_per_component = noise / np.sqrt(len(vec))
-        if noise_per_component != 0:
-
-            errors = truncnorm.rvs(-noise_per_component, noise_per_component, size=len(vec))
-            print('noise_per_comp:', noise_per_component, 'errors:', errors)
-            somma = lambda x, y: x + y
-            # new_vec = np.array([vec[i] + errors[i] for i in range(len(vec))])
-            new_vec = np.apply_along_axis(somma, 0, vec, errors)
-
-        else:
-            new_vec = vec
-
+    """
+    noise_per_component = noise / np.sqrt(len(vec))
+    if noise_per_component != 0:
+        errors = truncnorm.rvs(-noise_per_component, noise_per_component, size=len(vec))
+        print('noise_per_comp:', noise_per_component, 'errors:', errors)
+        somma = lambda x, y: x + y
+        # new_vec = np.array([vec[i] + errors[i] for i in range(len(vec))])
+        new_vec = np.apply_along_axis(somma, 0, vec, errors)
     return new_vec
 
 
-# Given a matrix it makes it noisy by adding gaussian error to each component
-def make_noisy_mat(A, noise, tomography, stop_when_reached_accuracy=True):
-    vector_A = A.reshape(A.shape[0] * A.shape[1])
-    vector_B = make_noisy_vec(vector_A, noise, tomography, stop_when_reached_accuracy=stop_when_reached_accuracy)
-    B = vector_B.reshape(A.shape[0], A.shape[1])
-    return B
+def tomography(A, noise, fake_tomography=False, stop_when_reached_accuracy=True, N=None, n_jobs=None):
+    """ Tomography function (real and fake).
+            Parameters
+            ----------
+            A : array-like that has to be estimated.
+
+            N : int value. Number of measures of the quantum state. If None it is computed in the function itself.
+
+            noise: float value. It represent the error that you want to introduce to estimate the representation of vector V.
+
+            fake_tomography: bool value. If True it computes the fake tomography using a Truncated Gaussian Noise.
+                                        If False it computes the real tomography.
+
+            stop_when_reached_accuracy: bool value. If True it stops the execution of the tomography when the L2-norm of the
+                                                   difference between V and its estimation is less or equal then delta. Otherwise
+                                                   N measures are done (very memory intensive for large vectors).
+            Returns
+            -------
+            A_est : array-like that was estimated.
+
+            Notes
+            -----
+            This method returns an estimation of the true array/matrix A using quantum tomography algorithm 4.1 proposed in
+            "A Quantum Interior Point Method for LPs and SDPs" paper, or using an approximation of the tomography.
+        """
+
+    assert noise >= 0
+
+    if noise == 0:
+        return A
+
+    if fake_tomography:
+        if len(A.shape) == 2:
+            vector_A = A.reshape(A.shape[0] * A.shape[1])
+            vector_B = make_gaussian_est(vector_A, noise)
+            A_est = vector_B.reshape(A.shape[0], A.shape[1])
+        else:
+            A_est = make_gaussian_est(A, noise)
+
+    else:
+        if len(A.shape) == 2:
+            A_est = np.array([np.array(list(
+                L2_tomogrphy_Noparallel(A[idx], delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy,
+                                        N=N).values())[-1])
+                              for idx in range(len(A))])
+        else:
+            A_est = L2_tomogrphy_Noparallel(A, delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy, N=N)
+
+    return A_est
 
 
 def create_rand_vec(n_vec, len_vec, scale=None, type='uniform'):
@@ -155,16 +192,19 @@ def L2_tomogrphy_parallel(V, N=None, delta=None, stop_when_reached_accuracy=True
 
     if n_jobs == None:
         # Case not parallel
-        return L2_tomographyVector_rightSign(V=V, delta=delta)
+        return L2_tomogrphy_Noparallel(V=V, delta=delta)
     elif n_jobs == -1:
         n_cpu = cpu_count()
     else:
         n_cpu = n_jobs
         assert (cpu_count() >= n_cpu)
     measure_indexes = np.geomspace(1, N, num=100, dtype=np.int64)
+
     measure_indexes = check_measure(measure_indexes)
 
     for i in measure_indexes:
+        print(i)
+        start = time.time()
         if i < n_cpu:
             P = estimate_wald(q_state.measure(n_times=int(i)))
         else:
@@ -209,14 +249,15 @@ def L2_tomogrphy_parallel(V, N=None, delta=None, stop_when_reached_accuracy=True
         d_ = list(map(dictionary.get, str_))
 
         P_i = [P_i[e] if x > 0.4 * P_i[e] ** 2 * i else P_i[e] * -1 for e, x in enumerate(d_)]
-        print(i)
+        # print(i)
         # print(i, np.linalg.norm(P_i,ord=2))
-
+        end = time.time()
+        print('time:', end - start)
         dict_res.update({i: P_i})
         if stop_when_reached_accuracy:
 
             sample = np.linalg.norm(V - P_i, ord=2)
-            print(sample, i)
+            # print(sample, i)
             if sample > delta:
                 pass
             else:
@@ -225,71 +266,8 @@ def L2_tomogrphy_parallel(V, N=None, delta=None, stop_when_reached_accuracy=True
     return dict_res
 
 
-def L2_tomographyVector_rightSign(V, N=None, delta=None):
-    if np.round(np.linalg.norm(V, ord=2)) == 1.0 or np.round(np.linalg.norm(V, ord=2)) == 0.9:
-        pass
-    else:
-
-        V = V / np.linalg.norm(V, ord=2)
-    d = len(V)
-    index = np.arange(d)
-    if N is None:
-        N = (36 * d * np.log(d)) / (delta ** 2)
-
-    q_state = QuantumState(amplitudes=V, registers=index)
-    # N=18000000
-    '''
-    n_cpu = cpu_count()
-    with Pool(n_cpu) as prc:
-        measure_lists = prc.starmap(auxiliary_fun, list(zip([q_state] * n_cpu, [int(N / n_cpu)] * n_cpu)))
-        P_ = prc.map(estimate_wald, measure_lists)
-    
-    P_ = [Counter(c) for c in P_]
-    P = sum(P_, Counter())
-    P = {x: P[x] / n_cpu for x in P}
-    '''
-    P = estimate_wald(q_state.measure(n_times=int(N)))
-
-    P_i = np.zeros(d)
-    P_i[list(P.keys())] = np.sqrt(list(P.values()))
-    # P_i = list(np.vectorize(vectorize_aux_fun)(P,index))
-    # Part2
-
-    max_index = max(index)
-    digits = len(str(max_index)) + 1
-    registers = [str(i).zfill(digits) for i in index] + [re.sub('0', '1', str(i).zfill(digits), 1) for i in index]
-
-    amplitudes = np.asarray([V[i] + P_i[i] for i in range(len(V))] + [V[i] - P_i[i] for i in range(len(V))])
-
-    ## V deve essere unitario
-    amplitudes *= 0.5
-
-    new_quantum_state = QuantumState(registers=registers, amplitudes=amplitudes)
-    '''
-    with Pool(n_cpu) as proc:
-        measure = proc.starmap(auxiliary_fun, list(zip([new_quantum_state] * n_cpu, [int(N / n_cpu)] * n_cpu)))
-    measure = np.concatenate(measure)
-    '''
-    measure = new_quantum_state.measure(int(N))  # ritorna una lista tipo ['01','02','02',...] lunga N
-    str_ = [str(ind).zfill(digits) for ind in index]
-    dictionary = dict(Counter(measure))
-    if len(dictionary) < len(registers):
-        keys = set(list(dictionary.keys()))
-        tot_keys = set(registers)
-
-        missing_keys = list(tot_keys - keys)
-
-        dictionary.update({l: 0 for l in missing_keys})
-
-    d_ = list(map(dictionary.get, str_))
-
-    P_i = [P_i[e] if i > 0.4 * P_i[e] ** 2 * N else P_i[e] * -1 for e, i in enumerate(d_)]
-
-    print(np.linalg.norm(V - P_i, ord=2))
-    return P_i
-
-
-def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2'):
+def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2',
+                            sparsity_percentage=False):
     """ Official version of the tomography function.
         Parameters
         ----------
@@ -302,6 +280,10 @@ def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=Tr
         stop_when_reached_accuracy: bool flag. If True it stops the execution of the tomography when the L2-norm of the
                                                difference between V and its estimation is less or equal then delta. Otherwise
                                                N measures are done (very memory intensive for large vectors).
+        sparsity_percentage: bool flag. If True it computes the sparsity percentage of the vector and it is used to
+                                        make bigger and bigger measures as you increase the non-sparsity of the vector.
+                                        If False it makes measures that increases always of a factor of 1000.
+                                        It is particulary useful in testing the tomography.
         Returns
         -------
         dict_res : dictionary of shape {N_measure: vector_estimation}.
@@ -311,12 +293,15 @@ def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=Tr
         This method returns an estimation of the true array V using quantum tomography algorithm 4.1 proposed in
         "A Quantum Interior Point Method for LPs and SDPs" paper.
 
-
     """
+
+    if sparsity_percentage:
+        sparsity = 1 - (np.count_nonzero(V) / float(V.size))
+    else:
+        sparsity = None
     if np.round(np.linalg.norm(V, ord=2)) == 1.0 or np.round(np.linalg.norm(V, ord=2)) == 0.9:
         pass
     else:
-
         V = V / np.linalg.norm(V, ord=2)
     d = len(V)
     index = np.arange(0, d)
@@ -328,15 +313,14 @@ def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=Tr
 
     measure_indexes = np.geomspace(1, N, num=100, dtype=np.int64)
 
-    measure_indexes = check_measure(measure_indexes)
+    measure_indexes = check_measure(measure_indexes, sparsity)
 
-    # print(measure_indexes)
     for i in measure_indexes:
+
         P = estimate_wald(q_state.measure(n_times=int(i)))
-
         P_i = np.zeros(d)
-
         P_i[list(P.keys())] = np.sqrt(list(P.values()))
+
         # Part2 of algorithm 4.1
         max_index = max(index)
         digits = len(str(max_index)) + 1
@@ -369,7 +353,6 @@ def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=Tr
                 sample = np.linalg.norm(V - P_i, ord=2)
             else:
                 sample = np.linalg.norm(V - P_i, ord=np.inf)
-            # print(sample, i)
             if sample > delta:
                 pass
             else:
@@ -386,12 +369,16 @@ def vectorize_aux_fun(dic, i):
     return np.sqrt(dic[i]) if i in dic else 0
 
 
-def check_measure(arr):
+def check_measure(arr, sparsity):
+    if sparsity != None:
+        incr = (1 - sparsity) * 1000 * 0.3**2
+    else:
+        incr = 1000
     for i in range(len(arr) - 1):
         if arr[i + 1] == arr[i]:
-            arr[i + 1] += 1000
+            arr[i + 1] += incr  # 1000
         if arr[i + 1] <= arr[i]:
-            arr[i + 1] = arr[i] + 1000
+            arr[i + 1] = arr[i] + incr  # 1000
     return arr
 
 
@@ -403,87 +390,6 @@ def check_division(v, n_jobs):
     for i in range(remaining):
         process_values[i] += 1
     return process_values
-
-
-def L2_tomogrphy_faster(V, N=None, delta=None, frac=0.01, n_jobs=None):
-    if np.round(np.linalg.norm(V, ord=2)) == 1.0 or np.round(np.linalg.norm(V, ord=2)) == 0.9:
-        pass
-    else:
-
-        V = V / np.linalg.norm(V, ord=2)
-
-    d = len(V)
-    index = np.arange(0, d)
-    if N is None:
-        N = int((36 * d * np.log(d)) / (delta ** 2))
-
-    q_state = QuantumState(amplitudes=V, registers=index)
-    dict_res = {}
-
-    assert (frac > 0)
-    if n_jobs == None:
-        # Case not parallel
-        return L2_tomographyVector_rightSign(V=V, delta=delta)
-    elif n_jobs == -1:
-        n_cpu = cpu_count()
-    else:
-        n_cpu = n_jobs
-        assert (cpu_count() >= n_cpu)
-    block = int(N * frac)
-    with Pool(n_cpu) as prc:
-        measure_lists = prc.starmap(auxiliary_fun, list(zip([q_state] * n_cpu, [int(N / n_cpu)] * n_cpu)))
-    measure_lists = np.concatenate(measure_lists, axis=0)
-    counter = 0
-    for i in range(block, N, block):
-        start = time.time()
-        counter += 1
-        with Pool(n_cpu) as prc:
-
-            measure_ = np.array_split(measure_lists[0:i + 1], n_cpu)
-            P_ = prc.map(estimate_wald, measure_)
-        P_ = [Counter(c) for c in P_]
-        P = sum(P_, Counter())
-        P = {x: P[x] / n_cpu for x in P}
-        P_i = np.zeros(d)
-
-        P_i[list(P.keys())] = np.sqrt(list(P.values()))
-        # Part2 of algorithm 4.1
-        max_index = max(index)
-        digits = len(str(max_index)) + 1
-        registers = [str(j).zfill(digits) for j in index] + [re.sub('0', '1', str(j).zfill(digits), 1) for j in index]
-
-        amplitudes = np.asarray([V[k] + P_i[k] for k in range(len(V))] + [V[k] - P_i[k] for k in range(len(V))])
-
-        amplitudes *= 0.5
-
-        new_quantum_state = QuantumState(registers=registers, amplitudes=amplitudes)
-        if counter == 1:
-            with Pool(n_cpu) as proc:
-                measure = proc.starmap(auxiliary_fun, list(zip([new_quantum_state] * n_cpu, [int(N / n_cpu)] * n_cpu)))
-                # measure = new_quantum_state.measure(int(i))  # ritorna una lista tipo ['01','02','02',...] lunga N
-                measure = np.concatenate(measure)
-
-        str_ = [str(ind).zfill(digits) for ind in index]
-        mea = measure[0:i + 1]
-        dictionary = dict(Counter(mea))
-
-        if len(dictionary) < len(registers):
-            keys = set(list(dictionary.keys()))
-            tot_keys = set(registers)
-            missing_keys = list(tot_keys - keys)
-            dictionary.update({l: 0 for l in missing_keys})
-
-        d_ = list(map(dictionary.get, str_))
-
-        P_i = [P_i[e] if x > 0.4 * P_i[e] ** 2 * i else P_i[e] * -1 for e, x in enumerate(d_)]
-        print(i)
-        # print(i, np.linalg.norm(P_i,ord=2))
-
-        dict_res.update({i: P_i})
-        end = time.time()
-        print(i, end - start)
-
-    return dict_res
 
 
 def amplitute_est_wrapper(a, epsilon, gamma, Q_mode='default'):
@@ -504,22 +410,23 @@ def amplitute_est_wrapper(a, epsilon, gamma, Q_mode='default'):
 
 
 def Amp_est_error(theta, epsilon, Q=1):
-    M = math.ceil((np.pi / (2 * epsilon)) * (1 + np.sqrt(1 + 4 * epsilon)))
-
+    M = 2 ** (math.ceil((np.pi / (2 * epsilon)) * (1 + np.sqrt(1 + 4 * epsilon))))
+    # M1 = 2**(n)
     p = []
     a_j = []
 
     for j in range(1, M + 1):
-        a_j_current=  math.sin(np.pi * j / M) ** 2
+        a_j_current = math.sin(np.pi * j / M) ** 2
         a_j.append(a_j_current)
-        distance = AmplitudeAmpDist( a_j_current/ M, theta / np.pi)
+        distance = AmplitudeAmpDist(a_j_current / M, theta / np.pi)
         if distance != 0:
-            #If j == M and theta = 0 -> distance = 0
+            # If j == M and theta = 0 -> distance = 0
             p_aj = np.abs(math.sin(M * distance) / (M * math.sin(distance))) ** 2
         else:
             pass
 
         p.append(p_aj)
+    sum_at_one = np.sum(p)
     a_tilde = random.choices(a_j, weights=p, k=1)[0]
     # estimates = statistics.median(a_tilde)
     return a_tilde

@@ -532,7 +532,7 @@ def _kmeans_single_elkan(X, sample_weight, centers_init, max_iter=300,
     return labels, inertia, centers, i + 1
 
 
-def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, tomography, stop_when_reached_accuracy ,max_iter=300,
+def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, fake_tomography, stop_when_reached_accuracy ,max_iter=300,
                          verbose=False, x_squared_norms=None, tol=1e-4,
                          n_threads=1,precompute_distances=True, delta = None, eta=None,squared_distances=1):
     """A single run of k-means lloyd, assumes preparation completed prior.
@@ -634,7 +634,8 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, tomog
                 #error = np.sqrt(eta) * eps3_eps4
                 error = delta/2
 
-                centers = _centers_update(X, labels, error, intermediate_error=intermediate_err,tomography=tomography, stop_when_reached_accuracy =stop_when_reached_accuracy)
+                centers = _centers_update(X, labels, error, intermediate_error=intermediate_err,fake_tomography=fake_tomography,
+                                          stop_when_reached_accuracy =stop_when_reached_accuracy)
 
                 print(i)
             if verbose:
@@ -786,7 +787,7 @@ def hacked_assign_labels_array(X ,centers, delta,squared_distances):
 
     return labels, distances, delta_inertia
 
-def _centers_update(X, labels,error,intermediate_error,tomography,stop_when_reached_accuracy):
+def _centers_update(X, labels,error,intermediate_error,fake_tomography,stop_when_reached_accuracy):
     """M step of the K-means EM algorithm (hacked)
     Computation of cluster centers / means.
     Parameters
@@ -823,7 +824,7 @@ def _centers_update(X, labels,error,intermediate_error,tomography,stop_when_reac
 
     if intermediate_error:
         #print('OK, intermediate error')
-        centers = make_noisy_mat(centers, error, tomography=tomography)
+        centers = tomography(centers, error, fake_tomography=fake_tomography)
 
     return centers
 
@@ -924,8 +925,8 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
     delta : float, default=None
         The error that you want to insert in the labels estimation and in the centroid updates.
 
-    tomography: bool, default=None.
-        True if you want to estimate the labels and the centroids update using the tomography, otherwise
+    fake_tomography: bool, default=False.
+        False if you want to estimate the labels and the centroids update using the real tomography, otherwise
         Truncated Gaussian Noise approximation is used.
 
     intermediate_error: bool, default=None.
@@ -1010,7 +1011,7 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
                  max_iter=300, tol=1e-4, precompute_distances='deprecated',
                  verbose=0, random_state=None, copy_x=True,
                  n_jobs='deprecated', algorithm='auto', delta=None, squared_distances=1,
-                 intermediate_error=False, tomography=False, stop_when_reached_accuracy=True):
+                 intermediate_error=False, fake_tomography=False, stop_when_reached_accuracy=True):
 
         self.n_clusters = n_clusters
         self.init = init
@@ -1026,7 +1027,7 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
         self.delta=delta
         self.squared_distances=squared_distances
         self.intermediate_error=intermediate_error
-        self.tomography = tomography
+        self.fake_tomography = fake_tomography
         self.stop_when_reached_accuracy = stop_when_reached_accuracy
         #self.eta=eta
         #self.eps3_eps4=eps3_eps4
@@ -1281,7 +1282,7 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
                 verbose=self.verbose, tol=self._tol,
                 x_squared_norms=x_squared_norms, n_threads=self._n_threads, delta=self.delta,
                 eta=self.eta,squared_distances=self.squared_distances,intermediate_err=self.intermediate_error,
-                tomography = self.tomography, stop_when_reached_accuracy = self.stop_when_reached_accuracy)
+                fake_tomography = self.fake_tomography, stop_when_reached_accuracy = self.stop_when_reached_accuracy)
 
             # determine if these results are the best so far
             if best_inertia is None or inertia < best_inertia:
