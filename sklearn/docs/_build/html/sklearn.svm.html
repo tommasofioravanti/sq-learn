@@ -1,0 +1,1807 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sklearn.svm package &mdash; Qsklearn  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Qsklearn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">sklearn</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Qsklearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>sklearn.svm package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sklearn.svm.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="sklearn-svm-package">
+<h1>sklearn.svm package<a class="headerlink" href="#sklearn-svm-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sklearn.svm.tests.html">sklearn.svm.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.svm.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.svm.tests.html#sklearn-svm-tests-test-bounds-module">sklearn.svm.tests.test_bounds module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.svm.tests.html#sklearn-svm-tests-test-sparse-module">sklearn.svm.tests.test_sparse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.svm.tests.html#sklearn-svm-tests-test-svm-module">sklearn.svm.tests.test_svm module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.svm.tests.html#module-sklearn.svm.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-sklearn.svm.setup">
+<span id="sklearn-svm-setup-module"></span><h2>sklearn.svm.setup module<a class="headerlink" href="#module-sklearn.svm.setup" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.svm.setup.configuration">
+<span class="sig-prename descclassname"><span class="pre">sklearn.svm.setup.</span></span><span class="sig-name descname"><span class="pre">configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent_package</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.setup.configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-sklearn.svm">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.svm" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#module-sklearn.svm" title="sklearn.svm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.svm</span></code></a> module includes Support Vector Machine algorithms.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.svm.LinearSVC">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.svm.</span></span><span class="sig-name descname"><span class="pre">LinearSVC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">penalty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'l2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'squared_hinge'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ovr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_intercept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept_scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.LinearSVC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model._base.LinearClassifierMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model._base.SparseCoefMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Linear Support Vector Classification.</p>
+<p>Similar to SVC with parameter kernel=’linear’, but implemented in terms of
+liblinear rather than libsvm, so it has more flexibility in the choice of
+penalties and loss functions and should scale better to large numbers of
+samples.</p>
+<p>This class supports both dense and sparse input and the multiclass support
+is handled according to a one-vs-the-rest scheme.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>penalty</strong> (<em>{'l1'</em><em>, </em><em>'l2'}</em><em>, </em><em>default='l2'</em>) – Specifies the norm used in the penalization. The ‘l2’
+penalty is the standard used in SVC. The ‘l1’ leads to <code class="docutils literal notranslate"><span class="pre">coef_</span></code>
+vectors that are sparse.</p></li>
+<li><p><strong>loss</strong> (<em>{'hinge'</em><em>, </em><em>'squared_hinge'}</em><em>, </em><em>default='squared_hinge'</em>) – Specifies the loss function. ‘hinge’ is the standard SVM loss
+(used e.g. by the SVC class) while ‘squared_hinge’ is the
+square of the hinge loss. The combination of <code class="docutils literal notranslate"><span class="pre">penalty='l1'</span></code>
+and <code class="docutils literal notranslate"><span class="pre">loss='hinge'</span></code> is not supported.</p></li>
+<li><p><strong>dual</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Select the algorithm to either solve the dual or primal
+optimization problem. Prefer dual=False when n_samples &gt; n_features.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-4</em>) – Tolerance for stopping criteria.</p></li>
+<li><p><strong>C</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Regularization parameter. The strength of the regularization is
+inversely proportional to C. Must be strictly positive.</p></li>
+<li><p><strong>multi_class</strong> (<em>{'ovr'</em><em>, </em><em>'crammer_singer'}</em><em>, </em><em>default='ovr'</em>) – Determines the multi-class strategy if <cite>y</cite> contains more than
+two classes.
+<code class="docutils literal notranslate"><span class="pre">&quot;ovr&quot;</span></code> trains n_classes one-vs-rest classifiers, while
+<code class="docutils literal notranslate"><span class="pre">&quot;crammer_singer&quot;</span></code> optimizes a joint objective over all classes.
+While <cite>crammer_singer</cite> is interesting from a theoretical perspective
+as it is consistent, it is seldom used in practice as it rarely leads
+to better accuracy and is more expensive to compute.
+If <code class="docutils literal notranslate"><span class="pre">&quot;crammer_singer&quot;</span></code> is chosen, the options loss, penalty and dual
+will be ignored.</p></li>
+<li><p><strong>fit_intercept</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to calculate the intercept for this model. If set
+to false, no intercept will be used in calculations
+(i.e. data is expected to be already centered).</p></li>
+<li><p><strong>intercept_scaling</strong> (<em>float</em><em>, </em><em>default=1</em>) – When self.fit_intercept is True, instance vector x becomes
+<code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">self.intercept_scaling]</span></code>,
+i.e. a “synthetic” feature with constant value equals to
+intercept_scaling is appended to the instance vector.
+The intercept becomes intercept_scaling * synthetic feature weight
+Note! the synthetic feature weight is subject to l1/l2 regularization
+as all other features.
+To lessen the effect of regularization on synthetic feature weight
+(and therefore on the intercept) intercept_scaling has to be increased.</p></li>
+<li><p><strong>class_weight</strong> (<em>dict</em><em> or </em><em>'balanced'</em><em>, </em><em>default=None</em>) – Set the parameter C of class i to <code class="docutils literal notranslate"><span class="pre">class_weight[i]*C</span></code> for
+SVC. If not given, all classes are supposed to have
+weight one.
+The “balanced” mode uses the values of y to automatically adjust
+weights inversely proportional to class frequencies in the input data
+as <code class="docutils literal notranslate"><span class="pre">n_samples</span> <span class="pre">/</span> <span class="pre">(n_classes</span> <span class="pre">*</span> <span class="pre">np.bincount(y))</span></code>.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>default=0</em>) – Enable verbose output. Note that this setting takes advantage of a
+per-process runtime setting in liblinear that, if enabled, may not work
+properly in a multithreaded context.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Controls the pseudo random number generation for shuffling the data for
+the dual coordinate descent (if <code class="docutils literal notranslate"><span class="pre">dual=True</span></code>). When <code class="docutils literal notranslate"><span class="pre">dual=False</span></code> the
+underlying implementation of <a class="reference internal" href="#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> is not random and
+<code class="docutils literal notranslate"><span class="pre">random_state</span></code> has no effect on the results.
+Pass an int for reproducible output across multiple function calls.
+See <span class="xref std std-term">Glossary</span>.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=1000</em>) – The maximum number of iterations to be run.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.LinearSVC.coef_">
+<span class="sig-name descname"><span class="pre">coef_</span></span><a class="headerlink" href="#sklearn.svm.LinearSVC.coef_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Weights assigned to the features (coefficients in the primal
+problem). This is only available in the case of a linear kernel.</p>
+<p><code class="docutils literal notranslate"><span class="pre">coef_</span></code> is a readonly property derived from <code class="docutils literal notranslate"><span class="pre">raw_coef_</span></code> that
+follows the internal memory layout of liblinear.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (1, n_features) if n_classes == 2             else (n_classes, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.LinearSVC.intercept_">
+<span class="sig-name descname"><span class="pre">intercept_</span></span><a class="headerlink" href="#sklearn.svm.LinearSVC.intercept_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constants in decision function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (1,) if n_classes == 2 else (n_classes,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.LinearSVC.classes_">
+<span class="sig-name descname"><span class="pre">classes_</span></span><a class="headerlink" href="#sklearn.svm.LinearSVC.classes_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The unique classes labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.LinearSVC.n_iter_">
+<span class="sig-name descname"><span class="pre">n_iter_</span></span><a class="headerlink" href="#sklearn.svm.LinearSVC.n_iter_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum number of iterations run across all classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SVC</span></code></a></dt><dd><p>Implementation of Support Vector Machine classifier using libsvm: the kernel can be non-linear but its SMO algorithm does not scale to large number of samples as LinearSVC does. Furthermore SVC multi-class mode is implemented using one vs one scheme while LinearSVC uses one vs the rest. It is possible to implement one vs the rest with SVC by using the <code class="xref py py-class docutils literal notranslate"><span class="pre">OneVsRestClassifier</span></code> wrapper. Finally SVC can fit dense data without memory copy if the input is C-contiguous. Sparse data will still incur memory copy though.</p>
+</dd>
+<dt><a class="reference internal" href="sklearn.linear_model.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sklearn.linear_model.SGDClassifier</span></code></a></dt><dd><p>SGDClassifier can optimize the same cost function as LinearSVC by adjusting the penalty and loss parameters. In addition it requires less memory, allows incremental (online) learning, and implements various loss functions and regularization regimes.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The underlying C implementation uses a random number generator to
+select features when fitting the model. It is thus not uncommon
+to have slightly different results for the same input data. If
+that happens, try with a smaller <code class="docutils literal notranslate"><span class="pre">tol</span></code> parameter.</p>
+<p>The underlying implementation, liblinear, uses a sparse internal
+representation for the data that will incur a memory copy.</p>
+<p>Predict output may not match that of standalone liblinear in certain
+cases. See <span class="xref std std-ref">differences from liblinear</span>
+in the narrative documentation.</p>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://www.csie.ntu.edu.tw/~cjlin/liblinear/">LIBLINEAR: A Library for Large Linear Classification</a></p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span>
+<span class="gp">... </span>                    <span class="n">LinearSVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">Pipeline(steps=[(&#39;standardscaler&#39;, StandardScaler()),</span>
+<span class="go">                (&#39;linearsvc&#39;, LinearSVC(random_state=0, tol=1e-05))])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;linearsvc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="go">[[0.141...   0.526... 0.679... 0.493...]]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;linearsvc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+<span class="go">[0.1693...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]))</span>
+<span class="go">[1]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.svm.LinearSVC.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.LinearSVC.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the model according to the given training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training vector, where n_samples in the number of samples and
+n_features is the number of features.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Target vector relative to X.</p></li>
+<li><p><strong>sample_weight</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – <p>Array of weights that are assigned to individual
+samples. If not provided,
+then each sample is given unit weight.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong> – An instance of the estimator.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.svm.LinearSVR">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.svm.</span></span><span class="sig-name descname"><span class="pre">LinearSVR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'epsilon_insensitive'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_intercept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept_scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.LinearSVR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.RegressorMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.linear_model._base.LinearModel</span></code></p>
+<p>Linear Support Vector Regression.</p>
+<p>Similar to SVR with parameter kernel=’linear’, but implemented in terms of
+liblinear rather than libsvm, so it has more flexibility in the choice of
+penalties and loss functions and should scale better to large numbers of
+samples.</p>
+<p>This class supports both dense and sparse input.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.16.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>epsilon</strong> (<em>float</em><em>, </em><em>default=0.0</em>) – Epsilon parameter in the epsilon-insensitive loss function. Note
+that the value of this parameter depends on the scale of the target
+variable y. If unsure, set <code class="docutils literal notranslate"><span class="pre">epsilon=0</span></code>.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-4</em>) – Tolerance for stopping criteria.</p></li>
+<li><p><strong>C</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Regularization parameter. The strength of the regularization is
+inversely proportional to C. Must be strictly positive.</p></li>
+<li><p><strong>loss</strong> (<em>{'epsilon_insensitive'</em><em>, </em><em>'squared_epsilon_insensitive'}</em><em>,             </em><em>default='epsilon_insensitive'</em>) – Specifies the loss function. The epsilon-insensitive loss
+(standard SVR) is the L1 loss, while the squared epsilon-insensitive
+loss (‘squared_epsilon_insensitive’) is the L2 loss.</p></li>
+<li><p><strong>fit_intercept</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to calculate the intercept for this model. If set
+to false, no intercept will be used in calculations
+(i.e. data is expected to be already centered).</p></li>
+<li><p><strong>intercept_scaling</strong> (<em>float</em><em>, </em><em>default=1.</em>) – When self.fit_intercept is True, instance vector x becomes
+[x, self.intercept_scaling],
+i.e. a “synthetic” feature with constant value equals to
+intercept_scaling is appended to the instance vector.
+The intercept becomes intercept_scaling * synthetic feature weight
+Note! the synthetic feature weight is subject to l1/l2 regularization
+as all other features.
+To lessen the effect of regularization on synthetic feature weight
+(and therefore on the intercept) intercept_scaling has to be increased.</p></li>
+<li><p><strong>dual</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Select the algorithm to either solve the dual or primal
+optimization problem. Prefer dual=False when n_samples &gt; n_features.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>default=0</em>) – Enable verbose output. Note that this setting takes advantage of a
+per-process runtime setting in liblinear that, if enabled, may not work
+properly in a multithreaded context.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Controls the pseudo random number generation for shuffling the data.
+Pass an int for reproducible output across multiple function calls.
+See <span class="xref std std-term">Glossary</span>.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=1000</em>) – The maximum number of iterations to be run.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.LinearSVR.coef_">
+<span class="sig-name descname"><span class="pre">coef_</span></span><a class="headerlink" href="#sklearn.svm.LinearSVR.coef_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Weights assigned to the features (coefficients in the primal
+problem). This is only available in the case of a linear kernel.</p>
+<p><cite>coef_</cite> is a readonly property derived from <cite>raw_coef_</cite> that
+follows the internal memory layout of liblinear.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features) if n_classes == 2             else (n_classes, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.LinearSVR.intercept_">
+<span class="sig-name descname"><span class="pre">intercept_</span></span><a class="headerlink" href="#sklearn.svm.LinearSVR.intercept_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constants in decision function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (1) if n_classes == 2 else (n_classes)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.LinearSVR.n_iter_">
+<span class="sig-name descname"><span class="pre">n_iter_</span></span><a class="headerlink" href="#sklearn.svm.LinearSVR.n_iter_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum number of iterations run across all classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVR</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_regression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span>
+<span class="gp">... </span>                     <span class="n">LinearSVR</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">Pipeline(steps=[(&#39;standardscaler&#39;, StandardScaler()),</span>
+<span class="go">                (&#39;linearsvr&#39;, LinearSVR(random_state=0, tol=1e-05))])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">regr</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;linearsvr&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="go">[18.582... 27.023... 44.357... 64.522...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">regr</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">&#39;linearsvr&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+<span class="go">[-4...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]))</span>
+<span class="go">[-2.384...]</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearSVC</span></code></a></dt><dd><p>Implementation of Support Vector Machine classifier using the same library as this class (liblinear).</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SVR</span></code></a></dt><dd><p>Implementation of Support Vector Machine regression using libsvm: the kernel can be non-linear but its SMO algorithm does not scale to large number of samples as LinearSVC does.</p>
+</dd>
+<dt><a class="reference internal" href="sklearn.linear_model.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sklearn.linear_model.SGDRegressor</span></code></a></dt><dd><p>SGDRegressor can optimize the same cost function as LinearSVR by adjusting the penalty and loss parameters. In addition it requires less memory, allows incremental (online) learning, and implements various loss functions and regularization regimes.</p>
+</dd>
+</dl>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.svm.LinearSVR.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.LinearSVR.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the model according to the given training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training vector, where n_samples in the number of samples and
+n_features is the number of features.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Target vector relative to X</p></li>
+<li><p><strong>sample_weight</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – <p>Array of weights that are assigned to individual
+samples. If not provided,
+then each sample is given unit weight.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong> – An instance of the estimator.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVC">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.svm.</span></span><span class="sig-name descname"><span class="pre">NuSVC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rbf'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scale'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coef0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shrinking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probability</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decision_function_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ovr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">break_ties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.NuSVC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.svm._base.BaseSVC</span></code></p>
+<p>Nu-Support Vector Classification.</p>
+<p>Similar to SVC but uses a parameter to control the number of support
+vectors.</p>
+<p>The implementation is based on libsvm.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nu</strong> (<em>float</em><em>, </em><em>default=0.5</em>) – An upper bound on the fraction of margin errors (see <span class="xref std std-ref">User Guide</span>) and a lower bound of the fraction of support vectors.
+Should be in the interval (0, 1].</p></li>
+<li><p><strong>kernel</strong> (<em>{'linear'</em><em>, </em><em>'poly'</em><em>, </em><em>'rbf'</em><em>, </em><em>'sigmoid'</em><em>, </em><em>'precomputed'}</em><em>, </em><em>default='rbf'</em>) – Specifies the kernel type to be used in the algorithm.
+It must be one of ‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ or
+a callable.
+If none is given, ‘rbf’ will be used. If a callable is given it is
+used to precompute the kernel matrix.</p></li>
+<li><p><strong>degree</strong> (<em>int</em><em>, </em><em>default=3</em>) – Degree of the polynomial kernel function (‘poly’).
+Ignored by all other kernels.</p></li>
+<li><p><strong>gamma</strong> (<em>{'scale'</em><em>, </em><em>'auto'}</em><em> or </em><em>float</em><em>, </em><em>default='scale'</em>) – <p>Kernel coefficient for ‘rbf’, ‘poly’ and ‘sigmoid’.</p>
+<ul>
+<li><p>if <code class="docutils literal notranslate"><span class="pre">gamma='scale'</span></code> (default) is passed then it uses
+1 / (n_features * X.var()) as value of gamma,</p></li>
+<li><p>if ‘auto’, uses 1 / n_features.</p></li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.22: </span>The default value of <code class="docutils literal notranslate"><span class="pre">gamma</span></code> changed from ‘auto’ to ‘scale’.</p>
+</div>
+</p></li>
+<li><p><strong>coef0</strong> (<em>float</em><em>, </em><em>default=0.0</em>) – Independent term in kernel function.
+It is only significant in ‘poly’ and ‘sigmoid’.</p></li>
+<li><p><strong>shrinking</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to use the shrinking heuristic.
+See the <span class="xref std std-ref">User Guide</span>.</p></li>
+<li><p><strong>probability</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Whether to enable probability estimates. This must be enabled prior
+to calling <cite>fit</cite>, will slow down that method as it internally uses
+5-fold cross-validation, and <cite>predict_proba</cite> may be inconsistent with
+<cite>predict</cite>. Read more in the <span class="xref std std-ref">User Guide</span>.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-3</em>) – Tolerance for stopping criterion.</p></li>
+<li><p><strong>cache_size</strong> (<em>float</em><em>, </em><em>default=200</em>) – Specify the size of the kernel cache (in MB).</p></li>
+<li><p><strong>class_weight</strong> (<em>{dict</em><em>, </em><em>'balanced'}</em><em>, </em><em>default=None</em>) – Set the parameter C of class i to class_weight[i]*C for
+SVC. If not given, all classes are supposed to have
+weight one. The “balanced” mode uses the values of y to automatically
+adjust weights inversely proportional to class frequencies as
+<code class="docutils literal notranslate"><span class="pre">n_samples</span> <span class="pre">/</span> <span class="pre">(n_classes</span> <span class="pre">*</span> <span class="pre">np.bincount(y))</span></code></p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Enable verbose output. Note that this setting takes advantage of a
+per-process runtime setting in libsvm that, if enabled, may not work
+properly in a multithreaded context.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=-1</em>) – Hard limit on iterations within solver, or -1 for no limit.</p></li>
+<li><p><strong>decision_function_shape</strong> (<em>{'ovo'</em><em>, </em><em>'ovr'}</em><em>, </em><em>default='ovr'</em>) – <p>Whether to return a one-vs-rest (‘ovr’) decision function of shape
+(n_samples, n_classes) as all other classifiers, or the original
+one-vs-one (‘ovo’) decision function of libsvm which has shape
+(n_samples, n_classes * (n_classes - 1) / 2). However, one-vs-one
+(‘ovo’) is always used as multi-class strategy. The parameter is
+ignored for binary classification.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.19: </span>decision_function_shape is ‘ovr’ by default.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.17: </span><em>decision_function_shape=’ovr’</em> is recommended.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.17: </span>Deprecated <em>decision_function_shape=’ovo’ and None</em>.</p>
+</div>
+</p></li>
+<li><p><strong>break_ties</strong> (<em>bool</em><em>, </em><em>default=False</em>) – <p>If true, <code class="docutils literal notranslate"><span class="pre">decision_function_shape='ovr'</span></code>, and number of classes &gt; 2,
+<span class="xref std std-term">predict</span> will break ties according to the confidence values of
+<span class="xref std std-term">decision_function</span>; otherwise the first class among the tied
+classes is returned. Please note that breaking ties comes at a
+relatively high computational cost compared to a simple predict.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.22.</span></p>
+</div>
+</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Controls the pseudo random number generation for shuffling the data for
+probability estimates. Ignored when <cite>probability</cite> is False.
+Pass an int for reproducible output across multiple function calls.
+See <span class="xref std std-term">Glossary</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVC.class_weight_">
+<span class="sig-name descname"><span class="pre">class_weight_</span></span><a class="headerlink" href="#sklearn.svm.NuSVC.class_weight_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multipliers of parameter C of each class.
+Computed based on the <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVC.classes_">
+<span class="sig-name descname"><span class="pre">classes_</span></span><a class="headerlink" href="#sklearn.svm.NuSVC.classes_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The unique classes labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVC.coef_">
+<span class="sig-name descname"><span class="pre">coef_</span></span><a class="headerlink" href="#sklearn.svm.NuSVC.coef_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Weights assigned to the features (coefficients in the primal
+problem). This is only available in the case of a linear kernel.</p>
+<p><cite>coef_</cite> is readonly property derived from <cite>dual_coef_</cite> and
+<cite>support_vectors_</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes * (n_classes -1) / 2, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVC.dual_coef_">
+<span class="sig-name descname"><span class="pre">dual_coef_</span></span><a class="headerlink" href="#sklearn.svm.NuSVC.dual_coef_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dual coefficients of the support vector in the decision
+function (see <span class="xref std std-ref">sgd_mathematical_formulation</span>), multiplied by
+their targets.
+For multiclass, coefficient for all 1-vs-1 classifiers.
+The layout of the coefficients in the multiclass case is somewhat
+non-trivial. See the <span class="xref std std-ref">multi-class section of the User Guide</span> for details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes - 1, n_SV)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVC.fit_status_">
+<span class="sig-name descname"><span class="pre">fit_status_</span></span><a class="headerlink" href="#sklearn.svm.NuSVC.fit_status_" title="Permalink to this definition">¶</a></dt>
+<dd><p>0 if correctly fitted, 1 if the algorithm did not converge.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVC.intercept_">
+<span class="sig-name descname"><span class="pre">intercept_</span></span><a class="headerlink" href="#sklearn.svm.NuSVC.intercept_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constants in decision function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes * (n_classes - 1) / 2,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVC.support_">
+<span class="sig-name descname"><span class="pre">support_</span></span><a class="headerlink" href="#sklearn.svm.NuSVC.support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indices of support vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_SV,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVC.support_vectors_">
+<span class="sig-name descname"><span class="pre">support_vectors_</span></span><a class="headerlink" href="#sklearn.svm.NuSVC.support_vectors_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Support vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_SV, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVC.n_support_">
+<span class="sig-name descname"><span class="pre">n_support_</span></span><a class="headerlink" href="#sklearn.svm.NuSVC.n_support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of support vectors for each class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes,), dtype=int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">fit_status_</span></span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><p>0 if correctly fitted, 1 if the algorithm did not converge.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVC.probA_">
+<span class="sig-name descname"><span class="pre">probA_</span></span><a class="headerlink" href="#sklearn.svm.NuSVC.probA_" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes * (n_classes - 1) / 2,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVC.probB_">
+<span class="sig-name descname"><span class="pre">probB_</span></span><a class="headerlink" href="#sklearn.svm.NuSVC.probB_" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <cite>probability=True</cite>, it corresponds to the parameters learned in
+Platt scaling to produce probability estimates from decision values.
+If <cite>probability=False</cite>, it’s an empty array. Platt scaling uses the
+logistic function
+<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">exp(decision_value</span> <span class="pre">*</span> <span class="pre">probA_</span> <span class="pre">+</span> <span class="pre">probB_))</span></code>
+where <code class="docutils literal notranslate"><span class="pre">probA_</span></code> and <code class="docutils literal notranslate"><span class="pre">probB_</span></code> are learned from the dataset <a href="#id19"><span class="problematic" id="id1">[2]_</span></a>. For
+more information on the multiclass case and training procedure see
+section 8 of <a href="#id20"><span class="problematic" id="id2">[1]_</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes * (n_classes - 1) / 2,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVC.shape_fit_">
+<span class="sig-name descname"><span class="pre">shape_fit_</span></span><a class="headerlink" href="#sklearn.svm.NuSVC.shape_fit_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array dimensions of training vector <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tuple of int of shape (n_dimensions_of_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">NuSVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">NuSVC</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">Pipeline(steps=[(&#39;standardscaler&#39;, StandardScaler()), (&#39;nusvc&#39;, NuSVC())])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>
+<span class="go">[1]</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.svm.SVC" title="sklearn.svm.SVC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SVC</span></code></a></dt><dd><p>Support Vector Machine for classification using libsvm.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearSVC</span></code></a></dt><dd><p>Scalable linear Support Vector Machine for classification using liblinear.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">LIBSVM: A Library for Support Vector Machines</a></p>
+</dd>
+<dt class="label" id="id4"><span class="brackets">2</span></dt>
+<dd><p><a class="reference external" href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.41.1639">Platt, John (1999). “Probabilistic outputs for support vector
+machines and comparison to regularizedlikelihood methods.”</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVR">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.svm.</span></span><span class="sig-name descname"><span class="pre">NuSVR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rbf'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scale'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coef0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shrinking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.NuSVR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.RegressorMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.svm._base.BaseLibSVM</span></code></p>
+<p>Nu Support Vector Regression.</p>
+<p>Similar to NuSVC, for regression, uses a parameter nu to control
+the number of support vectors. However, unlike NuSVC, where nu
+replaces C, here nu replaces the parameter epsilon of epsilon-SVR.</p>
+<p>The implementation is based on libsvm.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nu</strong> (<em>float</em><em>, </em><em>default=0.5</em>) – An upper bound on the fraction of training errors and a lower bound of
+the fraction of support vectors. Should be in the interval (0, 1].  By
+default 0.5 will be taken.</p></li>
+<li><p><strong>C</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Penalty parameter C of the error term.</p></li>
+<li><p><strong>kernel</strong> (<em>{'linear'</em><em>, </em><em>'poly'</em><em>, </em><em>'rbf'</em><em>, </em><em>'sigmoid'</em><em>, </em><em>'precomputed'}</em><em>, </em><em>default='rbf'</em>) – Specifies the kernel type to be used in the algorithm.
+It must be one of ‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ or
+a callable.
+If none is given, ‘rbf’ will be used. If a callable is given it is
+used to precompute the kernel matrix.</p></li>
+<li><p><strong>degree</strong> (<em>int</em><em>, </em><em>default=3</em>) – Degree of the polynomial kernel function (‘poly’).
+Ignored by all other kernels.</p></li>
+<li><p><strong>gamma</strong> (<em>{'scale'</em><em>, </em><em>'auto'}</em><em> or </em><em>float</em><em>, </em><em>default='scale'</em>) – <p>Kernel coefficient for ‘rbf’, ‘poly’ and ‘sigmoid’.</p>
+<ul>
+<li><p>if <code class="docutils literal notranslate"><span class="pre">gamma='scale'</span></code> (default) is passed then it uses
+1 / (n_features * X.var()) as value of gamma,</p></li>
+<li><p>if ‘auto’, uses 1 / n_features.</p></li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.22: </span>The default value of <code class="docutils literal notranslate"><span class="pre">gamma</span></code> changed from ‘auto’ to ‘scale’.</p>
+</div>
+</p></li>
+<li><p><strong>coef0</strong> (<em>float</em><em>, </em><em>default=0.0</em>) – Independent term in kernel function.
+It is only significant in ‘poly’ and ‘sigmoid’.</p></li>
+<li><p><strong>shrinking</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to use the shrinking heuristic.
+See the <span class="xref std std-ref">User Guide</span>.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-3</em>) – Tolerance for stopping criterion.</p></li>
+<li><p><strong>cache_size</strong> (<em>float</em><em>, </em><em>default=200</em>) – Specify the size of the kernel cache (in MB).</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Enable verbose output. Note that this setting takes advantage of a
+per-process runtime setting in libsvm that, if enabled, may not work
+properly in a multithreaded context.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=-1</em>) – Hard limit on iterations within solver, or -1 for no limit.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVR.class_weight_">
+<span class="sig-name descname"><span class="pre">class_weight_</span></span><a class="headerlink" href="#sklearn.svm.NuSVR.class_weight_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multipliers of parameter C for each class.
+Computed based on the <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVR.coef_">
+<span class="sig-name descname"><span class="pre">coef_</span></span><a class="headerlink" href="#sklearn.svm.NuSVR.coef_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Weights assigned to the features (coefficients in the primal
+problem). This is only available in the case of a linear kernel.</p>
+<p><cite>coef_</cite> is readonly property derived from <cite>dual_coef_</cite> and
+<cite>support_vectors_</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (1, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVR.dual_coef_">
+<span class="sig-name descname"><span class="pre">dual_coef_</span></span><a class="headerlink" href="#sklearn.svm.NuSVR.dual_coef_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coefficients of the support vector in the decision function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (1, n_SV)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVR.fit_status_">
+<span class="sig-name descname"><span class="pre">fit_status_</span></span><a class="headerlink" href="#sklearn.svm.NuSVR.fit_status_" title="Permalink to this definition">¶</a></dt>
+<dd><p>0 if correctly fitted, 1 otherwise (will raise warning)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVR.intercept_">
+<span class="sig-name descname"><span class="pre">intercept_</span></span><a class="headerlink" href="#sklearn.svm.NuSVR.intercept_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constants in decision function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (1,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVR.n_support_">
+<span class="sig-name descname"><span class="pre">n_support_</span></span><a class="headerlink" href="#sklearn.svm.NuSVR.n_support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of support vectors for each class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes,), dtype=int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVR.shape_fit_">
+<span class="sig-name descname"><span class="pre">shape_fit_</span></span><a class="headerlink" href="#sklearn.svm.NuSVR.shape_fit_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array dimensions of training vector <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tuple of int of shape (n_dimensions_of_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVR.support_">
+<span class="sig-name descname"><span class="pre">support_</span></span><a class="headerlink" href="#sklearn.svm.NuSVR.support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indices of support vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_SV,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.NuSVR.support_vectors_">
+<span class="sig-name descname"><span class="pre">support_vectors_</span></span><a class="headerlink" href="#sklearn.svm.NuSVR.support_vectors_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Support vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_SV, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">NuSVR</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">NuSVR</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">Pipeline(steps=[(&#39;standardscaler&#39;, StandardScaler()),</span>
+<span class="go">                (&#39;nusvr&#39;, NuSVR(nu=0.1))])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.svm.NuSVC" title="sklearn.svm.NuSVC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NuSVC</span></code></a></dt><dd><p>Support Vector Machine for classification implemented with libsvm with a parameter to control the number of support vectors.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SVR</span></code></a></dt><dd><p>Epsilon Support Vector Machine for regression implemented with libsvm.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id5"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">LIBSVM: A Library for Support Vector Machines</a></p>
+</dd>
+<dt class="label" id="id7"><span class="brackets">2</span></dt>
+<dd><p><a class="reference external" href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.41.1639">Platt, John (1999). “Probabilistic outputs for support vector
+machines and comparison to regularizedlikelihood methods.”</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.svm.</span></span><span class="sig-name descname"><span class="pre">OneClassSVM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rbf'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scale'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coef0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shrinking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.OneClassSVM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.OutlierMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.svm._base.BaseLibSVM</span></code></p>
+<p>Unsupervised Outlier Detection.</p>
+<p>Estimate the support of a high-dimensional distribution.</p>
+<p>The implementation is based on libsvm.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kernel</strong> (<em>{'linear'</em><em>, </em><em>'poly'</em><em>, </em><em>'rbf'</em><em>, </em><em>'sigmoid'</em><em>, </em><em>'precomputed'}</em><em>, </em><em>default='rbf'</em>) – Specifies the kernel type to be used in the algorithm.
+It must be one of ‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ or
+a callable.
+If none is given, ‘rbf’ will be used. If a callable is given it is
+used to precompute the kernel matrix.</p></li>
+<li><p><strong>degree</strong> (<em>int</em><em>, </em><em>default=3</em>) – Degree of the polynomial kernel function (‘poly’).
+Ignored by all other kernels.</p></li>
+<li><p><strong>gamma</strong> (<em>{'scale'</em><em>, </em><em>'auto'}</em><em> or </em><em>float</em><em>, </em><em>default='scale'</em>) – <p>Kernel coefficient for ‘rbf’, ‘poly’ and ‘sigmoid’.</p>
+<ul>
+<li><p>if <code class="docutils literal notranslate"><span class="pre">gamma='scale'</span></code> (default) is passed then it uses
+1 / (n_features * X.var()) as value of gamma,</p></li>
+<li><p>if ‘auto’, uses 1 / n_features.</p></li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.22: </span>The default value of <code class="docutils literal notranslate"><span class="pre">gamma</span></code> changed from ‘auto’ to ‘scale’.</p>
+</div>
+</p></li>
+<li><p><strong>coef0</strong> (<em>float</em><em>, </em><em>default=0.0</em>) – Independent term in kernel function.
+It is only significant in ‘poly’ and ‘sigmoid’.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-3</em>) – Tolerance for stopping criterion.</p></li>
+<li><p><strong>nu</strong> (<em>float</em><em>, </em><em>default=0.5</em>) – An upper bound on the fraction of training
+errors and a lower bound of the fraction of support
+vectors. Should be in the interval (0, 1]. By default 0.5
+will be taken.</p></li>
+<li><p><strong>shrinking</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to use the shrinking heuristic.
+See the <span class="xref std std-ref">User Guide</span>.</p></li>
+<li><p><strong>cache_size</strong> (<em>float</em><em>, </em><em>default=200</em>) – Specify the size of the kernel cache (in MB).</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Enable verbose output. Note that this setting takes advantage of a
+per-process runtime setting in libsvm that, if enabled, may not work
+properly in a multithreaded context.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=-1</em>) – Hard limit on iterations within solver, or -1 for no limit.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.class_weight_">
+<span class="sig-name descname"><span class="pre">class_weight_</span></span><a class="headerlink" href="#sklearn.svm.OneClassSVM.class_weight_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multipliers of parameter C for each class.
+Computed based on the <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.coef_">
+<span class="sig-name descname"><span class="pre">coef_</span></span><a class="headerlink" href="#sklearn.svm.OneClassSVM.coef_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Weights assigned to the features (coefficients in the primal
+problem). This is only available in the case of a linear kernel.</p>
+<p><cite>coef_</cite> is readonly property derived from <cite>dual_coef_</cite> and
+<cite>support_vectors_</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (1, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.dual_coef_">
+<span class="sig-name descname"><span class="pre">dual_coef_</span></span><a class="headerlink" href="#sklearn.svm.OneClassSVM.dual_coef_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coefficients of the support vectors in the decision function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (1, n_SV)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.fit_status_">
+<span class="sig-name descname"><span class="pre">fit_status_</span></span><a class="headerlink" href="#sklearn.svm.OneClassSVM.fit_status_" title="Permalink to this definition">¶</a></dt>
+<dd><p>0 if correctly fitted, 1 otherwise (will raise warning)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.intercept_">
+<span class="sig-name descname"><span class="pre">intercept_</span></span><a class="headerlink" href="#sklearn.svm.OneClassSVM.intercept_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constant in the decision function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (1,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.n_support_">
+<span class="sig-name descname"><span class="pre">n_support_</span></span><a class="headerlink" href="#sklearn.svm.OneClassSVM.n_support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of support vectors for each class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes,), dtype=int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.offset_">
+<span class="sig-name descname"><span class="pre">offset_</span></span><a class="headerlink" href="#sklearn.svm.OneClassSVM.offset_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Offset used to define the decision function from the raw scores.
+We have the relation: decision_function = score_samples - <cite>offset_</cite>.
+The offset is the opposite of <cite>intercept_</cite> and is provided for
+consistency with other outlier detection algorithms.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.shape_fit_">
+<span class="sig-name descname"><span class="pre">shape_fit_</span></span><a class="headerlink" href="#sklearn.svm.OneClassSVM.shape_fit_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array dimensions of training vector <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tuple of int of shape (n_dimensions_of_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.support_">
+<span class="sig-name descname"><span class="pre">support_</span></span><a class="headerlink" href="#sklearn.svm.OneClassSVM.support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indices of support vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_SV,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.support_vectors_">
+<span class="sig-name descname"><span class="pre">support_vectors_</span></span><a class="headerlink" href="#sklearn.svm.OneClassSVM.support_vectors_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Support vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_SV, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">OneClassSVM</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.44</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.45</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.46</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">OneClassSVM</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([-1,  1,  1,  1, -1])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([1.7798..., 2.0547..., 2.0556..., 2.0561..., 1.7332...])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="sklearn.linear_model.html#sklearn.linear_model.SGDOneClassSVM" title="sklearn.linear_model.SGDOneClassSVM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sklearn.linear_model.SGDOneClassSVM</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.decision_function">
+<span class="sig-name descname"><span class="pre">decision_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.OneClassSVM.decision_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signed distance to the separating hyperplane.</p>
+<p>Signed distance is positive for an inlier and negative for an outlier.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The data matrix.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dec</strong> – Returns the decision function of the samples.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.OneClassSVM.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detects the soft boundary of the set of samples X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Set of samples, where n_samples is the number of samples and
+n_features is the number of features.</p></li>
+<li><p><strong>sample_weight</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – Per-sample weights. Rescale C per sample. Higher weights
+force the classifier to put more emphasis on these points.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – not used, present for API consistency by convention.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>If X is not a C-ordered contiguous array it is copied.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.OneClassSVM.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform classification on samples in X.</p>
+<p>For a one-class model, +1 or -1 is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>) or                 </em><em>(</em><em>n_samples_test</em><em>, </em><em>n_samples_train</em><em>)</em>) – For kernel=”precomputed”, the expected shape of X is
+(n_samples_test, n_samples_train).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>y_pred</strong> – Class labels for samples in X.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.probA_">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">probA_</span></span><a class="headerlink" href="#sklearn.svm.OneClassSVM.probA_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.probB_">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">probB_</span></span><a class="headerlink" href="#sklearn.svm.OneClassSVM.probB_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.svm.OneClassSVM.score_samples">
+<span class="sig-name descname"><span class="pre">score_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.OneClassSVM.score_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raw scoring function of the samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The data matrix.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>score_samples</strong> – Returns the (unshifted) scoring function of the samples.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.svm.SVC">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.svm.</span></span><span class="sig-name descname"><span class="pre">SVC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rbf'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scale'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coef0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shrinking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">probability</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decision_function_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ovr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">break_ties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.SVC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.svm._base.BaseSVC</span></code></p>
+<p>C-Support Vector Classification.</p>
+<p>The implementation is based on libsvm. The fit time scales at least
+quadratically with the number of samples and may be impractical
+beyond tens of thousands of samples. For large datasets
+consider using <a class="reference internal" href="#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVC</span></code></a> or
+<a class="reference internal" href="sklearn.linear_model.html#sklearn.linear_model.SGDClassifier" title="sklearn.linear_model.SGDClassifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">SGDClassifier</span></code></a> instead, possibly after a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Nystroem</span></code> transformer.</p>
+<p>The multiclass support is handled according to a one-vs-one scheme.</p>
+<p>For details on the precise mathematical formulation of the provided
+kernel functions and how <cite>gamma</cite>, <cite>coef0</cite> and <cite>degree</cite> affect each
+other, see the corresponding section in the narrative documentation:
+<span class="xref std std-ref">svm_kernels</span>.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>C</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Regularization parameter. The strength of the regularization is
+inversely proportional to C. Must be strictly positive. The penalty
+is a squared l2 penalty.</p></li>
+<li><p><strong>kernel</strong> (<em>{'linear'</em><em>, </em><em>'poly'</em><em>, </em><em>'rbf'</em><em>, </em><em>'sigmoid'</em><em>, </em><em>'precomputed'}</em><em>, </em><em>default='rbf'</em>) – Specifies the kernel type to be used in the algorithm.
+It must be one of ‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ or
+a callable.
+If none is given, ‘rbf’ will be used. If a callable is given it is
+used to pre-compute the kernel matrix from data matrices; that matrix
+should be an array of shape <code class="docutils literal notranslate"><span class="pre">(n_samples,</span> <span class="pre">n_samples)</span></code>.</p></li>
+<li><p><strong>degree</strong> (<em>int</em><em>, </em><em>default=3</em>) – Degree of the polynomial kernel function (‘poly’).
+Ignored by all other kernels.</p></li>
+<li><p><strong>gamma</strong> (<em>{'scale'</em><em>, </em><em>'auto'}</em><em> or </em><em>float</em><em>, </em><em>default='scale'</em>) – <p>Kernel coefficient for ‘rbf’, ‘poly’ and ‘sigmoid’.</p>
+<ul>
+<li><p>if <code class="docutils literal notranslate"><span class="pre">gamma='scale'</span></code> (default) is passed then it uses
+1 / (n_features * X.var()) as value of gamma,</p></li>
+<li><p>if ‘auto’, uses 1 / n_features.</p></li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.22: </span>The default value of <code class="docutils literal notranslate"><span class="pre">gamma</span></code> changed from ‘auto’ to ‘scale’.</p>
+</div>
+</p></li>
+<li><p><strong>coef0</strong> (<em>float</em><em>, </em><em>default=0.0</em>) – Independent term in kernel function.
+It is only significant in ‘poly’ and ‘sigmoid’.</p></li>
+<li><p><strong>shrinking</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to use the shrinking heuristic.
+See the <span class="xref std std-ref">User Guide</span>.</p></li>
+<li><p><strong>probability</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Whether to enable probability estimates. This must be enabled prior
+to calling <cite>fit</cite>, will slow down that method as it internally uses
+5-fold cross-validation, and <cite>predict_proba</cite> may be inconsistent with
+<cite>predict</cite>. Read more in the <span class="xref std std-ref">User Guide</span>.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-3</em>) – Tolerance for stopping criterion.</p></li>
+<li><p><strong>cache_size</strong> (<em>float</em><em>, </em><em>default=200</em>) – Specify the size of the kernel cache (in MB).</p></li>
+<li><p><strong>class_weight</strong> (<em>dict</em><em> or </em><em>'balanced'</em><em>, </em><em>default=None</em>) – Set the parameter C of class i to class_weight[i]*C for
+SVC. If not given, all classes are supposed to have
+weight one.
+The “balanced” mode uses the values of y to automatically adjust
+weights inversely proportional to class frequencies in the input data
+as <code class="docutils literal notranslate"><span class="pre">n_samples</span> <span class="pre">/</span> <span class="pre">(n_classes</span> <span class="pre">*</span> <span class="pre">np.bincount(y))</span></code></p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Enable verbose output. Note that this setting takes advantage of a
+per-process runtime setting in libsvm that, if enabled, may not work
+properly in a multithreaded context.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=-1</em>) – Hard limit on iterations within solver, or -1 for no limit.</p></li>
+<li><p><strong>decision_function_shape</strong> (<em>{'ovo'</em><em>, </em><em>'ovr'}</em><em>, </em><em>default='ovr'</em>) – <p>Whether to return a one-vs-rest (‘ovr’) decision function of shape
+(n_samples, n_classes) as all other classifiers, or the original
+one-vs-one (‘ovo’) decision function of libsvm which has shape
+(n_samples, n_classes * (n_classes - 1) / 2). However, one-vs-one
+(‘ovo’) is always used as multi-class strategy. The parameter is
+ignored for binary classification.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.19: </span>decision_function_shape is ‘ovr’ by default.</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.17: </span><em>decision_function_shape=’ovr’</em> is recommended.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.17: </span>Deprecated <em>decision_function_shape=’ovo’ and None</em>.</p>
+</div>
+</p></li>
+<li><p><strong>break_ties</strong> (<em>bool</em><em>, </em><em>default=False</em>) – <p>If true, <code class="docutils literal notranslate"><span class="pre">decision_function_shape='ovr'</span></code>, and number of classes &gt; 2,
+<span class="xref std std-term">predict</span> will break ties according to the confidence values of
+<span class="xref std std-term">decision_function</span>; otherwise the first class among the tied
+classes is returned. Please note that breaking ties comes at a
+relatively high computational cost compared to a simple predict.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.22.</span></p>
+</div>
+</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Controls the pseudo random number generation for shuffling the data for
+probability estimates. Ignored when <cite>probability</cite> is False.
+Pass an int for reproducible output across multiple function calls.
+See <span class="xref std std-term">Glossary</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVC.class_weight_">
+<span class="sig-name descname"><span class="pre">class_weight_</span></span><a class="headerlink" href="#sklearn.svm.SVC.class_weight_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multipliers of parameter C for each class.
+Computed based on the <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVC.classes_">
+<span class="sig-name descname"><span class="pre">classes_</span></span><a class="headerlink" href="#sklearn.svm.SVC.classes_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The classes labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVC.coef_">
+<span class="sig-name descname"><span class="pre">coef_</span></span><a class="headerlink" href="#sklearn.svm.SVC.coef_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Weights assigned to the features (coefficients in the primal
+problem). This is only available in the case of a linear kernel.</p>
+<p><cite>coef_</cite> is a readonly property derived from <cite>dual_coef_</cite> and
+<cite>support_vectors_</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes * (n_classes - 1) / 2, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVC.dual_coef_">
+<span class="sig-name descname"><span class="pre">dual_coef_</span></span><a class="headerlink" href="#sklearn.svm.SVC.dual_coef_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dual coefficients of the support vector in the decision
+function (see <span class="xref std std-ref">sgd_mathematical_formulation</span>), multiplied by
+their targets.
+For multiclass, coefficient for all 1-vs-1 classifiers.
+The layout of the coefficients in the multiclass case is somewhat
+non-trivial. See the <span class="xref std std-ref">multi-class section of the User Guide</span> for details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes -1, n_SV)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVC.fit_status_">
+<span class="sig-name descname"><span class="pre">fit_status_</span></span><a class="headerlink" href="#sklearn.svm.SVC.fit_status_" title="Permalink to this definition">¶</a></dt>
+<dd><p>0 if correctly fitted, 1 otherwise (will raise warning)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVC.intercept_">
+<span class="sig-name descname"><span class="pre">intercept_</span></span><a class="headerlink" href="#sklearn.svm.SVC.intercept_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constants in decision function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes * (n_classes - 1) / 2,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVC.support_">
+<span class="sig-name descname"><span class="pre">support_</span></span><a class="headerlink" href="#sklearn.svm.SVC.support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indices of support vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_SV)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVC.support_vectors_">
+<span class="sig-name descname"><span class="pre">support_vectors_</span></span><a class="headerlink" href="#sklearn.svm.SVC.support_vectors_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Support vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_SV, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVC.n_support_">
+<span class="sig-name descname"><span class="pre">n_support_</span></span><a class="headerlink" href="#sklearn.svm.SVC.n_support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of support vectors for each class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes,), dtype=int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVC.probA_">
+<span class="sig-name descname"><span class="pre">probA_</span></span><a class="headerlink" href="#sklearn.svm.SVC.probA_" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes * (n_classes - 1) / 2)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVC.probB_">
+<span class="sig-name descname"><span class="pre">probB_</span></span><a class="headerlink" href="#sklearn.svm.SVC.probB_" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <cite>probability=True</cite>, it corresponds to the parameters learned in
+Platt scaling to produce probability estimates from decision values.
+If <cite>probability=False</cite>, it’s an empty array. Platt scaling uses the
+logistic function
+<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">exp(decision_value</span> <span class="pre">*</span> <span class="pre">probA_</span> <span class="pre">+</span> <span class="pre">probB_))</span></code>
+where <code class="docutils literal notranslate"><span class="pre">probA_</span></code> and <code class="docutils literal notranslate"><span class="pre">probB_</span></code> are learned from the dataset <a href="#id21"><span class="problematic" id="id9">[2]_</span></a>. For
+more information on the multiclass case and training procedure see
+section 8 of <a href="#id22"><span class="problematic" id="id10">[1]_</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes * (n_classes - 1) / 2)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVC.shape_fit_">
+<span class="sig-name descname"><span class="pre">shape_fit_</span></span><a class="headerlink" href="#sklearn.svm.SVC.shape_fit_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array dimensions of training vector <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tuple of int of shape (n_dimensions_of_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">SVC</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">Pipeline(steps=[(&#39;standardscaler&#39;, StandardScaler()),</span>
+<span class="go">                (&#39;svc&#39;, SVC(gamma=&#39;auto&#39;))])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]))</span>
+<span class="go">[1]</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.svm.SVR" title="sklearn.svm.SVR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SVR</span></code></a></dt><dd><p>Support Vector Machine for Regression implemented using libsvm.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.svm.LinearSVC" title="sklearn.svm.LinearSVC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearSVC</span></code></a></dt><dd><p>Scalable Linear Support Vector Machine for classification implemented using liblinear. Check the See Also section of LinearSVC for more comparison element.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id11"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">LIBSVM: A Library for Support Vector Machines</a></p>
+</dd>
+<dt class="label" id="id13"><span class="brackets">2</span></dt>
+<dd><p><a class="reference external" href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.41.1639">Platt, John (1999). “Probabilistic outputs for support vector
+machines and comparison to regularizedlikelihood methods.”</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.svm.SVR">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.svm.</span></span><span class="sig-name descname"><span class="pre">SVR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rbf'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scale'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coef0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shrinking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.SVR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.RegressorMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.svm._base.BaseLibSVM</span></code></p>
+<p>Epsilon-Support Vector Regression.</p>
+<p>The free parameters in the model are C and epsilon.</p>
+<p>The implementation is based on libsvm. The fit time complexity
+is more than quadratic with the number of samples which makes it hard
+to scale to datasets with more than a couple of 10000 samples. For large
+datasets consider using <a class="reference internal" href="#sklearn.svm.LinearSVR" title="sklearn.svm.LinearSVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearSVR</span></code></a> or
+<a class="reference internal" href="sklearn.linear_model.html#sklearn.linear_model.SGDRegressor" title="sklearn.linear_model.SGDRegressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">SGDRegressor</span></code></a> instead, possibly after a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Nystroem</span></code> transformer.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kernel</strong> (<em>{'linear'</em><em>, </em><em>'poly'</em><em>, </em><em>'rbf'</em><em>, </em><em>'sigmoid'</em><em>, </em><em>'precomputed'}</em><em>, </em><em>default='rbf'</em>) – Specifies the kernel type to be used in the algorithm.
+It must be one of ‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ or
+a callable.
+If none is given, ‘rbf’ will be used. If a callable is given it is
+used to precompute the kernel matrix.</p></li>
+<li><p><strong>degree</strong> (<em>int</em><em>, </em><em>default=3</em>) – Degree of the polynomial kernel function (‘poly’).
+Ignored by all other kernels.</p></li>
+<li><p><strong>gamma</strong> (<em>{'scale'</em><em>, </em><em>'auto'}</em><em> or </em><em>float</em><em>, </em><em>default='scale'</em>) – <p>Kernel coefficient for ‘rbf’, ‘poly’ and ‘sigmoid’.</p>
+<ul>
+<li><p>if <code class="docutils literal notranslate"><span class="pre">gamma='scale'</span></code> (default) is passed then it uses
+1 / (n_features * X.var()) as value of gamma,</p></li>
+<li><p>if ‘auto’, uses 1 / n_features.</p></li>
+</ul>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.22: </span>The default value of <code class="docutils literal notranslate"><span class="pre">gamma</span></code> changed from ‘auto’ to ‘scale’.</p>
+</div>
+</p></li>
+<li><p><strong>coef0</strong> (<em>float</em><em>, </em><em>default=0.0</em>) – Independent term in kernel function.
+It is only significant in ‘poly’ and ‘sigmoid’.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-3</em>) – Tolerance for stopping criterion.</p></li>
+<li><p><strong>C</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Regularization parameter. The strength of the regularization is
+inversely proportional to C. Must be strictly positive.
+The penalty is a squared l2 penalty.</p></li>
+<li><p><strong>epsilon</strong> (<em>float</em><em>, </em><em>default=0.1</em>) – Epsilon in the epsilon-SVR model. It specifies the epsilon-tube
+within which no penalty is associated in the training loss function
+with points predicted within a distance epsilon from the actual
+value.</p></li>
+<li><p><strong>shrinking</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to use the shrinking heuristic.
+See the <span class="xref std std-ref">User Guide</span>.</p></li>
+<li><p><strong>cache_size</strong> (<em>float</em><em>, </em><em>default=200</em>) – Specify the size of the kernel cache (in MB).</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Enable verbose output. Note that this setting takes advantage of a
+per-process runtime setting in libsvm that, if enabled, may not work
+properly in a multithreaded context.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=-1</em>) – Hard limit on iterations within solver, or -1 for no limit.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVR.class_weight_">
+<span class="sig-name descname"><span class="pre">class_weight_</span></span><a class="headerlink" href="#sklearn.svm.SVR.class_weight_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multipliers of parameter C for each class.
+Computed based on the <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVR.coef_">
+<span class="sig-name descname"><span class="pre">coef_</span></span><a class="headerlink" href="#sklearn.svm.SVR.coef_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Weights assigned to the features (coefficients in the primal
+problem). This is only available in the case of a linear kernel.</p>
+<p><cite>coef_</cite> is readonly property derived from <cite>dual_coef_</cite> and
+<cite>support_vectors_</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (1, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVR.dual_coef_">
+<span class="sig-name descname"><span class="pre">dual_coef_</span></span><a class="headerlink" href="#sklearn.svm.SVR.dual_coef_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coefficients of the support vector in the decision function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (1, n_SV)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVR.fit_status_">
+<span class="sig-name descname"><span class="pre">fit_status_</span></span><a class="headerlink" href="#sklearn.svm.SVR.fit_status_" title="Permalink to this definition">¶</a></dt>
+<dd><p>0 if correctly fitted, 1 otherwise (will raise warning)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVR.intercept_">
+<span class="sig-name descname"><span class="pre">intercept_</span></span><a class="headerlink" href="#sklearn.svm.SVR.intercept_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constants in decision function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (1,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVR.n_support_">
+<span class="sig-name descname"><span class="pre">n_support_</span></span><a class="headerlink" href="#sklearn.svm.SVR.n_support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of support vectors for each class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_classes,), dtype=int32</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVR.shape_fit_">
+<span class="sig-name descname"><span class="pre">shape_fit_</span></span><a class="headerlink" href="#sklearn.svm.SVR.shape_fit_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array dimensions of training vector <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>tuple of int of shape (n_dimensions_of_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVR.support_">
+<span class="sig-name descname"><span class="pre">support_</span></span><a class="headerlink" href="#sklearn.svm.SVR.support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indices of support vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_SV,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.svm.SVR.support_vectors_">
+<span class="sig-name descname"><span class="pre">support_vectors_</span></span><a class="headerlink" href="#sklearn.svm.SVR.support_vectors_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Support vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_SV, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVR</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">SVR</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">Pipeline(steps=[(&#39;standardscaler&#39;, StandardScaler()),</span>
+<span class="go">                (&#39;svr&#39;, SVR(epsilon=0.2))])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.svm.NuSVR" title="sklearn.svm.NuSVR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NuSVR</span></code></a></dt><dd><p>Support Vector Machine for regression implemented using libsvm using a parameter to control the number of support vectors.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.svm.LinearSVR" title="sklearn.svm.LinearSVR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearSVR</span></code></a></dt><dd><p>Scalable Linear Support Vector Machine for regression implemented using liblinear.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id15"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="http://www.csie.ntu.edu.tw/~cjlin/papers/libsvm.pdf">LIBSVM: A Library for Support Vector Machines</a></p>
+</dd>
+<dt class="label" id="id17"><span class="brackets">2</span></dt>
+<dd><p><a class="reference external" href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.41.1639">Platt, John (1999). “Probabilistic outputs for support vector
+machines and comparison to regularizedlikelihood methods.”</a></p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.svm.SVR.probA_">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">probA_</span></span><a class="headerlink" href="#sklearn.svm.SVR.probA_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.svm.SVR.probB_">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">probB_</span></span><a class="headerlink" href="#sklearn.svm.SVR.probB_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.svm.l1_min_c">
+<span class="sig-prename descclassname"><span class="pre">sklearn.svm.</span></span><span class="sig-name descname"><span class="pre">l1_min_c</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'squared_hinge'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_intercept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept_scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.svm.l1_min_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the lowest bound for C such that for C in (l1_min_C, infinity)
+the model is guaranteed not to be empty. This applies to l1 penalized
+classifiers, such as LinearSVC with penalty=’l1’ and
+linear_model.LogisticRegression with penalty=’l1’.</p>
+<p>This value is valid if class_weight parameter in fit() is not set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training vector, where n_samples in the number of samples and
+n_features is the number of features.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Target vector relative to X.</p></li>
+<li><p><strong>loss</strong> (<em>{'squared_hinge'</em><em>, </em><em>'log'}</em><em>, </em><em>default='squared_hinge'</em>) – Specifies the loss function.
+With ‘squared_hinge’ it is the squared hinge loss (a.k.a. L2 loss).
+With ‘log’ it is the loss of logistic regression models.</p></li>
+<li><p><strong>fit_intercept</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Specifies if the intercept should be fitted by the model.
+It must match the fit() method parameter.</p></li>
+<li><p><strong>intercept_scaling</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – when fit_intercept is True, instance vector x becomes
+[x, intercept_scaling],
+i.e. a “synthetic” feature with constant value equals to
+intercept_scaling is appended to the instance vector.
+It must match the fit() method parameter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>l1_min_c</strong> – minimum value for C</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Tommaso
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

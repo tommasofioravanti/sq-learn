@@ -1,0 +1,1242 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sklearn.metrics.cluster package &mdash; Qsklearn  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Qsklearn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">sklearn</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Qsklearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>sklearn.metrics.cluster package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sklearn.metrics.cluster.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="sklearn-metrics-cluster-package">
+<h1>sklearn.metrics.cluster package<a class="headerlink" href="#sklearn-metrics-cluster-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sklearn.metrics.cluster.tests.html">sklearn.metrics.cluster.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.metrics.cluster.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.metrics.cluster.tests.html#module-sklearn.metrics.cluster.tests.test_bicluster">sklearn.metrics.cluster.tests.test_bicluster module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.metrics.cluster.tests.html#sklearn-metrics-cluster-tests-test-common-module">sklearn.metrics.cluster.tests.test_common module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.metrics.cluster.tests.html#sklearn-metrics-cluster-tests-test-supervised-module">sklearn.metrics.cluster.tests.test_supervised module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.metrics.cluster.tests.html#sklearn-metrics-cluster-tests-test-unsupervised-module">sklearn.metrics.cluster.tests.test_unsupervised module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.metrics.cluster.tests.html#module-sklearn.metrics.cluster.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-sklearn.metrics.cluster.setup">
+<span id="sklearn-metrics-cluster-setup-module"></span><h2>sklearn.metrics.cluster.setup module<a class="headerlink" href="#module-sklearn.metrics.cluster.setup" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.setup.configuration">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.setup.</span></span><span class="sig-name descname"><span class="pre">configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent_package</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.setup.configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-sklearn.metrics.cluster">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.metrics.cluster" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#module-sklearn.metrics.cluster" title="sklearn.metrics.cluster"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.metrics.cluster</span></code></a> submodule contains evaluation metrics for
+cluster analysis results. There are two forms of evaluation:</p>
+<ul class="simple">
+<li><p>supervised, which uses a ground truth class values for each sample.</p></li>
+<li><p>unsupervised, which does not and measures the ‘quality’ of the model itself.</p></li>
+</ul>
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.adjusted_mutual_info_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">adjusted_mutual_info_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'arithmetic'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.adjusted_mutual_info_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adjusted Mutual Information between two clusterings.</p>
+<p>Adjusted Mutual Information (AMI) is an adjustment of the Mutual
+Information (MI) score to account for chance. It accounts for the fact that
+the MI is generally higher for two clusterings with a larger number of
+clusters, regardless of whether there is actually more information shared.
+For two clusterings <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span>, the AMI is given as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AMI</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="n">MI</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span> <span class="o">-</span> <span class="n">E</span><span class="p">(</span><span class="n">MI</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">))]</span> <span class="o">/</span> <span class="p">[</span><span class="n">avg</span><span class="p">(</span><span class="n">H</span><span class="p">(</span><span class="n">U</span><span class="p">),</span> <span class="n">H</span><span class="p">(</span><span class="n">V</span><span class="p">))</span> <span class="o">-</span> <span class="n">E</span><span class="p">(</span><span class="n">MI</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">))]</span>
+</pre></div>
+</div>
+<p>This metric is independent of the absolute values of the labels:
+a permutation of the class or cluster label values won’t change the
+score value in any way.</p>
+<p>This metric is furthermore symmetric: switching <code class="docutils literal notranslate"><span class="pre">label_true</span></code> with
+<code class="docutils literal notranslate"><span class="pre">label_pred</span></code> will return the same score value. This can be useful to
+measure the agreement of two independent label assignments strategies
+on the same dataset when the real ground truth is not known.</p>
+<p>Be mindful that this function is an order of magnitude slower than other
+metrics, such as the Adjusted Rand Index.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels_true</strong> (<em>int array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em>) – A clustering of the data into disjoint subsets.</p></li>
+<li><p><strong>labels_pred</strong> (<em>int array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – A clustering of the data into disjoint subsets.</p></li>
+<li><p><strong>average_method</strong> (<em>str</em><em>, </em><em>default='arithmetic'</em>) – <p>How to compute the normalizer in the denominator. Possible options
+are ‘min’, ‘geometric’, ‘arithmetic’, and ‘max’.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.22: </span>The default value of <code class="docutils literal notranslate"><span class="pre">average_method</span></code> changed from ‘max’ to
+‘arithmetic’.</p>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ami</strong> – The AMI returns a value of 1 when the two partitions are identical
+(ie perfectly matched). Random partitions (independent labellings) have
+an expected AMI around 0 on average hence can be negative.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float (upperlimited by 1.0)</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.metrics.cluster.adjusted_rand_score" title="sklearn.metrics.cluster.adjusted_rand_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjusted_rand_score</span></code></a></dt><dd><p>Adjusted Rand Index.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.metrics.cluster.mutual_info_score" title="sklearn.metrics.cluster.mutual_info_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_info_score</span></code></a></dt><dd><p>Mutual Information (not adjusted for chance).</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>Perfect labelings are both homogeneous and complete, hence have
+score 1.0:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">adjusted_mutual_info_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_mutual_info_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">... </span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_mutual_info_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">... </span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>If classes members are completely split across different clusters,
+the assignment is totally in-complete, hence the AMI is null:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_mutual_info_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">... </span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id1"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="http://jmlr.csail.mit.edu/papers/volume11/vinh10a/vinh10a.pdf">Vinh, Epps, and Bailey, (2010). Information Theoretic Measures for
+Clusterings Comparison: Variants, Properties, Normalization and
+Correction for Chance, JMLR</a></p>
+</dd>
+<dt class="label" id="id2"><span class="brackets">2</span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Adjusted_Mutual_Information">Wikipedia entry for the Adjusted Mutual Information</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.adjusted_rand_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">adjusted_rand_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.adjusted_rand_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rand index adjusted for chance.</p>
+<p>The Rand Index computes a similarity measure between two clusterings
+by considering all pairs of samples and counting pairs that are
+assigned in the same or different clusters in the predicted and
+true clusterings.</p>
+<p>The raw RI score is then “adjusted for chance” into the ARI score
+using the following scheme:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ARI</span> <span class="o">=</span> <span class="p">(</span><span class="n">RI</span> <span class="o">-</span> <span class="n">Expected_RI</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">RI</span><span class="p">)</span> <span class="o">-</span> <span class="n">Expected_RI</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The adjusted Rand index is thus ensured to have a value close to
+0.0 for random labeling independently of the number of clusters and
+samples and exactly 1.0 when the clusterings are identical (up to
+a permutation).</p>
+<p>ARI is a symmetric measure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels_true</strong> (<em>int array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em>) – Ground truth class labels to be used as a reference</p></li>
+<li><p><strong>labels_pred</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Cluster labels to evaluate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ARI</strong> – Similarity score between -1.0 and 1.0. Random labelings have an ARI
+close to 0.0. 1.0 stands for perfect match.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Perfectly matching labelings have a score of 1 even</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">adjusted_rand_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_rand_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_rand_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>Labelings that assign all classes members to the same clusters
+are complete but may not always be pure, hence penalized:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_rand_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">0.57...</span>
+</pre></div>
+</div>
+<p>ARI is symmetric, so labelings that have pure clusters with members
+coming from the same classes but unnecessary splits are penalized:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_rand_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="go">0.57...</span>
+</pre></div>
+</div>
+<p>If classes members are completely split across different clusters, the
+assignment is totally incomplete, hence the ARI is very low:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adjusted_rand_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="hubert1985"><span class="brackets">Hubert1985</span></dt>
+<dd><p>L. Hubert and P. Arabie, Comparing Partitions,
+Journal of Classification 1985
+<a class="reference external" href="https://link.springer.com/article/10.1007%2FBF01908075">https://link.springer.com/article/10.1007%2FBF01908075</a></p>
+</dd>
+<dt class="label" id="steinley2004"><span class="brackets">Steinley2004</span></dt>
+<dd><p>D. Steinley, Properties of the Hubert-Arabie
+adjusted Rand index, Psychological Methods 2004</p>
+</dd>
+<dt class="label" id="wk"><span class="brackets">wk</span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Rand_index#Adjusted_Rand_index">https://en.wikipedia.org/wiki/Rand_index#Adjusted_Rand_index</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.metrics.cluster.adjusted_mutual_info_score" title="sklearn.metrics.cluster.adjusted_mutual_info_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjusted_mutual_info_score</span></code></a></dt><dd><p>Adjusted Mutual Information.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.calinski_harabasz_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">calinski_harabasz_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.calinski_harabasz_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Calinski and Harabasz score.</p>
+<p>It is also known as the Variance Ratio Criterion.</p>
+<p>The score is defined as ratio between the within-cluster dispersion and
+the between-cluster dispersion.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – A list of <code class="docutils literal notranslate"><span class="pre">n_features</span></code>-dimensional data points. Each row corresponds
+to a single data point.</p></li>
+<li><p><strong>labels</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Predicted labels for each sample.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>score</strong> – The resulting Calinski-Harabasz score.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://www.tandfonline.com/doi/abs/10.1080/03610927408827101">T. Calinski and J. Harabasz, 1974. “A dendrite method for cluster
+analysis”. Communications in Statistics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.completeness_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">completeness_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.completeness_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Completeness metric of a cluster labeling given a ground truth.</p>
+<p>A clustering result satisfies completeness if all the data points
+that are members of a given class are elements of the same cluster.</p>
+<p>This metric is independent of the absolute values of the labels:
+a permutation of the class or cluster label values won’t change the
+score value in any way.</p>
+<p>This metric is not symmetric: switching <code class="docutils literal notranslate"><span class="pre">label_true</span></code> with <code class="docutils literal notranslate"><span class="pre">label_pred</span></code>
+will return the <a class="reference internal" href="#sklearn.metrics.cluster.homogeneity_score" title="sklearn.metrics.cluster.homogeneity_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">homogeneity_score()</span></code></a> which will be different in
+general.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels_true</strong> (<em>int array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em>) – ground truth class labels to be used as a reference</p></li>
+<li><p><strong>labels_pred</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – cluster labels to evaluate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>completeness</strong> – score between 0.0 and 1.0. 1.0 stands for perfectly complete labeling</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id4"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://aclweb.org/anthology/D/D07/D07-1043.pdf">Andrew Rosenberg and Julia Hirschberg, 2007. V-Measure: A
+conditional entropy-based external cluster evaluation measure</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#sklearn.metrics.cluster.homogeneity_score" title="sklearn.metrics.cluster.homogeneity_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">homogeneity_score</span></code></a>, <a class="reference internal" href="#sklearn.metrics.cluster.v_measure_score" title="sklearn.metrics.cluster.v_measure_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_measure_score</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Perfect labelings are complete:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">completeness_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">completeness_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>Non-perfect labelings that assign all classes members to the same clusters
+are still complete:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">completeness_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">completeness_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="go">0.999...</span>
+</pre></div>
+</div>
+<p>If classes members are split across different clusters, the
+assignment cannot be complete:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">completeness_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">completeness_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.consensus_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">consensus_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">similarity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jaccard'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.consensus_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>The similarity of two sets of biclusters.</p>
+<p>Similarity between individual biclusters is computed. Then the
+best matching between sets is found using the Hungarian algorithm.
+The final score is the sum of similarities divided by the size of
+the larger set.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>(</em><em>rows</em><em>, </em><em>columns</em><em>)</em>) – Tuple of row and column indicators for a set of biclusters.</p></li>
+<li><p><strong>b</strong> (<em>(</em><em>rows</em><em>, </em><em>columns</em><em>)</em>) – Another set of biclusters like <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></li>
+<li><p><strong>similarity</strong> (<em>'jaccard'</em><em> or </em><em>callable</em><em>, </em><em>default='jaccard'</em>) – May be the string “jaccard” to use the Jaccard coefficient, or
+any function that takes four arguments, each of which is a 1d
+indicator vector: (a_rows, a_columns, b_rows, b_columns).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p>Hochreiter, Bodenhofer, et. al., 2010. <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2881408/">FABIA: factor analysis
+for bicluster acquisition</a>.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.contingency_matrix">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">contingency_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">labels_true</span></em>, <em class="sig-param"><span class="pre">labels_pred</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">eps=None</span></em>, <em class="sig-param"><span class="pre">sparse=False</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.int64'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.contingency_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a contingency matrix describing the relationship between labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels_true</strong> (<em>int array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em>) – Ground truth class labels to be used as a reference.</p></li>
+<li><p><strong>labels_pred</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Cluster labels to evaluate.</p></li>
+<li><p><strong>eps</strong> (<em>float</em><em>, </em><em>default=None</em>) – If a float, that value is added to all values in the contingency
+matrix. This helps to stop NaN propagation.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, nothing is adjusted.</p></li>
+<li><p><strong>sparse</strong> (<em>bool</em><em>, </em><em>default=False</em>) – <p>If <cite>True</cite>, return a sparse CSR continency matrix. If <cite>eps</cite> is not
+<cite>None</cite> and <cite>sparse</cite> is <cite>True</cite> will raise ValueError.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+</p></li>
+<li><p><strong>dtype</strong> (<em>numeric type</em><em>, </em><em>default=np.int64</em>) – <p>Output dtype. Ignored if <cite>eps</cite> is not <cite>None</cite>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.</span></p>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>contingency</strong> – Matrix <span class="math notranslate nohighlight">\(C\)</span> such that <span class="math notranslate nohighlight">\(C_{i, j}\)</span> is the number of samples in
+true class <span class="math notranslate nohighlight">\(i\)</span> and in predicted class <span class="math notranslate nohighlight">\(j\)</span>. If
+<code class="docutils literal notranslate"><span class="pre">eps</span> <span class="pre">is</span> <span class="pre">None</span></code>, the dtype of this array will be integer unless set
+otherwise with the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> argument. If <code class="docutils literal notranslate"><span class="pre">eps</span></code> is given, the dtype
+will be float.
+Will be a <code class="docutils literal notranslate"><span class="pre">sklearn.sparse.csr_matrix</span></code> if <code class="docutils literal notranslate"><span class="pre">sparse=True</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>{array-like, sparse}, shape=[n_classes_true, n_classes_pred]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.davies_bouldin_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">davies_bouldin_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.davies_bouldin_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Davies-Bouldin score.</p>
+<p>The score is defined as the average similarity measure of each cluster with
+its most similar cluster, where similarity is the ratio of within-cluster
+distances to between-cluster distances. Thus, clusters which are farther
+apart and less dispersed will result in a better score.</p>
+<p>The minimum score is zero, with lower values indicating better clustering.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – A list of <code class="docutils literal notranslate"><span class="pre">n_features</span></code>-dimensional data points. Each row corresponds
+to a single data point.</p></li>
+<li><p><strong>labels</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Predicted labels for each sample.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>score</strong> – The resulting Davies-Bouldin score.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id5"><span class="brackets">1</span></dt>
+<dd><p>Davies, David L.; Bouldin, Donald W. (1979).
+<a class="reference external" href="https://ieeexplore.ieee.org/document/4766909">“A Cluster Separation Measure”</a>.
+IEEE Transactions on Pattern Analysis and Machine Intelligence.
+PAMI-1 (2): 224-227</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.entropy">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.entropy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the entropy for a labeling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>labels</strong> (<em>int array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em>) – The labels</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The logarithm used is the natural logarithm (base-e).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.expected_mutual_information">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">expected_mutual_information</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.expected_mutual_information" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the expected mutual information for two labelings.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.fowlkes_mallows_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">fowlkes_mallows_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.fowlkes_mallows_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Measure the similarity of two clusterings of a set of points.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<p>The Fowlkes-Mallows index (FMI) is defined as the geometric mean between of
+the precision and recall:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FMI</span> <span class="o">=</span> <span class="n">TP</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FP</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FN</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">TP</span></code> is the number of <strong>True Positive</strong> (i.e. the number of pair of
+points that belongs in the same clusters in both <code class="docutils literal notranslate"><span class="pre">labels_true</span></code> and
+<code class="docutils literal notranslate"><span class="pre">labels_pred</span></code>), <code class="docutils literal notranslate"><span class="pre">FP</span></code> is the number of <strong>False Positive</strong> (i.e. the
+number of pair of points that belongs in the same clusters in
+<code class="docutils literal notranslate"><span class="pre">labels_true</span></code> and not in <code class="docutils literal notranslate"><span class="pre">labels_pred</span></code>) and <code class="docutils literal notranslate"><span class="pre">FN</span></code> is the number of
+<strong>False Negative</strong> (i.e the number of pair of points that belongs in the
+same clusters in <code class="docutils literal notranslate"><span class="pre">labels_pred</span></code> and not in <code class="docutils literal notranslate"><span class="pre">labels_True</span></code>).</p>
+<p>The score ranges from 0 to 1. A high value indicates a good similarity
+between two clusters.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels_true</strong> (int array, shape = (<code class="docutils literal notranslate"><span class="pre">n_samples</span></code>,)) – A clustering of the data into disjoint subsets.</p></li>
+<li><p><strong>labels_pred</strong> (array, shape = (<code class="docutils literal notranslate"><span class="pre">n_samples</span></code>, )) – A clustering of the data into disjoint subsets.</p></li>
+<li><p><strong>sparse</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Compute contingency matrix internally with sparse matrix.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>score</strong> – The resulting Fowlkes-Mallows score.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Perfect labelings are both homogeneous and complete, hence have
+score 1.0:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">fowlkes_mallows_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fowlkes_mallows_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fowlkes_mallows_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>If classes members are completely split across different clusters,
+the assignment is totally random, hence the FMI is null:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fowlkes_mallows_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id6"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="http://wildfire.stat.ucla.edu/pdflibrary/fowlkes.pdf">E. B. Fowkles and C. L. Mallows, 1983. “A method for comparing two
+hierarchical clusterings”. Journal of the American Statistical
+Association</a></p>
+</dd>
+<dt class="label" id="id7"><span class="brackets">2</span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Fowlkes-Mallows_index">Wikipedia entry for the Fowlkes-Mallows Index</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.homogeneity_completeness_v_measure">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">homogeneity_completeness_v_measure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.homogeneity_completeness_v_measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the homogeneity and completeness and V-Measure scores at once.</p>
+<p>Those metrics are based on normalized conditional entropy measures of
+the clustering labeling to evaluate given the knowledge of a Ground
+Truth class labels of the same samples.</p>
+<p>A clustering result satisfies homogeneity if all of its clusters
+contain only data points which are members of a single class.</p>
+<p>A clustering result satisfies completeness if all the data points
+that are members of a given class are elements of the same cluster.</p>
+<p>Both scores have positive values between 0.0 and 1.0, larger values
+being desirable.</p>
+<p>Those 3 metrics are independent of the absolute values of the labels:
+a permutation of the class or cluster label values won’t change the
+score values in any way.</p>
+<p>V-Measure is furthermore symmetric: swapping <code class="docutils literal notranslate"><span class="pre">labels_true</span></code> and
+<code class="docutils literal notranslate"><span class="pre">label_pred</span></code> will give the same score. This does not hold for
+homogeneity and completeness. V-Measure is identical to
+<a class="reference internal" href="#sklearn.metrics.cluster.normalized_mutual_info_score" title="sklearn.metrics.cluster.normalized_mutual_info_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">normalized_mutual_info_score()</span></code></a> with the arithmetic averaging
+method.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels_true</strong> (<em>int array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em>) – ground truth class labels to be used as a reference</p></li>
+<li><p><strong>labels_pred</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – cluster labels to evaluate</p></li>
+<li><p><strong>beta</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Ratio of weight attributed to <code class="docutils literal notranslate"><span class="pre">homogeneity</span></code> vs <code class="docutils literal notranslate"><span class="pre">completeness</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">beta</span></code> is greater than 1, <code class="docutils literal notranslate"><span class="pre">completeness</span></code> is weighted more
+strongly in the calculation. If <code class="docutils literal notranslate"><span class="pre">beta</span></code> is less than 1,
+<code class="docutils literal notranslate"><span class="pre">homogeneity</span></code> is weighted more strongly.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>homogeneity</strong> (<em>float</em>) – score between 0.0 and 1.0. 1.0 stands for perfectly homogeneous labeling</p></li>
+<li><p><strong>completeness</strong> (<em>float</em>) – score between 0.0 and 1.0. 1.0 stands for perfectly complete labeling</p></li>
+<li><p><strong>v_measure</strong> (<em>float</em>) – harmonic mean of the first two</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#sklearn.metrics.cluster.homogeneity_score" title="sklearn.metrics.cluster.homogeneity_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">homogeneity_score</span></code></a>, <a class="reference internal" href="#sklearn.metrics.cluster.completeness_score" title="sklearn.metrics.cluster.completeness_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">completeness_score</span></code></a>, <a class="reference internal" href="#sklearn.metrics.cluster.v_measure_score" title="sklearn.metrics.cluster.v_measure_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_measure_score</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.homogeneity_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">homogeneity_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.homogeneity_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Homogeneity metric of a cluster labeling given a ground truth.</p>
+<p>A clustering result satisfies homogeneity if all of its clusters
+contain only data points which are members of a single class.</p>
+<p>This metric is independent of the absolute values of the labels:
+a permutation of the class or cluster label values won’t change the
+score value in any way.</p>
+<p>This metric is not symmetric: switching <code class="docutils literal notranslate"><span class="pre">label_true</span></code> with <code class="docutils literal notranslate"><span class="pre">label_pred</span></code>
+will return the <a class="reference internal" href="#sklearn.metrics.cluster.completeness_score" title="sklearn.metrics.cluster.completeness_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">completeness_score()</span></code></a> which will be different in
+general.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels_true</strong> (<em>int array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em>) – ground truth class labels to be used as a reference</p></li>
+<li><p><strong>labels_pred</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – cluster labels to evaluate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>homogeneity</strong> – score between 0.0 and 1.0. 1.0 stands for perfectly homogeneous labeling</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id8"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://aclweb.org/anthology/D/D07/D07-1043.pdf">Andrew Rosenberg and Julia Hirschberg, 2007. V-Measure: A
+conditional entropy-based external cluster evaluation measure</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#sklearn.metrics.cluster.completeness_score" title="sklearn.metrics.cluster.completeness_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">completeness_score</span></code></a>, <a class="reference internal" href="#sklearn.metrics.cluster.v_measure_score" title="sklearn.metrics.cluster.v_measure_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_measure_score</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Perfect labelings are homogeneous:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">homogeneity_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">homogeneity_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>Non-perfect labelings that further split classes into more clusters can be
+perfectly homogeneous:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">homogeneity_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+<span class="go">1.000000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">homogeneity_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="go">1.000000</span>
+</pre></div>
+</div>
+<p>Clusters that include samples from different classes do not make for an
+homogeneous labeling:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">homogeneity_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="go">0.0...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">homogeneity_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+<span class="go">0.0...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.mutual_info_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">mutual_info_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contingency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.mutual_info_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mutual Information between two clusterings.</p>
+<p>The Mutual Information is a measure of the similarity between two labels of
+the same data. Where <span class="math notranslate nohighlight">\(|U_i|\)</span> is the number of the samples
+in cluster <span class="math notranslate nohighlight">\(U_i\)</span> and <span class="math notranslate nohighlight">\(|V_j|\)</span> is the number of the
+samples in cluster <span class="math notranslate nohighlight">\(V_j\)</span>, the Mutual Information
+between clusterings <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> is given as:</p>
+<div class="math notranslate nohighlight">
+\[MI(U,V)=\sum_{i=1}^{|U|} \sum_{j=1}^{|V|} \frac{|U_i\cap V_j|}{N}
+\log\frac{N|U_i \cap V_j|}{|U_i||V_j|}\]</div>
+<p>This metric is independent of the absolute values of the labels:
+a permutation of the class or cluster label values won’t change the
+score value in any way.</p>
+<p>This metric is furthermore symmetric: switching <code class="docutils literal notranslate"><span class="pre">label_true</span></code> with
+<code class="docutils literal notranslate"><span class="pre">label_pred</span></code> will return the same score value. This can be useful to
+measure the agreement of two independent label assignments strategies
+on the same dataset when the real ground truth is not known.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels_true</strong> (<em>int array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em>) – A clustering of the data into disjoint subsets.</p></li>
+<li><p><strong>labels_pred</strong> (<em>int array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – A clustering of the data into disjoint subsets.</p></li>
+<li><p><strong>contingency</strong> (<em>{ndarray</em><em>, </em><em>sparse matrix} of shape</em><em>             (</em><em>n_classes_true</em><em>, </em><em>n_classes_pred</em><em>)</em><em>, </em><em>default=None</em>) – A contingency matrix given by the <a class="reference internal" href="#sklearn.metrics.cluster.contingency_matrix" title="sklearn.metrics.cluster.contingency_matrix"><code class="xref py py-func docutils literal notranslate"><span class="pre">contingency_matrix()</span></code></a> function.
+If value is <code class="docutils literal notranslate"><span class="pre">None</span></code>, it will be computed, otherwise the given value is
+used, with <code class="docutils literal notranslate"><span class="pre">labels_true</span></code> and <code class="docutils literal notranslate"><span class="pre">labels_pred</span></code> ignored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>mi</strong> – Mutual information, a non-negative value</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The logarithm used is the natural logarithm (base-e).</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.metrics.cluster.adjusted_mutual_info_score" title="sklearn.metrics.cluster.adjusted_mutual_info_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjusted_mutual_info_score</span></code></a></dt><dd><p>Adjusted against chance Mutual Information.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.metrics.cluster.normalized_mutual_info_score" title="sklearn.metrics.cluster.normalized_mutual_info_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalized_mutual_info_score</span></code></a></dt><dd><p>Normalized Mutual Information.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.normalized_mutual_info_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">normalized_mutual_info_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'arithmetic'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.normalized_mutual_info_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalized Mutual Information between two clusterings.</p>
+<p>Normalized Mutual Information (NMI) is a normalization of the Mutual
+Information (MI) score to scale the results between 0 (no mutual
+information) and 1 (perfect correlation). In this function, mutual
+information is normalized by some generalized mean of <code class="docutils literal notranslate"><span class="pre">H(labels_true)</span></code>
+and <code class="docutils literal notranslate"><span class="pre">H(labels_pred))</span></code>, defined by the <cite>average_method</cite>.</p>
+<p>This measure is not adjusted for chance. Therefore
+<a class="reference internal" href="#sklearn.metrics.cluster.adjusted_mutual_info_score" title="sklearn.metrics.cluster.adjusted_mutual_info_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">adjusted_mutual_info_score()</span></code></a> might be preferred.</p>
+<p>This metric is independent of the absolute values of the labels:
+a permutation of the class or cluster label values won’t change the
+score value in any way.</p>
+<p>This metric is furthermore symmetric: switching <code class="docutils literal notranslate"><span class="pre">label_true</span></code> with
+<code class="docutils literal notranslate"><span class="pre">label_pred</span></code> will return the same score value. This can be useful to
+measure the agreement of two independent label assignments strategies
+on the same dataset when the real ground truth is not known.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels_true</strong> (<em>int array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em>) – A clustering of the data into disjoint subsets.</p></li>
+<li><p><strong>labels_pred</strong> (<em>int array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – A clustering of the data into disjoint subsets.</p></li>
+<li><p><strong>average_method</strong> (<em>str</em><em>, </em><em>default='arithmetic'</em>) – <p>How to compute the normalizer in the denominator. Possible options
+are ‘min’, ‘geometric’, ‘arithmetic’, and ‘max’.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.22: </span>The default value of <code class="docutils literal notranslate"><span class="pre">average_method</span></code> changed from ‘geometric’ to
+‘arithmetic’.</p>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>nmi</strong> – score between 0.0 and 1.0. 1.0 stands for perfectly complete labeling</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.metrics.cluster.v_measure_score" title="sklearn.metrics.cluster.v_measure_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_measure_score</span></code></a></dt><dd><p>V-Measure (NMI with arithmetic mean option).</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.metrics.cluster.adjusted_rand_score" title="sklearn.metrics.cluster.adjusted_rand_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjusted_rand_score</span></code></a></dt><dd><p>Adjusted Rand Index.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.metrics.cluster.adjusted_mutual_info_score" title="sklearn.metrics.cluster.adjusted_mutual_info_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjusted_mutual_info_score</span></code></a></dt><dd><p>Adjusted Mutual Information (adjusted against chance).</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>Perfect labelings are both homogeneous and complete, hence have
+score 1.0:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">normalized_mutual_info_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalized_mutual_info_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">... </span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normalized_mutual_info_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">... </span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>If classes members are completely split across different clusters,
+the assignment is totally in-complete, hence the NMI is null:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">normalized_mutual_info_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">... </span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.pair_confusion_matrix">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">pair_confusion_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.pair_confusion_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pair confusion matrix arising from two clusterings.</p>
+<p>The pair confusion matrix <span class="math notranslate nohighlight">\(C\)</span> computes a 2 by 2 similarity matrix
+between two clusterings by considering all pairs of samples and counting
+pairs that are assigned into the same or into different clusters under
+the true and predicted clusterings.</p>
+<p>Considering a pair of samples that is clustered together a positive pair,
+then as in binary classification the count of true negatives is
+<span class="math notranslate nohighlight">\(C_{00}\)</span>, false negatives is <span class="math notranslate nohighlight">\(C_{10}\)</span>, true positives is
+<span class="math notranslate nohighlight">\(C_{11}\)</span> and false positives is <span class="math notranslate nohighlight">\(C_{01}\)</span>.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels_true</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>dtype=integral</em>) – Ground truth class labels to be used as a reference.</p></li>
+<li><p><strong>labels_pred</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>dtype=integral</em>) – Cluster labels to evaluate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>C</strong> – The contingency matrix.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (2, 2), dtype=np.int64</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.metrics.cluster.rand_score" title="sklearn.metrics.cluster.rand_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rand_score</span></code></a></dt><dd><p>Rand Score</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.metrics.cluster.adjusted_rand_score" title="sklearn.metrics.cluster.adjusted_rand_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjusted_rand_score</span></code></a></dt><dd><p>Adjusted Rand Score</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.metrics.cluster.adjusted_mutual_info_score" title="sklearn.metrics.cluster.adjusted_mutual_info_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjusted_mutual_info_score</span></code></a></dt><dd><p>Adjusted Mutual Information</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>Perfectly matching labelings have all non-zero entries on the
+diagonal regardless of actual label values:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">pair_confusion_matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pair_confusion_matrix</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">array([[8, 0],</span>
+<span class="go">       [0, 4]]...</span>
+</pre></div>
+</div>
+<p>Labelings that assign all classes members to the same clusters
+are complete but may be not always pure, hence penalized, and
+have some off-diagonal non-zero entries:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pair_confusion_matrix</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">array([[8, 2],</span>
+<span class="go">       [0, 2]]...</span>
+</pre></div>
+</div>
+<p>Note that the matrix is not symmetric.</p>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.rand_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">rand_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_pred</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.rand_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rand index.</p>
+<p>The Rand Index computes a similarity measure between two clusterings
+by considering all pairs of samples and counting pairs that are
+assigned in the same or different clusters in the predicted and
+true clusterings.</p>
+<p>The raw RI score is:</p>
+<blockquote>
+<div><p>RI = (number of agreeing pairs) / (number of pairs)</p>
+</div></blockquote>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels_true</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>dtype=integral</em>) – Ground truth class labels to be used as a reference.</p></li>
+<li><p><strong>labels_pred</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>dtype=integral</em>) – Cluster labels to evaluate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>RI</strong> – Similarity score between 0.0 and 1.0, inclusive, 1.0 stands for
+perfect match.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.metrics.cluster.adjusted_rand_score" title="sklearn.metrics.cluster.adjusted_rand_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjusted_rand_score</span></code></a></dt><dd><p>Adjusted Rand Score</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.metrics.cluster.adjusted_mutual_info_score" title="sklearn.metrics.cluster.adjusted_mutual_info_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjusted_mutual_info_score</span></code></a></dt><dd><p>Adjusted Mutual Information</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>Perfectly matching labelings have a score of 1 even</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">rand_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rand_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>Labelings that assign all classes members to the same clusters
+are complete but may not always be pure, hence penalized:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rand_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">0.83...</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.silhouette_samples">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">silhouette_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.silhouette_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Silhouette Coefficient for each sample.</p>
+<p>The Silhouette Coefficient is a measure of how well samples are clustered
+with samples that are similar to themselves. Clustering models with a high
+Silhouette Coefficient are said to be dense, where samples in the same
+cluster are similar to each other, and well separated, where samples in
+different clusters are not very similar to each other.</p>
+<p>The Silhouette Coefficient is calculated using the mean intra-cluster
+distance (<code class="docutils literal notranslate"><span class="pre">a</span></code>) and the mean nearest-cluster distance (<code class="docutils literal notranslate"><span class="pre">b</span></code>) for each
+sample.  The Silhouette Coefficient for a sample is <code class="docutils literal notranslate"><span class="pre">(b</span> <span class="pre">-</span> <span class="pre">a)</span> <span class="pre">/</span> <span class="pre">max(a,</span>
+<span class="pre">b)</span></code>.
+Note that Silhouette Coefficient is only defined if number of labels
+is 2 <code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">n_labels</span> <span class="pre">&lt;=</span> <span class="pre">n_samples</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p>
+<p>This function returns the Silhouette Coefficient for each sample.</p>
+<p>The best value is 1 and the worst value is -1. Values near 0 indicate
+overlapping clusters.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples_a</em><em>, </em><em>n_samples_a</em><em>) </em><em>if metric ==             &quot;precomputed&quot;</em><em> or </em><em>(</em><em>n_samples_a</em><em>, </em><em>n_features</em><em>) </em><em>otherwise</em>) – An array of pairwise distances between samples, or a feature array.</p></li>
+<li><p><strong>labels</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Label values for each sample.</p></li>
+<li><p><strong>metric</strong> (<em>str</em><em> or </em><em>callable</em><em>, </em><em>default='euclidean'</em>) – The metric to use when calculating distance between instances in a
+feature array. If metric is a string, it must be one of the options
+allowed by <a class="reference internal" href="sklearn.metrics.html#sklearn.metrics.pairwise.pairwise_distances" title="sklearn.metrics.pairwise.pairwise_distances"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.pairwise.pairwise_distances()</span></code></a>.
+If <code class="docutils literal notranslate"><span class="pre">X</span></code> is the distance array itself, use “precomputed” as the metric.
+Precomputed distance matrices must have 0 along the diagonal.</p></li>
+<li><p><strong>**kwds</strong> (<em>optional keyword parameters</em>) – Any further parameters are passed directly to the distance function.
+If using a <code class="docutils literal notranslate"><span class="pre">scipy.spatial.distance</span></code> metric, the parameters are still
+metric dependent. See the scipy docs for usage examples.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>silhouette</strong> – Silhouette Coefficients for each sample.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like of shape (n_samples,)</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id10"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://www.sciencedirect.com/science/article/pii/0377042787901257">Peter J. Rousseeuw (1987). “Silhouettes: a Graphical Aid to the
+Interpretation and Validation of Cluster Analysis”. Computational
+and Applied Mathematics 20: 53-65.</a></p>
+</dd>
+<dt class="label" id="id11"><span class="brackets">2</span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Silhouette_(clustering)">Wikipedia entry on the Silhouette Coefficient</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.silhouette_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">silhouette_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.silhouette_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the mean Silhouette Coefficient of all samples.</p>
+<p>The Silhouette Coefficient is calculated using the mean intra-cluster
+distance (<code class="docutils literal notranslate"><span class="pre">a</span></code>) and the mean nearest-cluster distance (<code class="docutils literal notranslate"><span class="pre">b</span></code>) for each
+sample.  The Silhouette Coefficient for a sample is <code class="docutils literal notranslate"><span class="pre">(b</span> <span class="pre">-</span> <span class="pre">a)</span> <span class="pre">/</span> <span class="pre">max(a,</span>
+<span class="pre">b)</span></code>.  To clarify, <code class="docutils literal notranslate"><span class="pre">b</span></code> is the distance between a sample and the nearest
+cluster that the sample is not a part of.
+Note that Silhouette Coefficient is only defined if number of labels
+is <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">&lt;=</span> <span class="pre">n_labels</span> <span class="pre">&lt;=</span> <span class="pre">n_samples</span> <span class="pre">-</span> <span class="pre">1</span></code>.</p>
+<p>This function returns the mean Silhouette Coefficient over all samples.
+To obtain the values for each sample, use <a class="reference internal" href="#sklearn.metrics.cluster.silhouette_samples" title="sklearn.metrics.cluster.silhouette_samples"><code class="xref py py-func docutils literal notranslate"><span class="pre">silhouette_samples()</span></code></a>.</p>
+<p>The best value is 1 and the worst value is -1. Values near 0 indicate
+overlapping clusters. Negative values generally indicate that a sample has
+been assigned to the wrong cluster, as a different cluster is more similar.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples_a</em><em>, </em><em>n_samples_a</em><em>) </em><em>if metric ==             &quot;precomputed&quot;</em><em> or </em><em>(</em><em>n_samples_a</em><em>, </em><em>n_features</em><em>) </em><em>otherwise</em>) – An array of pairwise distances between samples, or a feature array.</p></li>
+<li><p><strong>labels</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Predicted labels for each sample.</p></li>
+<li><p><strong>metric</strong> (<em>str</em><em> or </em><em>callable</em><em>, </em><em>default='euclidean'</em>) – The metric to use when calculating distance between instances in a
+feature array. If metric is a string, it must be one of the options
+allowed by <a class="reference internal" href="sklearn.metrics.html#sklearn.metrics.pairwise.pairwise_distances" title="sklearn.metrics.pairwise.pairwise_distances"><code class="xref py py-func docutils literal notranslate"><span class="pre">metrics.pairwise.pairwise_distances</span></code></a>. If <code class="docutils literal notranslate"><span class="pre">X</span></code> is
+the distance array itself, use <code class="docutils literal notranslate"><span class="pre">metric=&quot;precomputed&quot;</span></code>.</p></li>
+<li><p><strong>sample_size</strong> (<em>int</em><em>, </em><em>default=None</em>) – The size of the sample to use when computing the Silhouette Coefficient
+on a random subset of the data.
+If <code class="docutils literal notranslate"><span class="pre">sample_size</span> <span class="pre">is</span> <span class="pre">None</span></code>, no sampling is used.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines random number generation for selecting a subset of samples.
+Used when <code class="docutils literal notranslate"><span class="pre">sample_size</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None</span></code>.
+Pass an int for reproducible results across multiple function calls.
+See <span class="xref std std-term">Glossary</span>.</p></li>
+<li><p><strong>**kwds</strong> (<em>optional keyword parameters</em>) – Any further parameters are passed directly to the distance function.
+If using a scipy.spatial.distance metric, the parameters are still
+metric dependent. See the scipy docs for usage examples.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>silhouette</strong> – Mean Silhouette Coefficient for all samples.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id12"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://www.sciencedirect.com/science/article/pii/0377042787901257">Peter J. Rousseeuw (1987). “Silhouettes: a Graphical Aid to the
+Interpretation and Validation of Cluster Analysis”. Computational
+and Applied Mathematics 20: 53-65.</a></p>
+</dd>
+<dt class="label" id="id14"><span class="brackets">2</span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Silhouette_(clustering)">Wikipedia entry on the Silhouette Coefficient</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.metrics.cluster.v_measure_score">
+<span class="sig-prename descclassname"><span class="pre">sklearn.metrics.cluster.</span></span><span class="sig-name descname"><span class="pre">v_measure_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels_true</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_pred</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.metrics.cluster.v_measure_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>V-measure cluster labeling given a ground truth.</p>
+<p>This score is identical to <a class="reference internal" href="#sklearn.metrics.cluster.normalized_mutual_info_score" title="sklearn.metrics.cluster.normalized_mutual_info_score"><code class="xref py py-func docutils literal notranslate"><span class="pre">normalized_mutual_info_score()</span></code></a> with
+the <code class="docutils literal notranslate"><span class="pre">'arithmetic'</span></code> option for averaging.</p>
+<p>The V-measure is the harmonic mean between homogeneity and completeness:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)</span> <span class="o">*</span> <span class="n">homogeneity</span> <span class="o">*</span> <span class="n">completeness</span>
+     <span class="o">/</span> <span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="n">homogeneity</span> <span class="o">+</span> <span class="n">completeness</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This metric is independent of the absolute values of the labels:
+a permutation of the class or cluster label values won’t change the
+score value in any way.</p>
+<p>This metric is furthermore symmetric: switching <code class="docutils literal notranslate"><span class="pre">label_true</span></code> with
+<code class="docutils literal notranslate"><span class="pre">label_pred</span></code> will return the same score value. This can be useful to
+measure the agreement of two independent label assignments strategies
+on the same dataset when the real ground truth is not known.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels_true</strong> (<em>int array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em>) – ground truth class labels to be used as a reference</p></li>
+<li><p><strong>labels_pred</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – cluster labels to evaluate</p></li>
+<li><p><strong>beta</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Ratio of weight attributed to <code class="docutils literal notranslate"><span class="pre">homogeneity</span></code> vs <code class="docutils literal notranslate"><span class="pre">completeness</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">beta</span></code> is greater than 1, <code class="docutils literal notranslate"><span class="pre">completeness</span></code> is weighted more
+strongly in the calculation. If <code class="docutils literal notranslate"><span class="pre">beta</span></code> is less than 1,
+<code class="docutils literal notranslate"><span class="pre">homogeneity</span></code> is weighted more strongly.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>v_measure</strong> – score between 0.0 and 1.0. 1.0 stands for perfectly complete labeling</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id16"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://aclweb.org/anthology/D/D07/D07-1043.pdf">Andrew Rosenberg and Julia Hirschberg, 2007. V-Measure: A
+conditional entropy-based external cluster evaluation measure</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#sklearn.metrics.cluster.homogeneity_score" title="sklearn.metrics.cluster.homogeneity_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">homogeneity_score</span></code></a>, <a class="reference internal" href="#sklearn.metrics.cluster.completeness_score" title="sklearn.metrics.cluster.completeness_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">completeness_score</span></code></a>, <a class="reference internal" href="#sklearn.metrics.cluster.normalized_mutual_info_score" title="sklearn.metrics.cluster.normalized_mutual_info_score"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalized_mutual_info_score</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Perfect labelings are both homogeneous and complete, hence have score 1.0:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">v_measure_score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v_measure_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v_measure_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>Labelings that assign all classes members to the same clusters
+are complete be not homogeneous, hence penalized:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">v_measure_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="go">0.8...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">v_measure_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="go">0.66...</span>
+</pre></div>
+</div>
+<p>Labelings that have pure clusters with members coming from the same
+classes are homogeneous but un-necessary splits harms completeness
+and thus penalize V-measure as well:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">v_measure_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+<span class="go">0.8...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">v_measure_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="go">0.66...</span>
+</pre></div>
+</div>
+<p>If classes members are completely split across different clusters,
+the assignment is totally incomplete, hence the V-Measure is null:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">v_measure_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="go">0.0...</span>
+</pre></div>
+</div>
+<p>Clusters that include samples from totally different classes totally
+destroy the homogeneity of the labeling, hence:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">v_measure_score</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+<span class="go">0.0...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Tommaso
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,798 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sklearn.compose package &mdash; Qsklearn  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Qsklearn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">sklearn</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Qsklearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>sklearn.compose package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sklearn.compose.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="sklearn-compose-package">
+<h1>sklearn.compose package<a class="headerlink" href="#sklearn-compose-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sklearn.compose.tests.html">sklearn.compose.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.compose.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.compose.tests.html#sklearn-compose-tests-test-column-transformer-module">sklearn.compose.tests.test_column_transformer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.compose.tests.html#sklearn-compose-tests-test-target-module">sklearn.compose.tests.test_target module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.compose.tests.html#module-sklearn.compose.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-sklearn.compose">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.compose" title="Permalink to this headline">¶</a></h2>
+<p>Meta-estimators for building composite models with transformers</p>
+<p>In addition to its current contents, this module will eventually be home to
+refurbished versions of Pipeline and FeatureUnion.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.compose.ColumnTransformer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.compose.</span></span><span class="sig-name descname"><span class="pre">ColumnTransformer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transformers</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remainder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'drop'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparse_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer_weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.compose.ColumnTransformer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.utils.metaestimators._BaseComposition</span></code></p>
+<p>Applies transformers to columns of an array or pandas DataFrame.</p>
+<p>This estimator allows different columns or column subsets of the input
+to be transformed separately and the features generated by each transformer
+will be concatenated to form a single feature space.
+This is useful for heterogeneous or columnar data, to combine several
+feature extraction mechanisms or transformations into a single transformer.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>transformers</strong> (<em>list of tuples</em>) – <p>List of (name, transformer, columns) tuples specifying the
+transformer objects to be applied to subsets of the data.</p>
+<dl class="simple">
+<dt>name<span class="classifier">str</span></dt><dd><p>Like in Pipeline and FeatureUnion, this allows the transformer and
+its parameters to be set using <code class="docutils literal notranslate"><span class="pre">set_params</span></code> and searched in grid
+search.</p>
+</dd>
+<dt>transformer<span class="classifier">{‘drop’, ‘passthrough’} or estimator</span></dt><dd><p>Estimator must support <span class="xref std std-term">fit</span> and <span class="xref std std-term">transform</span>.
+Special-cased strings ‘drop’ and ‘passthrough’ are accepted as
+well, to indicate to drop the columns or to pass them through
+untransformed, respectively.</p>
+</dd>
+<dt>columns<span class="classifier">str, array-like of str, int, array-like of int,                 array-like of bool, slice or callable</span></dt><dd><p>Indexes the data on its second axis. Integers are interpreted as
+positional columns, while strings can reference DataFrame columns
+by name.  A scalar string or int should be used where
+<code class="docutils literal notranslate"><span class="pre">transformer</span></code> expects X to be a 1d array-like (vector),
+otherwise a 2d array will be passed to the transformer.
+A callable is passed the input data <cite>X</cite> and can return any of the
+above. To select multiple columns by name or dtype, you can use
+<a class="reference internal" href="#sklearn.compose.make_column_selector" title="sklearn.compose.make_column_selector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_column_selector</span></code></a>.</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>remainder</strong> (<em>{'drop'</em><em>, </em><em>'passthrough'}</em><em> or </em><em>estimator</em><em>, </em><em>default='drop'</em>) – By default, only the specified columns in <cite>transformers</cite> are
+transformed and combined in the output, and the non-specified
+columns are dropped. (default of <code class="docutils literal notranslate"><span class="pre">'drop'</span></code>).
+By specifying <code class="docutils literal notranslate"><span class="pre">remainder='passthrough'</span></code>, all remaining columns that
+were not specified in <cite>transformers</cite> will be automatically passed
+through. This subset of columns is concatenated with the output of
+the transformers.
+By setting <code class="docutils literal notranslate"><span class="pre">remainder</span></code> to be an estimator, the remaining
+non-specified columns will use the <code class="docutils literal notranslate"><span class="pre">remainder</span></code> estimator. The
+estimator must support <span class="xref std std-term">fit</span> and <span class="xref std std-term">transform</span>.
+Note that using this feature requires that the DataFrame columns
+input at <span class="xref std std-term">fit</span> and <span class="xref std std-term">transform</span> have identical order.</p></li>
+<li><p><strong>sparse_threshold</strong> (<em>float</em><em>, </em><em>default=0.3</em>) – If the output of the different transformers contains sparse matrices,
+these will be stacked as a sparse matrix if the overall density is
+lower than this value. Use <code class="docutils literal notranslate"><span class="pre">sparse_threshold=0</span></code> to always return
+dense.  When the transformed output consists of all dense data, the
+stacked result will be dense, and this keyword will be ignored.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>default=None</em>) – Number of jobs to run in parallel.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <span class="xref std std-term">Glossary</span>
+for more details.</p></li>
+<li><p><strong>transformer_weights</strong> (<em>dict</em><em>, </em><em>default=None</em>) – Multiplicative weights for features per transformer. The output of the
+transformer is multiplied by these weights. Keys are transformer names,
+values the weights.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, the time elapsed while fitting each transformer will be
+printed as it is completed.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.compose.ColumnTransformer.transformers_">
+<span class="sig-name descname"><span class="pre">transformers_</span></span><a class="headerlink" href="#sklearn.compose.ColumnTransformer.transformers_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The collection of fitted transformers as tuples of
+(name, fitted_transformer, column). <cite>fitted_transformer</cite> can be an
+estimator, ‘drop’, or ‘passthrough’. In case there were no columns
+selected, this will be the unfitted transformer.
+If there are remaining columns, the final element is a tuple of the
+form:
+(‘remainder’, transformer, remaining_columns) corresponding to the
+<code class="docutils literal notranslate"><span class="pre">remainder</span></code> parameter. If there are remaining columns, then
+<code class="docutils literal notranslate"><span class="pre">len(transformers_)==len(transformers)+1</span></code>, otherwise
+<code class="docutils literal notranslate"><span class="pre">len(transformers_)==len(transformers)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.compose.ColumnTransformer.named_transformers_">
+<span class="sig-name descname"><span class="pre">named_transformers_</span></span><a class="headerlink" href="#sklearn.compose.ColumnTransformer.named_transformers_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read-only attribute to access any transformer by given name.
+Keys are transformer names and values are the fitted transformer
+objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Bunch</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.compose.ColumnTransformer.sparse_output_">
+<span class="sig-name descname"><span class="pre">sparse_output_</span></span><a class="headerlink" href="#sklearn.compose.ColumnTransformer.sparse_output_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boolean flag indicating whether the output of <code class="docutils literal notranslate"><span class="pre">transform</span></code> is a
+sparse matrix or a dense numpy array, which depends on the output
+of the individual transformers and the <cite>sparse_threshold</cite> keyword.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.compose.ColumnTransformer.output_indices_">
+<span class="sig-name descname"><span class="pre">output_indices_</span></span><a class="headerlink" href="#sklearn.compose.ColumnTransformer.output_indices_" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary from each transformer name to a slice, where the slice
+corresponds to indices in the transformed output. This is useful to
+inspect which transformer is responsible for which transformed
+feature(s).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.0.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>The order of the columns in the transformed feature matrix follows the
+order of how the columns are specified in the <cite>transformers</cite> list.
+Columns of the original feature matrix that are not specified are
+dropped from the resulting transformed feature matrix, unless specified
+in the <cite>passthrough</cite> keyword. Those columns specified with <cite>passthrough</cite>
+are added at the right to the output of the transformers.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.compose.make_column_transformer" title="sklearn.compose.make_column_transformer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_column_transformer</span></code></a></dt><dd><p>Convenience function for combining the outputs of multiple transformer objects applied to column subsets of the original feature space.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.compose.make_column_selector" title="sklearn.compose.make_column_selector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_column_selector</span></code></a></dt><dd><p>Convenience function for selecting columns based on datatype or the columns name with a regex pattern.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">Normalizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ct</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[(</span><span class="s2">&quot;norm1&quot;</span><span class="p">,</span> <span class="n">Normalizer</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>     <span class="p">(</span><span class="s2">&quot;norm2&quot;</span><span class="p">,</span> <span class="n">Normalizer</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Normalizer scales each row of X to unit norm. A separate scaling</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># is applied for the two first and two last elements of each</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># row independently.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ct</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[0. , 1. , 0.5, 0.5],</span>
+<span class="go">       [0.5, 0.5, 0. , 1. ]])</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.compose.ColumnTransformer.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.compose.ColumnTransformer.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit all transformers using X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>dataframe} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Input data, of which specified subsets are used to fit the
+transformers.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>...</em><em>)</em><em>, </em><em>default=None</em>) – Targets for supervised learning.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong> – This estimator</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sklearn.compose.ColumnTransformer" title="sklearn.compose.ColumnTransformer">ColumnTransformer</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.compose.ColumnTransformer.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.compose.ColumnTransformer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit all transformers, transform the data and concatenate results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>dataframe} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Input data, of which specified subsets are used to fit the
+transformers.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – Targets for supervised learning.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_t</strong> – hstack of results of transformers. sum_n_components is the
+sum of n_components (output dimension) over transformers. If
+any result is a sparse matrix, everything will be converted to
+sparse matrices.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>{array-like, sparse matrix} of                 shape (n_samples, sum_n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.compose.ColumnTransformer.get_feature_names">
+<span class="sig-name descname"><span class="pre">get_feature_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.compose.ColumnTransformer.get_feature_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get feature names from all transformers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>feature_names</strong> – Names of the features produced by transform.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list of strings</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.compose.ColumnTransformer.get_params">
+<span class="sig-name descname"><span class="pre">get_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.compose.ColumnTransformer.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<p>Returns the parameters given in the constructor as well as the
+estimators contained within the <cite>transformers</cite> of the
+<cite>ColumnTransformer</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>deep</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>params</strong> – Parameter names mapped to their values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">named_transformers_</span></span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Access the fitted transformer by name.</p>
+<p>Read-only attribute to access any transformer by given name.
+Keys are transformer names and values are the fitted transformer
+objects.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.compose.ColumnTransformer.set_params">
+<span class="sig-name descname"><span class="pre">set_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.compose.ColumnTransformer.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>Valid parameter keys can be listed with <code class="docutils literal notranslate"><span class="pre">get_params()</span></code>. Note that you
+can directly set the parameters of the estimators contained in
+<cite>transformers</cite> of <cite>ColumnTransformer</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.compose.ColumnTransformer.steps">
+<span class="sig-name descname"><span class="pre">steps</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#sklearn.compose.ColumnTransformer.steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.compose.ColumnTransformer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.compose.ColumnTransformer.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform X separately by each transformer, concatenate results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>dataframe} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The data to be transformed by subset.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_t</strong> – hstack of results of transformers. sum_n_components is the
+sum of n_components (output dimension) over transformers. If
+any result is a sparse matrix, everything will be converted to
+sparse matrices.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>{array-like, sparse matrix} of                 shape (n_samples, sum_n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.compose.TransformedTargetRegressor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.compose.</span></span><span class="sig-name descname"><span class="pre">TransformedTargetRegressor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regressor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inverse_func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_inverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.compose.TransformedTargetRegressor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.RegressorMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Meta-estimator to regress on a transformed target.</p>
+<p>Useful for applying a non-linear transformation to the target <code class="docutils literal notranslate"><span class="pre">y</span></code> in
+regression problems. This transformation can be given as a Transformer
+such as the QuantileTransformer or as a function and its inverse such as
+<code class="docutils literal notranslate"><span class="pre">log</span></code> and <code class="docutils literal notranslate"><span class="pre">exp</span></code>.</p>
+<p>The computation during <code class="docutils literal notranslate"><span class="pre">fit</span></code> is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">regressor</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">regressor</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The computation during <code class="docutils literal notranslate"><span class="pre">predict</span></code> is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inverse_func</span><span class="p">(</span><span class="n">regressor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">transformer</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">regressor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>regressor</strong> (<em>object</em><em>, </em><em>default=None</em>) – Regressor object such as derived from <code class="docutils literal notranslate"><span class="pre">RegressorMixin</span></code>. This
+regressor will automatically be cloned each time prior to fitting.
+If regressor is <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">LinearRegression()</span></code> is created and used.</p></li>
+<li><p><strong>transformer</strong> (<em>object</em><em>, </em><em>default=None</em>) – Estimator object such as derived from <code class="docutils literal notranslate"><span class="pre">TransformerMixin</span></code>. Cannot be
+set at the same time as <code class="docutils literal notranslate"><span class="pre">func</span></code> and <code class="docutils literal notranslate"><span class="pre">inverse_func</span></code>. If
+<code class="docutils literal notranslate"><span class="pre">transformer</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code> as well as <code class="docutils literal notranslate"><span class="pre">func</span></code> and <code class="docutils literal notranslate"><span class="pre">inverse_func</span></code>,
+the transformer will be an identity transformer. Note that the
+transformer will be cloned during fitting. Also, the transformer is
+restricting <code class="docutils literal notranslate"><span class="pre">y</span></code> to be a numpy array.</p></li>
+<li><p><strong>func</strong> (<em>function</em><em>, </em><em>default=None</em>) – Function to apply to <code class="docutils literal notranslate"><span class="pre">y</span></code> before passing to <code class="docutils literal notranslate"><span class="pre">fit</span></code>. Cannot be set at
+the same time as <code class="docutils literal notranslate"><span class="pre">transformer</span></code>. The function needs to return a
+2-dimensional array. If <code class="docutils literal notranslate"><span class="pre">func</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the function used will be
+the identity function.</p></li>
+<li><p><strong>inverse_func</strong> (<em>function</em><em>, </em><em>default=None</em>) – Function to apply to the prediction of the regressor. Cannot be set at
+the same time as <code class="docutils literal notranslate"><span class="pre">transformer</span></code> as well. The function needs to return
+a 2-dimensional array. The inverse function is used to return
+predictions to the same space of the original training labels.</p></li>
+<li><p><strong>check_inverse</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to check that <code class="docutils literal notranslate"><span class="pre">transform</span></code> followed by <code class="docutils literal notranslate"><span class="pre">inverse_transform</span></code>
+or <code class="docutils literal notranslate"><span class="pre">func</span></code> followed by <code class="docutils literal notranslate"><span class="pre">inverse_func</span></code> leads to the original targets.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.compose.TransformedTargetRegressor.regressor_">
+<span class="sig-name descname"><span class="pre">regressor_</span></span><a class="headerlink" href="#sklearn.compose.TransformedTargetRegressor.regressor_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fitted regressor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.compose.TransformedTargetRegressor.transformer_">
+<span class="sig-name descname"><span class="pre">transformer_</span></span><a class="headerlink" href="#sklearn.compose.TransformedTargetRegressor.transformer_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transformer used in <code class="docutils literal notranslate"><span class="pre">fit</span></code> and <code class="docutils literal notranslate"><span class="pre">predict</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">TransformedTargetRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">TransformedTargetRegressor</span><span class="p">(</span><span class="n">regressor</span><span class="o">=</span><span class="n">LinearRegression</span><span class="p">(),</span>
+<span class="gp">... </span>                                <span class="n">func</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">,</span> <span class="n">inverse_func</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">TransformedTargetRegressor(...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="o">.</span><span class="n">regressor_</span><span class="o">.</span><span class="n">coef_</span>
+<span class="go">array([2.])</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>Internally, the target <code class="docutils literal notranslate"><span class="pre">y</span></code> is always converted into a 2-dimensional array
+to be used by scikit-learn transformers. At the time of prediction, the
+output will be reshaped to a have the same number of dimensions as <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<p>See <span class="xref std std-ref">examples/compose/plot_transformed_target.py</span>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.compose.TransformedTargetRegressor.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fit_params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.compose.TransformedTargetRegressor.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the model according to the given training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training vector, where n_samples is the number of samples and
+n_features is the number of features.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Target values.</p></li>
+<li><p><strong>**fit_params</strong> (<em>dict</em>) – Parameters passed to the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method of the underlying
+regressor.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.compose.TransformedTargetRegressor.n_features_in_">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">n_features_in_</span></span><a class="headerlink" href="#sklearn.compose.TransformedTargetRegressor.n_features_in_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.compose.TransformedTargetRegressor.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.compose.TransformedTargetRegressor.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict using the base regressor, applying inverse.</p>
+<p>The regressor is used to predict and the <code class="docutils literal notranslate"><span class="pre">inverse_func</span></code> or
+<code class="docutils literal notranslate"><span class="pre">inverse_transform</span></code> is applied before returning the prediction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Samples.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>y_hat</strong> – Predicted values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.compose.make_column_selector">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.compose.</span></span><span class="sig-name descname"><span class="pre">make_column_selector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype_include</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype_exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.compose.make_column_selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Create a callable to select columns to be used with
+<a class="reference internal" href="#sklearn.compose.ColumnTransformer" title="sklearn.compose.ColumnTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColumnTransformer</span></code></a>.</p>
+<p><a class="reference internal" href="#sklearn.compose.make_column_selector" title="sklearn.compose.make_column_selector"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_column_selector()</span></code></a> can select columns based on datatype or the
+columns name with a regex. When using multiple selection criteria, <strong>all</strong>
+criteria must match for a column to be selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pattern</strong> (<em>str</em><em>, </em><em>default=None</em>) – Name of columns containing this regex pattern will be included. If
+None, column selection will not be selected based on pattern.</p></li>
+<li><p><strong>dtype_include</strong> (<em>column dtype</em><em> or </em><em>list of column dtypes</em><em>, </em><em>default=None</em>) – A selection of dtypes to include. For more details, see
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">pandas.DataFrame.select_dtypes()</span></code>.</p></li>
+<li><p><strong>dtype_exclude</strong> (<em>column dtype</em><em> or </em><em>list of column dtypes</em><em>, </em><em>default=None</em>) – A selection of dtypes to exclude. For more details, see
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">pandas.DataFrame.select_dtypes()</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>selector</strong> – Callable for column selection to be used by a
+<a class="reference internal" href="#sklearn.compose.ColumnTransformer" title="sklearn.compose.ColumnTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColumnTransformer</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.compose.ColumnTransformer" title="sklearn.compose.ColumnTransformer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ColumnTransformer</span></code></a></dt><dd><p>Class that allows combining the outputs of multiple transformer objects used on column subsets of the data into a single feature space.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">make_column_transformer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">make_column_selector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;Paris&#39;</span><span class="p">,</span> <span class="s1">&#39;Sallisaw&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                  <span class="s1">&#39;rating&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ct</span> <span class="o">=</span> <span class="n">make_column_transformer</span><span class="p">(</span>
+<span class="gp">... </span>      <span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span>
+<span class="gp">... </span>       <span class="n">make_column_selector</span><span class="p">(</span><span class="n">dtype_include</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">)),</span>  <span class="c1"># rating</span>
+<span class="gp">... </span>      <span class="p">(</span><span class="n">OneHotEncoder</span><span class="p">(),</span>
+<span class="gp">... </span>       <span class="n">make_column_selector</span><span class="p">(</span><span class="n">dtype_include</span><span class="o">=</span><span class="nb">object</span><span class="p">)))</span>  <span class="c1"># city</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ct</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  
+<span class="go">array([[ 0.90453403,  1.        ,  0.        ,  0.        ],</span>
+<span class="go">       [-1.50755672,  1.        ,  0.        ,  0.        ],</span>
+<span class="go">       [-0.30151134,  0.        ,  1.        ,  0.        ],</span>
+<span class="go">       [ 0.90453403,  0.        ,  0.        ,  1.        ]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.compose.make_column_transformer">
+<span class="sig-prename descclassname"><span class="pre">sklearn.compose.</span></span><span class="sig-name descname"><span class="pre">make_column_transformer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">transformers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remainder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'drop'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sparse_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.compose.make_column_transformer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a ColumnTransformer from the given transformers.</p>
+<p>This is a shorthand for the ColumnTransformer constructor; it does not
+require, and does not permit, naming the transformers. Instead, they will
+be given names automatically based on their types. It also does not allow
+weighting with <code class="docutils literal notranslate"><span class="pre">transformer_weights</span></code>.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*transformers</strong> (<em>tuples</em>) – <p>Tuples of the form (transformer, columns) specifying the
+transformer objects to be applied to subsets of the data.</p>
+<dl class="simple">
+<dt>transformer<span class="classifier">{‘drop’, ‘passthrough’} or estimator</span></dt><dd><p>Estimator must support <span class="xref std std-term">fit</span> and <span class="xref std std-term">transform</span>.
+Special-cased strings ‘drop’ and ‘passthrough’ are accepted as
+well, to indicate to drop the columns or to pass them through
+untransformed, respectively.</p>
+</dd>
+<dt>columns<span class="classifier">str,  array-like of str, int, array-like of int, slice,                 array-like of bool or callable</span></dt><dd><p>Indexes the data on its second axis. Integers are interpreted as
+positional columns, while strings can reference DataFrame columns
+by name. A scalar string or int should be used where
+<code class="docutils literal notranslate"><span class="pre">transformer</span></code> expects X to be a 1d array-like (vector),
+otherwise a 2d array will be passed to the transformer.
+A callable is passed the input data <cite>X</cite> and can return any of the
+above. To select multiple columns by name or dtype, you can use
+<a class="reference internal" href="#sklearn.compose.make_column_selector" title="sklearn.compose.make_column_selector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_column_selector</span></code></a>.</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>remainder</strong> (<em>{'drop'</em><em>, </em><em>'passthrough'}</em><em> or </em><em>estimator</em><em>, </em><em>default='drop'</em>) – By default, only the specified columns in <cite>transformers</cite> are
+transformed and combined in the output, and the non-specified
+columns are dropped. (default of <code class="docutils literal notranslate"><span class="pre">'drop'</span></code>).
+By specifying <code class="docutils literal notranslate"><span class="pre">remainder='passthrough'</span></code>, all remaining columns that
+were not specified in <cite>transformers</cite> will be automatically passed
+through. This subset of columns is concatenated with the output of
+the transformers.
+By setting <code class="docutils literal notranslate"><span class="pre">remainder</span></code> to be an estimator, the remaining
+non-specified columns will use the <code class="docutils literal notranslate"><span class="pre">remainder</span></code> estimator. The
+estimator must support <span class="xref std std-term">fit</span> and <span class="xref std std-term">transform</span>.</p></li>
+<li><p><strong>sparse_threshold</strong> (<em>float</em><em>, </em><em>default=0.3</em>) – If the transformed output consists of a mix of sparse and dense data,
+it will be stacked as a sparse matrix if the density is lower than this
+value. Use <code class="docutils literal notranslate"><span class="pre">sparse_threshold=0</span></code> to always return dense.
+When the transformed output consists of all sparse or all dense data,
+the stacked result will be sparse or dense, respectively, and this
+keyword will be ignored.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>default=None</em>) – Number of jobs to run in parallel.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <span class="xref std std-term">Glossary</span>
+for more details.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, the time elapsed while fitting each transformer will be
+printed as it is completed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ct</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sklearn.compose.ColumnTransformer" title="sklearn.compose.ColumnTransformer">ColumnTransformer</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.compose.ColumnTransformer" title="sklearn.compose.ColumnTransformer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ColumnTransformer</span></code></a></dt><dd><p>Class that allows combining the outputs of multiple transformer objects used on column subsets of the data into a single feature space.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">make_column_transformer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">make_column_transformer</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="p">[</span><span class="s1">&#39;numerical_column&#39;</span><span class="p">]),</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="n">OneHotEncoder</span><span class="p">(),</span> <span class="p">[</span><span class="s1">&#39;categorical_column&#39;</span><span class="p">]))</span>
+<span class="go">ColumnTransformer(transformers=[(&#39;standardscaler&#39;, StandardScaler(...),</span>
+<span class="go">                                 [&#39;numerical_column&#39;]),</span>
+<span class="go">                                (&#39;onehotencoder&#39;, OneHotEncoder(...),</span>
+<span class="go">                                 [&#39;categorical_column&#39;])])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Tommaso
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

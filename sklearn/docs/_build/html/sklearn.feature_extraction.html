@@ -1,0 +1,1806 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sklearn.feature_extraction package &mdash; Qsklearn  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Qsklearn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">sklearn</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Qsklearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>sklearn.feature_extraction package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sklearn.feature_extraction.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="sklearn-feature-extraction-package">
+<h1>sklearn.feature_extraction package<a class="headerlink" href="#sklearn-feature-extraction-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sklearn.feature_extraction.tests.html">sklearn.feature_extraction.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_extraction.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_extraction.tests.html#sklearn-feature-extraction-tests-test-dict-vectorizer-module">sklearn.feature_extraction.tests.test_dict_vectorizer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_extraction.tests.html#sklearn-feature-extraction-tests-test-feature-hasher-module">sklearn.feature_extraction.tests.test_feature_hasher module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_extraction.tests.html#sklearn-feature-extraction-tests-test-image-module">sklearn.feature_extraction.tests.test_image module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_extraction.tests.html#sklearn-feature-extraction-tests-test-text-module">sklearn.feature_extraction.tests.test_text module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_extraction.tests.html#module-sklearn.feature_extraction.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-sklearn.feature_extraction.image">
+<span id="sklearn-feature-extraction-image-module"></span><h2>sklearn.feature_extraction.image module<a class="headerlink" href="#module-sklearn.feature_extraction.image" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#module-sklearn.feature_extraction.image" title="sklearn.feature_extraction.image"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_extraction.image</span></code></a> submodule gathers utilities to
+extract features from images.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.image.PatchExtractor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.image.</span></span><span class="sig-name descname"><span class="pre">PatchExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_patches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.image.PatchExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Extracts patches from a collection of images</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.9.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>patch_size</strong> (<em>tuple of int</em><em> (</em><em>patch_height</em><em>, </em><em>patch_width</em><em>)</em><em>, </em><em>default=None</em>) – The dimensions of one patch.</p></li>
+<li><p><strong>max_patches</strong> (<em>int</em><em> or </em><em>float</em><em>, </em><em>default=None</em>) – The maximum number of patches per image to extract. If max_patches is a
+float in (0, 1), it is taken to mean a proportion of the total number
+of patches.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em>, </em><em>default=None</em>) – Determines the random number generator used for random sampling when
+<cite>max_patches</cite> is not None. Use an int to make the randomness
+deterministic.
+See <span class="xref std std-term">Glossary</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_sample_images</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <span class="n">image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Use the array data from the second image in this dataset:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">load_sample_images</span><span class="p">()</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Image shape: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="go">Image shape: (427, 640, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pe</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">PatchExtractor</span><span class="p">(</span><span class="n">patch_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pe_fit</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pe_trans</span> <span class="o">=</span> <span class="n">pe</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Patches shape: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pe_trans</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="go">Patches shape: (545706, 2, 2)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.image.PatchExtractor.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.image.PatchExtractor.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do nothing and return the estimator unchanged.</p>
+<p>This method is just there to implement the usual API and hence
+work in pipelines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.image.PatchExtractor.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.image.PatchExtractor.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms the image samples in X into a matrix of patch data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>ndarray of shape</em><em> (</em><em>n_samples</em><em>, </em><em>image_height</em><em>, </em><em>image_width</em><em>) or             </em><em>(</em><em>n_samples</em><em>, </em><em>image_height</em><em>, </em><em>image_width</em><em>, </em><em>n_channels</em><em>)</em>) – Array of images from which to extract patches. For color images,
+the last dimension specifies the channel: a RGB image would have
+<cite>n_channels=3</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>patches</strong> – The collection of patches extracted from the images, where
+<cite>n_patches</cite> is either <cite>n_samples * max_patches</cite> or the total
+number of patches that can be extracted.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array of shape (n_patches, patch_height, patch_width) or              (n_patches, patch_height, patch_width, n_channels)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.image.extract_patches_2d">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.image.</span></span><span class="sig-name descname"><span class="pre">extract_patches_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch_size</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_patches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.image.extract_patches_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reshape a 2D image into a collection of patches</p>
+<p>The resulting patches are allocated in a dedicated array.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>ndarray of shape</em><em> (</em><em>image_height</em><em>, </em><em>image_width</em><em>) or         </em><em>(</em><em>image_height</em><em>, </em><em>image_width</em><em>, </em><em>n_channels</em><em>)</em>) – The original image data. For color images, the last dimension specifies
+the channel: a RGB image would have <cite>n_channels=3</cite>.</p></li>
+<li><p><strong>patch_size</strong> (<em>tuple of int</em><em> (</em><em>patch_height</em><em>, </em><em>patch_width</em><em>)</em>) – The dimensions of one patch.</p></li>
+<li><p><strong>max_patches</strong> (<em>int</em><em> or </em><em>float</em><em>, </em><em>default=None</em>) – The maximum number of patches to extract. If <cite>max_patches</cite> is a float
+between 0 and 1, it is taken to be a proportion of the total number
+of patches.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em>, </em><em>default=None</em>) – Determines the random number generator used for random sampling when
+<cite>max_patches</cite> is not None. Use an int to make the randomness
+deterministic.
+See <span class="xref std std-term">Glossary</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>patches</strong> – The collection of patches extracted from the image, where <cite>n_patches</cite>
+is either <cite>max_patches</cite> or the total number of patches that can be
+extracted.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array of shape (n_patches, patch_height, patch_width) or         (n_patches, patch_height, patch_width, n_channels)</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_sample_image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <span class="n">image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Use the array data from the first image in this dataset:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">one_image</span> <span class="o">=</span> <span class="n">load_sample_image</span><span class="p">(</span><span class="s2">&quot;china.jpg&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Image shape: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">one_image</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="go">Image shape: (427, 640, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">patches</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">extract_patches_2d</span><span class="p">(</span><span class="n">one_image</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Patches shape: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">patches</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="go">Patches shape: (272214, 2, 2, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Here are just two of these patches:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">patches</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">[[[174 201 231]</span>
+<span class="go">  [174 201 231]]</span>
+<span class="go"> [[173 200 230]</span>
+<span class="go">  [173 200 230]]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">patches</span><span class="p">[</span><span class="mi">800</span><span class="p">])</span>
+<span class="go">[[[187 214 243]</span>
+<span class="go">  [188 215 244]]</span>
+<span class="go"> [[187 214 243]</span>
+<span class="go">  [188 215 244]]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.image.grid_to_graph">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.image.</span></span><span class="sig-name descname"><span class="pre">grid_to_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n_x</span></em>, <em class="sig-param"><span class="pre">n_y</span></em>, <em class="sig-param"><span class="pre">n_z=1</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">mask=None</span></em>, <em class="sig-param"><span class="pre">return_as=&lt;class</span> <span class="pre">'scipy.sparse.coo.coo_matrix'&gt;</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'int'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.image.grid_to_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Graph of the pixel-to-pixel connections</p>
+<p>Edges exist if 2 voxels are connected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_x</strong> (<em>int</em>) – Dimension in x axis</p></li>
+<li><p><strong>n_y</strong> (<em>int</em>) – Dimension in y axis</p></li>
+<li><p><strong>n_z</strong> (<em>int</em><em>, </em><em>default=1</em>) – Dimension in z axis</p></li>
+<li><p><strong>mask</strong> (<em>ndarray of shape</em><em> (</em><em>n_x</em><em>, </em><em>n_y</em><em>, </em><em>n_z</em><em>)</em><em>, </em><em>dtype=bool</em><em>, </em><em>default=None</em>) – An optional mask of the image, to consider only part of the
+pixels.</p></li>
+<li><p><strong>return_as</strong> (<em>np.ndarray</em><em> or </em><em>a sparse matrix class</em><em>,             </em><em>default=sparse.coo_matrix</em>) – The class to use to build the returned adjacency matrix.</p></li>
+<li><p><strong>dtype</strong> (<em>dtype</em><em>, </em><em>default=int</em>) – The data of the returned sparse matrix. By default it is int</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>For scikit-learn versions 0.14.1 and prior, return_as=np.ndarray was
+handled by returning a dense np.matrix instance.  Going forward, np.ndarray
+returns an np.ndarray, as expected.</p>
+<p>For compatibility, user code relying on this method should wrap its
+calls in <code class="docutils literal notranslate"><span class="pre">np.asarray</span></code> to avoid type issues.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.image.img_to_graph">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.image.</span></span><span class="sig-name descname"><span class="pre">img_to_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">img</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">mask=None</span></em>, <em class="sig-param"><span class="pre">return_as=&lt;class</span> <span class="pre">'scipy.sparse.coo.coo_matrix'&gt;</span></em>, <em class="sig-param"><span class="pre">dtype=None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.image.img_to_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Graph of the pixel-to-pixel gradient connections</p>
+<p>Edges are weighted with the gradient values.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<em>ndarray of shape</em><em> (</em><em>height</em><em>, </em><em>width</em><em>) or </em><em>(</em><em>height</em><em>, </em><em>width</em><em>, </em><em>channel</em><em>)</em>) – 2D or 3D image.</p></li>
+<li><p><strong>mask</strong> (<em>ndarray of shape</em><em> (</em><em>height</em><em>, </em><em>width</em><em>) or             </em><em>(</em><em>height</em><em>, </em><em>width</em><em>, </em><em>channel</em><em>)</em><em>, </em><em>dtype=bool</em><em>, </em><em>default=None</em>) – An optional mask of the image, to consider only part of the
+pixels.</p></li>
+<li><p><strong>return_as</strong> (<em>np.ndarray</em><em> or </em><em>a sparse matrix class</em><em>,             </em><em>default=sparse.coo_matrix</em>) – The class to use to build the returned adjacency matrix.</p></li>
+<li><p><strong>dtype</strong> (<em>dtype</em><em>, </em><em>default=None</em>) – The data of the returned sparse matrix. By default it is the
+dtype of img</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>For scikit-learn versions 0.14.1 and prior, return_as=np.ndarray was
+handled by returning a dense np.matrix instance.  Going forward, np.ndarray
+returns an np.ndarray, as expected.</p>
+<p>For compatibility, user code relying on this method should wrap its
+calls in <code class="docutils literal notranslate"><span class="pre">np.asarray</span></code> to avoid type issues.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.image.reconstruct_from_patches_2d">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.image.</span></span><span class="sig-name descname"><span class="pre">reconstruct_from_patches_2d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">patches</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.image.reconstruct_from_patches_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct the image from all of its patches.</p>
+<p>Patches are assumed to overlap and the image is constructed by filling in
+the patches from left to right, top to bottom, averaging the overlapping
+regions.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>patches</strong> (<em>ndarray of shape</em><em> (</em><em>n_patches</em><em>, </em><em>patch_height</em><em>, </em><em>patch_width</em><em>) or         </em><em>(</em><em>n_patches</em><em>, </em><em>patch_height</em><em>, </em><em>patch_width</em><em>, </em><em>n_channels</em><em>)</em>) – The complete set of patches. If the patches contain colour information,
+channels are indexed along the last dimension: RGB patches would
+have <cite>n_channels=3</cite>.</p></li>
+<li><p><strong>image_size</strong> (<em>tuple of int</em><em> (</em><em>image_height</em><em>, </em><em>image_width</em><em>) or         </em><em>(</em><em>image_height</em><em>, </em><em>image_width</em><em>, </em><em>n_channels</em><em>)</em>) – The size of the image that will be reconstructed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>image</strong> – The reconstructed image.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape image_size</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-sklearn.feature_extraction.setup">
+<span id="sklearn-feature-extraction-setup-module"></span><h2>sklearn.feature_extraction.setup module<a class="headerlink" href="#module-sklearn.feature_extraction.setup" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.setup.configuration">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.setup.</span></span><span class="sig-name descname"><span class="pre">configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent_package</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.setup.configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-sklearn.feature_extraction.text">
+<span id="sklearn-feature-extraction-text-module"></span><h2>sklearn.feature_extraction.text module<a class="headerlink" href="#module-sklearn.feature_extraction.text" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#module-sklearn.feature_extraction.text" title="sklearn.feature_extraction.text"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_extraction.text</span></code></a> submodule gathers utilities to
+build feature vectors from text documents.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.CountVectorizer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.text.</span></span><span class="sig-name descname"><span class="pre">CountVectorizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">input='content'</span></em>, <em class="sig-param"><span class="pre">encoding='utf-8'</span></em>, <em class="sig-param"><span class="pre">decode_error='strict'</span></em>, <em class="sig-param"><span class="pre">strip_accents=None</span></em>, <em class="sig-param"><span class="pre">lowercase=True</span></em>, <em class="sig-param"><span class="pre">preprocessor=None</span></em>, <em class="sig-param"><span class="pre">tokenizer=None</span></em>, <em class="sig-param"><span class="pre">stop_words=None</span></em>, <em class="sig-param"><span class="pre">token_pattern='(?u)\\b\\w\\w+\\b'</span></em>, <em class="sig-param"><span class="pre">ngram_range=(1</span></em>, <em class="sig-param"><span class="pre">1)</span></em>, <em class="sig-param"><span class="pre">analyzer='word'</span></em>, <em class="sig-param"><span class="pre">max_df=1.0</span></em>, <em class="sig-param"><span class="pre">min_df=1</span></em>, <em class="sig-param"><span class="pre">max_features=None</span></em>, <em class="sig-param"><span class="pre">vocabulary=None</span></em>, <em class="sig-param"><span class="pre">binary=False</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.int64'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.CountVectorizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_extraction.text._VectorizerMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Convert a collection of text documents to a matrix of token counts</p>
+<p>This implementation produces a sparse representation of the counts using
+scipy.sparse.csr_matrix.</p>
+<p>If you do not provide an a-priori dictionary and you do not use an analyzer
+that does some kind of feature selection then the number of features will
+be equal to the vocabulary size found by analyzing the data.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>{'filename'</em><em>, </em><em>'file'</em><em>, </em><em>'content'}</em><em>, </em><em>default='content'</em>) – <ul>
+<li><p>If <cite>‘filename’</cite>, the sequence passed as an argument to fit is
+expected to be a list of filenames that need reading to fetch
+the raw content to analyze.</p></li>
+<li><p>If <cite>‘file’</cite>, the sequence items must have a ‘read’ method (file-like
+object) that is called to fetch the bytes in memory.</p></li>
+<li><p>If <cite>‘content’</cite>, the input is expected to be a sequence of items that
+can be of type string or byte.</p></li>
+</ul>
+</p></li>
+<li><p><strong>encoding</strong> (<em>string</em><em>, </em><em>default='utf-8'</em>) – If bytes or files are given to analyze, this encoding is used to
+decode.</p></li>
+<li><p><strong>decode_error</strong> (<em>{'strict'</em><em>, </em><em>'ignore'</em><em>, </em><em>'replace'}</em><em>, </em><em>default='strict'</em>) – Instruction on what to do if a byte sequence is given to analyze that
+contains characters not of the given <cite>encoding</cite>. By default, it is
+‘strict’, meaning that a UnicodeDecodeError will be raised. Other
+values are ‘ignore’ and ‘replace’.</p></li>
+<li><p><strong>strip_accents</strong> (<em>{'ascii'</em><em>, </em><em>'unicode'}</em><em>, </em><em>default=None</em>) – <p>Remove accents and perform other character normalization
+during the preprocessing step.
+‘ascii’ is a fast method that only works on characters that have
+an direct ASCII mapping.
+‘unicode’ is a slightly slower method that works on any characters.
+None (default) does nothing.</p>
+<p>Both ‘ascii’ and ‘unicode’ use NFKD normalization from
+<code class="xref py py-func docutils literal notranslate"><span class="pre">unicodedata.normalize()</span></code>.</p>
+</p></li>
+<li><p><strong>lowercase</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Convert all characters to lowercase before tokenizing.</p></li>
+<li><p><strong>preprocessor</strong> (<em>callable</em><em>, </em><em>default=None</em>) – Override the preprocessing (strip_accents and lowercase) stage while
+preserving the tokenizing and n-grams generation steps.
+Only applies if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">callable</span></code>.</p></li>
+<li><p><strong>tokenizer</strong> (<em>callable</em><em>, </em><em>default=None</em>) – Override the string tokenization step while preserving the
+preprocessing and n-grams generation steps.
+Only applies if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">==</span> <span class="pre">'word'</span></code>.</p></li>
+<li><p><strong>stop_words</strong> (<em>{'english'}</em><em>, </em><em>list</em><em>, </em><em>default=None</em>) – <p>If ‘english’, a built-in stop word list for English is used.
+There are several known issues with ‘english’ and you should
+consider an alternative (see <span class="xref std std-ref">stop_words</span>).</p>
+<p>If a list, that list is assumed to contain stop words, all of which
+will be removed from the resulting tokens.
+Only applies if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">==</span> <span class="pre">'word'</span></code>.</p>
+<p>If None, no stop words will be used. max_df can be set to a value
+in the range [0.7, 1.0) to automatically detect and filter stop
+words based on intra corpus document frequency of terms.</p>
+</p></li>
+<li><p><strong>token_pattern</strong> (<em>str</em><em>, </em><em>default=r&quot;</em><em>(</em><em>?u</em><em>)</em><em>\b\w\w+\b&quot;</em>) – <p>Regular expression denoting what constitutes a “token”, only used
+if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">==</span> <span class="pre">'word'</span></code>. The default regexp select tokens of 2
+or more alphanumeric characters (punctuation is completely ignored
+and always treated as a token separator).</p>
+<p>If there is a capturing group in token_pattern then the
+captured group content, not the entire match, becomes the token.
+At most one capturing group is permitted.</p>
+</p></li>
+<li><p><strong>ngram_range</strong> (<em>tuple</em><em> (</em><em>min_n</em><em>, </em><em>max_n</em><em>)</em><em>, </em><em>default=</em><em>(</em><em>1</em><em>, </em><em>1</em><em>)</em>) – The lower and upper boundary of the range of n-values for different
+word n-grams or char n-grams to be extracted. All values of n such
+such that min_n &lt;= n &lt;= max_n will be used. For example an
+<code class="docutils literal notranslate"><span class="pre">ngram_range</span></code> of <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">1)</span></code> means only unigrams, <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2)</span></code> means
+unigrams and bigrams, and <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">2)</span></code> means only bigrams.
+Only applies if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">callable</span></code>.</p></li>
+<li><p><strong>analyzer</strong> (<em>{'word'</em><em>, </em><em>'char'</em><em>, </em><em>'char_wb'}</em><em> or </em><em>callable</em><em>, </em><em>default='word'</em>) – <p>Whether the feature should be made of word n-gram or character
+n-grams.
+Option ‘char_wb’ creates character n-grams only from text inside
+word boundaries; n-grams at the edges of words are padded with space.</p>
+<p>If a callable is passed it is used to extract the sequence of features
+out of the raw, unprocessed input.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.21.</span></p>
+</div>
+<p>Since v0.21, if <code class="docutils literal notranslate"><span class="pre">input</span></code> is <code class="docutils literal notranslate"><span class="pre">filename</span></code> or <code class="docutils literal notranslate"><span class="pre">file</span></code>, the data is
+first read from the file and then passed to the given callable
+analyzer.</p>
+</p></li>
+<li><p><strong>max_df</strong> (<em>float in range</em><em> [</em><em>0.0</em><em>, </em><em>1.0</em><em>] or </em><em>int</em><em>, </em><em>default=1.0</em>) – When building the vocabulary ignore terms that have a document
+frequency strictly higher than the given threshold (corpus-specific
+stop words).
+If float, the parameter represents a proportion of documents, integer
+absolute counts.
+This parameter is ignored if vocabulary is not None.</p></li>
+<li><p><strong>min_df</strong> (<em>float in range</em><em> [</em><em>0.0</em><em>, </em><em>1.0</em><em>] or </em><em>int</em><em>, </em><em>default=1</em>) – When building the vocabulary ignore terms that have a document
+frequency strictly lower than the given threshold. This value is also
+called cut-off in the literature.
+If float, the parameter represents a proportion of documents, integer
+absolute counts.
+This parameter is ignored if vocabulary is not None.</p></li>
+<li><p><strong>max_features</strong> (<em>int</em><em>, </em><em>default=None</em>) – <p>If not None, build a vocabulary that only consider the top
+max_features ordered by term frequency across the corpus.</p>
+<p>This parameter is ignored if vocabulary is not None.</p>
+</p></li>
+<li><p><strong>vocabulary</strong> (<em>Mapping</em><em> or </em><em>iterable</em><em>, </em><em>default=None</em>) – Either a Mapping (e.g., a dict) where keys are terms and values are
+indices in the feature matrix, or an iterable over terms. If not
+given, a vocabulary is determined from the input documents. Indices
+in the mapping should not be repeated and should not have any gap
+between 0 and the largest index.</p></li>
+<li><p><strong>binary</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, all non zero counts are set to 1. This is useful for discrete
+probabilistic models that model binary events rather than integer
+counts.</p></li>
+<li><p><strong>dtype</strong> (<em>type</em><em>, </em><em>default=np.int64</em>) – Type of the matrix returned by fit_transform() or transform().</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.CountVectorizer.vocabulary_">
+<span class="sig-name descname"><span class="pre">vocabulary_</span></span><a class="headerlink" href="#sklearn.feature_extraction.text.CountVectorizer.vocabulary_" title="Permalink to this definition">¶</a></dt>
+<dd><p>A mapping of terms to feature indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.CountVectorizer.fixed_vocabulary_">
+<span class="sig-name descname"><span class="pre">fixed_vocabulary_</span></span><a class="headerlink" href="#sklearn.feature_extraction.text.CountVectorizer.fixed_vocabulary_" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if a fixed vocabulary of term to indices mapping
+is provided by the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.CountVectorizer.stop_words_">
+<span class="sig-name descname"><span class="pre">stop_words_</span></span><a class="headerlink" href="#sklearn.feature_extraction.text.CountVectorizer.stop_words_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terms that were ignored because they either:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>occurred in too many documents (<cite>max_df</cite>)</p></li>
+<li><p>occurred in too few documents (<cite>min_df</cite>)</p></li>
+<li><p>were cut off by feature selection (<cite>max_features</cite>).</p></li>
+</ul>
+</div></blockquote>
+<p>This is only available if no vocabulary was given.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="s1">&#39;This is the first document.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;This document is the second document.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;And this is the third one.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;Is this the first document?&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
+<span class="go">[&#39;and&#39;, &#39;document&#39;, &#39;first&#39;, &#39;is&#39;, &#39;one&#39;, &#39;second&#39;, &#39;the&#39;, &#39;third&#39;, &#39;this&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+<span class="go">[[0 1 1 1 0 0 1 0 1]</span>
+<span class="go"> [0 2 0 1 0 1 1 0 1]</span>
+<span class="go"> [1 0 0 1 1 0 1 1 1]</span>
+<span class="go"> [0 1 1 1 0 0 1 0 1]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer2</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="s1">&#39;word&#39;</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X2</span> <span class="o">=</span> <span class="n">vectorizer2</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">vectorizer2</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
+<span class="go">[&#39;and this&#39;, &#39;document is&#39;, &#39;first document&#39;, &#39;is the&#39;, &#39;is this&#39;,</span>
+<span class="go">&#39;second document&#39;, &#39;the first&#39;, &#39;the second&#39;, &#39;the third&#39;, &#39;third one&#39;,</span>
+<span class="go"> &#39;this document&#39;, &#39;this is&#39;, &#39;this the&#39;]</span>
+<span class="go"> &gt;&gt;&gt; print(X2.toarray())</span>
+<span class="go"> [[0 0 1 1 0 0 1 0 0 0 0 1 0]</span>
+<span class="go"> [0 1 0 1 0 1 0 1 0 0 1 0 0]</span>
+<span class="go"> [1 0 0 1 0 0 0 0 1 1 0 1 0]</span>
+<span class="go"> [0 0 1 0 1 0 1 0 0 0 0 0 1]]</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#sklearn.feature_extraction.text.HashingVectorizer" title="sklearn.feature_extraction.text.HashingVectorizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HashingVectorizer</span></code></a>, <a class="reference internal" href="#sklearn.feature_extraction.text.TfidfVectorizer" title="sklearn.feature_extraction.text.TfidfVectorizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TfidfVectorizer</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">stop_words_</span></code> attribute can get large and increase the model size
+when pickling. This attribute is provided only for introspection and can
+be safely removed using delattr or set to None before pickling.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.CountVectorizer.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_documents</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.CountVectorizer.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn a vocabulary dictionary of all tokens in the raw documents.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_documents</strong> (<em>iterable</em>) – An iterable which yields either str, unicode or file objects.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.CountVectorizer.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_documents</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.CountVectorizer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn the vocabulary dictionary and return document-term matrix.</p>
+<p>This is equivalent to fit followed by transform, but more efficiently
+implemented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_documents</strong> (<em>iterable</em>) – An iterable which yields either str, unicode or file objects.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X</strong> – Document-term matrix.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array of shape (n_samples, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.CountVectorizer.get_feature_names">
+<span class="sig-name descname"><span class="pre">get_feature_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.CountVectorizer.get_feature_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array mapping from feature integer indices to feature name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>feature_names</strong> – A list of feature names.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.CountVectorizer.inverse_transform">
+<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.CountVectorizer.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return terms per document with nonzero entries in X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Document-term matrix.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_inv</strong> – List of arrays of terms.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of arrays of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.CountVectorizer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_documents</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.CountVectorizer.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform documents to document-term matrix.</p>
+<p>Extract token counts out of raw text documents using the vocabulary
+fitted with fit or the one provided to the constructor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_documents</strong> (<em>iterable</em>) – An iterable which yields either str, unicode or file objects.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X</strong> – Document-term matrix.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>sparse matrix of shape (n_samples, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.HashingVectorizer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.text.</span></span><span class="sig-name descname"><span class="pre">HashingVectorizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">input='content'</span></em>, <em class="sig-param"><span class="pre">encoding='utf-8'</span></em>, <em class="sig-param"><span class="pre">decode_error='strict'</span></em>, <em class="sig-param"><span class="pre">strip_accents=None</span></em>, <em class="sig-param"><span class="pre">lowercase=True</span></em>, <em class="sig-param"><span class="pre">preprocessor=None</span></em>, <em class="sig-param"><span class="pre">tokenizer=None</span></em>, <em class="sig-param"><span class="pre">stop_words=None</span></em>, <em class="sig-param"><span class="pre">token_pattern='(?u)\\b\\w\\w+\\b'</span></em>, <em class="sig-param"><span class="pre">ngram_range=(1</span></em>, <em class="sig-param"><span class="pre">1)</span></em>, <em class="sig-param"><span class="pre">analyzer='word'</span></em>, <em class="sig-param"><span class="pre">n_features=1048576</span></em>, <em class="sig-param"><span class="pre">binary=False</span></em>, <em class="sig-param"><span class="pre">norm='l2'</span></em>, <em class="sig-param"><span class="pre">alternate_sign=True</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float64'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.HashingVectorizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_extraction.text._VectorizerMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Convert a collection of text documents to a matrix of token occurrences</p>
+<p>It turns a collection of text documents into a scipy.sparse matrix holding
+token occurrence counts (or binary occurrence information), possibly
+normalized as token frequencies if norm=’l1’ or projected on the euclidean
+unit sphere if norm=’l2’.</p>
+<p>This text vectorizer implementation uses the hashing trick to find the
+token string name to feature integer index mapping.</p>
+<p>This strategy has several advantages:</p>
+<ul class="simple">
+<li><p>it is very low memory scalable to large datasets as there is no need to
+store a vocabulary dictionary in memory</p></li>
+<li><p>it is fast to pickle and un-pickle as it holds no state besides the
+constructor parameters</p></li>
+<li><p>it can be used in a streaming (partial fit) or parallel pipeline as there
+is no state computed during fit.</p></li>
+</ul>
+<p>There are also a couple of cons (vs using a CountVectorizer with an
+in-memory vocabulary):</p>
+<ul class="simple">
+<li><p>there is no way to compute the inverse transform (from feature indices to
+string feature names) which can be a problem when trying to introspect
+which features are most important to a model.</p></li>
+<li><p>there can be collisions: distinct tokens can be mapped to the same
+feature index. However in practice this is rarely an issue if n_features
+is large enough (e.g. 2 ** 18 for text classification problems).</p></li>
+<li><p>no IDF weighting as this would render the transformer stateful.</p></li>
+</ul>
+<p>The hash function employed is the signed 32-bit version of Murmurhash3.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>{'filename'</em><em>, </em><em>'file'</em><em>, </em><em>'content'}</em><em>, </em><em>default='content'</em>) – <ul>
+<li><p>If <cite>‘filename’</cite>, the sequence passed as an argument to fit is
+expected to be a list of filenames that need reading to fetch
+the raw content to analyze.</p></li>
+<li><p>If <cite>‘file’</cite>, the sequence items must have a ‘read’ method (file-like
+object) that is called to fetch the bytes in memory.</p></li>
+<li><p>If <cite>‘content’</cite>, the input is expected to be a sequence of items that
+can be of type string or byte.</p></li>
+</ul>
+</p></li>
+<li><p><strong>encoding</strong> (<em>string</em><em>, </em><em>default='utf-8'</em>) – If bytes or files are given to analyze, this encoding is used to
+decode.</p></li>
+<li><p><strong>decode_error</strong> (<em>{'strict'</em><em>, </em><em>'ignore'</em><em>, </em><em>'replace'}</em><em>, </em><em>default='strict'</em>) – Instruction on what to do if a byte sequence is given to analyze that
+contains characters not of the given <cite>encoding</cite>. By default, it is
+‘strict’, meaning that a UnicodeDecodeError will be raised. Other
+values are ‘ignore’ and ‘replace’.</p></li>
+<li><p><strong>strip_accents</strong> (<em>{'ascii'</em><em>, </em><em>'unicode'}</em><em>, </em><em>default=None</em>) – <p>Remove accents and perform other character normalization
+during the preprocessing step.
+‘ascii’ is a fast method that only works on characters that have
+an direct ASCII mapping.
+‘unicode’ is a slightly slower method that works on any characters.
+None (default) does nothing.</p>
+<p>Both ‘ascii’ and ‘unicode’ use NFKD normalization from
+<code class="xref py py-func docutils literal notranslate"><span class="pre">unicodedata.normalize()</span></code>.</p>
+</p></li>
+<li><p><strong>lowercase</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Convert all characters to lowercase before tokenizing.</p></li>
+<li><p><strong>preprocessor</strong> (<em>callable</em><em>, </em><em>default=None</em>) – Override the preprocessing (string transformation) stage while
+preserving the tokenizing and n-grams generation steps.
+Only applies if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">callable</span></code>.</p></li>
+<li><p><strong>tokenizer</strong> (<em>callable</em><em>, </em><em>default=None</em>) – Override the string tokenization step while preserving the
+preprocessing and n-grams generation steps.
+Only applies if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">==</span> <span class="pre">'word'</span></code>.</p></li>
+<li><p><strong>stop_words</strong> (<em>{'english'}</em><em>, </em><em>list</em><em>, </em><em>default=None</em>) – <p>If ‘english’, a built-in stop word list for English is used.
+There are several known issues with ‘english’ and you should
+consider an alternative (see <span class="xref std std-ref">stop_words</span>).</p>
+<p>If a list, that list is assumed to contain stop words, all of which
+will be removed from the resulting tokens.
+Only applies if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">==</span> <span class="pre">'word'</span></code>.</p>
+</p></li>
+<li><p><strong>token_pattern</strong> (<em>str</em><em>, </em><em>default=r&quot;</em><em>(</em><em>?u</em><em>)</em><em>\b\w\w+\b&quot;</em>) – <p>Regular expression denoting what constitutes a “token”, only used
+if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">==</span> <span class="pre">'word'</span></code>. The default regexp selects tokens of 2
+or more alphanumeric characters (punctuation is completely ignored
+and always treated as a token separator).</p>
+<p>If there is a capturing group in token_pattern then the
+captured group content, not the entire match, becomes the token.
+At most one capturing group is permitted.</p>
+</p></li>
+<li><p><strong>ngram_range</strong> (<em>tuple</em><em> (</em><em>min_n</em><em>, </em><em>max_n</em><em>)</em><em>, </em><em>default=</em><em>(</em><em>1</em><em>, </em><em>1</em><em>)</em>) – The lower and upper boundary of the range of n-values for different
+n-grams to be extracted. All values of n such that min_n &lt;= n &lt;= max_n
+will be used. For example an <code class="docutils literal notranslate"><span class="pre">ngram_range</span></code> of <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">1)</span></code> means only
+unigrams, <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2)</span></code> means unigrams and bigrams, and <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">2)</span></code> means
+only bigrams.
+Only applies if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">callable</span></code>.</p></li>
+<li><p><strong>analyzer</strong> (<em>{'word'</em><em>, </em><em>'char'</em><em>, </em><em>'char_wb'}</em><em> or </em><em>callable</em><em>, </em><em>default='word'</em>) – <p>Whether the feature should be made of word or character n-grams.
+Option ‘char_wb’ creates character n-grams only from text inside
+word boundaries; n-grams at the edges of words are padded with space.</p>
+<p>If a callable is passed it is used to extract the sequence of features
+out of the raw, unprocessed input.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.21: </span>Since v0.21, if <code class="docutils literal notranslate"><span class="pre">input</span></code> is <code class="docutils literal notranslate"><span class="pre">'filename'</span></code> or <code class="docutils literal notranslate"><span class="pre">'file'</span></code>, the data
+is first read from the file and then passed to the given callable
+analyzer.</p>
+</div>
+</p></li>
+<li><p><strong>n_features</strong> (<em>int</em><em>, </em><em>default=</em><em>(</em><em>2 ** 20</em><em>)</em>) – The number of features (columns) in the output matrices. Small numbers
+of features are likely to cause hash collisions, but large numbers
+will cause larger coefficient dimensions in linear learners.</p></li>
+<li><p><strong>binary</strong> (<em>bool</em><em>, </em><em>default=False.</em>) – If True, all non zero counts are set to 1. This is useful for discrete
+probabilistic models that model binary events rather than integer
+counts.</p></li>
+<li><p><strong>norm</strong> (<em>{'l1'</em><em>, </em><em>'l2'}</em><em>, </em><em>default='l2'</em>) – Norm used to normalize term vectors. None for no normalization.</p></li>
+<li><p><strong>alternate_sign</strong> (<em>bool</em><em>, </em><em>default=True</em>) – <p>When True, an alternating sign is added to the features as to
+approximately conserve the inner product in the hashed space even for
+small n_features. This approach is similar to sparse random projection.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.</span></p>
+</div>
+</p></li>
+<li><p><strong>dtype</strong> (<em>type</em><em>, </em><em>default=np.float64</em>) – Type of the matrix returned by fit_transform() or transform().</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">HashingVectorizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="s1">&#39;This is the first document.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;This document is the second document.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;And this is the third one.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;Is this the first document?&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">HashingVectorizer</span><span class="p">(</span><span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(4, 16)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a>, <a class="reference internal" href="#sklearn.feature_extraction.text.TfidfVectorizer" title="sklearn.feature_extraction.text.TfidfVectorizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TfidfVectorizer</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.HashingVectorizer.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.HashingVectorizer.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does nothing: this transformer is stateless.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>ndarray of shape</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – Training data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.HashingVectorizer.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.HashingVectorizer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform a sequence of documents to a document-term matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>iterable over raw text documents</em><em>, </em><em>length = n_samples</em>) – Samples. Each sample must be a text document (either bytes or
+unicode strings, file name or file object depending on the
+constructor argument) which will be tokenized and hashed.</p></li>
+<li><p><strong>y</strong> (<em>any</em>) – Ignored. This parameter exists only for compatibility with
+sklearn.pipeline.Pipeline.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X</strong> – Document-term matrix.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>sparse matrix of shape (n_samples, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.HashingVectorizer.partial_fit">
+<span class="sig-name descname"><span class="pre">partial_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.HashingVectorizer.partial_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does nothing: this transformer is stateless.</p>
+<p>This method is just there to mark the fact that this transformer
+can work in a streaming setup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>ndarray of shape</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – Training data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.HashingVectorizer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.HashingVectorizer.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform a sequence of documents to a document-term matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>iterable over raw text documents</em><em>, </em><em>length = n_samples</em>) – Samples. Each sample must be a text document (either bytes or
+unicode strings, file name or file object depending on the
+constructor argument) which will be tokenized and hashed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X</strong> – Document-term matrix.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>sparse matrix of shape (n_samples, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfTransformer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.text.</span></span><span class="sig-name descname"><span class="pre">TfidfTransformer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'l2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_idf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smooth_idf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sublinear_tf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfTransformer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Transform a count matrix to a normalized tf or tf-idf representation</p>
+<p>Tf means term-frequency while tf-idf means term-frequency times inverse
+document-frequency. This is a common term weighting scheme in information
+retrieval, that has also found good use in document classification.</p>
+<p>The goal of using tf-idf instead of the raw frequencies of occurrence of a
+token in a given document is to scale down the impact of tokens that occur
+very frequently in a given corpus and that are hence empirically less
+informative than features that occur in a small fraction of the training
+corpus.</p>
+<p>The formula that is used to compute the tf-idf for a term t of a document d
+in a document set is tf-idf(t, d) = tf(t, d) * idf(t), and the idf is
+computed as idf(t) = log [ n / df(t) ] + 1 (if <code class="docutils literal notranslate"><span class="pre">smooth_idf=False</span></code>), where
+n is the total number of documents in the document set and df(t) is the
+document frequency of t; the document frequency is the number of documents
+in the document set that contain the term t. The effect of adding “1” to
+the idf in the equation above is that terms with zero idf, i.e., terms
+that occur in all documents in a training set, will not be entirely
+ignored.
+(Note that the idf formula above differs from the standard textbook
+notation that defines the idf as
+idf(t) = log [ n / (df(t) + 1) ]).</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">smooth_idf=True</span></code> (the default), the constant “1” is added to the
+numerator and denominator of the idf as if an extra document was seen
+containing every term in the collection exactly once, which prevents
+zero divisions: idf(t) = log [ (1 + n) / (1 + df(t)) ] + 1.</p>
+<p>Furthermore, the formulas used to compute tf and idf depend
+on parameter settings that correspond to the SMART notation used in IR
+as follows:</p>
+<p>Tf is “n” (natural) by default, “l” (logarithmic) when
+<code class="docutils literal notranslate"><span class="pre">sublinear_tf=True</span></code>.
+Idf is “t” when use_idf is given, “n” (none) otherwise.
+Normalization is “c” (cosine) when <code class="docutils literal notranslate"><span class="pre">norm='l2'</span></code>, “n” (none)
+when <code class="docutils literal notranslate"><span class="pre">norm=None</span></code>.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>norm</strong> (<em>{'l1'</em><em>, </em><em>'l2'}</em><em>, </em><em>default='l2'</em>) – Each output row will have unit norm, either:
+* ‘l2’: Sum of squares of vector elements is 1. The cosine
+similarity between two vectors is their dot product when l2 norm has
+been applied.
+* ‘l1’: Sum of absolute values of vector elements is 1.
+See <code class="xref py py-func docutils literal notranslate"><span class="pre">preprocessing.normalize()</span></code></p></li>
+<li><p><strong>use_idf</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Enable inverse-document-frequency reweighting.</p></li>
+<li><p><strong>smooth_idf</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Smooth idf weights by adding one to document frequencies, as if an
+extra document was seen containing every term in the collection
+exactly once. Prevents zero divisions.</p></li>
+<li><p><strong>sublinear_tf</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Apply sublinear tf scaling, i.e. replace tf with 1 + log(tf).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfTransformer.idf_">
+<span class="sig-name descname"><span class="pre">idf_</span></span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfTransformer.idf_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The inverse document frequency (IDF) vector; only defined
+if  <code class="docutils literal notranslate"><span class="pre">use_idf</span></code> is True.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array of shape (n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfTransformer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;this is the first document&#39;</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="s1">&#39;this document is the second document&#39;</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="s1">&#39;and this is the third one&#39;</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="s1">&#39;is this the first document&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vocabulary</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;this&#39;</span><span class="p">,</span> <span class="s1">&#39;document&#39;</span><span class="p">,</span> <span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;the&#39;</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">vocabulary</span><span class="o">=</span><span class="n">vocabulary</span><span class="p">)),</span>
+<span class="gp">... </span>                 <span class="p">(</span><span class="s1">&#39;tfid&#39;</span><span class="p">,</span> <span class="n">TfidfTransformer</span><span class="p">())])</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[1, 1, 1, 1, 0, 1, 0, 0],</span>
+<span class="go">       [1, 2, 0, 1, 1, 1, 0, 0],</span>
+<span class="go">       [1, 0, 0, 1, 0, 1, 1, 1],</span>
+<span class="go">       [1, 1, 1, 1, 0, 1, 0, 0]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="p">[</span><span class="s1">&#39;tfid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idf_</span>
+<span class="go">array([1.        , 1.22314355, 1.51082562, 1.        , 1.91629073,</span>
+<span class="go">       1.        , 1.91629073, 1.91629073])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pipe</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(4, 8)</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="yates2011"><span class="brackets">Yates2011</span></dt>
+<dd><p>R. Baeza-Yates and B. Ribeiro-Neto (2011). Modern
+Information Retrieval. Addison Wesley, pp. 68-74.</p>
+</dd>
+<dt class="label" id="mrs2008"><span class="brackets">MRS2008</span></dt>
+<dd><p>C.D. Manning, P. Raghavan and H. Schütze  (2008).
+Introduction to Information Retrieval. Cambridge University
+Press, pp. 118-120.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfTransformer.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfTransformer.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn the idf vector (global term weights).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>sparse matrix of shape n_samples</em><em>, </em><em>n_features</em><em>)</em>) – A matrix of term/token counts.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">idf_</span></span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfTransformer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfTransformer.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform a count matrix to a tf or tf-idf representation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>sparse matrix of</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – a matrix of term/token counts</p></li>
+<li><p><strong>copy</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to copy X and operate on the copy or perform in-place
+operations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>vectors</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>sparse matrix of shape (n_samples, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfVectorizer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.text.</span></span><span class="sig-name descname"><span class="pre">TfidfVectorizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">input='content'</span></em>, <em class="sig-param"><span class="pre">encoding='utf-8'</span></em>, <em class="sig-param"><span class="pre">decode_error='strict'</span></em>, <em class="sig-param"><span class="pre">strip_accents=None</span></em>, <em class="sig-param"><span class="pre">lowercase=True</span></em>, <em class="sig-param"><span class="pre">preprocessor=None</span></em>, <em class="sig-param"><span class="pre">tokenizer=None</span></em>, <em class="sig-param"><span class="pre">analyzer='word'</span></em>, <em class="sig-param"><span class="pre">stop_words=None</span></em>, <em class="sig-param"><span class="pre">token_pattern='(?u)\\b\\w\\w+\\b'</span></em>, <em class="sig-param"><span class="pre">ngram_range=(1</span></em>, <em class="sig-param"><span class="pre">1)</span></em>, <em class="sig-param"><span class="pre">max_df=1.0</span></em>, <em class="sig-param"><span class="pre">min_df=1</span></em>, <em class="sig-param"><span class="pre">max_features=None</span></em>, <em class="sig-param"><span class="pre">vocabulary=None</span></em>, <em class="sig-param"><span class="pre">binary=False</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float64'&gt;</span></em>, <em class="sig-param"><span class="pre">norm='l2'</span></em>, <em class="sig-param"><span class="pre">use_idf=True</span></em>, <em class="sig-param"><span class="pre">smooth_idf=True</span></em>, <em class="sig-param"><span class="pre">sublinear_tf=False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_extraction.text.CountVectorizer</span></code></a></p>
+<p>Convert a collection of raw documents to a matrix of TF-IDF features.</p>
+<p>Equivalent to <a class="reference internal" href="#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> followed by
+<a class="reference internal" href="#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">TfidfTransformer</span></code></a>.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>{'filename'</em><em>, </em><em>'file'</em><em>, </em><em>'content'}</em><em>, </em><em>default='content'</em>) – <ul>
+<li><p>If <cite>‘filename’</cite>, the sequence passed as an argument to fit is
+expected to be a list of filenames that need reading to fetch
+the raw content to analyze.</p></li>
+<li><p>If <cite>‘file’</cite>, the sequence items must have a ‘read’ method (file-like
+object) that is called to fetch the bytes in memory.</p></li>
+<li><p>If <cite>‘content’</cite>, the input is expected to be a sequence of items that
+can be of type string or byte.</p></li>
+</ul>
+</p></li>
+<li><p><strong>encoding</strong> (<em>str</em><em>, </em><em>default='utf-8'</em>) – If bytes or files are given to analyze, this encoding is used to
+decode.</p></li>
+<li><p><strong>decode_error</strong> (<em>{'strict'</em><em>, </em><em>'ignore'</em><em>, </em><em>'replace'}</em><em>, </em><em>default='strict'</em>) – Instruction on what to do if a byte sequence is given to analyze that
+contains characters not of the given <cite>encoding</cite>. By default, it is
+‘strict’, meaning that a UnicodeDecodeError will be raised. Other
+values are ‘ignore’ and ‘replace’.</p></li>
+<li><p><strong>strip_accents</strong> (<em>{'ascii'</em><em>, </em><em>'unicode'}</em><em>, </em><em>default=None</em>) – <p>Remove accents and perform other character normalization
+during the preprocessing step.
+‘ascii’ is a fast method that only works on characters that have
+an direct ASCII mapping.
+‘unicode’ is a slightly slower method that works on any characters.
+None (default) does nothing.</p>
+<p>Both ‘ascii’ and ‘unicode’ use NFKD normalization from
+<code class="xref py py-func docutils literal notranslate"><span class="pre">unicodedata.normalize()</span></code>.</p>
+</p></li>
+<li><p><strong>lowercase</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Convert all characters to lowercase before tokenizing.</p></li>
+<li><p><strong>preprocessor</strong> (<em>callable</em><em>, </em><em>default=None</em>) – Override the preprocessing (string transformation) stage while
+preserving the tokenizing and n-grams generation steps.
+Only applies if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">callable</span></code>.</p></li>
+<li><p><strong>tokenizer</strong> (<em>callable</em><em>, </em><em>default=None</em>) – Override the string tokenization step while preserving the
+preprocessing and n-grams generation steps.
+Only applies if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">==</span> <span class="pre">'word'</span></code>.</p></li>
+<li><p><strong>analyzer</strong> (<em>{'word'</em><em>, </em><em>'char'</em><em>, </em><em>'char_wb'}</em><em> or </em><em>callable</em><em>, </em><em>default='word'</em>) – <p>Whether the feature should be made of word or character n-grams.
+Option ‘char_wb’ creates character n-grams only from text inside
+word boundaries; n-grams at the edges of words are padded with space.</p>
+<p>If a callable is passed it is used to extract the sequence of features
+out of the raw, unprocessed input.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.21: </span>Since v0.21, if <code class="docutils literal notranslate"><span class="pre">input</span></code> is <code class="docutils literal notranslate"><span class="pre">'filename'</span></code> or <code class="docutils literal notranslate"><span class="pre">'file'</span></code>, the data
+is first read from the file and then passed to the given callable
+analyzer.</p>
+</div>
+</p></li>
+<li><p><strong>stop_words</strong> (<em>{'english'}</em><em>, </em><em>list</em><em>, </em><em>default=None</em>) – <p>If a string, it is passed to _check_stop_list and the appropriate stop
+list is returned. ‘english’ is currently the only supported string
+value.
+There are several known issues with ‘english’ and you should
+consider an alternative (see <span class="xref std std-ref">stop_words</span>).</p>
+<p>If a list, that list is assumed to contain stop words, all of which
+will be removed from the resulting tokens.
+Only applies if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">==</span> <span class="pre">'word'</span></code>.</p>
+<p>If None, no stop words will be used. max_df can be set to a value
+in the range [0.7, 1.0) to automatically detect and filter stop
+words based on intra corpus document frequency of terms.</p>
+</p></li>
+<li><p><strong>token_pattern</strong> (<em>str</em><em>, </em><em>default=r&quot;</em><em>(</em><em>?u</em><em>)</em><em>\b\w\w+\b&quot;</em>) – <p>Regular expression denoting what constitutes a “token”, only used
+if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">==</span> <span class="pre">'word'</span></code>. The default regexp selects tokens of 2
+or more alphanumeric characters (punctuation is completely ignored
+and always treated as a token separator).</p>
+<p>If there is a capturing group in token_pattern then the
+captured group content, not the entire match, becomes the token.
+At most one capturing group is permitted.</p>
+</p></li>
+<li><p><strong>ngram_range</strong> (<em>tuple</em><em> (</em><em>min_n</em><em>, </em><em>max_n</em><em>)</em><em>, </em><em>default=</em><em>(</em><em>1</em><em>, </em><em>1</em><em>)</em>) – The lower and upper boundary of the range of n-values for different
+n-grams to be extracted. All values of n such that min_n &lt;= n &lt;= max_n
+will be used. For example an <code class="docutils literal notranslate"><span class="pre">ngram_range</span></code> of <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">1)</span></code> means only
+unigrams, <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2)</span></code> means unigrams and bigrams, and <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">2)</span></code> means
+only bigrams.
+Only applies if <code class="docutils literal notranslate"><span class="pre">analyzer</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">callable</span></code>.</p></li>
+<li><p><strong>max_df</strong> (<em>float</em><em> or </em><em>int</em><em>, </em><em>default=1.0</em>) – When building the vocabulary ignore terms that have a document
+frequency strictly higher than the given threshold (corpus-specific
+stop words).
+If float in range [0.0, 1.0], the parameter represents a proportion of
+documents, integer absolute counts.
+This parameter is ignored if vocabulary is not None.</p></li>
+<li><p><strong>min_df</strong> (<em>float</em><em> or </em><em>int</em><em>, </em><em>default=1</em>) – When building the vocabulary ignore terms that have a document
+frequency strictly lower than the given threshold. This value is also
+called cut-off in the literature.
+If float in range of [0.0, 1.0], the parameter represents a proportion
+of documents, integer absolute counts.
+This parameter is ignored if vocabulary is not None.</p></li>
+<li><p><strong>max_features</strong> (<em>int</em><em>, </em><em>default=None</em>) – <p>If not None, build a vocabulary that only consider the top
+max_features ordered by term frequency across the corpus.</p>
+<p>This parameter is ignored if vocabulary is not None.</p>
+</p></li>
+<li><p><strong>vocabulary</strong> (<em>Mapping</em><em> or </em><em>iterable</em><em>, </em><em>default=None</em>) – Either a Mapping (e.g., a dict) where keys are terms and values are
+indices in the feature matrix, or an iterable over terms. If not
+given, a vocabulary is determined from the input documents.</p></li>
+<li><p><strong>binary</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, all non-zero term counts are set to 1. This does not mean
+outputs will have only 0/1 values, only that the tf term in tf-idf
+is binary. (Set idf and normalization to False to get 0/1 outputs).</p></li>
+<li><p><strong>dtype</strong> (<em>dtype</em><em>, </em><em>default=float64</em>) – Type of the matrix returned by fit_transform() or transform().</p></li>
+<li><p><strong>norm</strong> (<em>{'l1'</em><em>, </em><em>'l2'}</em><em>, </em><em>default='l2'</em>) – Each output row will have unit norm, either:
+* ‘l2’: Sum of squares of vector elements is 1. The cosine
+similarity between two vectors is their dot product when l2 norm has
+been applied.
+* ‘l1’: Sum of absolute values of vector elements is 1.
+See <code class="xref py py-func docutils literal notranslate"><span class="pre">preprocessing.normalize()</span></code>.</p></li>
+<li><p><strong>use_idf</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Enable inverse-document-frequency reweighting.</p></li>
+<li><p><strong>smooth_idf</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Smooth idf weights by adding one to document frequencies, as if an
+extra document was seen containing every term in the collection
+exactly once. Prevents zero divisions.</p></li>
+<li><p><strong>sublinear_tf</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Apply sublinear tf scaling, i.e. replace tf with 1 + log(tf).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfVectorizer.vocabulary_">
+<span class="sig-name descname"><span class="pre">vocabulary_</span></span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.vocabulary_" title="Permalink to this definition">¶</a></dt>
+<dd><p>A mapping of terms to feature indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfVectorizer.fixed_vocabulary_">
+<span class="sig-name descname"><span class="pre">fixed_vocabulary_</span></span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.fixed_vocabulary_" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if a fixed vocabulary of term to indices mapping
+is provided by the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfVectorizer.idf_">
+<span class="sig-name descname"><span class="pre">idf_</span></span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.idf_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The inverse document frequency (IDF) vector; only defined
+if <code class="docutils literal notranslate"><span class="pre">use_idf</span></code> is True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfVectorizer.stop_words_">
+<span class="sig-name descname"><span class="pre">stop_words_</span></span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.stop_words_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terms that were ignored because they either:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>occurred in too many documents (<cite>max_df</cite>)</p></li>
+<li><p>occurred in too few documents (<cite>min_df</cite>)</p></li>
+<li><p>were cut off by feature selection (<cite>max_features</cite>).</p></li>
+</ul>
+</div></blockquote>
+<p>This is only available if no vocabulary was given.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_extraction.text.CountVectorizer" title="sklearn.feature_extraction.text.CountVectorizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a></dt><dd><p>Transforms text into a sparse matrix of n-gram counts.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_extraction.text.TfidfTransformer" title="sklearn.feature_extraction.text.TfidfTransformer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TfidfTransformer</span></code></a></dt><dd><p>Performs the TF-IDF transformation from a provided matrix of counts.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">stop_words_</span></code> attribute can get large and increase the model size
+when pickling. This attribute is provided only for introspection and can
+be safely removed using delattr or set to None before pickling.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="s1">&#39;This is the first document.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;This document is the second document.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;And this is the third one.&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&#39;Is this the first document?&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">())</span>
+<span class="go">[&#39;and&#39;, &#39;document&#39;, &#39;first&#39;, &#39;is&#39;, &#39;one&#39;, &#39;second&#39;, &#39;the&#39;, &#39;third&#39;, &#39;this&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="go">(4, 9)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfVectorizer.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_documents</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn vocabulary and idf from training set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>raw_documents</strong> (<em>iterable</em>) – An iterable which yields either str, unicode or file objects.</p></li>
+<li><p><strong>y</strong> (<em>None</em>) – This parameter is not needed to compute tfidf.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong> – Fitted vectorizer.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfVectorizer.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_documents</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn vocabulary and idf, return document-term matrix.</p>
+<p>This is equivalent to fit followed by transform, but more efficiently
+implemented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>raw_documents</strong> (<em>iterable</em>) – An iterable which yields either str, unicode or file objects.</p></li>
+<li><p><strong>y</strong> (<em>None</em>) – This parameter is ignored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X</strong> – Tf-idf-weighted document-term matrix.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>sparse matrix of (n_samples, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id1">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">idf_</span></span><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfVectorizer.norm">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">norm</span></span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.norm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfVectorizer.smooth_idf">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">smooth_idf</span></span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.smooth_idf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfVectorizer.sublinear_tf">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">sublinear_tf</span></span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.sublinear_tf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfVectorizer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_documents</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform documents to document-term matrix.</p>
+<p>Uses the vocabulary and document frequencies (df) learned by fit (or
+fit_transform).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_documents</strong> (<em>iterable</em>) – An iterable which yields either str, unicode or file objects.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X</strong> – Tf-idf-weighted document-term matrix.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>sparse matrix of (n_samples, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.TfidfVectorizer.use_idf">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">use_idf</span></span><a class="headerlink" href="#sklearn.feature_extraction.text.TfidfVectorizer.use_idf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.strip_accents_ascii">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.text.</span></span><span class="sig-name descname"><span class="pre">strip_accents_ascii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.strip_accents_ascii" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform accentuated unicode symbols into ascii or nothing</p>
+<p>Warning: this solution is only suited for languages that have a direct
+transliteration to ASCII symbols.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>string</em>) – The string to strip</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_extraction.text.strip_accents_unicode" title="sklearn.feature_extraction.text.strip_accents_unicode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strip_accents_unicode</span></code></a></dt><dd><p>Remove accentuated char for any unicode symbol.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.strip_accents_unicode">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.text.</span></span><span class="sig-name descname"><span class="pre">strip_accents_unicode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.strip_accents_unicode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform accentuated unicode symbols into their simple counterpart</p>
+<p>Warning: the python-level loop and join operations make this
+implementation 20 times slower than the strip_accents_ascii basic
+normalization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>string</em>) – The string to strip</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_extraction.text.strip_accents_ascii" title="sklearn.feature_extraction.text.strip_accents_ascii"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strip_accents_ascii</span></code></a></dt><dd><p>Remove accentuated char for any unicode symbol that has a direct ASCII equivalent.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.text.strip_tags">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.text.</span></span><span class="sig-name descname"><span class="pre">strip_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.text.strip_tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic regexp based HTML / XML tag stripper function</p>
+<p>For serious HTML/XML preprocessing you should rather use an external
+library such as lxml or BeautifulSoup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>string</em>) – The string to strip</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-sklearn.feature_extraction">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.feature_extraction" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#module-sklearn.feature_extraction" title="sklearn.feature_extraction"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_extraction</span></code></a> module deals with feature extraction
+from raw data. It currently includes methods to extract features from text and
+images.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.DictVectorizer">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.</span></span><span class="sig-name descname"><span class="pre">DictVectorizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float64'&gt;</span></em>, <em class="sig-param"><span class="pre">separator='='</span></em>, <em class="sig-param"><span class="pre">sparse=True</span></em>, <em class="sig-param"><span class="pre">sort=True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.DictVectorizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Transforms lists of feature-value mappings to vectors.</p>
+<p>This transformer turns lists of mappings (dict-like objects) of feature
+names to feature values into Numpy arrays or scipy.sparse matrices for use
+with scikit-learn estimators.</p>
+<p>When feature values are strings, this transformer will do a binary one-hot
+(aka one-of-K) coding: one boolean-valued feature is constructed for each
+of the possible string values that the feature can take on. For instance,
+a feature “f” that can take on the values “ham” and “spam” will become two
+features in the output, one signifying “f=ham”, the other “f=spam”.</p>
+<p>If a feature value is a sequence or set of strings, this transformer
+will iterate over the values and will count the occurrences of each string
+value.</p>
+<p>However, note that this transformer will only do a binary one-hot encoding
+when feature values are of type string. If categorical features are
+represented as numeric values such as int or iterables of strings, the
+DictVectorizer can be followed by
+<a class="reference internal" href="sklearn.preprocessing.html#sklearn.preprocessing.OneHotEncoder" title="sklearn.preprocessing.OneHotEncoder"><code class="xref py py-class docutils literal notranslate"><span class="pre">OneHotEncoder</span></code></a> to complete
+binary one-hot encoding.</p>
+<p>Features that do not occur in a sample (mapping) will have a zero value
+in the resulting array/matrix.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dtype</strong> (<em>dtype</em><em>, </em><em>default=np.float64</em>) – The type of feature values. Passed to Numpy array/scipy.sparse matrix
+constructors as the dtype argument.</p></li>
+<li><p><strong>separator</strong> (<em>str</em><em>, </em><em>default=&quot;=&quot;</em>) – Separator string used when constructing new features for one-hot
+coding.</p></li>
+<li><p><strong>sparse</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether transform should produce scipy.sparse matrices.</p></li>
+<li><p><strong>sort</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether <code class="docutils literal notranslate"><span class="pre">feature_names_</span></code> and <code class="docutils literal notranslate"><span class="pre">vocabulary_</span></code> should be
+sorted when fitting.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.DictVectorizer.vocabulary_">
+<span class="sig-name descname"><span class="pre">vocabulary_</span></span><a class="headerlink" href="#sklearn.feature_extraction.DictVectorizer.vocabulary_" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary mapping feature names to feature indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.DictVectorizer.feature_names_">
+<span class="sig-name descname"><span class="pre">feature_names_</span></span><a class="headerlink" href="#sklearn.feature_extraction.DictVectorizer.feature_names_" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of length n_features containing the feature names (e.g., “f=ham”
+and “f=spam”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <span class="n">DictVectorizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">DictVectorizer</span><span class="p">(</span><span class="n">sparse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">array([[2., 0., 1.],</span>
+<span class="go">       [0., 1., 3.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">==</span> <span class="p">[{</span><span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>
+<span class="gp">... </span>                           <span class="p">{</span><span class="s1">&#39;baz&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">}]</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">transform</span><span class="p">({</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;unseen_feature&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span>
+<span class="go">array([[0., 0., 4.]])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FeatureHasher</span></code></a></dt><dd><p>Performs vectorization using only a hash function.</p>
+</dd>
+<dt><a class="reference internal" href="sklearn.preprocessing.html#sklearn.preprocessing.OrdinalEncoder" title="sklearn.preprocessing.OrdinalEncoder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sklearn.preprocessing.OrdinalEncoder</span></code></a></dt><dd><p>Handles nominal/categorical features encoded as columns of arbitrary data types.</p>
+</dd>
+</dl>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.DictVectorizer.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.DictVectorizer.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn a list of feature name -&gt; indices mappings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>Mapping</em><em> or </em><em>iterable over Mappings</em>) – <p>Dict(s) or Mapping(s) from feature names (arbitrary Python
+objects) to feature values (strings or convertible to dtype).</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.24: </span>Accepts multiple string values for one categorical feature.</p>
+</div>
+</p></li>
+<li><p><strong>y</strong> (<em>(</em><em>ignored</em><em>)</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.DictVectorizer.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.DictVectorizer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn a list of feature name -&gt; indices mappings and transform X.</p>
+<p>Like fit(X) followed by transform(X), but does not require
+materializing X in memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>Mapping</em><em> or </em><em>iterable over Mappings</em>) – <p>Dict(s) or Mapping(s) from feature names (arbitrary Python
+objects) to feature values (strings or convertible to dtype).</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.24: </span>Accepts multiple string values for one categorical feature.</p>
+</div>
+</p></li>
+<li><p><strong>y</strong> (<em>(</em><em>ignored</em><em>)</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Xa</strong> – Feature vectors; always 2-d.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>{array, sparse matrix}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.DictVectorizer.get_feature_names">
+<span class="sig-name descname"><span class="pre">get_feature_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.DictVectorizer.get_feature_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of feature names, ordered by their indices.</p>
+<p>If one-of-K coding is applied to categorical features, this will
+include the constructed feature names but not the original ones.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.DictVectorizer.inverse_transform">
+<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">X</span></em>, <em class="sig-param"><span class="pre">dict_type=&lt;class</span> <span class="pre">'dict'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.DictVectorizer.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform array or sparse matrix X back to feature mappings.</p>
+<p>X must have been produced by this DictVectorizer’s transform or
+fit_transform method; it may only have passed through transformers
+that preserve the number of features and their order.</p>
+<p>In the case of one-hot/one-of-K coding, the constructed feature
+names and values are returned rather than the original ones.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Sample matrix.</p></li>
+<li><p><strong>dict_type</strong> (<em>type</em><em>, </em><em>default=dict</em>) – Constructor for feature mappings. Must conform to the
+collections.Mapping API.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>D</strong> – Feature mappings for the samples in X.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of dict_type objects of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.DictVectorizer.restrict">
+<span class="sig-name descname"><span class="pre">restrict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">support</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.DictVectorizer.restrict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restrict the features to those in support using feature selection.</p>
+<p>This function modifies the estimator in-place.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>support</strong> (<em>array-like</em>) – Boolean mask or list of indices (as returned by the get_support
+member of feature selectors).</p></li>
+<li><p><strong>indices</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Whether support is a list of indices.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <span class="n">DictVectorizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectKBest</span><span class="p">,</span> <span class="n">chi2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">DictVectorizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">support</span> <span class="o">=</span> <span class="n">SelectKBest</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
+<span class="go">[&#39;bar&#39;, &#39;baz&#39;, &#39;foo&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">restrict</span><span class="p">(</span><span class="n">support</span><span class="o">.</span><span class="n">get_support</span><span class="p">())</span>
+<span class="go">DictVectorizer()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
+<span class="go">[&#39;bar&#39;, &#39;foo&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.DictVectorizer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.DictVectorizer.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform feature-&gt;value dicts to array or sparse matrix.</p>
+<p>Named features not encountered during fit or fit_transform will be
+silently ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>Mapping</em><em> or </em><em>iterable over Mappings of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Dict(s) or Mapping(s) from feature names (arbitrary Python
+objects) to feature values (strings or convertible to dtype).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Xa</strong> – Feature vectors; always 2-d.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>{array, sparse matrix}</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.FeatureHasher">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.</span></span><span class="sig-name descname"><span class="pre">FeatureHasher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n_features=1048576</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">input_type='dict'</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float64'&gt;</span></em>, <em class="sig-param"><span class="pre">alternate_sign=True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.FeatureHasher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Implements feature hashing, aka the hashing trick.</p>
+<p>This class turns sequences of symbolic feature names (strings) into
+scipy.sparse matrices, using a hash function to compute the matrix column
+corresponding to a name. The hash function employed is the signed 32-bit
+version of Murmurhash3.</p>
+<p>Feature names of type byte string are used as-is. Unicode strings are
+converted to UTF-8 first, but no Unicode normalization is done.
+Feature values must be (finite) numbers.</p>
+<p>This class is a low-memory alternative to DictVectorizer and
+CountVectorizer, intended for large-scale (online) learning and situations
+where memory is tight, e.g. when running prediction code on embedded
+devices.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.13.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_features</strong> (<em>int</em><em>, </em><em>default=2**20</em>) – The number of features (columns) in the output matrices. Small numbers
+of features are likely to cause hash collisions, but large numbers
+will cause larger coefficient dimensions in linear learners.</p></li>
+<li><p><strong>input_type</strong> (<em>{&quot;dict&quot;</em><em>, </em><em>&quot;pair&quot;</em><em>, </em><em>&quot;string&quot;}</em><em>, </em><em>default=&quot;dict&quot;</em>) – Either “dict” (the default) to accept dictionaries over
+(feature_name, value); “pair” to accept pairs of (feature_name, value);
+or “string” to accept single strings.
+feature_name should be a string, while value should be a number.
+In the case of “string”, a value of 1 is implied.
+The feature_name is hashed to find the appropriate column for the
+feature. The value’s sign might be flipped in the output (but see
+non_negative, below).</p></li>
+<li><p><strong>dtype</strong> (<em>numpy dtype</em><em>, </em><em>default=np.float64</em>) – The type of feature values. Passed to scipy.sparse matrix constructors
+as the dtype argument. Do not set this to bool, np.boolean or any
+unsigned integer type.</p></li>
+<li><p><strong>alternate_sign</strong> (<em>bool</em><em>, </em><em>default=True</em>) – <p>When True, an alternating sign is added to the features as to
+approximately conserve the inner product in the hashed space even for
+small n_features. This approach is similar to sparse random projection.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.19: </span><code class="docutils literal notranslate"><span class="pre">alternate_sign</span></code> replaces the now deprecated <code class="docutils literal notranslate"><span class="pre">non_negative</span></code>
+parameter.</p>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <span class="n">FeatureHasher</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">FeatureHasher</span><span class="p">(</span><span class="n">n_features</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;dog&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;elephant&#39;</span><span class="p">:</span><span class="mi">4</span><span class="p">},{</span><span class="s1">&#39;dog&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[ 0.,  0., -4., -1.,  0.,  0.,  0.,  0.,  0.,  2.],</span>
+<span class="go">       [ 0.,  0.,  0., -2., -5.,  0.,  0.,  0.,  0.,  0.]])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_extraction.DictVectorizer" title="sklearn.feature_extraction.DictVectorizer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DictVectorizer</span></code></a></dt><dd><p>Vectorizes string-valued features using a hash table.</p>
+</dd>
+<dt><a class="reference internal" href="sklearn.preprocessing.html#sklearn.preprocessing.OneHotEncoder" title="sklearn.preprocessing.OneHotEncoder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sklearn.preprocessing.OneHotEncoder</span></code></a></dt><dd><p>Handles nominal/categorical features.</p>
+</dd>
+</dl>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.FeatureHasher.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.FeatureHasher.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>No-op.</p>
+<p>This method doesn’t do anything. It exists purely for compatibility
+with the scikit-learn transformer API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>ndarray</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sklearn.feature_extraction.FeatureHasher" title="sklearn.feature_extraction.FeatureHasher">FeatureHasher</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.FeatureHasher.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.FeatureHasher.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform a sequence of instances to a scipy.sparse matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>raw_X</strong> (<em>iterable over iterable over raw features</em><em>, </em><em>length = n_samples</em>) – Samples. Each sample must be iterable an (e.g., a list or tuple)
+containing/generating feature names (and optionally values, see
+the input_type constructor argument) which will be hashed.
+raw_X need not support the len function, so it can be the result
+of a generator; n_samples is determined on the fly.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X</strong> – Feature matrix, for use with estimators or further transformers.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>sparse matrix of shape (n_samples, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.grid_to_graph">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.</span></span><span class="sig-name descname"><span class="pre">grid_to_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n_x</span></em>, <em class="sig-param"><span class="pre">n_y</span></em>, <em class="sig-param"><span class="pre">n_z=1</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">mask=None</span></em>, <em class="sig-param"><span class="pre">return_as=&lt;class</span> <span class="pre">'scipy.sparse.coo.coo_matrix'&gt;</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'int'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.grid_to_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Graph of the pixel-to-pixel connections</p>
+<p>Edges exist if 2 voxels are connected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_x</strong> (<em>int</em>) – Dimension in x axis</p></li>
+<li><p><strong>n_y</strong> (<em>int</em>) – Dimension in y axis</p></li>
+<li><p><strong>n_z</strong> (<em>int</em><em>, </em><em>default=1</em>) – Dimension in z axis</p></li>
+<li><p><strong>mask</strong> (<em>ndarray of shape</em><em> (</em><em>n_x</em><em>, </em><em>n_y</em><em>, </em><em>n_z</em><em>)</em><em>, </em><em>dtype=bool</em><em>, </em><em>default=None</em>) – An optional mask of the image, to consider only part of the
+pixels.</p></li>
+<li><p><strong>return_as</strong> (<em>np.ndarray</em><em> or </em><em>a sparse matrix class</em><em>,             </em><em>default=sparse.coo_matrix</em>) – The class to use to build the returned adjacency matrix.</p></li>
+<li><p><strong>dtype</strong> (<em>dtype</em><em>, </em><em>default=int</em>) – The data of the returned sparse matrix. By default it is int</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>For scikit-learn versions 0.14.1 and prior, return_as=np.ndarray was
+handled by returning a dense np.matrix instance.  Going forward, np.ndarray
+returns an np.ndarray, as expected.</p>
+<p>For compatibility, user code relying on this method should wrap its
+calls in <code class="docutils literal notranslate"><span class="pre">np.asarray</span></code> to avoid type issues.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_extraction.img_to_graph">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_extraction.</span></span><span class="sig-name descname"><span class="pre">img_to_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">img</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">mask=None</span></em>, <em class="sig-param"><span class="pre">return_as=&lt;class</span> <span class="pre">'scipy.sparse.coo.coo_matrix'&gt;</span></em>, <em class="sig-param"><span class="pre">dtype=None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_extraction.img_to_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Graph of the pixel-to-pixel gradient connections</p>
+<p>Edges are weighted with the gradient values.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<em>ndarray of shape</em><em> (</em><em>height</em><em>, </em><em>width</em><em>) or </em><em>(</em><em>height</em><em>, </em><em>width</em><em>, </em><em>channel</em><em>)</em>) – 2D or 3D image.</p></li>
+<li><p><strong>mask</strong> (<em>ndarray of shape</em><em> (</em><em>height</em><em>, </em><em>width</em><em>) or             </em><em>(</em><em>height</em><em>, </em><em>width</em><em>, </em><em>channel</em><em>)</em><em>, </em><em>dtype=bool</em><em>, </em><em>default=None</em>) – An optional mask of the image, to consider only part of the
+pixels.</p></li>
+<li><p><strong>return_as</strong> (<em>np.ndarray</em><em> or </em><em>a sparse matrix class</em><em>,             </em><em>default=sparse.coo_matrix</em>) – The class to use to build the returned adjacency matrix.</p></li>
+<li><p><strong>dtype</strong> (<em>dtype</em><em>, </em><em>default=None</em>) – The data of the returned sparse matrix. By default it is the
+dtype of img</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>For scikit-learn versions 0.14.1 and prior, return_as=np.ndarray was
+handled by returning a dense np.matrix instance.  Going forward, np.ndarray
+returns an np.ndarray, as expected.</p>
+<p>For compatibility, user code relying on this method should wrap its
+calls in <code class="docutils literal notranslate"><span class="pre">np.asarray</span></code> to avoid type issues.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Tommaso
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

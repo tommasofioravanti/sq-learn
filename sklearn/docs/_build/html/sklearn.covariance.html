@@ -1,0 +1,1921 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sklearn.covariance package &mdash; Qsklearn  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Qsklearn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">sklearn</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Qsklearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>sklearn.covariance package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sklearn.covariance.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="sklearn-covariance-package">
+<h1>sklearn.covariance package<a class="headerlink" href="#sklearn-covariance-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sklearn.covariance.tests.html">sklearn.covariance.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.covariance.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.covariance.tests.html#sklearn-covariance-tests-test-covariance-module">sklearn.covariance.tests.test_covariance module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.covariance.tests.html#sklearn-covariance-tests-test-elliptic-envelope-module">sklearn.covariance.tests.test_elliptic_envelope module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.covariance.tests.html#sklearn-covariance-tests-test-graphical-lasso-module">sklearn.covariance.tests.test_graphical_lasso module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.covariance.tests.html#sklearn-covariance-tests-test-robust-covariance-module">sklearn.covariance.tests.test_robust_covariance module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.covariance.tests.html#module-sklearn.covariance.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-sklearn.covariance">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.covariance" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#module-sklearn.covariance" title="sklearn.covariance"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.covariance</span></code></a> module includes methods and algorithms to
+robustly estimate the covariance of features given a set of points. The
+precision matrix defined as the inverse of the covariance is also estimated.
+Covariance estimation is closely related to the theory of Gaussian Graphical
+Models.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">EllipticEnvelope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">support_fraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contamination</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.OutlierMixin</span></code>, <a class="reference internal" href="#sklearn.covariance.MinCovDet" title="sklearn.covariance._robust_covariance.MinCovDet"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.covariance._robust_covariance.MinCovDet</span></code></a></p>
+<p>An object for detecting outliers in a Gaussian distributed dataset.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>store_precision</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Specify if the estimated precision is stored.</p></li>
+<li><p><strong>assume_centered</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, the support of robust location and covariance estimates
+is computed, and a covariance estimate is recomputed from it,
+without centering the data.
+Useful to work with data whose mean is significantly equal to
+zero but is not exactly zero.
+If False, the robust location and covariance are directly computed
+with the FastMCD algorithm without additional treatment.</p></li>
+<li><p><strong>support_fraction</strong> (<em>float</em><em>, </em><em>default=None</em>) – The proportion of points to be included in the support of the raw
+MCD estimate. If None, the minimum value of support_fraction will
+be used within the algorithm: <cite>[n_sample + n_features + 1] / 2</cite>.
+Range is (0, 1).</p></li>
+<li><p><strong>contamination</strong> (<em>float</em><em>, </em><em>default=0.1</em>) – The amount of contamination of the data set, i.e. the proportion
+of outliers in the data set. Range is (0, 0.5].</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines the pseudo random number generator for shuffling
+the data. Pass an int for reproducible results across multiple function
+calls. See :term: <cite>Glossary &lt;random_state&gt;</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.location_">
+<span class="sig-name descname"><span class="pre">location_</span></span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.location_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated robust location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.covariance_">
+<span class="sig-name descname"><span class="pre">covariance_</span></span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.covariance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated robust covariance matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.precision_">
+<span class="sig-name descname"><span class="pre">precision_</span></span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.precision_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated pseudo inverse matrix.
+(stored only if store_precision is True)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.support_">
+<span class="sig-name descname"><span class="pre">support_</span></span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>A mask of the observations that have been used to compute the
+robust estimates of location and shape.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.offset_">
+<span class="sig-name descname"><span class="pre">offset_</span></span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.offset_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Offset used to define the decision function from the raw scores.
+We have the relation: <code class="docutils literal notranslate"><span class="pre">decision_function</span> <span class="pre">=</span> <span class="pre">score_samples</span> <span class="pre">-</span> <span class="pre">offset_</span></code>.
+The offset depends on the contamination parameter and is defined in
+such a way we obtain the expected number of outliers (samples with
+decision function &lt; 0) in training.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.raw_location_">
+<span class="sig-name descname"><span class="pre">raw_location_</span></span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.raw_location_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The raw robust estimated location before correction and re-weighting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.raw_covariance_">
+<span class="sig-name descname"><span class="pre">raw_covariance_</span></span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.raw_covariance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The raw robust estimated covariance before correction and re-weighting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.raw_support_">
+<span class="sig-name descname"><span class="pre">raw_support_</span></span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.raw_support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>A mask of the observations that have been used to compute
+the raw robust estimates of location and shape, before correction
+and re-weighting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.dist_">
+<span class="sig-name descname"><span class="pre">dist_</span></span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.dist_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mahalanobis distances of the training set (on which <a class="reference internal" href="#sklearn.covariance.EllipticEnvelope.fit" title="sklearn.covariance.EllipticEnvelope.fit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fit()</span></code></a> is
+called) observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <span class="n">EllipticEnvelope</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">true_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">.8</span><span class="p">,</span> <span class="mf">.3</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">.3</span><span class="p">,</span> <span class="mf">.4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                                                 <span class="n">cov</span><span class="o">=</span><span class="n">true_cov</span><span class="p">,</span>
+<span class="gp">... </span>                                                 <span class="n">size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span> <span class="o">=</span> <span class="n">EllipticEnvelope</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># predict returns 1 for an inlier and -1 for an outlier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>             <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="go">array([ 1, -1])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span><span class="o">.</span><span class="n">covariance_</span>
+<span class="go">array([[0.7411..., 0.2535...],</span>
+<span class="go">       [0.2535..., 0.3053...]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span><span class="o">.</span><span class="n">location_</span>
+<span class="go">array([0.0813... , 0.0427...])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#sklearn.covariance.EmpiricalCovariance" title="sklearn.covariance.EmpiricalCovariance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EmpiricalCovariance</span></code></a>, <a class="reference internal" href="#sklearn.covariance.MinCovDet" title="sklearn.covariance.MinCovDet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MinCovDet</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>Outlier detection from covariance estimation may break or not
+perform well in high-dimensional settings. In particular, one will
+always take care to work with <code class="docutils literal notranslate"><span class="pre">n_samples</span> <span class="pre">&gt;</span> <span class="pre">n_features</span> <span class="pre">**</span> <span class="pre">2</span></code>.</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id1"><span class="brackets">1</span></dt>
+<dd><p>Rousseeuw, P.J., Van Driessen, K. “A fast algorithm for the
+minimum covariance determinant estimator” Technometrics 41(3), 212
+(1999)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.decision_function">
+<span class="sig-name descname"><span class="pre">decision_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.decision_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the decision function of the given observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The data matrix.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>decision</strong> – Decision function of the samples.
+It is equal to the shifted Mahalanobis distances.
+The threshold for being an outlier is 0, which ensures a
+compatibility with other outlier detection algorithms.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the EllipticEnvelope model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training data.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present for API consistency by convention.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict the labels (1 inlier, -1 outlier) of X according to the
+fitted model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The data matrix.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>is_inlier</strong> – Returns -1 for anomalies/outliers and +1 for inliers.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.score">
+<span class="sig-name descname"><span class="pre">score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mean accuracy on the given test data and labels.</p>
+<p>In multi-label classification, this is the subset accuracy
+which is a harsh metric since you require for each sample that
+each label set be correctly predicted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Test samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>) or </em><em>(</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>)</em>) – True labels for X.</p></li>
+<li><p><strong>sample_weight</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – Sample weights.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>score</strong> – Mean accuracy of self.predict(X) w.r.t. y.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.EllipticEnvelope.score_samples">
+<span class="sig-name descname"><span class="pre">score_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.EllipticEnvelope.score_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the negative Mahalanobis distances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The data matrix.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>negative_mahal_distances</strong> – Opposite of the Mahalanobis distances.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.covariance.EmpiricalCovariance">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">EmpiricalCovariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.EmpiricalCovariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Maximum likelihood covariance estimator</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>store_precision</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Specifies if the estimated precision is stored.</p></li>
+<li><p><strong>assume_centered</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, data are not centered before computation.
+Useful when working with data whose mean is almost, but not exactly
+zero.
+If False (default), data are centered before computation.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.EmpiricalCovariance.location_">
+<span class="sig-name descname"><span class="pre">location_</span></span><a class="headerlink" href="#sklearn.covariance.EmpiricalCovariance.location_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated location, i.e. the estimated mean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.EmpiricalCovariance.covariance_">
+<span class="sig-name descname"><span class="pre">covariance_</span></span><a class="headerlink" href="#sklearn.covariance.EmpiricalCovariance.covariance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated covariance matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.EmpiricalCovariance.precision_">
+<span class="sig-name descname"><span class="pre">precision_</span></span><a class="headerlink" href="#sklearn.covariance.EmpiricalCovariance.precision_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated pseudo-inverse matrix.
+(stored only if store_precision is True)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <span class="n">EmpiricalCovariance</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_gaussian_quantiles</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">real_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">.8</span><span class="p">,</span> <span class="mf">.3</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">.3</span><span class="p">,</span> <span class="mf">.4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                            <span class="n">cov</span><span class="o">=</span><span class="n">real_cov</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span> <span class="o">=</span> <span class="n">EmpiricalCovariance</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span><span class="o">.</span><span class="n">covariance_</span>
+<span class="go">array([[0.7569..., 0.2818...],</span>
+<span class="go">       [0.2818..., 0.3928...]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span><span class="o">.</span><span class="n">location_</span>
+<span class="go">array([0.0622..., 0.0193...])</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.EmpiricalCovariance.error_norm">
+<span class="sig-name descname"><span class="pre">error_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comp_cov</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'frobenius'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squared</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.EmpiricalCovariance.error_norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Mean Squared Error between two covariance estimators.
+(In the sense of the Frobenius norm).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comp_cov</strong> (<em>array-like of shape</em><em> (</em><em>n_features</em><em>, </em><em>n_features</em><em>)</em>) – The covariance to compare with.</p></li>
+<li><p><strong>norm</strong> (<em>{&quot;frobenius&quot;</em><em>, </em><em>&quot;spectral&quot;}</em><em>, </em><em>default=&quot;frobenius&quot;</em>) – The type of norm used to compute the error. Available error types:
+- ‘frobenius’ (default): sqrt(tr(A^t.A))
+- ‘spectral’: sqrt(max(eigenvalues(A^t.A))
+where A is the error <code class="docutils literal notranslate"><span class="pre">(comp_cov</span> <span class="pre">-</span> <span class="pre">self.covariance_)</span></code>.</p></li>
+<li><p><strong>scaling</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If True (default), the squared error norm is divided by n_features.
+If False, the squared error norm is not rescaled.</p></li>
+<li><p><strong>squared</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to compute the squared error norm or the error norm.
+If True (default), the squared error norm is returned.
+If False, the error norm is returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>result</strong> – The Mean Squared Error (in the sense of the Frobenius norm) between
+<cite>self</cite> and <cite>comp_cov</cite> covariance estimators.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.EmpiricalCovariance.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.EmpiricalCovariance.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fits the Maximum Likelihood Estimator covariance model
+according to the given training data and parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training data, where n_samples is the number of samples and
+n_features is the number of features.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present for API consistency by convention.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.EmpiricalCovariance.get_precision">
+<span class="sig-name descname"><span class="pre">get_precision</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.EmpiricalCovariance.get_precision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for the precision matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>precision_</strong> – The precision matrix associated to the current covariance object.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>array-like of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.EmpiricalCovariance.mahalanobis">
+<span class="sig-name descname"><span class="pre">mahalanobis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.EmpiricalCovariance.mahalanobis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the squared Mahalanobis distances of given observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The observations, the Mahalanobis distances of the which we
+compute. Observations are assumed to be drawn from the same
+distribution than the data used in fit.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dist</strong> – Squared Mahalanobis distances of the observations.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.EmpiricalCovariance.score">
+<span class="sig-name descname"><span class="pre">score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.EmpiricalCovariance.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the log-likelihood of a Gaussian data set with
+<cite>self.covariance_</cite> as an estimator of its covariance matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_test</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Test data of which we compute the likelihood, where n_samples is
+the number of samples and n_features is the number of features.
+X_test is assumed to be drawn from the same distribution than
+the data used in fit (including centering).</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present for API consistency by convention.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>res</strong> – The likelihood of the data set with <cite>self.covariance_</cite> as an
+estimator of its covariance matrix.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLasso">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">GraphicalLasso</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cd'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enet_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.GraphicalLasso" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.covariance.EmpiricalCovariance" title="sklearn.covariance._empirical_covariance.EmpiricalCovariance"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.covariance._empirical_covariance.EmpiricalCovariance</span></code></a></p>
+<p>Sparse inverse covariance estimation with an l1-penalized estimator.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version v0.20: </span>GraphLasso has been renamed to GraphicalLasso</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>default=0.01</em>) – The regularization parameter: the higher alpha, the more
+regularization, the sparser the inverse covariance.
+Range is (0, inf].</p></li>
+<li><p><strong>mode</strong> (<em>{'cd'</em><em>, </em><em>'lars'}</em><em>, </em><em>default='cd'</em>) – The Lasso solver to use: coordinate descent or LARS. Use LARS for
+very sparse underlying graphs, where p &gt; n. Elsewhere prefer cd
+which is more numerically stable.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-4</em>) – The tolerance to declare convergence: if the dual gap goes below
+this value, iterations are stopped. Range is (0, inf].</p></li>
+<li><p><strong>enet_tol</strong> (<em>float</em><em>, </em><em>default=1e-4</em>) – The tolerance for the elastic net solver used to calculate the descent
+direction. This parameter controls the accuracy of the search direction
+for a given column update, not of the overall parameter estimate. Only
+used for mode=’cd’. Range is (0, inf].</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=100</em>) – The maximum number of iterations.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If verbose is True, the objective function and dual gap are
+plotted at each iteration.</p></li>
+<li><p><strong>assume_centered</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, data are not centered before computation.
+Useful when working with data whose mean is almost, but not exactly
+zero.
+If False, data are centered before computation.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLasso.location_">
+<span class="sig-name descname"><span class="pre">location_</span></span><a class="headerlink" href="#sklearn.covariance.GraphicalLasso.location_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated location, i.e. the estimated mean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLasso.covariance_">
+<span class="sig-name descname"><span class="pre">covariance_</span></span><a class="headerlink" href="#sklearn.covariance.GraphicalLasso.covariance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated covariance matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLasso.precision_">
+<span class="sig-name descname"><span class="pre">precision_</span></span><a class="headerlink" href="#sklearn.covariance.GraphicalLasso.precision_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated pseudo inverse matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLasso.n_iter_">
+<span class="sig-name descname"><span class="pre">n_iter_</span></span><a class="headerlink" href="#sklearn.covariance.GraphicalLasso.n_iter_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of iterations run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <span class="n">GraphicalLasso</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">true_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                                  <span class="n">cov</span><span class="o">=</span><span class="n">true_cov</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">size</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span> <span class="o">=</span> <span class="n">GraphicalLasso</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">covariance_</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([[0.816, 0.049, 0.218, 0.019],</span>
+<span class="go">       [0.049, 0.364, 0.017, 0.034],</span>
+<span class="go">       [0.218, 0.017, 0.322, 0.093],</span>
+<span class="go">       [0.019, 0.034, 0.093, 0.69 ]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">location_</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([0.073, 0.04 , 0.038, 0.143])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#sklearn.covariance.graphical_lasso" title="sklearn.covariance.graphical_lasso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">graphical_lasso</span></code></a>, <a class="reference internal" href="#sklearn.covariance.GraphicalLassoCV" title="sklearn.covariance.GraphicalLassoCV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GraphicalLassoCV</span></code></a></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLasso.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.GraphicalLasso.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fits the GraphicalLasso model to X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Data from which to compute the covariance estimate</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present for API consistency by convention.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLassoCV">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">GraphicalLassoCV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alphas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_refinements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enet_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cd'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.GraphicalLassoCV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.covariance.GraphicalLasso" title="sklearn.covariance._graph_lasso.GraphicalLasso"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.covariance._graph_lasso.GraphicalLasso</span></code></a></p>
+<p>Sparse inverse covariance w/ cross-validated choice of the l1 penalty.</p>
+<p>See glossary entry for <span class="xref std std-term">cross-validation estimator</span>.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version v0.20: </span>GraphLassoCV has been renamed to GraphicalLassoCV</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alphas</strong> (<em>int</em><em> or </em><em>array-like of shape</em><em> (</em><em>n_alphas</em><em>,</em><em>)</em><em>, </em><em>dtype=float</em><em>, </em><em>default=4</em>) – If an integer is given, it fixes the number of points on the
+grids of alpha to be used. If a list is given, it gives the
+grid to be used. See the notes in the class docstring for
+more details. Range is (0, inf] when floats given.</p></li>
+<li><p><strong>n_refinements</strong> (<em>int</em><em>, </em><em>default=4</em>) – The number of times the grid is refined. Not used if explicit
+values of alphas are passed. Range is [1, inf).</p></li>
+<li><p><strong>cv</strong> (<em>int</em><em>, </em><em>cross-validation generator</em><em> or </em><em>iterable</em><em>, </em><em>default=None</em>) – <p>Determines the cross-validation splitting strategy.
+Possible inputs for cv are:</p>
+<ul>
+<li><p>None, to use the default 5-fold cross-validation,</p></li>
+<li><p>integer, to specify the number of folds.</p></li>
+<li><p><span class="xref std std-term">CV splitter</span>,</p></li>
+<li><p>An iterable yielding (train, test) splits as arrays of indices.</p></li>
+</ul>
+<p>For integer/None inputs <code class="xref py py-class docutils literal notranslate"><span class="pre">KFold</span></code> is used.</p>
+<p>Refer <span class="xref std std-ref">User Guide</span> for the various
+cross-validation strategies that can be used here.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.20: </span><code class="docutils literal notranslate"><span class="pre">cv</span></code> default value if None changed from 3-fold to 5-fold.</p>
+</div>
+</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-4</em>) – The tolerance to declare convergence: if the dual gap goes below
+this value, iterations are stopped. Range is (0, inf].</p></li>
+<li><p><strong>enet_tol</strong> (<em>float</em><em>, </em><em>default=1e-4</em>) – The tolerance for the elastic net solver used to calculate the descent
+direction. This parameter controls the accuracy of the search direction
+for a given column update, not of the overall parameter estimate. Only
+used for mode=’cd’. Range is (0, inf].</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=100</em>) – Maximum number of iterations.</p></li>
+<li><p><strong>mode</strong> (<em>{'cd'</em><em>, </em><em>'lars'}</em><em>, </em><em>default='cd'</em>) – The Lasso solver to use: coordinate descent or LARS. Use LARS for
+very sparse underlying graphs, where number of features is greater
+than number of samples. Elsewhere prefer cd which is more numerically
+stable.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>default=None</em>) – <p>number of jobs to run in parallel.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <span class="xref std std-term">Glossary</span>
+for more details.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version v0.20: </span><cite>n_jobs</cite> default changed from 1 to None</p>
+</div>
+</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If verbose is True, the objective function and duality gap are
+printed at each iteration.</p></li>
+<li><p><strong>assume_centered</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, data are not centered before computation.
+Useful when working with data whose mean is almost, but not exactly
+zero.
+If False, data are centered before computation.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLassoCV.location_">
+<span class="sig-name descname"><span class="pre">location_</span></span><a class="headerlink" href="#sklearn.covariance.GraphicalLassoCV.location_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated location, i.e. the estimated mean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLassoCV.covariance_">
+<span class="sig-name descname"><span class="pre">covariance_</span></span><a class="headerlink" href="#sklearn.covariance.GraphicalLassoCV.covariance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated covariance matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLassoCV.precision_">
+<span class="sig-name descname"><span class="pre">precision_</span></span><a class="headerlink" href="#sklearn.covariance.GraphicalLassoCV.precision_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated precision matrix (inverse covariance).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLassoCV.alpha_">
+<span class="sig-name descname"><span class="pre">alpha_</span></span><a class="headerlink" href="#sklearn.covariance.GraphicalLassoCV.alpha_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Penalization parameter selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLassoCV.cv_alphas_">
+<span class="sig-name descname"><span class="pre">cv_alphas_</span></span><a class="headerlink" href="#sklearn.covariance.GraphicalLassoCV.cv_alphas_" title="Permalink to this definition">¶</a></dt>
+<dd><p>All penalization parameters explored.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.24: </span>The <cite>cv_alphas_</cite> attribute is deprecated in version 0.24 in favor
+of <cite>cv_results_[‘alphas’]</cite> and will be removed in version
+1.1 (renaming of 0.26).</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of shape (n_alphas,), dtype=float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLassoCV.grid_scores_">
+<span class="sig-name descname"><span class="pre">grid_scores_</span></span><a class="headerlink" href="#sklearn.covariance.GraphicalLassoCV.grid_scores_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log-likelihood score on left-out data across folds.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.24: </span>The <cite>grid_scores_</cite> attribute is deprecated in version 0.24 in favor
+of <cite>cv_results_</cite> and will be removed in version
+1.1 (renaming of 0.26).</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_alphas, n_folds)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLassoCV.cv_results_">
+<span class="sig-name descname"><span class="pre">cv_results_</span></span><a class="headerlink" href="#sklearn.covariance.GraphicalLassoCV.cv_results_" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dict with keys:</p>
+<dl class="simple">
+<dt>alphas<span class="classifier">ndarray of shape (n_alphas,)</span></dt><dd><p>All penalization parameters explored.</p>
+</dd>
+<dt>split(k)_score<span class="classifier">ndarray of shape (n_alphas,)</span></dt><dd><p>Log-likelihood score on left-out data across (k)th fold.</p>
+</dd>
+<dt>mean_score<span class="classifier">ndarray of shape (n_alphas,)</span></dt><dd><p>Mean of scores over the folds.</p>
+</dd>
+<dt>std_score<span class="classifier">ndarray of shape (n_alphas,)</span></dt><dd><p>Standard deviation of scores over the folds.</p>
+</dd>
+</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict of ndarrays</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLassoCV.n_iter_">
+<span class="sig-name descname"><span class="pre">n_iter_</span></span><a class="headerlink" href="#sklearn.covariance.GraphicalLassoCV.n_iter_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of iterations run for the optimal alpha.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <span class="n">GraphicalLassoCV</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">true_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                                  <span class="n">cov</span><span class="o">=</span><span class="n">true_cov</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">size</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span> <span class="o">=</span> <span class="n">GraphicalLassoCV</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">covariance_</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([[0.816, 0.051, 0.22 , 0.017],</span>
+<span class="go">       [0.051, 0.364, 0.018, 0.036],</span>
+<span class="go">       [0.22 , 0.018, 0.322, 0.094],</span>
+<span class="go">       [0.017, 0.036, 0.094, 0.69 ]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">location_</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([0.073, 0.04 , 0.038, 0.143])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#sklearn.covariance.graphical_lasso" title="sklearn.covariance.graphical_lasso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">graphical_lasso</span></code></a>, <a class="reference internal" href="#sklearn.covariance.GraphicalLasso" title="sklearn.covariance.GraphicalLasso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GraphicalLasso</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>The search for the optimal penalization parameter (alpha) is done on an
+iteratively refined grid: first the cross-validated scores on a grid are
+computed, then a new refined grid is centered around the maximum, and so
+on.</p>
+<p>One of the challenges which is faced here is that the solvers can
+fail to converge to a well-conditioned estimate. The corresponding
+values of alpha then come out as missing values, but the optimum may
+be close to these missing values.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">cv_alphas_</span></span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.GraphicalLassoCV.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.GraphicalLassoCV.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fits the GraphicalLasso covariance model to X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Data from which to compute the covariance estimate</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present for API consistency by convention.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id2">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">grid_scores_</span></span><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.covariance.LedoitWolf">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">LedoitWolf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.LedoitWolf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.covariance.EmpiricalCovariance" title="sklearn.covariance._empirical_covariance.EmpiricalCovariance"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.covariance._empirical_covariance.EmpiricalCovariance</span></code></a></p>
+<p>LedoitWolf Estimator</p>
+<p>Ledoit-Wolf is a particular form of shrinkage, where the shrinkage
+coefficient is computed using O. Ledoit and M. Wolf’s formula as
+described in “A Well-Conditioned Estimator for Large-Dimensional
+Covariance Matrices”, Ledoit and Wolf, Journal of Multivariate
+Analysis, Volume 88, Issue 2, February 2004, pages 365-411.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>store_precision</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Specify if the estimated precision is stored.</p></li>
+<li><p><strong>assume_centered</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, data will not be centered before computation.
+Useful when working with data whose mean is almost, but not exactly
+zero.
+If False (default), data will be centered before computation.</p></li>
+<li><p><strong>block_size</strong> (<em>int</em><em>, </em><em>default=1000</em>) – Size of blocks into which the covariance matrix will be split
+during its Ledoit-Wolf estimation. This is purely a memory
+optimization and does not affect results.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.LedoitWolf.covariance_">
+<span class="sig-name descname"><span class="pre">covariance_</span></span><a class="headerlink" href="#sklearn.covariance.LedoitWolf.covariance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated covariance matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.LedoitWolf.location_">
+<span class="sig-name descname"><span class="pre">location_</span></span><a class="headerlink" href="#sklearn.covariance.LedoitWolf.location_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated location, i.e. the estimated mean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.LedoitWolf.precision_">
+<span class="sig-name descname"><span class="pre">precision_</span></span><a class="headerlink" href="#sklearn.covariance.LedoitWolf.precision_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated pseudo inverse matrix.
+(stored only if store_precision is True)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.LedoitWolf.shrinkage_">
+<span class="sig-name descname"><span class="pre">shrinkage_</span></span><a class="headerlink" href="#sklearn.covariance.LedoitWolf.shrinkage_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coefficient in the convex combination used for the computation
+of the shrunk estimate. Range is [0, 1].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <span class="n">LedoitWolf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">real_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">.4</span><span class="p">,</span> <span class="mf">.2</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">.2</span><span class="p">,</span> <span class="mf">.8</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                                  <span class="n">cov</span><span class="o">=</span><span class="n">real_cov</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span> <span class="o">=</span> <span class="n">LedoitWolf</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span><span class="o">.</span><span class="n">covariance_</span>
+<span class="go">array([[0.4406..., 0.1616...],</span>
+<span class="go">       [0.1616..., 0.8022...]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span><span class="o">.</span><span class="n">location_</span>
+<span class="go">array([ 0.0595... , -0.0075...])</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>The regularised covariance is:</p>
+<p>(1 - shrinkage) * cov + shrinkage * mu * np.identity(n_features)</p>
+<p>where mu = trace(cov) / n_features
+and shrinkage is given by the Ledoit and Wolf formula (see References)</p>
+<p class="rubric">References</p>
+<p>“A Well-Conditioned Estimator for Large-Dimensional Covariance Matrices”,
+Ledoit and Wolf, Journal of Multivariate Analysis, Volume 88, Issue 2,
+February 2004, pages 365-411.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.LedoitWolf.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.LedoitWolf.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the Ledoit-Wolf shrunk covariance model according to the given
+training data and parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training data, where <cite>n_samples</cite> is the number of samples
+and <cite>n_features</cite> is the number of features.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present for API consistency by convention.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.covariance.MinCovDet">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">MinCovDet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">support_fraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.MinCovDet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.covariance.EmpiricalCovariance" title="sklearn.covariance._empirical_covariance.EmpiricalCovariance"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.covariance._empirical_covariance.EmpiricalCovariance</span></code></a></p>
+<p>Minimum Covariance Determinant (MCD): robust estimator of covariance.</p>
+<p>The Minimum Covariance Determinant covariance estimator is to be applied
+on Gaussian-distributed data, but could still be relevant on data
+drawn from a unimodal, symmetric distribution. It is not meant to be used
+with multi-modal data (the algorithm used to fit a MinCovDet object is
+likely to fail in such a case).
+One should consider projection pursuit methods to deal with multi-modal
+datasets.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>store_precision</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Specify if the estimated precision is stored.</p></li>
+<li><p><strong>assume_centered</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, the support of the robust location and the covariance
+estimates is computed, and a covariance estimate is recomputed from
+it, without centering the data.
+Useful to work with data whose mean is significantly equal to
+zero but is not exactly zero.
+If False, the robust location and covariance are directly computed
+with the FastMCD algorithm without additional treatment.</p></li>
+<li><p><strong>support_fraction</strong> (<em>float</em><em>, </em><em>default=None</em>) – The proportion of points to be included in the support of the raw
+MCD estimate. Default is None, which implies that the minimum
+value of support_fraction will be used within the algorithm:
+<cite>(n_sample + n_features + 1) / 2</cite>. The parameter must be in the range
+(0, 1).</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines the pseudo random number generator for shuffling the data.
+Pass an int for reproducible results across multiple function calls.
+See :term: <cite>Glossary &lt;random_state&gt;</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.MinCovDet.raw_location_">
+<span class="sig-name descname"><span class="pre">raw_location_</span></span><a class="headerlink" href="#sklearn.covariance.MinCovDet.raw_location_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The raw robust estimated location before correction and re-weighting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.MinCovDet.raw_covariance_">
+<span class="sig-name descname"><span class="pre">raw_covariance_</span></span><a class="headerlink" href="#sklearn.covariance.MinCovDet.raw_covariance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The raw robust estimated covariance before correction and re-weighting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.MinCovDet.raw_support_">
+<span class="sig-name descname"><span class="pre">raw_support_</span></span><a class="headerlink" href="#sklearn.covariance.MinCovDet.raw_support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>A mask of the observations that have been used to compute
+the raw robust estimates of location and shape, before correction
+and re-weighting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.MinCovDet.location_">
+<span class="sig-name descname"><span class="pre">location_</span></span><a class="headerlink" href="#sklearn.covariance.MinCovDet.location_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated robust location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.MinCovDet.covariance_">
+<span class="sig-name descname"><span class="pre">covariance_</span></span><a class="headerlink" href="#sklearn.covariance.MinCovDet.covariance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated robust covariance matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.MinCovDet.precision_">
+<span class="sig-name descname"><span class="pre">precision_</span></span><a class="headerlink" href="#sklearn.covariance.MinCovDet.precision_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated pseudo inverse matrix.
+(stored only if store_precision is True)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.MinCovDet.support_">
+<span class="sig-name descname"><span class="pre">support_</span></span><a class="headerlink" href="#sklearn.covariance.MinCovDet.support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>A mask of the observations that have been used to compute
+the robust estimates of location and shape.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.MinCovDet.dist_">
+<span class="sig-name descname"><span class="pre">dist_</span></span><a class="headerlink" href="#sklearn.covariance.MinCovDet.dist_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mahalanobis distances of the training set (on which <a class="reference internal" href="#sklearn.covariance.MinCovDet.fit" title="sklearn.covariance.MinCovDet.fit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fit()</span></code></a> is
+called) observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <span class="n">MinCovDet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_gaussian_quantiles</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">real_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">.8</span><span class="p">,</span> <span class="mf">.3</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">.3</span><span class="p">,</span> <span class="mf">.4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                                  <span class="n">cov</span><span class="o">=</span><span class="n">real_cov</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span> <span class="o">=</span> <span class="n">MinCovDet</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span><span class="o">.</span><span class="n">covariance_</span>
+<span class="go">array([[0.7411..., 0.2535...],</span>
+<span class="go">       [0.2535..., 0.3053...]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span><span class="o">.</span><span class="n">location_</span>
+<span class="go">array([0.0813... , 0.0427...])</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rouseeuw1984"><span class="brackets">Rouseeuw1984</span></dt>
+<dd><p>P. J. Rousseeuw. Least median of squares regression.
+J. Am Stat Ass, 79:871, 1984.</p>
+</dd>
+<dt class="label" id="rousseeuw"><span class="brackets">Rousseeuw</span></dt>
+<dd><p>A Fast Algorithm for the Minimum Covariance Determinant
+Estimator, 1999, American Statistical Association and the American
+Society for Quality, TECHNOMETRICS</p>
+</dd>
+<dt class="label" id="butlerdavies"><span class="brackets">ButlerDavies</span></dt>
+<dd><p>R. W. Butler, P. L. Davies and M. Jhun,
+Asymptotics For The Minimum Covariance Determinant Estimator,
+The Annals of Statistics, 1993, Vol. 21, No. 3, 1385-1400</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.MinCovDet.correct_covariance">
+<span class="sig-name descname"><span class="pre">correct_covariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.MinCovDet.correct_covariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a correction to raw Minimum Covariance Determinant estimates.</p>
+<p>Correction using the empirical correction factor suggested
+by Rousseeuw and Van Driessen in <a class="reference internal" href="#rvd" id="id3"><span>[RVD]</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The data matrix, with p features and n samples.
+The data set must be the one which was used to compute
+the raw estimates.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>covariance_corrected</strong> – Corrected robust covariance estimate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rvd"><span class="brackets"><a class="fn-backref" href="#id3">RVD</a></span></dt>
+<dd><p>A Fast Algorithm for the Minimum Covariance
+Determinant Estimator, 1999, American Statistical Association
+and the American Society for Quality, TECHNOMETRICS</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.MinCovDet.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.MinCovDet.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fits a Minimum Covariance Determinant with the FastMCD algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training data, where <cite>n_samples</cite> is the number of samples
+and <cite>n_features</cite> is the number of features.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present for API consistency by convention.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.MinCovDet.reweight_covariance">
+<span class="sig-name descname"><span class="pre">reweight_covariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.MinCovDet.reweight_covariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Re-weight raw Minimum Covariance Determinant estimates.</p>
+<p>Re-weight observations using Rousseeuw’s method (equivalent to
+deleting outlying observations from the data set before
+computing location and covariance estimates) described
+in <a class="reference internal" href="#rvdriessen" id="id4"><span>[RVDriessen]</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The data matrix, with p features and n samples.
+The data set must be the one which was used to compute
+the raw estimates.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>location_reweighted</strong> (<em>ndarray of shape (n_features,)</em>) – Re-weighted robust location estimate.</p></li>
+<li><p><strong>covariance_reweighted</strong> (<em>ndarray of shape (n_features, n_features)</em>) – Re-weighted robust covariance estimate.</p></li>
+<li><p><strong>support_reweighted</strong> (<em>ndarray of shape (n_samples,), dtype=bool</em>) – A mask of the observations that have been used to compute
+the re-weighted robust location and covariance estimates.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rvdriessen"><span class="brackets"><a class="fn-backref" href="#id4">RVDriessen</a></span></dt>
+<dd><p>A Fast Algorithm for the Minimum Covariance
+Determinant Estimator, 1999, American Statistical Association
+and the American Society for Quality, TECHNOMETRICS</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.covariance.OAS">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">OAS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.OAS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.covariance.EmpiricalCovariance" title="sklearn.covariance._empirical_covariance.EmpiricalCovariance"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.covariance._empirical_covariance.EmpiricalCovariance</span></code></a></p>
+<p>Oracle Approximating Shrinkage Estimator</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<p>OAS is a particular form of shrinkage described in
+“Shrinkage Algorithms for MMSE Covariance Estimation”
+Chen et al., IEEE Trans. on Sign. Proc., Volume 58, Issue 10, October 2010.</p>
+<p>The formula used here does not correspond to the one given in the
+article. In the original article, formula (23) states that 2/p is
+multiplied by Trace(cov*cov) in both the numerator and denominator, but
+this operation is omitted because for a large p, the value of 2/p is
+so small that it doesn’t affect the value of the estimator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>store_precision</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Specify if the estimated precision is stored.</p></li>
+<li><p><strong>assume_centered</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, data will not be centered before computation.
+Useful when working with data whose mean is almost, but not exactly
+zero.
+If False (default), data will be centered before computation.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.OAS.covariance_">
+<span class="sig-name descname"><span class="pre">covariance_</span></span><a class="headerlink" href="#sklearn.covariance.OAS.covariance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated covariance matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.OAS.location_">
+<span class="sig-name descname"><span class="pre">location_</span></span><a class="headerlink" href="#sklearn.covariance.OAS.location_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated location, i.e. the estimated mean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.OAS.precision_">
+<span class="sig-name descname"><span class="pre">precision_</span></span><a class="headerlink" href="#sklearn.covariance.OAS.precision_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated pseudo inverse matrix.
+(stored only if store_precision is True)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.OAS.shrinkage_">
+<span class="sig-name descname"><span class="pre">shrinkage_</span></span><a class="headerlink" href="#sklearn.covariance.OAS.shrinkage_" title="Permalink to this definition">¶</a></dt>
+<dd><p>coefficient in the convex combination used for the computation
+of the shrunk estimate. Range is [0, 1].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <span class="n">OAS</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_gaussian_quantiles</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">real_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">.8</span><span class="p">,</span> <span class="mf">.3</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">.3</span><span class="p">,</span> <span class="mf">.4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                            <span class="n">cov</span><span class="o">=</span><span class="n">real_cov</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oas</span> <span class="o">=</span> <span class="n">OAS</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oas</span><span class="o">.</span><span class="n">covariance_</span>
+<span class="go">array([[0.7533..., 0.2763...],</span>
+<span class="go">       [0.2763..., 0.3964...]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oas</span><span class="o">.</span><span class="n">precision_</span>
+<span class="go">array([[ 1.7833..., -1.2431... ],</span>
+<span class="go">       [-1.2431...,  3.3889...]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oas</span><span class="o">.</span><span class="n">shrinkage_</span>
+<span class="go">0.0195...</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>The regularised covariance is:</p>
+<p>(1 - shrinkage) * cov + shrinkage * mu * np.identity(n_features)</p>
+<p>where mu = trace(cov) / n_features
+and shrinkage is given by the OAS formula (see References)</p>
+<p class="rubric">References</p>
+<p>“Shrinkage Algorithms for MMSE Covariance Estimation”
+Chen et al., IEEE Trans. on Sign. Proc., Volume 58, Issue 10, October 2010.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.OAS.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.OAS.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the Oracle Approximating Shrinkage covariance model
+according to the given training data and parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training data, where <cite>n_samples</cite> is the number of samples
+and <cite>n_features</cite> is the number of features.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present for API consistency by convention.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.covariance.ShrunkCovariance">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">ShrunkCovariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store_precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shrinkage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.ShrunkCovariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.covariance.EmpiricalCovariance" title="sklearn.covariance._empirical_covariance.EmpiricalCovariance"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.covariance._empirical_covariance.EmpiricalCovariance</span></code></a></p>
+<p>Covariance estimator with shrinkage</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>store_precision</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Specify if the estimated precision is stored</p></li>
+<li><p><strong>assume_centered</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, data will not be centered before computation.
+Useful when working with data whose mean is almost, but not exactly
+zero.
+If False, data will be centered before computation.</p></li>
+<li><p><strong>shrinkage</strong> (<em>float</em><em>, </em><em>default=0.1</em>) – Coefficient in the convex combination used for the computation
+of the shrunk estimate. Range is [0, 1].</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.ShrunkCovariance.covariance_">
+<span class="sig-name descname"><span class="pre">covariance_</span></span><a class="headerlink" href="#sklearn.covariance.ShrunkCovariance.covariance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated covariance matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.ShrunkCovariance.location_">
+<span class="sig-name descname"><span class="pre">location_</span></span><a class="headerlink" href="#sklearn.covariance.ShrunkCovariance.location_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated location, i.e. the estimated mean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.covariance.ShrunkCovariance.precision_">
+<span class="sig-name descname"><span class="pre">precision_</span></span><a class="headerlink" href="#sklearn.covariance.ShrunkCovariance.precision_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated pseudo inverse matrix.
+(stored only if store_precision is True)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <span class="n">ShrunkCovariance</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_gaussian_quantiles</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">real_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">.8</span><span class="p">,</span> <span class="mf">.3</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="p">[</span><span class="mf">.3</span><span class="p">,</span> <span class="mf">.4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                                  <span class="n">cov</span><span class="o">=</span><span class="n">real_cov</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span> <span class="o">=</span> <span class="n">ShrunkCovariance</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span><span class="o">.</span><span class="n">covariance_</span>
+<span class="go">array([[0.7387..., 0.2536...],</span>
+<span class="go">       [0.2536..., 0.4110...]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span><span class="o">.</span><span class="n">location_</span>
+<span class="go">array([0.0622..., 0.0193...])</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>The regularized covariance is given by:</p>
+<p>(1 - shrinkage) * cov + shrinkage * mu * np.identity(n_features)</p>
+<p>where mu = trace(cov) / n_features</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.covariance.ShrunkCovariance.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.ShrunkCovariance.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the shrunk covariance model according to the given training data
+and parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training data, where n_samples is the number of samples
+and n_features is the number of features.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present for API consistency by convention.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.covariance.empirical_covariance">
+<span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">empirical_covariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.empirical_covariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Maximum likelihood covariance estimator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>ndarray of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Data from which to compute the covariance estimate</p></li>
+<li><p><strong>assume_centered</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, data will not be centered before computation.
+Useful when working with data whose mean is almost, but not exactly
+zero.
+If False, data will be centered before computation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>covariance</strong> – Empirical covariance (Maximum Likelihood Estimator).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.covariance</span> <span class="kn">import</span> <span class="n">empirical_covariance</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">empirical_covariance</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[0.25, 0.25, 0.25],</span>
+<span class="go">       [0.25, 0.25, 0.25],</span>
+<span class="go">       [0.25, 0.25, 0.25]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.covariance.fast_mcd">
+<span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">fast_mcd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">X</span></em>, <em class="sig-param"><span class="pre">support_fraction=None</span></em>, <em class="sig-param"><span class="pre">cov_computation_method=&lt;function</span> <span class="pre">empirical_covariance&gt;</span></em>, <em class="sig-param"><span class="pre">random_state=None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.fast_mcd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimates the Minimum Covariance Determinant matrix.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The data matrix, with p features and n samples.</p></li>
+<li><p><strong>support_fraction</strong> (<em>float</em><em>, </em><em>default=None</em>) – The proportion of points to be included in the support of the raw
+MCD estimate. Default is <cite>None</cite>, which implies that the minimum
+value of <cite>support_fraction</cite> will be used within the algorithm:
+<cite>(n_sample + n_features + 1) / 2</cite>. This parameter must be in the
+range (0, 1).</p></li>
+<li><p><strong>cov_computation_method</strong> (callable,             default=:func:<cite>sklearn.covariance.empirical_covariance</cite>) – The function which will be used to compute the covariance.
+Must return an array of shape (n_features, n_features).</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines the pseudo random number generator for shuffling the data.
+Pass an int for reproducible results across multiple function calls.
+See :term: <cite>Glossary &lt;random_state&gt;</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>location</strong> (<em>ndarray of shape (n_features,)</em>) – Robust location of the data.</p></li>
+<li><p><strong>covariance</strong> (<em>ndarray of shape (n_features, n_features)</em>) – Robust covariance of the features.</p></li>
+<li><p><strong>support</strong> (<em>ndarray of shape (n_samples,), dtype=bool</em>) – A mask of the observations that have been used to compute
+the robust location and covariance estimates of the data set.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The FastMCD algorithm has been introduced by Rousseuw and Van Driessen
+in “A Fast Algorithm for the Minimum Covariance Determinant Estimator,
+1999, American Statistical Association and the American Society
+for Quality, TECHNOMETRICS”.
+The principle is to compute robust estimates and random subsets before
+pooling them into a larger subsets, and finally into the full data set.
+Depending on the size of the initial sample, we have one, two or three
+such computation levels.</p>
+<p>Note that only raw estimates are returned. If one is interested in
+the correction and reweighting steps described in <a class="reference internal" href="#rouseeuwvan" id="id5"><span>[RouseeuwVan]</span></a>,
+see the MinCovDet object.</p>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="rouseeuwvan"><span class="brackets"><a class="fn-backref" href="#id5">RouseeuwVan</a></span></dt>
+<dd><p>A Fast Algorithm for the Minimum Covariance
+Determinant Estimator, 1999, American Statistical Association
+and the American Society for Quality, TECHNOMETRICS</p>
+</dd>
+<dt class="label" id="butler1993"><span class="brackets">Butler1993</span></dt>
+<dd><p>R. W. Butler, P. L. Davies and M. Jhun,
+Asymptotics For The Minimum Covariance Determinant Estimator,
+The Annals of Statistics, 1993, Vol. 21, No. 3, 1385-1400</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.covariance.graphical_lasso">
+<span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">graphical_lasso</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">emp_cov</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cov_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cd'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enet_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_costs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.220446049250313e-16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.graphical_lasso" title="Permalink to this definition">¶</a></dt>
+<dd><p>l1-penalized covariance estimator</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version v0.20: </span>graph_lasso has been renamed to graphical_lasso</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>emp_cov</strong> (<em>ndarray of shape</em><em> (</em><em>n_features</em><em>, </em><em>n_features</em><em>)</em>) – Empirical covariance from which to compute the covariance estimate.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – The regularization parameter: the higher alpha, the more
+regularization, the sparser the inverse covariance.
+Range is (0, inf].</p></li>
+<li><p><strong>cov_init</strong> (<em>array of shape</em><em> (</em><em>n_features</em><em>, </em><em>n_features</em><em>)</em><em>, </em><em>default=None</em>) – The initial guess for the covariance. If None, then the empirical
+covariance is used.</p></li>
+<li><p><strong>mode</strong> (<em>{'cd'</em><em>, </em><em>'lars'}</em><em>, </em><em>default='cd'</em>) – The Lasso solver to use: coordinate descent or LARS. Use LARS for
+very sparse underlying graphs, where p &gt; n. Elsewhere prefer cd
+which is more numerically stable.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-4</em>) – The tolerance to declare convergence: if the dual gap goes below
+this value, iterations are stopped. Range is (0, inf].</p></li>
+<li><p><strong>enet_tol</strong> (<em>float</em><em>, </em><em>default=1e-4</em>) – The tolerance for the elastic net solver used to calculate the descent
+direction. This parameter controls the accuracy of the search direction
+for a given column update, not of the overall parameter estimate. Only
+used for mode=’cd’. Range is (0, inf].</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=100</em>) – The maximum number of iterations.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If verbose is True, the objective function and dual gap are
+printed at each iteration.</p></li>
+<li><p><strong>return_costs</strong> (<em>bool</em><em>, </em><em>default=Flase</em>) – If return_costs is True, the objective function and dual gap
+at each iteration are returned.</p></li>
+<li><p><strong>eps</strong> (<em>float</em><em>, </em><em>default=eps</em>) – The machine-precision regularization in the computation of the
+Cholesky diagonal factors. Increase this for very ill-conditioned
+systems. Default is <cite>np.finfo(np.float64).eps</cite>.</p></li>
+<li><p><strong>return_n_iter</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Whether or not to return the number of iterations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>covariance</strong> (<em>ndarray of shape (n_features, n_features)</em>) – The estimated covariance matrix.</p></li>
+<li><p><strong>precision</strong> (<em>ndarray of shape (n_features, n_features)</em>) – The estimated (sparse) precision matrix.</p></li>
+<li><p><strong>costs</strong> (<em>list of (objective, dual_gap) pairs</em>) – The list of values of the objective function and the dual gap at
+each iteration. Returned only if return_costs is True.</p></li>
+<li><p><strong>n_iter</strong> (<em>int</em>) – Number of iterations. Returned only if <cite>return_n_iter</cite> is set to True.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#sklearn.covariance.GraphicalLasso" title="sklearn.covariance.GraphicalLasso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GraphicalLasso</span></code></a>, <a class="reference internal" href="#sklearn.covariance.GraphicalLassoCV" title="sklearn.covariance.GraphicalLassoCV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GraphicalLassoCV</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>The algorithm employed to solve this problem is the GLasso algorithm,
+from the Friedman 2008 Biostatistics paper. It is the same algorithm
+as in the R <cite>glasso</cite> package.</p>
+<p>One possible difference with the <cite>glasso</cite> R package is that the
+diagonal coefficients are not penalized.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.covariance.ledoit_wolf">
+<span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">ledoit_wolf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.ledoit_wolf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimates the shrunk Ledoit-Wolf covariance matrix.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Data from which to compute the covariance estimate</p></li>
+<li><p><strong>assume_centered</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, data will not be centered before computation.
+Useful to work with data whose mean is significantly equal to
+zero but is not exactly zero.
+If False, data will be centered before computation.</p></li>
+<li><p><strong>block_size</strong> (<em>int</em><em>, </em><em>default=1000</em>) – Size of blocks into which the covariance matrix will be split.
+This is purely a memory optimization and does not affect results.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>shrunk_cov</strong> (<em>ndarray of shape (n_features, n_features)</em>) – Shrunk covariance.</p></li>
+<li><p><strong>shrinkage</strong> (<em>float</em>) – Coefficient in the convex combination used for the computation
+of the shrunk estimate.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The regularized (shrunk) covariance is:</p>
+<p>(1 - shrinkage) * cov + shrinkage * mu * np.identity(n_features)</p>
+<p>where mu = trace(cov) / n_features</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.covariance.ledoit_wolf_shrinkage">
+<span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">ledoit_wolf_shrinkage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.ledoit_wolf_shrinkage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimates the shrunk Ledoit-Wolf covariance matrix.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Data from which to compute the Ledoit-Wolf shrunk covariance shrinkage.</p></li>
+<li><p><strong>assume_centered</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, data will not be centered before computation.
+Useful to work with data whose mean is significantly equal to
+zero but is not exactly zero.
+If False, data will be centered before computation.</p></li>
+<li><p><strong>block_size</strong> (<em>int</em><em>, </em><em>default=1000</em>) – Size of blocks into which the covariance matrix will be split.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>shrinkage</strong> – Coefficient in the convex combination used for the computation
+of the shrunk estimate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The regularized (shrunk) covariance is:</p>
+<p>(1 - shrinkage) * cov + shrinkage * mu * np.identity(n_features)</p>
+<p>where mu = trace(cov) / n_features</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.covariance.log_likelihood">
+<span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">log_likelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">emp_cov</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.log_likelihood" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the sample mean of the log_likelihood under a covariance model</p>
+<p>computes the empirical expected log-likelihood (accounting for the
+normalization terms and scaling), allowing for universal comparison (beyond
+this software package)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>emp_cov</strong> (<em>ndarray of shape</em><em> (</em><em>n_features</em><em>, </em><em>n_features</em><em>)</em>) – Maximum Likelihood Estimator of covariance.</p></li>
+<li><p><strong>precision</strong> (<em>ndarray of shape</em><em> (</em><em>n_features</em><em>, </em><em>n_features</em><em>)</em>) – The precision matrix of the covariance model to be tested.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>log_likelihood_</strong> – Sample mean of the log-likelihood.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.covariance.oas">
+<span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">oas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_centered</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.oas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate covariance with the Oracle Approximating Shrinkage algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Data from which to compute the covariance estimate.</p></li>
+<li><p><strong>assume_centered</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, data will not be centered before computation.
+Useful to work with data whose mean is significantly equal to
+zero but is not exactly zero.
+If False, data will be centered before computation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>shrunk_cov</strong> (<em>array-like of shape (n_features, n_features)</em>) – Shrunk covariance.</p></li>
+<li><p><strong>shrinkage</strong> (<em>float</em>) – Coefficient in the convex combination used for the computation
+of the shrunk estimate.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The regularised (shrunk) covariance is:</p>
+<p>(1 - shrinkage) * cov + shrinkage * mu * np.identity(n_features)</p>
+<p>where mu = trace(cov) / n_features</p>
+<p>The formula we used to implement the OAS is slightly modified compared
+to the one given in the article. See <a class="reference internal" href="#sklearn.covariance.OAS" title="sklearn.covariance.OAS"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAS</span></code></a> for more details.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.covariance.shrunk_covariance">
+<span class="sig-prename descclassname"><span class="pre">sklearn.covariance.</span></span><span class="sig-name descname"><span class="pre">shrunk_covariance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">emp_cov</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shrinkage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.covariance.shrunk_covariance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates a covariance matrix shrunk on the diagonal</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>emp_cov</strong> (<em>array-like of shape</em><em> (</em><em>n_features</em><em>, </em><em>n_features</em><em>)</em>) – Covariance matrix to be shrunk</p></li>
+<li><p><strong>shrinkage</strong> (<em>float</em><em>, </em><em>default=0.1</em>) – Coefficient in the convex combination used for the computation
+of the shrunk estimate. Range is [0, 1].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>shrunk_cov</strong> – Shrunk covariance.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features, n_features)</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The regularized (shrunk) covariance is given by:</p>
+<p>(1 - shrinkage) * cov + shrinkage * mu * np.identity(n_features)</p>
+<p>where mu = trace(cov) / n_features</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Tommaso
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

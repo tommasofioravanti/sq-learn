@@ -1,0 +1,687 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sklearn.decomposition.qPCA package &mdash; Qsklearn  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="sklearn.cluster.Dmeans package" href="sklearn.cluster.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Qsklearn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">sklearn</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="sklearn.html">sklearn package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="sklearn.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="sklearn.cluster.html">sklearn.cluster.Dmeans package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">sklearn.decomposition.qPCA package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sklearn.html#module-sklearn">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Qsklearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">sklearn</a> &raquo;</li>
+        
+          <li><a href="sklearn.html">sklearn package</a> &raquo;</li>
+        
+      <li>sklearn.decomposition.qPCA package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sklearn.decomposition.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="sklearn-decomposition-qpca-package">
+<h1>sklearn.decomposition.qPCA package<a class="headerlink" href="#sklearn-decomposition-qpca-package" title="Permalink to this headline">¶</a></h1>
+<section id="module-sklearn.decomposition">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.decomposition" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.decomposition</span></code></a> module includes matrix decomposition
+algorithms, including among others PCA, NMF or ICA. Most of the algorithms of
+this module can be regarded as dimensionality reduction techniques. This Qsklearn
+framework include also the quantum implementation of the PCA model.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.decomposition.</span></span><span class="sig-name descname"><span class="pre">qPCA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">whiten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">svd_solver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterated_power</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.decomposition.qPCA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.decomposition._base._BasePCA</span></code></p>
+<p>Quantum Principal component analysis (qPCA).</p>
+<p>Linear dimensionality reduction using Singular Value Decomposition of the
+data to project it to a lower dimensional space. The input data is centered
+but not scaled for each feature before applying the SVD.</p>
+<p>It uses the LAPACK implementation of the full SVD or a randomized truncated
+SVD by the method of Halko et al. 2009, depending on the shape of the input
+data and the number of components to extract.</p>
+<p>It can also use the scipy.sparse.linalg ARPACK implementation of the
+truncated SVD.</p>
+<p>Notice that this class does not support sparse input. See
+<code class="xref py py-class docutils literal notranslate"><span class="pre">TruncatedSVD</span></code> for an alternative with sparse data.</p>
+<p>Notice also that the quantum routines are implemented only for the ‘full’ svd_solver case.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_components</strong> (<em>int</em><em>, </em><em>float</em><em> or </em><em>'mle'</em><em>, </em><em>default=None</em>) – <p>Number of components to keep.
+if n_components is not set all components are kept:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_components</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">n_components</span> <span class="pre">==</span> <span class="pre">'mle'</span></code> and <code class="docutils literal notranslate"><span class="pre">svd_solver</span> <span class="pre">==</span> <span class="pre">'full'</span></code>, Minka’s
+MLE is used to guess the dimension. Use of <code class="docutils literal notranslate"><span class="pre">n_components</span> <span class="pre">==</span> <span class="pre">'mle'</span></code>
+will interpret <code class="docutils literal notranslate"><span class="pre">svd_solver</span> <span class="pre">==</span> <span class="pre">'auto'</span></code> as <code class="docutils literal notranslate"><span class="pre">svd_solver</span> <span class="pre">==</span> <span class="pre">'full'</span></code>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">n_components</span> <span class="pre">&lt;</span> <span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">svd_solver</span> <span class="pre">==</span> <span class="pre">'full'</span></code>, select the
+number of components such that the amount of variance that needs to be
+explained is greater than the percentage specified by n_components.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">svd_solver</span> <span class="pre">==</span> <span class="pre">'arpack'</span></code>, the number of components must be
+strictly less than the minimum of n_features and n_samples.</p>
+<p>Hence, the None case results in:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_components</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>copy</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If False, data passed to fit are overwritten and running
+fit(X).transform(X) will not yield the expected results,
+use fit_transform(X) instead.</p></li>
+<li><p><strong>whiten</strong> (<em>bool</em><em>, </em><em>default=False</em>) – <p>When True (False by default) the <cite>components_</cite> vectors are multiplied
+by the square root of n_samples and then divided by the singular values
+to ensure uncorrelated outputs with unit component-wise variances.</p>
+<p>Whitening will remove some information from the transformed signal
+(the relative variance scales of the components) but can sometime
+improve the predictive accuracy of the downstream estimators by
+making their data respect some hard-wired assumptions.</p>
+</p></li>
+<li><p><strong>svd_solver</strong> (<em>{'auto'</em><em>, </em><em>'full'</em><em>, </em><em>'arpack'</em><em>, </em><em>'randomized'}</em><em>, </em><em>default='auto'</em>) – <dl class="simple">
+<dt>If auto :</dt><dd><p>The solver is selected by a default policy based on <cite>X.shape</cite> and
+<cite>n_components</cite>: if the input data is larger than 500x500 and the
+number of components to extract is lower than 80% of the smallest
+dimension of the data, then the more efficient ‘randomized’
+method is enabled. Otherwise the exact full SVD is computed and
+optionally truncated afterwards.</p>
+</dd>
+<dt>If full :</dt><dd><p>run exact full SVD calling the standard LAPACK solver via
+<cite>scipy.linalg.svd</cite> and select the components by postprocessing</p>
+</dd>
+<dt>If arpack :</dt><dd><p>run SVD truncated to n_components calling ARPACK solver via
+<cite>scipy.sparse.linalg.svds</cite>. It requires strictly
+0 &lt; n_components &lt; min(X.shape)</p>
+</dd>
+<dt>If randomized :</dt><dd><p>run randomized SVD by the method of Halko et al.</p>
+</dd>
+</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
+</div>
+</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=0.0</em>) – <p>Tolerance for singular values computed by svd_solver == ‘arpack’.
+Must be of range [0.0, infinity).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
+</div>
+</p></li>
+<li><p><strong>iterated_power</strong> (<em>int</em><em> or </em><em>'auto'</em><em>, </em><em>default='auto'</em>) – <p>Number of iterations for the power method computed by
+svd_solver == ‘randomized’.
+Must be of range [0, infinity).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
+</div>
+</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – <p>Used when the ‘arpack’ or ‘randomized’ solvers are used. Pass an int
+for reproducible results across multiple function calls.
+See <span class="xref std std-term">Glossary</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.components_">
+<span class="sig-name descname"><span class="pre">components_</span></span><a class="headerlink" href="#sklearn.decomposition.qPCA.components_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Principal axes in feature space, representing the directions of
+maximum variance in the data. The components are sorted by
+<code class="docutils literal notranslate"><span class="pre">explained_variance_</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_components, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.explained_variance_">
+<span class="sig-name descname"><span class="pre">explained_variance_</span></span><a class="headerlink" href="#sklearn.decomposition.qPCA.explained_variance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The amount of variance explained by each of the selected components.
+The variance estimation uses <cite>n_samples - 1</cite> degrees of freedom.</p>
+<p>Equal to n_components largest eigenvalues
+of the covariance matrix of X.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_components,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.explained_variance_ratio_">
+<span class="sig-name descname"><span class="pre">explained_variance_ratio_</span></span><a class="headerlink" href="#sklearn.decomposition.qPCA.explained_variance_ratio_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Percentage of variance explained by each of the selected components.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">n_components</span></code> is not set then all components are stored and the
+sum of the ratios is equal to 1.0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_components,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.singular_values_">
+<span class="sig-name descname"><span class="pre">singular_values_</span></span><a class="headerlink" href="#sklearn.decomposition.qPCA.singular_values_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The singular values corresponding to each of the selected components.
+The singular values are equal to the 2-norms of the <code class="docutils literal notranslate"><span class="pre">n_components</span></code>
+variables in the lower-dimensional space.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_components,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.mean_">
+<span class="sig-name descname"><span class="pre">mean_</span></span><a class="headerlink" href="#sklearn.decomposition.qPCA.mean_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Per-feature empirical mean, estimated from the training set.</p>
+<p>Equal to <cite>X.mean(axis=0)</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.n_components_">
+<span class="sig-name descname"><span class="pre">n_components_</span></span><a class="headerlink" href="#sklearn.decomposition.qPCA.n_components_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The estimated number of components. When n_components is set
+to ‘mle’ or a number between 0 and 1 (with svd_solver == ‘full’) this
+number is estimated from input data. Otherwise it equals the parameter
+n_components, or the lesser value of n_features and n_samples
+if n_components is None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.n_features_">
+<span class="sig-name descname"><span class="pre">n_features_</span></span><a class="headerlink" href="#sklearn.decomposition.qPCA.n_features_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of features in the training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.n_samples_">
+<span class="sig-name descname"><span class="pre">n_samples_</span></span><a class="headerlink" href="#sklearn.decomposition.qPCA.n_samples_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of samples in the training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.noise_variance_">
+<span class="sig-name descname"><span class="pre">noise_variance_</span></span><a class="headerlink" href="#sklearn.decomposition.qPCA.noise_variance_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The estimated noise covariance following the Probabilistic PCA model
+from Tipping and Bishop 1999. See “Pattern Recognition and
+Machine Learning” by C. Bishop, 12.2.1 p. 574 or
+<a class="reference external" href="http://www.miketipping.com/papers/met-mppca.pdf">http://www.miketipping.com/papers/met-mppca.pdf</a>. It is required to
+compute the estimated data covariance and score samples.</p>
+<p>Equal to the average of (min(n_features, n_samples) - n_components)
+smallest eigenvalues of the covariance matrix of X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">KernelPCA</span></code></dt><dd><p>Kernel Principal Component Analysis.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">SparsePCA</span></code></dt><dd><p>Sparse Principal Component Analysis.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">TruncatedSVD</span></code></dt><dd><p>Dimensionality reduction using truncated SVD.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">IncrementalPCA</span></code></dt><dd><p>Incremental Principal Component Analysis.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<p>For n_components == ‘mle’, this class uses the method from:
+<a class="reference external" href="https://tminka.github.io/papers/pca/minka-pca.pdf">Minka, T. P.. “Automatic choice of dimensionality for PCA”.
+In NIPS, pp. 598-604</a></p>
+<p>Implements the probabilistic PCA model from:
+<a class="reference external" href="http://www.miketipping.com/papers/met-mppca.pdf">Tipping, M. E., and Bishop, C. M. (1999). “Probabilistic principal
+component analysis”. Journal of the Royal Statistical Society:
+Series B (Statistical Methodology), 61(3), 611-622.</a>
+via the score and score_samples methods.</p>
+<p>For svd_solver == ‘arpack’, refer to <cite>scipy.sparse.linalg.svds</cite>.</p>
+<p>For svd_solver == ‘randomized’, see:
+<a class="reference external" href="https://doi.org/10.1137/090771806">Halko, N., Martinsson, P. G., and Tropp, J. A. (2011).
+“Finding structure with randomness: Probabilistic algorithms for
+constructing approximate matrix decompositions”.
+SIAM review, 53(2), 217-288.</a>
+and also
+<a class="reference external" href="https://doi.org/10.1016/j.acha.2010.02.003">Martinsson, P. G., Rokhlin, V., and Tygert, M. (2011).
+“A randomized algorithm for the decomposition of matrices”.
+Applied and Computational Harmonic Analysis, 30(1), 47-68</a>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">PCA(n_components=2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span>
+<span class="go">[0.9924... 0.0075...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">singular_values_</span><span class="p">)</span>
+<span class="go">[6.30061... 0.54980...]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">svd_solver</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">PCA(n_components=2, svd_solver=&#39;full&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span>
+<span class="go">[0.9924... 0.00755...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">singular_values_</span><span class="p">)</span>
+<span class="go">[6.30061... 0.54980...]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qpca</span> <span class="o">=</span> <span class="n">qPCA</span><span class="p">(</span><span class="n">svd_solver</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span>
+<span class="go">qPCA fit with eps and delta error to estimate factor_score, singular values ecc... .</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qpca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">theta_estimate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">eps_theta</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="mf">0.70</span><span class="p">,</span><span class="n">estimate_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">delta</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">qpca</span><span class="o">.</span><span class="n">estimate_fs_ratio</span><span class="p">)</span>
+<span class="go">[1.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">qpca</span><span class="o">.</span><span class="n">estimate_s_values</span><span class="p">)</span>
+<span class="go">[1.07791089]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">svd_solver</span><span class="o">=</span><span class="s1">&#39;arpack&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">PCA(n_components=1, svd_solver=&#39;arpack&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span>
+<span class="go">[0.99244...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">singular_values_</span><span class="p">)</span>
+<span class="go">[6.30061...]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classic_ret_variance_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantum_retained_variance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_estimate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_computed_qcomponents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_theta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimate_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">true_tomography</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.decomposition.qPCA.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the model with X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training data, where n_samples is the number of samples
+and n_features is the number of features.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+<li><p><strong>classic_ret_variance_components</strong> (<em>float</em><em>, </em><em>default = None.</em>) – It computes the number of principal components to retain the classic_ret_variance_components percentage
+of variance. If None, it doesn’t anything.</p></li>
+<li><p><strong>quantum_retained_variance</strong> (<em>bool</em><em>, </em><em>default=False.</em>) – If true it computes the retained variance in the quantum version of the algorithm (Theorem 9 of QADRA)</p></li>
+<li><p><strong>eps</strong> (<em>float</em><em>, </em><em>default=0.</em>) – Error to introduce for the singular values estimation.</p></li>
+<li><p><strong>theta</strong> (<em>float</em><em>, </em><em>default=0.</em>) – Smallest singular values to retain in order to compute the retained variance.</p></li>
+<li><p><strong>eta</strong> (<em>float</em><em>, </em><em>default=0.</em>) – Used to compute the relative error of the estimated variance. If it is zero,
+the retained variance is returned without any error.</p></li>
+<li><p><strong>theta_estimate</strong> (<em>bool</em><em>, </em><em>default=False.</em>) – If true compute the estimation of theta as in Theorem 10 of QADRA.</p></li>
+<li><p><strong>eps_theta</strong> (<em>float</em><em>, </em><em>default=0.</em>) – Error to introduce in the estimation of theta in Theorem 10.</p></li>
+<li><p><strong>p</strong> (<em>float</em><em>, </em><em>default=0.</em>) – Percentage of retained variance to estimate theta.</p></li>
+<li><p><strong>estimate_all</strong> (<em>bool</em><em>, </em><em>default=False.</em>) – If true it estimates the singular vectors (left and right), the singular values and the factor score (Theorem 11 QADRA)</p></li>
+<li><p><strong>delta</strong> (<em>float</em><em>, </em><em>default=0.</em>) – Is the error to insert in the estimation of the singular vectors.</p></li>
+<li><p><strong>error</strong> (<em>bool</em><em>, </em><em>default=False.</em>) – If true return the L2 norm of the difference of the estimation of singular vectors,
+singular values and fator score with the correct ones.</p></li>
+<li><p><strong>true_tomography</strong> (<em>bool</em><em>, </em><em>default=True.</em>) – If true means that the quantum estimations are are done with real tomography,
+otherwise the estimations are approximated with a Truncated Gaussian Noise.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong> – Returns the instance itself.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantum_retained_variance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_estimate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_computed_qcomponents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_theta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ret_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimate_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.decomposition.qPCA.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the model with X and apply the dimensionality reduction on X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training data, where n_samples is the number of samples
+and n_features is the number of features.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_new</strong> – Transformed values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples, n_components)</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method returns a Fortran-ordered array. To convert it to a
+C-ordered array, use ‘np.ascontiguousarray’.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.inverse_transform">
+<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_classical_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.decomposition.qPCA.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform data back to its original space.</p>
+<p>In other words, return an input X_original whose transform would be X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_components</em><em>)</em>) – New data, where n_samples is the number of samples
+and n_components is the number of components.</p></li>
+<li><p><strong>use_classical_components</strong> (<em>bool</em><em>, </em><em>default = True.</em>) – See documentation in transform method in qPCA.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>X_original array-like, shape (n_samples, n_features)</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>If whitening is enabled, inverse_transform will compute the
+exact inverse operation, which includes reversing whitening.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.score">
+<span class="sig-name descname"><span class="pre">score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.decomposition.qPCA.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the average log-likelihood of all samples.</p>
+<p>See. “Pattern Recognition and Machine Learning”
+by C. Bishop, 12.2.1 p. 574
+or <a class="reference external" href="http://www.miketipping.com/papers/met-mppca.pdf">http://www.miketipping.com/papers/met-mppca.pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The data.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ll</strong> – Average log-likelihood of the samples under the current model.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.score_samples">
+<span class="sig-name descname"><span class="pre">score_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.decomposition.qPCA.score_samples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the log-likelihood of each sample.</p>
+<p>See. “Pattern Recognition and Machine Learning”
+by C. Bishop, 12.2.1 p. 574
+or <a class="reference external" href="http://www.miketipping.com/papers/met-mppca.pdf">http://www.miketipping.com/papers/met-mppca.pdf</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The data.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ll</strong> – Log-likelihood of each sample under the current model.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classic_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantum_representation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'None'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">true_tomography</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_classical_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.decomposition.qPCA.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the model with X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training data, where n_samples is the number of samples
+and n_features is the number of features.</p></li>
+<li><p><strong>classic_transform</strong> (<em>bool</em><em>, </em><em>default=True.</em>) – If true, the classic transform is applied, otherwise quantum transform is applied.</p></li>
+<li><p><strong>epsilon_delta</strong> (<em>float</em><em>, </em><em>default=0.</em>) – Error to estimate the matrix (np.sqrt(n_components)*epsilon_delta)</p></li>
+<li><p><strong>quantum_representation</strong> (<em>bool</em><em>, </em><em>default=False.</em>) – If true it returns a different quantum representation of the data X, depending on the norm flag.</p></li>
+<li><p><strong>norm</strong> (<em>{'est_representation'</em><em>, </em><em>'q_state'</em><em>, </em><em>'None'</em><em>, </em><em>'f_norm'}</em><em>, </em><em>default='None'</em>) – <dl class="simple">
+<dt>If est_representation :</dt><dd><p>Estimates the U*Sigma matrix (lemma 13 QADRA)</p>
+</dd>
+<dt>If q_state :</dt><dd><p>Create and return the quantum state.</p>
+</dd>
+<dt>If None :</dt><dd><p>return only the estimate matrix with psi error</p>
+</dd>
+<dt>If f_norm :</dt><dd><p>return only the estimate matrix (with psi error) divided by its f-norm</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>use_classical_components</strong> (<em>bool</em><em>, </em><em>default=True.</em>) – If True, and classical_transform is False, it computes the classic transformation of the matrix X
+and then an error is applied to this new matrix. If False, it computes the trasformation using the
+estimated components with a certain error computed using Theorem 11 of QADRA.</p></li>
+<li><p><strong>true_tomography</strong> (<em>bool</em><em>, </em><em>default=True.</em>) – If true means that the quantum estimations are done with real tomography,
+otherwise the estimations are approximated with a Truncated Gaussian Noise.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the transformed matrix,
+otherwise return a dictionary with all the result based on what you want to estimate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>If classic_transform</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="sklearn.cluster.html" class="btn btn-neutral float-left" title="sklearn.cluster.Dmeans package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Tommaso
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

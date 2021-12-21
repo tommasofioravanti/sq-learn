@@ -1,0 +1,240 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sklearn.cluster.tests package &mdash; Qsklearn  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Qsklearn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">sklearn</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Qsklearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>sklearn.cluster.tests package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sklearn.cluster.tests.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="sklearn-cluster-tests-package">
+<h1>sklearn.cluster.tests package<a class="headerlink" href="#sklearn-cluster-tests-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-sklearn.cluster.tests.common">
+<span id="sklearn-cluster-tests-common-module"></span><h2>sklearn.cluster.tests.common module<a class="headerlink" href="#module-sklearn.cluster.tests.common" title="Permalink to this headline">¶</a></h2>
+<p>Common utilities for testing clustering.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.cluster.tests.common.generate_clustered_data">
+<span class="sig-prename descclassname"><span class="pre">sklearn.cluster.tests.common.</span></span><span class="sig-name descname"><span class="pre">generate_clustered_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples_per_cluster</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.tests.common.generate_clustered_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="sklearn-cluster-tests-test-affinity-propagation-module">
+<h2>sklearn.cluster.tests.test_affinity_propagation module<a class="headerlink" href="#sklearn-cluster-tests-test-affinity-propagation-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="sklearn-cluster-tests-test-bicluster-module">
+<h2>sklearn.cluster.tests.test_bicluster module<a class="headerlink" href="#sklearn-cluster-tests-test-bicluster-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="sklearn-cluster-tests-test-birch-module">
+<h2>sklearn.cluster.tests.test_birch module<a class="headerlink" href="#sklearn-cluster-tests-test-birch-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="sklearn-cluster-tests-test-dbscan-module">
+<h2>sklearn.cluster.tests.test_dbscan module<a class="headerlink" href="#sklearn-cluster-tests-test-dbscan-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="sklearn-cluster-tests-test-feature-agglomeration-module">
+<h2>sklearn.cluster.tests.test_feature_agglomeration module<a class="headerlink" href="#sklearn-cluster-tests-test-feature-agglomeration-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="sklearn-cluster-tests-test-hierarchical-module">
+<h2>sklearn.cluster.tests.test_hierarchical module<a class="headerlink" href="#sklearn-cluster-tests-test-hierarchical-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="sklearn-cluster-tests-test-k-means-module">
+<h2>sklearn.cluster.tests.test_k_means module<a class="headerlink" href="#sklearn-cluster-tests-test-k-means-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="sklearn-cluster-tests-test-mean-shift-module">
+<h2>sklearn.cluster.tests.test_mean_shift module<a class="headerlink" href="#sklearn-cluster-tests-test-mean-shift-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="sklearn-cluster-tests-test-optics-module">
+<h2>sklearn.cluster.tests.test_optics module<a class="headerlink" href="#sklearn-cluster-tests-test-optics-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="sklearn-cluster-tests-test-spectral-module">
+<h2>sklearn.cluster.tests.test_spectral module<a class="headerlink" href="#sklearn-cluster-tests-test-spectral-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-sklearn.cluster.tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.cluster.tests" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Tommaso
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

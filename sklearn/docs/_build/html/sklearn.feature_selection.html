@@ -1,0 +1,1911 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sklearn.feature_selection package &mdash; Qsklearn  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Qsklearn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">sklearn</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Qsklearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>sklearn.feature_selection package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sklearn.feature_selection.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="sklearn-feature-selection-package">
+<h1>sklearn.feature_selection package<a class="headerlink" href="#sklearn-feature-selection-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sklearn.feature_selection.tests.html">sklearn.feature_selection.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_selection.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_selection.tests.html#sklearn-feature-selection-tests-test-base-module">sklearn.feature_selection.tests.test_base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_selection.tests.html#sklearn-feature-selection-tests-test-chi2-module">sklearn.feature_selection.tests.test_chi2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_selection.tests.html#sklearn-feature-selection-tests-test-feature-select-module">sklearn.feature_selection.tests.test_feature_select module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_selection.tests.html#sklearn-feature-selection-tests-test-from-model-module">sklearn.feature_selection.tests.test_from_model module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_selection.tests.html#sklearn-feature-selection-tests-test-mutual-info-module">sklearn.feature_selection.tests.test_mutual_info module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_selection.tests.html#sklearn-feature-selection-tests-test-rfe-module">sklearn.feature_selection.tests.test_rfe module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_selection.tests.html#sklearn-feature-selection-tests-test-sequential-module">sklearn.feature_selection.tests.test_sequential module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_selection.tests.html#sklearn-feature-selection-tests-test-variance-threshold-module">sklearn.feature_selection.tests.test_variance_threshold module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.feature_selection.tests.html#module-sklearn.feature_selection.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-sklearn.feature_selection">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.feature_selection" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#module-sklearn.feature_selection" title="sklearn.feature_selection"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.feature_selection</span></code></a> module implements feature selection
+algorithms. It currently includes univariate filter selection methods and the
+recursive feature elimination algorithm.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_selection.GenericUnivariateSelect">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">GenericUnivariateSelect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">score_func=&lt;function</span> <span class="pre">f_classif&gt;</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">mode='percentile'</span></em>, <em class="sig-param"><span class="pre">param=1e-05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.GenericUnivariateSelect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection._univariate_selection._BaseFilter</span></code></p>
+<p>Univariate feature selector with configurable strategy.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>score_func</strong> (<em>callable</em><em>, </em><em>default=f_classif</em>) – Function taking two arrays X and y, and returning a pair of arrays
+(scores, pvalues). For modes ‘percentile’ or ‘kbest’ it can return
+a single array scores.</p></li>
+<li><p><strong>mode</strong> (<em>{'percentile'</em><em>, </em><em>'k_best'</em><em>, </em><em>'fpr'</em><em>, </em><em>'fdr'</em><em>, </em><em>'fwe'}</em><em>, </em><em>default='percentile'</em>) – Feature selection mode.</p></li>
+<li><p><strong>param</strong> (<em>float</em><em> or </em><em>int depending on the feature selection mode</em><em>, </em><em>default=1e-5</em>) – Parameter of the corresponding mode.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.GenericUnivariateSelect.scores_">
+<span class="sig-name descname"><span class="pre">scores_</span></span><a class="headerlink" href="#sklearn.feature_selection.GenericUnivariateSelect.scores_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scores of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.GenericUnivariateSelect.pvalues_">
+<span class="sig-name descname"><span class="pre">pvalues_</span></span><a class="headerlink" href="#sklearn.feature_selection.GenericUnivariateSelect.pvalues_" title="Permalink to this definition">¶</a></dt>
+<dd><p>p-values of feature scores, None if <cite>score_func</cite> returned scores only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">GenericUnivariateSelect</span><span class="p">,</span> <span class="n">chi2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(569, 30)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformer</span> <span class="o">=</span> <span class="n">GenericUnivariateSelect</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;k_best&#39;</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(569, 20)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_classif" title="sklearn.feature_selection.f_classif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_classif</span></code></a></dt><dd><p>ANOVA F-value between label/feature for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.mutual_info_classif" title="sklearn.feature_selection.mutual_info_classif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_info_classif</span></code></a></dt><dd><p>Mutual information for a discrete target.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chi2</span></code></a></dt><dd><p>Chi-squared stats of non-negative features for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_regression" title="sklearn.feature_selection.f_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_regression</span></code></a></dt><dd><p>F-value between label/feature for regression tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.mutual_info_regression" title="sklearn.feature_selection.mutual_info_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_info_regression</span></code></a></dt><dd><p>Mutual information for a continuous target.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectPercentile" title="sklearn.feature_selection.SelectPercentile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectPercentile</span></code></a></dt><dd><p>Select features based on percentile of the highest scores.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectKBest" title="sklearn.feature_selection.SelectKBest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectKBest</span></code></a></dt><dd><p>Select features based on the k highest scores.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFpr" title="sklearn.feature_selection.SelectFpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFpr</span></code></a></dt><dd><p>Select features based on a false positive rate test.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFdr" title="sklearn.feature_selection.SelectFdr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFdr</span></code></a></dt><dd><p>Select features based on an estimated false discovery rate.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFwe" title="sklearn.feature_selection.SelectFwe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFwe</span></code></a></dt><dd><p>Select features based on family-wise error rate.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFE">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">RFE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">importance_getter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.RFE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.feature_selection.SelectorMixin" title="sklearn.feature_selection._base.SelectorMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection._base.SelectorMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.MetaEstimatorMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Feature ranking with recursive feature elimination.</p>
+<p>Given an external estimator that assigns weights to features (e.g., the
+coefficients of a linear model), the goal of recursive feature elimination
+(RFE) is to select features by recursively considering smaller and smaller
+sets of features. First, the estimator is trained on the initial set of
+features and the importance of each feature is obtained either through
+any specific attribute or callable.
+Then, the least important features are pruned from current set of features.
+That procedure is recursively repeated on the pruned set until the desired
+number of features to select is eventually reached.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<code class="docutils literal notranslate"><span class="pre">Estimator</span></code> instance) – A supervised learning estimator with a <code class="docutils literal notranslate"><span class="pre">fit</span></code> method that provides
+information about feature importance
+(e.g. <cite>coef_</cite>, <cite>feature_importances_</cite>).</p></li>
+<li><p><strong>n_features_to_select</strong> (<em>int</em><em> or </em><em>float</em><em>, </em><em>default=None</em>) – <p>The number of features to select. If <cite>None</cite>, half of the features are
+selected. If integer, the parameter is the absolute number of features
+to select. If float between 0 and 1, it is the fraction of features to
+select.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.24: </span>Added float values for fractions.</p>
+</div>
+</p></li>
+<li><p><strong>step</strong> (<em>int</em><em> or </em><em>float</em><em>, </em><em>default=1</em>) – If greater than or equal to 1, then <code class="docutils literal notranslate"><span class="pre">step</span></code> corresponds to the
+(integer) number of features to remove at each iteration.
+If within (0.0, 1.0), then <code class="docutils literal notranslate"><span class="pre">step</span></code> corresponds to the percentage
+(rounded down) of features to remove at each iteration.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>default=0</em>) – Controls verbosity of output.</p></li>
+<li><p><strong>importance_getter</strong> (<em>str</em><em> or </em><em>callable</em><em>, </em><em>default='auto'</em>) – <p>If ‘auto’, uses the feature importance either through a <cite>coef_</cite>
+or <cite>feature_importances_</cite> attributes of estimator.</p>
+<p>Also accepts a string that specifies an attribute name/path
+for extracting feature importance (implemented with <cite>attrgetter</cite>).
+For example, give <cite>regressor_.coef_</cite> in case of
+<a class="reference internal" href="sklearn.compose.html#sklearn.compose.TransformedTargetRegressor" title="sklearn.compose.TransformedTargetRegressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransformedTargetRegressor</span></code></a>  or
+<cite>named_steps.clf.feature_importances_</cite> in case of
+class:<cite>~sklearn.pipeline.Pipeline</cite> with its last step named <cite>clf</cite>.</p>
+<p>If <cite>callable</cite>, overrides the default feature importance getter.
+The callable is passed with the fitted estimator and it should
+return importance for each feature.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.</span></p>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFE.estimator_">
+<span class="sig-name descname"><span class="pre">estimator_</span></span><a class="headerlink" href="#sklearn.feature_selection.RFE.estimator_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The fitted estimator used to select features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Estimator</span></code> instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFE.n_features_">
+<span class="sig-name descname"><span class="pre">n_features_</span></span><a class="headerlink" href="#sklearn.feature_selection.RFE.n_features_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of selected features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFE.ranking_">
+<span class="sig-name descname"><span class="pre">ranking_</span></span><a class="headerlink" href="#sklearn.feature_selection.RFE.ranking_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The feature ranking, such that <code class="docutils literal notranslate"><span class="pre">ranking_[i]</span></code> corresponds to the
+ranking position of the i-th feature. Selected (i.e., estimated
+best) features are assigned rank 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFE.support_">
+<span class="sig-name descname"><span class="pre">support_</span></span><a class="headerlink" href="#sklearn.feature_selection.RFE.support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mask of selected features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<p>The following example shows how to retrieve the 5 most informative
+features in the Friedman #1 dataset.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_friedman1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">RFE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVR</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_friedman1</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span> <span class="o">=</span> <span class="n">SVR</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">RFE</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">n_features_to_select</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">support_</span>
+<span class="go">array([ True,  True,  True,  True,  True, False, False, False, False,</span>
+<span class="go">       False])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">ranking_</span>
+<span class="go">array([1, 1, 1, 1, 1, 6, 4, 3, 2, 5])</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>Allows NaN/Inf in the input if the underlying estimator does as well.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_selection.RFECV" title="sklearn.feature_selection.RFECV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RFECV</span></code></a></dt><dd><p>Recursive feature elimination with built-in cross-validated selection of the best number of features.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFromModel" title="sklearn.feature_selection.SelectFromModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFromModel</span></code></a></dt><dd><p>Feature selection based on thresholds of importance weights.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SequentialFeatureSelector" title="sklearn.feature_selection.SequentialFeatureSelector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SequentialFeatureSelector</span></code></a></dt><dd><p>Sequential cross-validation based feature selection. Does not rely on importance weights.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id1"><span class="brackets">1</span></dt>
+<dd><p>Guyon, I., Weston, J., Barnhill, S., &amp; Vapnik, V., “Gene selection
+for cancer classification using support vector machines”,
+Mach. Learn., 46(1-3), 389–422, 2002.</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFE.classes_">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">classes_</span></span><a class="headerlink" href="#sklearn.feature_selection.RFE.classes_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFE.decision_function">
+<span class="sig-name descname"><span class="pre">decision_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.RFE.decision_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the decision function of <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>{array-like</em><em> or </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The input samples. Internally, it will be converted to
+<code class="docutils literal notranslate"><span class="pre">dtype=np.float32</span></code> and if a sparse matrix is provided
+to a sparse <code class="docutils literal notranslate"><span class="pre">csr_matrix</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>score</strong> – The decision function of the input samples. The order of the
+classes corresponds to that in the attribute <span class="xref std std-term">classes_</span>.
+Regression and binary classification produce an array of shape
+[n_samples].</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array, shape = [n_samples, n_classes] or [n_samples]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFE.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.RFE.fit" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Fit the RFE model and then the underlying estimator on the selected</dt><dd><p>features.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – The target values.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFE.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.RFE.predict" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Reduce X to the selected features and then predict using the</dt><dd><p>underlying estimator.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array of shape</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – The input samples.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>y</strong> – The predicted target values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array of shape [n_samples]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFE.predict_log_proba">
+<span class="sig-name descname"><span class="pre">predict_log_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.RFE.predict_log_proba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict class log-probabilities for X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array of shape</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – The input samples.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>p</strong> – The class log-probabilities of the input samples. The order of the
+classes corresponds to that in the attribute <span class="xref std std-term">classes_</span>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array of shape (n_samples, n_classes)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFE.predict_proba">
+<span class="sig-name descname"><span class="pre">predict_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.RFE.predict_proba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict class probabilities for X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>{array-like</em><em> or </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The input samples. Internally, it will be converted to
+<code class="docutils literal notranslate"><span class="pre">dtype=np.float32</span></code> and if a sparse matrix is provided
+to a sparse <code class="docutils literal notranslate"><span class="pre">csr_matrix</span></code>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>p</strong> – The class probabilities of the input samples. The order of the
+classes corresponds to that in the attribute <span class="xref std std-term">classes_</span>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array of shape (n_samples, n_classes)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFE.score">
+<span class="sig-name descname"><span class="pre">score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.RFE.score" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Reduce X to the selected features and then return the score of the</dt><dd><p>underlying estimator.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array of shape</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – The input samples.</p></li>
+<li><p><strong>y</strong> (<em>array of shape</em><em> [</em><em>n_samples</em><em>]</em>) – The target values.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFECV">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">RFECV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">importance_getter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.RFECV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.feature_selection.RFE" title="sklearn.feature_selection._rfe.RFE"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection._rfe.RFE</span></code></a></p>
+<p>Feature ranking with recursive feature elimination and cross-validated
+selection of the best number of features.</p>
+<p>See glossary entry for <span class="xref std std-term">cross-validation estimator</span>.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<code class="docutils literal notranslate"><span class="pre">Estimator</span></code> instance) – A supervised learning estimator with a <code class="docutils literal notranslate"><span class="pre">fit</span></code> method that provides
+information about feature importance either through a <code class="docutils literal notranslate"><span class="pre">coef_</span></code>
+attribute or through a <code class="docutils literal notranslate"><span class="pre">feature_importances_</span></code> attribute.</p></li>
+<li><p><strong>step</strong> (<em>int</em><em> or </em><em>float</em><em>, </em><em>default=1</em>) – If greater than or equal to 1, then <code class="docutils literal notranslate"><span class="pre">step</span></code> corresponds to the
+(integer) number of features to remove at each iteration.
+If within (0.0, 1.0), then <code class="docutils literal notranslate"><span class="pre">step</span></code> corresponds to the percentage
+(rounded down) of features to remove at each iteration.
+Note that the last iteration may remove fewer than <code class="docutils literal notranslate"><span class="pre">step</span></code> features in
+order to reach <code class="docutils literal notranslate"><span class="pre">min_features_to_select</span></code>.</p></li>
+<li><p><strong>min_features_to_select</strong> (<em>int</em><em>, </em><em>default=1</em>) – <p>The minimum number of features to be selected. This number of features
+will always be scored, even if the difference between the original
+feature count and <code class="docutils literal notranslate"><span class="pre">min_features_to_select</span></code> isn’t divisible by
+<code class="docutils literal notranslate"><span class="pre">step</span></code>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.</span></p>
+</div>
+</p></li>
+<li><p><strong>cv</strong> (<em>int</em><em>, </em><em>cross-validation generator</em><em> or </em><em>an iterable</em><em>, </em><em>default=None</em>) – <p>Determines the cross-validation splitting strategy.
+Possible inputs for cv are:</p>
+<ul>
+<li><p>None, to use the default 5-fold cross-validation,</p></li>
+<li><p>integer, to specify the number of folds.</p></li>
+<li><p><span class="xref std std-term">CV splitter</span>,</p></li>
+<li><p>An iterable yielding (train, test) splits as arrays of indices.</p></li>
+</ul>
+<p>For integer/None inputs, if <code class="docutils literal notranslate"><span class="pre">y</span></code> is binary or multiclass,
+<a class="reference internal" href="sklearn.model_selection.html#sklearn.model_selection.StratifiedKFold" title="sklearn.model_selection.StratifiedKFold"><code class="xref py py-class docutils literal notranslate"><span class="pre">StratifiedKFold</span></code></a> is used. If the
+estimator is a classifier or if <code class="docutils literal notranslate"><span class="pre">y</span></code> is neither binary nor multiclass,
+<a class="reference internal" href="sklearn.model_selection.html#sklearn.model_selection.KFold" title="sklearn.model_selection.KFold"><code class="xref py py-class docutils literal notranslate"><span class="pre">KFold</span></code></a> is used.</p>
+<p>Refer <span class="xref std std-ref">User Guide</span> for the various
+cross-validation strategies that can be used here.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.22: </span><code class="docutils literal notranslate"><span class="pre">cv</span></code> default value of None changed from 3-fold to 5-fold.</p>
+</div>
+</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – A string (see model evaluation documentation) or
+a scorer callable object / function with signature
+<code class="docutils literal notranslate"><span class="pre">scorer(estimator,</span> <span class="pre">X,</span> <span class="pre">y)</span></code>.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>default=0</em>) – Controls verbosity of output.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – <p>Number of cores to run in parallel while fitting across folds.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <span class="xref std std-term">Glossary</span>
+for more details.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+</p></li>
+<li><p><strong>importance_getter</strong> (<em>str</em><em> or </em><em>callable</em><em>, </em><em>default='auto'</em>) – <p>If ‘auto’, uses the feature importance either through a <cite>coef_</cite>
+or <cite>feature_importances_</cite> attributes of estimator.</p>
+<p>Also accepts a string that specifies an attribute name/path
+for extracting feature importance.
+For example, give <cite>regressor_.coef_</cite> in case of
+<a class="reference internal" href="sklearn.compose.html#sklearn.compose.TransformedTargetRegressor" title="sklearn.compose.TransformedTargetRegressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransformedTargetRegressor</span></code></a>  or
+<cite>named_steps.clf.feature_importances_</cite> in case of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code> with its last step named <cite>clf</cite>.</p>
+<p>If <cite>callable</cite>, overrides the default feature importance getter.
+The callable is passed with the fitted estimator and it should
+return importance for each feature.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.</span></p>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFECV.estimator_">
+<span class="sig-name descname"><span class="pre">estimator_</span></span><a class="headerlink" href="#sklearn.feature_selection.RFECV.estimator_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The fitted estimator used to select features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Estimator</span></code> instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFECV.grid_scores_">
+<span class="sig-name descname"><span class="pre">grid_scores_</span></span><a class="headerlink" href="#sklearn.feature_selection.RFECV.grid_scores_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The cross-validation scores such that
+<code class="docutils literal notranslate"><span class="pre">grid_scores_[i]</span></code> corresponds to
+the CV score of the i-th subset of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_subsets_of_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFECV.n_features_">
+<span class="sig-name descname"><span class="pre">n_features_</span></span><a class="headerlink" href="#sklearn.feature_selection.RFECV.n_features_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of selected features with cross-validation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFECV.ranking_">
+<span class="sig-name descname"><span class="pre">ranking_</span></span><a class="headerlink" href="#sklearn.feature_selection.RFECV.ranking_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The feature ranking, such that <cite>ranking_[i]</cite>
+corresponds to the ranking
+position of the i-th feature.
+Selected (i.e., estimated best)
+features are assigned rank 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>narray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFECV.support_">
+<span class="sig-name descname"><span class="pre">support_</span></span><a class="headerlink" href="#sklearn.feature_selection.RFECV.support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mask of selected features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>The size of <code class="docutils literal notranslate"><span class="pre">grid_scores_</span></code> is equal to
+<code class="docutils literal notranslate"><span class="pre">ceil((n_features</span> <span class="pre">-</span> <span class="pre">min_features_to_select)</span> <span class="pre">/</span> <span class="pre">step)</span> <span class="pre">+</span> <span class="pre">1</span></code>,
+where step is the number of features removed at each iteration.</p>
+<p>Allows NaN/Inf in the input if the underlying estimator does as well.</p>
+<p class="rubric">Examples</p>
+<p>The following example shows how to retrieve the a-priori not known 5
+informative features in the Friedman #1 dataset.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_friedman1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">RFECV</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVR</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_friedman1</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span> <span class="o">=</span> <span class="n">SVR</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">RFECV</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">support_</span>
+<span class="go">array([ True,  True,  True,  True,  True, False, False, False, False,</span>
+<span class="go">       False])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">ranking_</span>
+<span class="go">array([1, 1, 1, 1, 1, 6, 4, 3, 2, 5])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_selection.RFE" title="sklearn.feature_selection.RFE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RFE</span></code></a></dt><dd><p>Recursive feature elimination.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets">1</span></dt>
+<dd><p>Guyon, I., Weston, J., Barnhill, S., &amp; Vapnik, V., “Gene selection
+for cancer classification using support vector machines”,
+Mach. Learn., 46(1-3), 389–422, 2002.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.RFECV.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.RFECV.fit" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Fit the RFE model and automatically tune the number of selected</dt><dd><p>features.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training vector, where <cite>n_samples</cite> is the number of samples and
+<cite>n_features</cite> is the total number of features.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Target values (integers for classification, real numbers for
+regression).</p></li>
+<li><p><strong>groups</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>) or </em><em>None</em><em>, </em><em>default=None</em>) – <p>Group labels for the samples used while splitting the dataset into
+train/test set. Only used in conjunction with a “Group” <span class="xref std std-term">cv</span>
+instance (e.g., <a class="reference internal" href="sklearn.model_selection.html#sklearn.model_selection.GroupKFold" title="sklearn.model_selection.GroupKFold"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupKFold</span></code></a>).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.</span></p>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFdr">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">SelectFdr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">score_func=&lt;function</span> <span class="pre">f_classif&gt;</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">alpha=0.05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.SelectFdr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection._univariate_selection._BaseFilter</span></code></p>
+<p>Filter: Select the p-values for an estimated false discovery rate</p>
+<p>This uses the Benjamini-Hochberg procedure. <code class="docutils literal notranslate"><span class="pre">alpha</span></code> is an upper bound
+on the expected false discovery rate.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>score_func</strong> (<em>callable</em><em>, </em><em>default=f_classif</em>) – Function taking two arrays X and y, and returning a pair of arrays
+(scores, pvalues).
+Default is f_classif (see below “See Also”). The default function only
+works with classification tasks.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>default=5e-2</em>) – The highest uncorrected p-value for features to keep.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectFdr</span><span class="p">,</span> <span class="n">chi2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(569, 30)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="n">SelectFdr</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(569, 16)</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFdr.scores_">
+<span class="sig-name descname"><span class="pre">scores_</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectFdr.scores_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scores of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFdr.pvalues_">
+<span class="sig-name descname"><span class="pre">pvalues_</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectFdr.pvalues_" title="Permalink to this definition">¶</a></dt>
+<dd><p>p-values of feature scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/False_discovery_rate">https://en.wikipedia.org/wiki/False_discovery_rate</a></p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_classif" title="sklearn.feature_selection.f_classif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_classif</span></code></a></dt><dd><p>ANOVA F-value between label/feature for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.mutual_info_classif" title="sklearn.feature_selection.mutual_info_classif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_info_classif</span></code></a></dt><dd><p>Mutual information for a discrete target.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chi2</span></code></a></dt><dd><p>Chi-squared stats of non-negative features for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_regression" title="sklearn.feature_selection.f_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_regression</span></code></a></dt><dd><p>F-value between label/feature for regression tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.mutual_info_regression" title="sklearn.feature_selection.mutual_info_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_info_regression</span></code></a></dt><dd><p>Mutual information for a contnuous target.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectPercentile" title="sklearn.feature_selection.SelectPercentile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectPercentile</span></code></a></dt><dd><p>Select features based on percentile of the highest scores.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectKBest" title="sklearn.feature_selection.SelectKBest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectKBest</span></code></a></dt><dd><p>Select features based on the k highest scores.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFpr" title="sklearn.feature_selection.SelectFpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFpr</span></code></a></dt><dd><p>Select features based on a false positive rate test.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFwe" title="sklearn.feature_selection.SelectFwe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFwe</span></code></a></dt><dd><p>Select features based on family-wise error rate.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.GenericUnivariateSelect" title="sklearn.feature_selection.GenericUnivariateSelect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericUnivariateSelect</span></code></a></dt><dd><p>Univariate feature selector with configurable mode.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFpr">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">SelectFpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">score_func=&lt;function</span> <span class="pre">f_classif&gt;</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">alpha=0.05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.SelectFpr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection._univariate_selection._BaseFilter</span></code></p>
+<p>Filter: Select the pvalues below alpha based on a FPR test.</p>
+<p>FPR test stands for False Positive Rate test. It controls the total
+amount of false detections.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>score_func</strong> (<em>callable</em><em>, </em><em>default=f_classif</em>) – Function taking two arrays X and y, and returning a pair of arrays
+(scores, pvalues).
+Default is f_classif (see below “See Also”). The default function only
+works with classification tasks.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>default=5e-2</em>) – The highest p-value for features to be kept.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFpr.scores_">
+<span class="sig-name descname"><span class="pre">scores_</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectFpr.scores_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scores of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFpr.pvalues_">
+<span class="sig-name descname"><span class="pre">pvalues_</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectFpr.pvalues_" title="Permalink to this definition">¶</a></dt>
+<dd><p>p-values of feature scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectFpr</span><span class="p">,</span> <span class="n">chi2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(569, 30)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="n">SelectFpr</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(569, 16)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_classif" title="sklearn.feature_selection.f_classif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_classif</span></code></a></dt><dd><p>ANOVA F-value between label/feature for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chi2</span></code></a></dt><dd><p>Chi-squared stats of non-negative features for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.mutual_info_classif" title="sklearn.feature_selection.mutual_info_classif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_info_classif</span></code></a></dt><dd><p>Mutual information for a discrete target.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_regression" title="sklearn.feature_selection.f_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_regression</span></code></a></dt><dd><p>F-value between label/feature for regression tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.mutual_info_regression" title="sklearn.feature_selection.mutual_info_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_info_regression</span></code></a></dt><dd><p>Mutual information for a continuous target.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectPercentile" title="sklearn.feature_selection.SelectPercentile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectPercentile</span></code></a></dt><dd><p>Select features based on percentile of the highest scores.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectKBest" title="sklearn.feature_selection.SelectKBest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectKBest</span></code></a></dt><dd><p>Select features based on the k highest scores.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFdr" title="sklearn.feature_selection.SelectFdr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFdr</span></code></a></dt><dd><p>Select features based on an estimated false discovery rate.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFwe" title="sklearn.feature_selection.SelectFwe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFwe</span></code></a></dt><dd><p>Select features based on family-wise error rate.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.GenericUnivariateSelect" title="sklearn.feature_selection.GenericUnivariateSelect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericUnivariateSelect</span></code></a></dt><dd><p>Univariate feature selector with configurable mode.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFromModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">SelectFromModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">importance_getter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.SelectFromModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.MetaEstimatorMixin</span></code>, <a class="reference internal" href="#sklearn.feature_selection.SelectorMixin" title="sklearn.feature_selection._base.SelectorMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection._base.SelectorMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Meta-transformer for selecting features based on importance weights.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.17.</span></p>
+</div>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<em>object</em>) – The base estimator from which the transformer is built.
+This can be both a fitted (if <code class="docutils literal notranslate"><span class="pre">prefit</span></code> is set to True)
+or a non-fitted estimator. The estimator should have a
+<code class="docutils literal notranslate"><span class="pre">feature_importances_</span></code> or <code class="docutils literal notranslate"><span class="pre">coef_</span></code> attribute after fitting.
+Otherwise, the <code class="docutils literal notranslate"><span class="pre">importance_getter</span></code> parameter should be used.</p></li>
+<li><p><strong>threshold</strong> (<em>string</em><em> or </em><em>float</em><em>, </em><em>default=None</em>) – The threshold value to use for feature selection. Features whose
+importance is greater or equal are kept while the others are
+discarded. If “median” (resp. “mean”), then the <code class="docutils literal notranslate"><span class="pre">threshold</span></code> value is
+the median (resp. the mean) of the feature importances. A scaling
+factor (e.g., “1.25*mean”) may also be used. If None and if the
+estimator has a parameter penalty set to l1, either explicitly
+or implicitly (e.g, Lasso), the threshold used is 1e-5.
+Otherwise, “mean” is used by default.</p></li>
+<li><p><strong>prefit</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Whether a prefit model is expected to be passed into the constructor
+directly or not. If True, <code class="docutils literal notranslate"><span class="pre">transform</span></code> must be called directly
+and SelectFromModel cannot be used with <code class="docutils literal notranslate"><span class="pre">cross_val_score</span></code>,
+<code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> and similar utilities that clone the estimator.
+Otherwise train the model using <code class="docutils literal notranslate"><span class="pre">fit</span></code> and then <code class="docutils literal notranslate"><span class="pre">transform</span></code> to do
+feature selection.</p></li>
+<li><p><strong>norm_order</strong> (<em>non-zero int</em><em>, </em><em>inf</em><em>, </em><em>-inf</em><em>, </em><em>default=1</em>) – Order of the norm used to filter the vectors of coefficients below
+<code class="docutils literal notranslate"><span class="pre">threshold</span></code> in the case where the <code class="docutils literal notranslate"><span class="pre">coef_</span></code> attribute of the
+estimator is of dimension 2.</p></li>
+<li><p><strong>max_features</strong> (<em>int</em><em>, </em><em>default=None</em>) – <p>The maximum number of features to select.
+To only select based on <code class="docutils literal notranslate"><span class="pre">max_features</span></code>, set <code class="docutils literal notranslate"><span class="pre">threshold=-np.inf</span></code>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.</span></p>
+</div>
+</p></li>
+<li><p><strong>importance_getter</strong> (<em>str</em><em> or </em><em>callable</em><em>, </em><em>default='auto'</em>) – <p>If ‘auto’, uses the feature importance either through a <code class="docutils literal notranslate"><span class="pre">coef_</span></code>
+attribute or <code class="docutils literal notranslate"><span class="pre">feature_importances_</span></code> attribute of estimator.</p>
+<p>Also accepts a string that specifies an attribute name/path
+for extracting feature importance (implemented with <cite>attrgetter</cite>).
+For example, give <cite>regressor_.coef_</cite> in case of
+<a class="reference internal" href="sklearn.compose.html#sklearn.compose.TransformedTargetRegressor" title="sklearn.compose.TransformedTargetRegressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransformedTargetRegressor</span></code></a>  or
+<cite>named_steps.clf.feature_importances_</cite> in case of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Pipeline</span></code> with its last step named <cite>clf</cite>.</p>
+<p>If <cite>callable</cite>, overrides the default feature importance getter.
+The callable is passed with the fitted estimator and it should
+return importance for each feature.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.</span></p>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFromModel.estimator_">
+<span class="sig-name descname"><span class="pre">estimator_</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectFromModel.estimator_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The base estimator from which the transformer is built.
+This is stored only when a non-fitted estimator is passed to the
+<code class="docutils literal notranslate"><span class="pre">SelectFromModel</span></code>, i.e when prefit is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>an estimator</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFromModel.threshold_">
+<span class="sig-name descname"><span class="pre">threshold_</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectFromModel.threshold_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The threshold value used for feature selection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>Allows NaN/Inf in the input if the underlying estimator does as well.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectFromModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.87</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.34</span><span class="p">,</span>  <span class="mf">0.31</span> <span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="o">-</span><span class="mf">2.79</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.85</span> <span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span><span class="o">-</span><span class="mf">1.34</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.48</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.55</span> <span class="p">],</span>
+<span class="gp">... </span>     <span class="p">[</span> <span class="mf">1.92</span><span class="p">,</span>  <span class="mf">1.48</span><span class="p">,</span>  <span class="mf">0.65</span> <span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">SelectFromModel</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">LogisticRegression</span><span class="p">())</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">estimator_</span><span class="o">.</span><span class="n">coef_</span>
+<span class="go">array([[-0.3252302 ,  0.83462377,  0.49750423]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">threshold_</span>
+<span class="go">0.55245...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">get_support</span><span class="p">()</span>
+<span class="go">array([False,  True, False])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[-1.34],</span>
+<span class="go">       [-0.02],</span>
+<span class="go">       [-0.48],</span>
+<span class="go">       [ 1.48]])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_selection.RFE" title="sklearn.feature_selection.RFE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RFE</span></code></a></dt><dd><p>Recursive feature elimination based on importance weights.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.RFECV" title="sklearn.feature_selection.RFECV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RFECV</span></code></a></dt><dd><p>Recursive feature elimination with built-in cross-validated selection of the best number of features.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SequentialFeatureSelector" title="sklearn.feature_selection.SequentialFeatureSelector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SequentialFeatureSelector</span></code></a></dt><dd><p>Sequential cross-validation based feature selection. Does not rely on importance weights.</p>
+</dd>
+</dl>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFromModel.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fit_params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.SelectFromModel.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the SelectFromModel meta-transformer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – The target values (integers that correspond to classes in
+classification, real numbers in regression).</p></li>
+<li><p><strong>**fit_params</strong> (<em>Other estimator specific parameters</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFromModel.n_features_in_">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">n_features_in_</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectFromModel.n_features_in_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFromModel.partial_fit">
+<span class="sig-name descname"><span class="pre">partial_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fit_params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.SelectFromModel.partial_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the SelectFromModel meta-transformer only once.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The training input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – The target values (integers that correspond to classes in
+classification, real numbers in regression).</p></li>
+<li><p><strong>**fit_params</strong> (<em>Other estimator specific parameters</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">threshold_</span></span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFwe">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">SelectFwe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">score_func=&lt;function</span> <span class="pre">f_classif&gt;</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">alpha=0.05</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.SelectFwe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection._univariate_selection._BaseFilter</span></code></p>
+<p>Filter: Select the p-values corresponding to Family-wise error rate</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>score_func</strong> (<em>callable</em><em>, </em><em>default=f_classif</em>) – Function taking two arrays X and y, and returning a pair of arrays
+(scores, pvalues).
+Default is f_classif (see below “See Also”). The default function only
+works with classification tasks.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>default=5e-2</em>) – The highest uncorrected p-value for features to keep.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectFwe</span><span class="p">,</span> <span class="n">chi2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(569, 30)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="n">SelectFwe</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(569, 15)</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFwe.scores_">
+<span class="sig-name descname"><span class="pre">scores_</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectFwe.scores_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scores of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectFwe.pvalues_">
+<span class="sig-name descname"><span class="pre">pvalues_</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectFwe.pvalues_" title="Permalink to this definition">¶</a></dt>
+<dd><p>p-values of feature scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_classif" title="sklearn.feature_selection.f_classif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_classif</span></code></a></dt><dd><p>ANOVA F-value between label/feature for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chi2</span></code></a></dt><dd><p>Chi-squared stats of non-negative features for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_regression" title="sklearn.feature_selection.f_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_regression</span></code></a></dt><dd><p>F-value between label/feature for regression tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectPercentile" title="sklearn.feature_selection.SelectPercentile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectPercentile</span></code></a></dt><dd><p>Select features based on percentile of the highest scores.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectKBest" title="sklearn.feature_selection.SelectKBest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectKBest</span></code></a></dt><dd><p>Select features based on the k highest scores.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFpr" title="sklearn.feature_selection.SelectFpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFpr</span></code></a></dt><dd><p>Select features based on a false positive rate test.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFdr" title="sklearn.feature_selection.SelectFdr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFdr</span></code></a></dt><dd><p>Select features based on an estimated false discovery rate.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.GenericUnivariateSelect" title="sklearn.feature_selection.GenericUnivariateSelect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericUnivariateSelect</span></code></a></dt><dd><p>Univariate feature selector with configurable mode.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectKBest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">SelectKBest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">score_func=&lt;function</span> <span class="pre">f_classif&gt;</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">k=10</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.SelectKBest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection._univariate_selection._BaseFilter</span></code></p>
+<p>Select features according to the k highest scores.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>score_func</strong> (<em>callable</em><em>, </em><em>default=f_classif</em>) – <p>Function taking two arrays X and y, and returning a pair of arrays
+(scores, pvalues) or a single array with scores.
+Default is f_classif (see below “See Also”). The default function only
+works with classification tasks.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+</p></li>
+<li><p><strong>k</strong> (<em>int</em><em> or </em><em>&quot;all&quot;</em><em>, </em><em>default=10</em>) – Number of top features to select.
+The “all” option bypasses selection, for use in a parameter search.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectKBest.scores_">
+<span class="sig-name descname"><span class="pre">scores_</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectKBest.scores_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scores of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectKBest.pvalues_">
+<span class="sig-name descname"><span class="pre">pvalues_</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectKBest.pvalues_" title="Permalink to this definition">¶</a></dt>
+<dd><p>p-values of feature scores, None if <cite>score_func</cite> returned only scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectKBest</span><span class="p">,</span> <span class="n">chi2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1797, 64)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="n">SelectKBest</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1797, 20)</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>Ties between features with equal scores will be broken in an unspecified
+way.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_classif" title="sklearn.feature_selection.f_classif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_classif</span></code></a></dt><dd><p>ANOVA F-value between label/feature for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.mutual_info_classif" title="sklearn.feature_selection.mutual_info_classif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_info_classif</span></code></a></dt><dd><p>Mutual information for a discrete target.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chi2</span></code></a></dt><dd><p>Chi-squared stats of non-negative features for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_regression" title="sklearn.feature_selection.f_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_regression</span></code></a></dt><dd><p>F-value between label/feature for regression tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.mutual_info_regression" title="sklearn.feature_selection.mutual_info_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_info_regression</span></code></a></dt><dd><p>Mutual information for a continuous target.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectPercentile" title="sklearn.feature_selection.SelectPercentile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectPercentile</span></code></a></dt><dd><p>Select features based on percentile of the highest scores.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFpr" title="sklearn.feature_selection.SelectFpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFpr</span></code></a></dt><dd><p>Select features based on a false positive rate test.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFdr" title="sklearn.feature_selection.SelectFdr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFdr</span></code></a></dt><dd><p>Select features based on an estimated false discovery rate.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFwe" title="sklearn.feature_selection.SelectFwe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFwe</span></code></a></dt><dd><p>Select features based on family-wise error rate.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.GenericUnivariateSelect" title="sklearn.feature_selection.GenericUnivariateSelect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericUnivariateSelect</span></code></a></dt><dd><p>Univariate feature selector with configurable mode.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectPercentile">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">SelectPercentile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">score_func=&lt;function</span> <span class="pre">f_classif&gt;</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">percentile=10</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.SelectPercentile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection._univariate_selection._BaseFilter</span></code></p>
+<p>Select features according to a percentile of the highest scores.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>score_func</strong> (<em>callable</em><em>, </em><em>default=f_classif</em>) – <p>Function taking two arrays X and y, and returning a pair of arrays
+(scores, pvalues) or a single array with scores.
+Default is f_classif (see below “See Also”). The default function only
+works with classification tasks.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+</p></li>
+<li><p><strong>percentile</strong> (<em>int</em><em>, </em><em>default=10</em>) – Percent of features to keep.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectPercentile.scores_">
+<span class="sig-name descname"><span class="pre">scores_</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectPercentile.scores_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scores of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectPercentile.pvalues_">
+<span class="sig-name descname"><span class="pre">pvalues_</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectPercentile.pvalues_" title="Permalink to this definition">¶</a></dt>
+<dd><p>p-values of feature scores, None if <cite>score_func</cite> returned only scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectPercentile</span><span class="p">,</span> <span class="n">chi2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1797, 64)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="n">SelectPercentile</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1797, 7)</span>
+</pre></div>
+</div>
+<p class="rubric">Notes</p>
+<p>Ties between features with equal scores will be broken in an unspecified
+way.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_classif" title="sklearn.feature_selection.f_classif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_classif</span></code></a></dt><dd><p>ANOVA F-value between label/feature for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.mutual_info_classif" title="sklearn.feature_selection.mutual_info_classif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_info_classif</span></code></a></dt><dd><p>Mutual information for a discrete target.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chi2</span></code></a></dt><dd><p>Chi-squared stats of non-negative features for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_regression" title="sklearn.feature_selection.f_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_regression</span></code></a></dt><dd><p>F-value between label/feature for regression tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.mutual_info_regression" title="sklearn.feature_selection.mutual_info_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_info_regression</span></code></a></dt><dd><p>Mutual information for a continuous target.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectKBest" title="sklearn.feature_selection.SelectKBest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectKBest</span></code></a></dt><dd><p>Select features based on the k highest scores.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFpr" title="sklearn.feature_selection.SelectFpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFpr</span></code></a></dt><dd><p>Select features based on a false positive rate test.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFdr" title="sklearn.feature_selection.SelectFdr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFdr</span></code></a></dt><dd><p>Select features based on an estimated false discovery rate.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFwe" title="sklearn.feature_selection.SelectFwe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFwe</span></code></a></dt><dd><p>Select features based on family-wise error rate.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.GenericUnivariateSelect" title="sklearn.feature_selection.GenericUnivariateSelect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericUnivariateSelect</span></code></a></dt><dd><p>Univariate feature selector with configurable mode.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectorMixin">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">SelectorMixin</span></span><a class="headerlink" href="#sklearn.feature_selection.SelectorMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Transformer mixin that performs feature selection given a support mask</p>
+<p>This mixin provides a feature selector implementation with <cite>transform</cite> and
+<cite>inverse_transform</cite> functionality given an implementation of
+<cite>_get_support_mask</cite>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectorMixin.get_support">
+<span class="sig-name descname"><span class="pre">get_support</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.SelectorMixin.get_support" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a mask, or integer index, of the features selected</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>indices</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, the return value will be an array of integers, rather
+than a boolean mask.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>support</strong> – An index that selects the retained features from a feature vector.
+If <cite>indices</cite> is False, this is a boolean array of shape
+[# input features], in which an element is True iff its
+corresponding feature is selected for retention. If <cite>indices</cite> is
+True, this is an integer array of shape [# output features] whose
+values are indices into the input feature vector.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectorMixin.inverse_transform">
+<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.SelectorMixin.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reverse the transformation operation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array of shape</em><em> [</em><em>n_samples</em><em>, </em><em>n_selected_features</em><em>]</em>) – The input samples.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_r</strong> – <cite>X</cite> with columns of zeros inserted where features would have
+been removed by <a class="reference internal" href="#sklearn.feature_selection.SelectorMixin.transform" title="sklearn.feature_selection.SelectorMixin.transform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transform()</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array of shape [n_samples, n_original_features]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SelectorMixin.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.SelectorMixin.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduce X to the selected features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array of shape</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – The input samples.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_r</strong> – The input samples with only the selected features.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array of shape [n_samples, n_selected_features]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SequentialFeatureSelector">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">SequentialFeatureSelector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimator</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_features_to_select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'forward'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.SequentialFeatureSelector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.feature_selection.SelectorMixin" title="sklearn.feature_selection._base.SelectorMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection._base.SelectorMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.MetaEstimatorMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Transformer that performs Sequential Feature Selection.</p>
+<p>This Sequential Feature Selector adds (forward selection) or
+removes (backward selection) features to form a feature subset in a
+greedy fashion. At each stage, this estimator chooses the best feature to
+add or remove based on the cross-validation score of an estimator.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<em>estimator instance</em>) – An unfitted estimator.</p></li>
+<li><p><strong>n_features_to_select</strong> (<em>int</em><em> or </em><em>float</em><em>, </em><em>default=None</em>) – The number of features to select. If <cite>None</cite>, half of the features are
+selected. If integer, the parameter is the absolute number of features
+to select. If float between 0 and 1, it is the fraction of features to
+select.</p></li>
+<li><p><strong>direction</strong> (<em>{'forward'</em><em>, </em><em>'backward'}</em><em>, </em><em>default='forward'</em>) – Whether to perform forward selection or backward selection.</p></li>
+<li><p><strong>scoring</strong> (<em>str</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em> or </em><em>dict</em><em>, </em><em>default=None</em>) – <p>A single str (see <span class="xref std std-ref">scoring_parameter</span>) or a callable
+(see <span class="xref std std-ref">scoring</span>) to evaluate the predictions on the test set.</p>
+<p>NOTE that when using custom scorers, each scorer should return a single
+value. Metric functions returning a list/array of values can be wrapped
+into multiple scorers that return one value each.</p>
+<p>If None, the estimator’s score method is used.</p>
+</p></li>
+<li><p><strong>cv</strong> (<em>int</em><em>, </em><em>cross-validation generator</em><em> or </em><em>an iterable</em><em>, </em><em>default=None</em>) – <p>Determines the cross-validation splitting strategy.
+Possible inputs for cv are:</p>
+<ul>
+<li><p>None, to use the default 5-fold cross validation,</p></li>
+<li><p>integer, to specify the number of folds in a <cite>(Stratified)KFold</cite>,</p></li>
+<li><p><span class="xref std std-term">CV splitter</span>,</p></li>
+<li><p>An iterable yielding (train, test) splits as arrays of indices.</p></li>
+</ul>
+<p>For integer/None inputs, if the estimator is a classifier and <code class="docutils literal notranslate"><span class="pre">y</span></code> is
+either binary or multiclass, <code class="xref py py-class docutils literal notranslate"><span class="pre">StratifiedKFold</span></code> is used. In all
+other cases, <code class="xref py py-class docutils literal notranslate"><span class="pre">KFold</span></code> is used. These splitters are instantiated
+with <cite>shuffle=False</cite> so the splits will be the same across calls.</p>
+<p>Refer <span class="xref std std-ref">User Guide</span> for the various
+cross-validation strategies that can be used here.</p>
+</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>default=None</em>) – Number of jobs to run in parallel. When evaluating a new feature to
+add or remove, the cross-validation procedure is parallel over the
+folds.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <span class="xref std std-term">Glossary</span>
+for more details.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SequentialFeatureSelector.n_features_to_select_">
+<span class="sig-name descname"><span class="pre">n_features_to_select_</span></span><a class="headerlink" href="#sklearn.feature_selection.SequentialFeatureSelector.n_features_to_select_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of features that were selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SequentialFeatureSelector.support_">
+<span class="sig-name descname"><span class="pre">support_</span></span><a class="headerlink" href="#sklearn.feature_selection.SequentialFeatureSelector.support_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mask of selected features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_features,), dtype=bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_selection.RFE" title="sklearn.feature_selection.RFE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RFE</span></code></a></dt><dd><p>Recursive feature elimination based on importance weights.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.RFECV" title="sklearn.feature_selection.RFECV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RFECV</span></code></a></dt><dd><p>Recursive feature elimination based on importance weights, with automatic selection of the number of features.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFromModel" title="sklearn.feature_selection.SelectFromModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFromModel</span></code></a></dt><dd><p>Feature selection based on thresholds of importance weights.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SequentialFeatureSelector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sfs</span> <span class="o">=</span> <span class="n">SequentialFeatureSelector</span><span class="p">(</span><span class="n">knn</span><span class="p">,</span> <span class="n">n_features_to_select</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sfs</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">SequentialFeatureSelector(estimator=KNeighborsClassifier(n_neighbors=3),</span>
+<span class="go">                          n_features_to_select=3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sfs</span><span class="o">.</span><span class="n">get_support</span><span class="p">()</span>
+<span class="go">array([ True, False,  True,  True])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sfs</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(150, 3)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.SequentialFeatureSelector.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.SequentialFeatureSelector.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn the features to select.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training vectors.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Target values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.feature_selection.VarianceThreshold">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">VarianceThreshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.VarianceThreshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.feature_selection.SelectorMixin" title="sklearn.feature_selection._base.SelectorMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.feature_selection._base.SelectorMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Feature selector that removes all low-variance features.</p>
+<p>This feature selection algorithm looks only at the features (X), not the
+desired outputs (y), and can thus be used for unsupervised learning.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>threshold</strong> (<em>float</em><em>, </em><em>default=0</em>) – Features with a training-set variance lower than this threshold will
+be removed. The default is to keep all features with non-zero variance,
+i.e. remove the features that have the same value in all samples.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.feature_selection.VarianceThreshold.variances_">
+<span class="sig-name descname"><span class="pre">variances_</span></span><a class="headerlink" href="#sklearn.feature_selection.VarianceThreshold.variances_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Variances of individual features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array, shape (n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>Allows NaN in the input.
+Raises ValueError if no feature in X meets the variance threshold.</p>
+<p class="rubric">Examples</p>
+<p>The following dataset has integer features, two of which are the same
+in every sample. These are removed with the default setting for threshold:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">VarianceThreshold</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="go">array([[2, 0],</span>
+<span class="go">       [1, 4],</span>
+<span class="go">       [1, 1]])</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.feature_selection.VarianceThreshold.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.VarianceThreshold.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn empirical variances from X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix}</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Sample vectors from which to compute variances.</p></li>
+<li><p><strong>y</strong> (<em>any</em><em>, </em><em>default=None</em>) – Ignored. This parameter exists only for compatibility with
+sklearn.pipeline.Pipeline.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_selection.chi2">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">chi2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.chi2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute chi-squared stats between each non-negative feature and class.</p>
+<p>This score can be used to select the n_features features with the
+highest values for the test chi-squared statistic from X, which must
+contain only non-negative features such as booleans or frequencies
+(e.g., term counts in document classification), relative to the classes.</p>
+<p>Recall that the chi-square test measures dependence between stochastic
+variables, so using this function “weeds out” the features that are the
+most likely to be independent of class and therefore irrelevant for
+classification.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Sample vectors.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Target vector (class labels).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>chi2</strong> (<em>array, shape = (n_features,)</em>) – chi2 statistics of each feature.</p></li>
+<li><p><strong>pval</strong> (<em>array, shape = (n_features,)</em>) – p-values of each feature.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Complexity of this algorithm is O(n_classes * n_features).</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_classif" title="sklearn.feature_selection.f_classif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_classif</span></code></a></dt><dd><p>ANOVA F-value between label/feature for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_regression" title="sklearn.feature_selection.f_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_regression</span></code></a></dt><dd><p>F-value between label/feature for regression tasks.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_selection.f_classif">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">f_classif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.f_classif" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the ANOVA F-value for the provided sample.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – The set of regressors that will be tested sequentially.</p></li>
+<li><p><strong>y</strong> (<em>array of shape</em><em>(</em><em>n_samples</em><em>)</em>) – The data matrix.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>F</strong> (<em>array, shape = [n_features,]</em>) – The set of F values.</p></li>
+<li><p><strong>pval</strong> (<em>array, shape = [n_features,]</em>) – The set of p-values.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chi2</span></code></a></dt><dd><p>Chi-squared stats of non-negative features for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_regression" title="sklearn.feature_selection.f_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_regression</span></code></a></dt><dd><p>F-value between label/feature for regression tasks.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_selection.f_oneway">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">f_oneway</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.f_oneway" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a 1-way ANOVA.</p>
+<p>The one-way ANOVA tests the null hypothesis that 2 or more groups have
+the same population mean. The test is applied to samples from two or
+more groups, possibly with differing sizes.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> (<em>array-like</em><em>, </em><em>sparse matrices</em>) – sample1, sample2… The sample measurements should be given as
+arguments.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>F-value</strong> (<em>float</em>) – The computed F-value of the test.</p></li>
+<li><p><strong>p-value</strong> (<em>float</em>) – The associated p-value from the F-distribution.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The ANOVA test has important assumptions that must be satisfied in order
+for the associated p-value to be valid.</p>
+<ol class="arabic simple">
+<li><p>The samples are independent</p></li>
+<li><p>Each sample is from a normally distributed population</p></li>
+<li><p>The population standard deviations of the groups are all equal. This
+property is known as homoscedasticity.</p></li>
+</ol>
+<p>If these assumptions are not true for a given set of data, it may still be
+possible to use the Kruskal-Wallis H-test (<a href="#id26"><span class="problematic" id="id27">`scipy.stats.kruskal`_</span></a>) although
+with some loss of power.</p>
+<p>The algorithm is from Heiman[2], pp.394-7.</p>
+<p>See <code class="docutils literal notranslate"><span class="pre">scipy.stats.f_oneway</span></code> that should give the same results while
+being less efficient.</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets">1</span></dt>
+<dd><p>Lowry, Richard.  “Concepts and Applications of Inferential
+Statistics”. Chapter 14.
+<a class="reference external" href="http://faculty.vassar.edu/lowry/ch14pt1.html">http://faculty.vassar.edu/lowry/ch14pt1.html</a></p>
+</dd>
+<dt class="label" id="id4"><span class="brackets">2</span></dt>
+<dd><p>Heiman, G.W.  Research Methods in Statistics. 2002.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_selection.f_regression">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">f_regression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.f_regression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Univariate linear regression tests.</p>
+<p>Linear model for testing the individual effect of each of many regressors.
+This is a scoring function to be used in a feature selection procedure, not
+a free standing feature selection procedure.</p>
+<p>This is done in 2 steps:</p>
+<ol class="arabic simple">
+<li><p>The correlation between each regressor and the target is computed,
+that is, ((X[:, i] - mean(X[:, i])) * (y - mean_y)) / (std(X[:, i]) *
+std(y)).</p></li>
+<li><p>It is converted to an F score then to a p-value.</p></li>
+</ol>
+<p>For more on usage see the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix}  shape =</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The set of regressors that will be tested sequentially.</p></li>
+<li><p><strong>y</strong> (<em>array of shape</em><em>(</em><em>n_samples</em><em>)</em><em></em>) – The data matrix</p></li>
+<li><p><strong>center</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If true, X and y will be centered.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>F</strong> (<em>array, shape=(n_features,)</em>) – F values of features.</p></li>
+<li><p><strong>pval</strong> (<em>array, shape=(n_features,)</em>) – p-values of F-scores.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#sklearn.feature_selection.mutual_info_regression" title="sklearn.feature_selection.mutual_info_regression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutual_info_regression</span></code></a></dt><dd><p>Mutual information for a continuous target.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.f_classif" title="sklearn.feature_selection.f_classif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_classif</span></code></a></dt><dd><p>ANOVA F-value between label/feature for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.chi2" title="sklearn.feature_selection.chi2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">chi2</span></code></a></dt><dd><p>Chi-squared stats of non-negative features for classification tasks.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectKBest" title="sklearn.feature_selection.SelectKBest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectKBest</span></code></a></dt><dd><p>Select features based on the k highest scores.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFpr" title="sklearn.feature_selection.SelectFpr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFpr</span></code></a></dt><dd><p>Select features based on a false positive rate test.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFdr" title="sklearn.feature_selection.SelectFdr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFdr</span></code></a></dt><dd><p>Select features based on an estimated false discovery rate.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectFwe" title="sklearn.feature_selection.SelectFwe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectFwe</span></code></a></dt><dd><p>Select features based on family-wise error rate.</p>
+</dd>
+<dt><a class="reference internal" href="#sklearn.feature_selection.SelectPercentile" title="sklearn.feature_selection.SelectPercentile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SelectPercentile</span></code></a></dt><dd><p>Select features based on percentile of the highest scores.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_selection.mutual_info_classif">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">mutual_info_classif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.mutual_info_classif" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate mutual information for a discrete target variable.</p>
+<p>Mutual information (MI) <a href="#id28"><span class="problematic" id="id5">[1]_</span></a> between two random variables is a non-negative
+value, which measures the dependency between the variables. It is equal
+to zero if and only if two random variables are independent, and higher
+values mean higher dependency.</p>
+<p>The function relies on nonparametric methods based on entropy estimation
+from k-nearest neighbors distances as described in <a href="#id29"><span class="problematic" id="id6">[2]_</span></a> and <a href="#id30"><span class="problematic" id="id7">[3]_</span></a>. Both
+methods are based on the idea originally proposed in <a href="#id31"><span class="problematic" id="id8">[4]_</span></a>.</p>
+<p>It can be used for univariate features selection, read more in the
+<span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em> or </em><em>sparse matrix</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Feature matrix.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Target vector.</p></li>
+<li><p><strong>discrete_features</strong> (<em>{'auto'</em><em>, </em><em>bool</em><em>, </em><em>array-like}</em><em>, </em><em>default='auto'</em>) – If bool, then determines whether to consider all features discrete
+or continuous. If array, then it should be either a boolean mask
+with shape (n_features,) or array with indices of discrete features.
+If ‘auto’, it is assigned to False for dense <cite>X</cite> and to True for
+sparse <cite>X</cite>.</p></li>
+<li><p><strong>n_neighbors</strong> (<em>int</em><em>, </em><em>default=3</em>) – Number of neighbors to use for MI estimation for continuous variables,
+see <a href="#id32"><span class="problematic" id="id9">[2]_</span></a> and <a href="#id33"><span class="problematic" id="id10">[3]_</span></a>. Higher values reduce variance of the estimation, but
+could introduce a bias.</p></li>
+<li><p><strong>copy</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to make a copy of the given data. If set to False, the initial
+data will be overwritten.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines random number generation for adding small noise to
+continuous variables in order to remove repeated values.
+Pass an int for reproducible results across multiple function calls.
+See <span class="xref std std-term">Glossary</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>mi</strong> – Estimated mutual information between each feature and the target.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray, shape (n_features,)</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ol class="arabic simple">
+<li><p>The term “discrete features” is used instead of naming them
+“categorical”, because it describes the essence more accurately.
+For example, pixel intensities of an image are discrete features
+(but hardly categorical) and you will get better results if mark them
+as such. Also note, that treating a continuous variable as discrete and
+vice versa will usually give incorrect results, so be attentive about
+that.</p></li>
+<li><p>True mutual information can’t be negative. If its estimate turns out
+to be negative, it is replaced by zero.</p></li>
+</ol>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id11"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Mutual_information">Mutual Information</a>
+on Wikipedia.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets">2</span></dt>
+<dd><p>A. Kraskov, H. Stogbauer and P. Grassberger, “Estimating mutual
+information”. Phys. Rev. E 69, 2004.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets">3</span></dt>
+<dd><p>B. C. Ross “Mutual Information between Discrete and Continuous
+Data Sets”. PLoS ONE 9(2), 2014.</p>
+</dd>
+<dt class="label" id="id14"><span class="brackets">4</span></dt>
+<dd><p>L. F. Kozachenko, N. N. Leonenko, “Sample Estimate of the Entropy
+of a Random Vector:, Probl. Peredachi Inf., 23:2 (1987), 9-16</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.feature_selection.mutual_info_regression">
+<span class="sig-prename descclassname"><span class="pre">sklearn.feature_selection.</span></span><span class="sig-name descname"><span class="pre">mutual_info_regression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.feature_selection.mutual_info_regression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate mutual information for a continuous target variable.</p>
+<p>Mutual information (MI) <a href="#id34"><span class="problematic" id="id15">[1]_</span></a> between two random variables is a non-negative
+value, which measures the dependency between the variables. It is equal
+to zero if and only if two random variables are independent, and higher
+values mean higher dependency.</p>
+<p>The function relies on nonparametric methods based on entropy estimation
+from k-nearest neighbors distances as described in <a href="#id35"><span class="problematic" id="id16">[2]_</span></a> and <a href="#id36"><span class="problematic" id="id17">[3]_</span></a>. Both
+methods are based on the idea originally proposed in <a href="#id37"><span class="problematic" id="id18">[4]_</span></a>.</p>
+<p>It can be used for univariate features selection, read more in the
+<span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em><em> or </em><em>sparse matrix</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Feature matrix.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Target vector.</p></li>
+<li><p><strong>discrete_features</strong> (<em>{'auto'</em><em>, </em><em>bool</em><em>, </em><em>array-like}</em><em>, </em><em>default='auto'</em>) – If bool, then determines whether to consider all features discrete
+or continuous. If array, then it should be either a boolean mask
+with shape (n_features,) or array with indices of discrete features.
+If ‘auto’, it is assigned to False for dense <cite>X</cite> and to True for
+sparse <cite>X</cite>.</p></li>
+<li><p><strong>n_neighbors</strong> (<em>int</em><em>, </em><em>default=3</em>) – Number of neighbors to use for MI estimation for continuous variables,
+see <a href="#id38"><span class="problematic" id="id19">[2]_</span></a> and <a href="#id39"><span class="problematic" id="id20">[3]_</span></a>. Higher values reduce variance of the estimation, but
+could introduce a bias.</p></li>
+<li><p><strong>copy</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to make a copy of the given data. If set to False, the initial
+data will be overwritten.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines random number generation for adding small noise to
+continuous variables in order to remove repeated values.
+Pass an int for reproducible results across multiple function calls.
+See <span class="xref std std-term">Glossary</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>mi</strong> – Estimated mutual information between each feature and the target.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray, shape (n_features,)</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ol class="arabic simple">
+<li><p>The term “discrete features” is used instead of naming them
+“categorical”, because it describes the essence more accurately.
+For example, pixel intensities of an image are discrete features
+(but hardly categorical) and you will get better results if mark them
+as such. Also note, that treating a continuous variable as discrete and
+vice versa will usually give incorrect results, so be attentive about
+that.</p></li>
+<li><p>True mutual information can’t be negative. If its estimate turns out
+to be negative, it is replaced by zero.</p></li>
+</ol>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id21"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Mutual_information">Mutual Information</a>
+on Wikipedia.</p>
+</dd>
+<dt class="label" id="id23"><span class="brackets">2</span></dt>
+<dd><p>A. Kraskov, H. Stogbauer and P. Grassberger, “Estimating mutual
+information”. Phys. Rev. E 69, 2004.</p>
+</dd>
+<dt class="label" id="id24"><span class="brackets">3</span></dt>
+<dd><p>B. C. Ross “Mutual Information between Discrete and Continuous
+Data Sets”. PLoS ONE 9(2), 2014.</p>
+</dd>
+<dt class="label" id="id25"><span class="brackets">4</span></dt>
+<dd><p>L. F. Kozachenko, N. N. Leonenko, “Sample Estimate of the Entropy
+of a Random Vector”, Probl. Peredachi Inf., 23:2 (1987), 9-16</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Tommaso
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

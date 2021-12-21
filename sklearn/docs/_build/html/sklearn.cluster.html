@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sklearn.cluster.Dmeans package &mdash; Qsklearn  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="sklearn.decomposition.qPCA package" href="sklearn.decomposition.html" />
+    <link rel="prev" title="sklearn package" href="sklearn.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Qsklearn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">sklearn</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="sklearn.html">sklearn package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="sklearn.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">sklearn.cluster.Dmeans package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sklearn.decomposition.html">sklearn.decomposition.qPCA package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sklearn.html#module-sklearn">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Qsklearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">sklearn</a> &raquo;</li>
+        
+          <li><a href="sklearn.html">sklearn package</a> &raquo;</li>
+        
+      <li>sklearn.cluster.Dmeans package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sklearn.cluster.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="sklearn-cluster-dmeans-package">
+<h1>sklearn.cluster.Dmeans package<a class="headerlink" href="#sklearn-cluster-dmeans-package" title="Permalink to this headline">¶</a></h1>
+<section id="module-sklearn.cluster">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.cluster" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#module-sklearn.cluster" title="sklearn.cluster"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a> module gathers popular unsupervised clustering
+algorithms.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.cluster.DMeans_">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.cluster.</span></span><span class="sig-name descname"><span class="pre">DMeans_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'k-means++'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precompute_distances</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squared_distances</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intermediate_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">true_tomography</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_when_reached_accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.ClusterMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>D-Means clustering.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span> for the classical counterpart.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_clusters</strong> (<em>int</em><em>, </em><em>default=8</em>) – The number of clusters to form as well as the number of
+centroids to generate.</p></li>
+<li><p><strong>init</strong> (<em>{'k-means++'</em><em>, </em><em>'random'}</em><em>, </em><em>callable</em><em> or </em><em>array-like of shape</em><em>             (</em><em>n_clusters</em><em>, </em><em>n_features</em><em>)</em><em>, </em><em>default='k-means++'</em>) – <p>Method for initialization:</p>
+<blockquote>
+<div><p>’k-means++’ : selects initial cluster centers for k-mean
+clustering in a smart way to speed up convergence. See section
+Notes in k_init for more details.</p>
+<p>’random’: choose <cite>n_clusters</cite> observations (rows) at random from data
+for the initial centroids.</p>
+</div></blockquote>
+<p>If an array is passed, it should be of shape (n_clusters, n_features)
+and gives the initial centers.</p>
+<p>If a callable is passed, it should take arguments X, n_clusters and a
+random state and return an initialization.</p>
+</p></li>
+<li><p><strong>n_init</strong> (<em>int</em><em>, </em><em>default=10</em>) – Number of time the k-means algorithm will be run with different
+centroid seeds. The final results will be the best output of
+n_init consecutive runs in terms of inertia.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=300</em>) – Maximum number of iterations of the k-means algorithm for a
+single run.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-4</em>) – Relative tolerance with regards to Frobenius norm of the difference
+in the cluster centers of two consecutive iterations to declare
+convergence.</p></li>
+<li><p><strong>precompute_distances</strong> (<em>{'auto'</em><em>, </em><em>True</em><em>, </em><em>False}</em><em>, </em><em>default='auto'</em>) – <p>Precompute distances (faster but takes more memory).</p>
+<blockquote>
+<div><p>’auto’ : do not precompute distances if n_samples * n_clusters &gt; 12
+million. This corresponds to about 100MB overhead per job using
+double precision.</p>
+<p>True : always precompute distances.</p>
+<p>False : never precompute distances.</p>
+</div></blockquote>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.23: </span>‘precompute_distances’ was deprecated in version 0.22 and will be
+removed in 1.0 (renaming of 0.25). It has no effect.</p>
+</div>
+</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>default=0</em>) – Verbosity mode.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines random number generation for centroid initialization. Use
+an int to make the randomness deterministic.
+See <span class="xref std std-term">Glossary</span>.</p></li>
+<li><p><strong>copy_x</strong> (<em>bool</em><em>, </em><em>default=True</em>) – When pre-computing distances it is more numerically accurate to center
+the data first. If copy_x is True (default), then the original data is
+not modified. If False, the original data is modified, and put back
+before the function returns, but small numerical differences may be
+introduced by subtracting and then adding the data mean. Note that if
+the original data is not C-contiguous, a copy will be made even if
+copy_x is False. If the original data is sparse, but not in CSR format,
+a copy will be made even if copy_x is False.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>default=None</em>) – <p>The number of OpenMP threads to use for the computation. Parallelism is
+sample-wise on the main cython loop which assigns each sample to its
+closest center.</p>
+<p><code class="docutils literal notranslate"><span class="pre">None</span></code> or <code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.23: </span><code class="docutils literal notranslate"><span class="pre">n_jobs</span></code> was deprecated in version 0.23 and will be removed in
+1.0 (renaming of 0.25).</p>
+</div>
+</p></li>
+<li><p><strong>algorithm</strong> (<em>{&quot;auto&quot;</em><em>, </em><em>&quot;full&quot;</em><em>, </em><em>&quot;elkan&quot;}</em><em>, </em><em>default=&quot;auto&quot;</em>) – K-means algorithm to use. The classical EM-style algorithm is “full”.
+The “elkan” variation is more efficient on data with well-defined
+clusters, by using the triangle inequality. However it’s more memory
+intensive due to the allocation of an extra array of shape
+(n_samples, n_clusters).</p></li>
+<li><p><strong>delta</strong> (<em>float</em><em>, </em><em>default=None</em>) – The error that you want to insert in the labels estimation and in the centroid updates.</p></li>
+<li><p><strong>squared_distances</strong> (<em>int value</em><em>, </em><em>default=1</em>) – If 1, the squared distances of each sample to its closest center are computed.
+Otherwise simple distances are computed.</p></li>
+<li><p><strong>intermediate_error</strong> (<em>bool</em><em>, </em><em>default=None.</em>) – True to add delta/2 error in the centroid update step. If false the centroid estimation is done without adding
+any error. Set it to false if you want to reduce the execution time of the algorithm.</p></li>
+<li><p><strong>true_tomography</strong> (<em>bool</em><em>, </em><em>default=True.</em>) – True if you want to estimate the labels and the centroids update using the real tomography, otherwise
+Truncated Gaussian Noise approximation is used.</p></li>
+<li><p><strong>stop_when_reached_accuracy</strong> – When True it stops the tomography when the L2-norm of the difference between the true and the estimated vector
+is less or equal than the tomography error, otherwise it computes the tomography using all the N measures of the
+quantum state.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.cluster_centers_">
+<span class="sig-name descname"><span class="pre">cluster_centers_</span></span><a class="headerlink" href="#sklearn.cluster.DMeans_.cluster_centers_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coordinates of cluster centers. If the algorithm stops before fully
+converging (see <code class="docutils literal notranslate"><span class="pre">tol</span></code> and <code class="docutils literal notranslate"><span class="pre">max_iter</span></code>), these will not be
+consistent with <code class="docutils literal notranslate"><span class="pre">labels_</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_clusters, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.labels_">
+<span class="sig-name descname"><span class="pre">labels_</span></span><a class="headerlink" href="#sklearn.cluster.DMeans_.labels_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Labels of each point</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.inertia_">
+<span class="sig-name descname"><span class="pre">inertia_</span></span><a class="headerlink" href="#sklearn.cluster.DMeans_.inertia_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sum of squared distances of samples to their closest cluster center.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.n_iter_">
+<span class="sig-name descname"><span class="pre">n_iter_</span></span><a class="headerlink" href="#sklearn.cluster.DMeans_.n_iter_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of iterations run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<p>The k-means problem is solved using either Lloyd’s or Elkan’s algorithm.
+The d-means problem is solved using only Lloyd’s algorithm.</p>
+<p>The average complexity is given by O(k n T), where n is the number of
+samples and T is the number of iteration.</p>
+<p>The worst case complexity is given by O(n^(k+2/p)) with
+n = n_samples, p = n_features. (D. Arthur and S. Vassilvitskii,
+‘How slow is the k-means method?’ SoCG2006)</p>
+<p>In practice, the k-means algorithm is very fast (one of the fastest
+clustering algorithms available), but it falls in local minima. That’s why
+it can be useful to restart it several times.</p>
+<p>If the algorithm stops before fully converging (because of <code class="docutils literal notranslate"><span class="pre">tol</span></code> or
+<code class="docutils literal notranslate"><span class="pre">max_iter</span></code>), <code class="docutils literal notranslate"><span class="pre">labels_</span></code> and <code class="docutils literal notranslate"><span class="pre">cluster_centers_</span></code> will not be consistent,
+i.e. the <code class="docutils literal notranslate"><span class="pre">cluster_centers_</span></code> will not be the means of the points in each
+cluster. Also, the estimator will reassign <code class="docutils literal notranslate"><span class="pre">labels_</span></code> after the last
+iteration to make <code class="docutils literal notranslate"><span class="pre">labels_</span></code> consistent with <code class="docutils literal notranslate"><span class="pre">predict</span></code> on the training
+set.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span>
+<span class="go">array([1, 1, 1, 0, 0, 0], dtype=int32)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="go">array([1, 0], dtype=int32)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
+<span class="go">array([[10.,  2.],</span>
+<span class="go">       [ 1.,  2.]])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmeans</span> <span class="o">=</span> <span class="n">DMeans_</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dmeans</span><span class="o">.</span><span class="n">labels_</span>
+<span class="go">array([0, 0, 0, 1, 1, 1], dtype=int32)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dmeans</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+<span class="go">array([0,1],dtype=int32)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
+<span class="go">array([[ 1.  2.]</span>
+<span class="go">    [10.  2.]])</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute d-means clustering.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training instances to cluster. It must be noted that the data
+will be converted to C ordering, which will cause a memory
+copy if the given data is not C-contiguous.
+If a sparse matrix is passed, a copy will be made if it’s not in
+CSR format.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present here for API consistency by convention.</p></li>
+<li><p><strong>sample_weight</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – <p>The weights for each observation in X. If None, all observations
+are assigned equal weight.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.</span></p>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Fitted estimator.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.fit_predict">
+<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.fit_predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute cluster centers and predict cluster index for each sample.</p>
+<p>Convenience method; equivalent to calling fit(X) followed by
+predict(X).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – New data to transform.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present here for API consistency by convention.</p></li>
+<li><p><strong>sample_weight</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – The weights for each observation in X. If None, all observations
+are assigned equal weight.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>labels</strong> – Index of the cluster each sample belongs to.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method is implemented only for the classical version of kmeans. To perform the same operation for quantum
+dmeans, you must perform first the fit() operation and then the predict() one.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute clustering and transform X to cluster-distance space.</p>
+<p>Equivalent to fit(X).transform(X), but more efficiently implemented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – New data to transform.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present here for API consistency by convention.</p></li>
+<li><p><strong>sample_weight</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – The weights for each observation in X. If None, all observations
+are assigned equal weight.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_new</strong> – X transformed in the new space.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples, n_clusters)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squared_distances</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict the closest cluster each sample in X belongs to.</p>
+<p>In the vector quantization literature, <cite>cluster_centers_</cite> is called
+the code book and each value returned by <cite>predict</cite> is the index of
+the closest code in the code book.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – New data to predict.</p></li>
+<li><p><strong>sample_weight</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – The weights for each observation in X. If None, all observations
+are assigned equal weight.</p></li>
+<li><p><strong>delta</strong> (<em>float</em><em>, </em><em>default=None</em>) – The error that you want to insert in the labels estimation and in the centroid updates.</p></li>
+<li><p><strong>squared_distances</strong> (<em>int value</em><em>, </em><em>default=1</em>) – If 1, the squared distances of each sample to its closest center are computed.
+Otherwise simple distances are computed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>labels</strong> – Index of the cluster each sample belongs to.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.score">
+<span class="sig-name descname"><span class="pre">score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opposite of the value of X on the K-means objective.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – New data.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present here for API consistency by convention.</p></li>
+<li><p><strong>sample_weight</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – The weights for each observation in X. If None, all observations
+are assigned equal weight.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>score</strong> – Opposite of the value of X on the K-means objective.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform X to a cluster-distance space.</p>
+<p>In the new space, each dimension is the distance to the cluster
+centers. Note that even if X is sparse, the array returned by
+<cite>transform</cite> will typically be dense.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – New data to transform.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_new</strong> – X transformed in the new space.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples, n_clusters)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sklearn.decomposition.html" class="btn btn-neutral float-right" title="sklearn.decomposition.qPCA package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sklearn.html" class="btn btn-neutral float-left" title="sklearn package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Tommaso
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

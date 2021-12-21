@@ -1,0 +1,1426 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sklearn.manifold package &mdash; Qsklearn  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Qsklearn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">sklearn</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Qsklearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>sklearn.manifold package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sklearn.manifold.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="sklearn-manifold-package">
+<h1>sklearn.manifold package<a class="headerlink" href="#sklearn-manifold-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sklearn.manifold.tests.html">sklearn.manifold.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.manifold.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.manifold.tests.html#sklearn-manifold-tests-test-isomap-module">sklearn.manifold.tests.test_isomap module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.manifold.tests.html#sklearn-manifold-tests-test-locally-linear-module">sklearn.manifold.tests.test_locally_linear module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.manifold.tests.html#sklearn-manifold-tests-test-mds-module">sklearn.manifold.tests.test_mds module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.manifold.tests.html#sklearn-manifold-tests-test-spectral-embedding-module">sklearn.manifold.tests.test_spectral_embedding module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.manifold.tests.html#sklearn-manifold-tests-test-t-sne-module">sklearn.manifold.tests.test_t_sne module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.manifold.tests.html#module-sklearn.manifold.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-sklearn.manifold.setup">
+<span id="sklearn-manifold-setup-module"></span><h2>sklearn.manifold.setup module<a class="headerlink" href="#module-sklearn.manifold.setup" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.manifold.setup.configuration">
+<span class="sig-prename descclassname"><span class="pre">sklearn.manifold.setup.</span></span><span class="sig-name descname"><span class="pre">configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent_package</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.setup.configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-sklearn.manifold">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.manifold" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#module-sklearn.manifold" title="sklearn.manifold"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.manifold</span></code></a> module implements data embedding techniques.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.manifold.Isomap">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.manifold.</span></span><span class="sig-name descname"><span class="pre">Isomap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigen_solver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbors_algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'minkowski'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.Isomap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Isomap Embedding</p>
+<p>Non-linear dimensionality reduction through Isometric Mapping</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_neighbors</strong> (<em>int</em><em>, </em><em>default=5</em>) – number of neighbors to consider for each point.</p></li>
+<li><p><strong>n_components</strong> (<em>int</em><em>, </em><em>default=2</em>) – number of coordinates for the manifold</p></li>
+<li><p><strong>eigen_solver</strong> (<em>{'auto'</em><em>, </em><em>'arpack'</em><em>, </em><em>'dense'}</em><em>, </em><em>default='auto'</em>) – <p>‘auto’ : Attempt to choose the most efficient solver
+for the given problem.</p>
+<p>’arpack’ : Use Arnoldi decomposition to find the eigenvalues
+and eigenvectors.</p>
+<p>’dense’ : Use a direct solver (i.e. LAPACK)
+for the eigenvalue decomposition.</p>
+</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=0</em>) – Convergence tolerance passed to arpack or lobpcg.
+not used if eigen_solver == ‘dense’.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=None</em>) – Maximum number of iterations for the arpack solver.
+not used if eigen_solver == ‘dense’.</p></li>
+<li><p><strong>path_method</strong> (<em>{'auto'</em><em>, </em><em>'FW'</em><em>, </em><em>'D'}</em><em>, </em><em>default='auto'</em>) – <p>Method to use in finding shortest path.</p>
+<p>’auto’ : attempt to choose the best algorithm automatically.</p>
+<p>’FW’ : Floyd-Warshall algorithm.</p>
+<p>’D’ : Dijkstra’s algorithm.</p>
+</p></li>
+<li><p><strong>neighbors_algorithm</strong> (<em>{'auto'</em><em>, </em><em>'brute'</em><em>, </em><em>'kd_tree'</em><em>, </em><em>'ball_tree'}</em><em>,                           </em><em>default='auto'</em>) – Algorithm to use for nearest neighbors search,
+passed to neighbors.NearestNeighbors instance.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – The number of parallel jobs to run.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <span class="xref std std-term">Glossary</span>
+for more details.</p></li>
+<li><p><strong>metric</strong> (<em>string</em><em>, or </em><em>callable</em><em>, </em><em>default=&quot;minkowski&quot;</em>) – <p>The metric to use when calculating distance between instances in a
+feature array. If metric is a string or callable, it must be one of
+the options allowed by <a class="reference internal" href="sklearn.metrics.html#sklearn.metrics.pairwise_distances" title="sklearn.metrics.pairwise_distances"><code class="xref py py-func docutils literal notranslate"><span class="pre">sklearn.metrics.pairwise_distances()</span></code></a> for
+its metric parameter.
+If metric is “precomputed”, X is assumed to be a distance matrix and
+must be square. X may be a <span class="xref std std-term">Glossary</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.22.</span></p>
+</div>
+</p></li>
+<li><p><strong>p</strong> (<em>int</em><em>, </em><em>default=2</em>) – <p>Parameter for the Minkowski metric from
+sklearn.metrics.pairwise.pairwise_distances. When p = 1, this is
+equivalent to using manhattan_distance (l1), and euclidean_distance
+(l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.22.</span></p>
+</div>
+</p></li>
+<li><p><strong>metric_params</strong> (<em>dict</em><em>, </em><em>default=None</em>) – <p>Additional keyword arguments for the metric function.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.22.</span></p>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.Isomap.embedding_">
+<span class="sig-name descname"><span class="pre">embedding_</span></span><a class="headerlink" href="#sklearn.manifold.Isomap.embedding_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the embedding vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like, shape (n_samples, n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.Isomap.kernel_pca_">
+<span class="sig-name descname"><span class="pre">kernel_pca_</span></span><a class="headerlink" href="#sklearn.manifold.Isomap.kernel_pca_" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">KernelPCA</span></code> object used to implement the
+embedding.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.Isomap.nbrs_">
+<span class="sig-name descname"><span class="pre">nbrs_</span></span><a class="headerlink" href="#sklearn.manifold.Isomap.nbrs_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores nearest neighbors instance, including BallTree or KDtree
+if applicable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>sklearn.neighbors.NearestNeighbors instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.Isomap.dist_matrix_">
+<span class="sig-name descname"><span class="pre">dist_matrix_</span></span><a class="headerlink" href="#sklearn.manifold.Isomap.dist_matrix_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the geodesic distance matrix of training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like, shape (n_samples, n_samples)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">Isomap</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1797, 64)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">Isomap</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_transformed</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_transformed</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 2)</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id1"><span class="brackets">1</span></dt>
+<dd><p>Tenenbaum, J.B.; De Silva, V.; &amp; Langford, J.C. A global geometric
+framework for nonlinear dimensionality reduction. Science 290 (5500)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.manifold.Isomap.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.Isomap.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the embedding vectors for data X</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse graph</em><em>, </em><a class="reference internal" href="sklearn.neighbors.html#sklearn.neighbors.BallTree" title="sklearn.neighbors.BallTree"><em>BallTree</em></a><em>, </em><a class="reference internal" href="sklearn.neighbors.html#sklearn.neighbors.KDTree" title="sklearn.neighbors.KDTree"><em>KDTree</em></a><em>, </em><em>NearestNeighbors}</em>) – Sample data, shape = (n_samples, n_features), in the form of a
+numpy array, sparse graph, precomputed tree, or NearestNeighbors
+object.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>returns an instance of self.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.manifold.Isomap.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.Isomap.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the model from data in X and transform X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse graph</em><em>, </em><a class="reference internal" href="sklearn.neighbors.html#sklearn.neighbors.BallTree" title="sklearn.neighbors.BallTree"><em>BallTree</em></a><em>, </em><em>KDTree}</em>) – Training vector, where n_samples in the number of samples
+and n_features is the number of features.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_new</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like, shape (n_samples, n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.manifold.Isomap.reconstruction_error">
+<span class="sig-name descname"><span class="pre">reconstruction_error</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.Isomap.reconstruction_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the reconstruction error for the embedding.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>reconstruction_error</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The cost function of an isomap embedding is</p>
+<p><code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">=</span> <span class="pre">frobenius_norm[K(D)</span> <span class="pre">-</span> <span class="pre">K(D_fit)]</span> <span class="pre">/</span> <span class="pre">n_samples</span></code></p>
+<p>Where D is the matrix of distances for the input data X,
+D_fit is the matrix of distances for the output embedding X_fit,
+and K is the isomap kernel:</p>
+<p><code class="docutils literal notranslate"><span class="pre">K(D)</span> <span class="pre">=</span> <span class="pre">-0.5</span> <span class="pre">*</span> <span class="pre">(I</span> <span class="pre">-</span> <span class="pre">1/n_samples)</span> <span class="pre">*</span> <span class="pre">D^2</span> <span class="pre">*</span> <span class="pre">(I</span> <span class="pre">-</span> <span class="pre">1/n_samples)</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.manifold.Isomap.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.Isomap.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform X.</p>
+<p>This is implemented by linking the points X into the graph of geodesic
+distances of the training data. First the <cite>n_neighbors</cite> nearest
+neighbors of X are found in the training data, and from these the
+shortest geodesic distances from each point in X to each point in
+the training data are computed in order to construct the kernel.
+The embedding of X is the projection of this kernel onto the
+embedding vectors of the training set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em><em>, </em><em>shape</em><em> (</em><em>n_queries</em><em>, </em><em>n_features</em><em>)</em>) – If neighbors_algorithm=’precomputed’, X is assumed to be a
+distance matrix or a sparse graph of shape
+(n_queries, n_samples_fit).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_new</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like, shape (n_queries, n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.manifold.LocallyLinearEmbedding">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.manifold.</span></span><span class="sig-name descname"><span class="pre">LocallyLinearEmbedding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigen_solver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hessian_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modified_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbors_algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.LocallyLinearEmbedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base._UnstableArchMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Locally Linear Embedding</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_neighbors</strong> (<em>int</em><em>, </em><em>default=5</em>) – number of neighbors to consider for each point.</p></li>
+<li><p><strong>n_components</strong> (<em>int</em><em>, </em><em>default=2</em>) – number of coordinates for the manifold</p></li>
+<li><p><strong>reg</strong> (<em>float</em><em>, </em><em>default=1e-3</em>) – regularization constant, multiplies the trace of the local covariance
+matrix of the distances.</p></li>
+<li><p><strong>eigen_solver</strong> (<em>{'auto'</em><em>, </em><em>'arpack'</em><em>, </em><em>'dense'}</em><em>, </em><em>default='auto'</em>) – <p>auto : algorithm will attempt to choose the best method for input data</p>
+<dl class="simple">
+<dt>arpack<span class="classifier">use arnoldi iteration in shift-invert mode.</span></dt><dd><p>For this method, M may be a dense matrix, sparse matrix,
+or general linear operator.
+Warning: ARPACK can be unstable for some problems.  It is
+best to try several random seeds in order to check results.</p>
+</dd>
+<dt>dense<span class="classifier">use standard dense matrix operations for the eigenvalue</span></dt><dd><p>decomposition.  For this method, M must be an array
+or matrix type.  This method should be avoided for
+large problems.</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-6</em>) – Tolerance for ‘arpack’ method
+Not used if eigen_solver==’dense’.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=100</em>) – maximum number of iterations for the arpack solver.
+Not used if eigen_solver==’dense’.</p></li>
+<li><p><strong>method</strong> (<em>{'standard'</em><em>, </em><em>'hessian'</em><em>, </em><em>'modified'</em><em>, </em><em>'ltsa'}</em><em>, </em><em>default='standard'</em>) – <ul>
+<li><p><cite>standard</cite>: use the standard locally linear embedding algorithm. see
+reference <a href="#id18"><span class="problematic" id="id2">[1]_</span></a></p></li>
+<li><p><cite>hessian</cite>: use the Hessian eigenmap method. This method requires
+<code class="docutils literal notranslate"><span class="pre">n_neighbors</span> <span class="pre">&gt;</span> <span class="pre">n_components</span> <span class="pre">*</span> <span class="pre">(1</span> <span class="pre">+</span> <span class="pre">(n_components</span> <span class="pre">+</span> <span class="pre">1)</span> <span class="pre">/</span> <span class="pre">2</span></code>. see
+reference <a href="#id19"><span class="problematic" id="id3">[2]_</span></a></p></li>
+<li><p><cite>modified</cite>: use the modified locally linear embedding algorithm.
+see reference <a href="#id20"><span class="problematic" id="id4">[3]_</span></a></p></li>
+<li><p><cite>ltsa</cite>: use local tangent space alignment algorithm. see
+reference <a href="#id21"><span class="problematic" id="id5">[4]_</span></a></p></li>
+</ul>
+</p></li>
+<li><p><strong>hessian_tol</strong> (<em>float</em><em>, </em><em>default=1e-4</em>) – Tolerance for Hessian eigenmapping method.
+Only used if <code class="docutils literal notranslate"><span class="pre">method</span> <span class="pre">==</span> <span class="pre">'hessian'</span></code></p></li>
+<li><p><strong>modified_tol</strong> (<em>float</em><em>, </em><em>default=1e-12</em>) – Tolerance for modified LLE method.
+Only used if <code class="docutils literal notranslate"><span class="pre">method</span> <span class="pre">==</span> <span class="pre">'modified'</span></code></p></li>
+<li><p><strong>neighbors_algorithm</strong> (<em>{'auto'</em><em>, </em><em>'brute'</em><em>, </em><em>'kd_tree'</em><em>, </em><em>'ball_tree'}</em><em>,                           </em><em>default='auto'</em>) – algorithm to use for nearest neighbors search,
+passed to neighbors.NearestNeighbors instance</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em>, </em><em>default=None</em>) – Determines the random number generator when
+<code class="docutils literal notranslate"><span class="pre">eigen_solver</span></code> == ‘arpack’. Pass an int for reproducible results
+across multiple function calls. See :term: <cite>Glossary &lt;random_state&gt;</cite>.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – The number of parallel jobs to run.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <span class="xref std std-term">Glossary</span>
+for more details.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.LocallyLinearEmbedding.embedding_">
+<span class="sig-name descname"><span class="pre">embedding_</span></span><a class="headerlink" href="#sklearn.manifold.LocallyLinearEmbedding.embedding_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the embedding vectors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like, shape [n_samples, n_components]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.LocallyLinearEmbedding.reconstruction_error_">
+<span class="sig-name descname"><span class="pre">reconstruction_error_</span></span><a class="headerlink" href="#sklearn.manifold.LocallyLinearEmbedding.reconstruction_error_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruction error associated with <cite>embedding_</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.LocallyLinearEmbedding.nbrs_">
+<span class="sig-name descname"><span class="pre">nbrs_</span></span><a class="headerlink" href="#sklearn.manifold.LocallyLinearEmbedding.nbrs_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores nearest neighbors instance, including BallTree or KDtree
+if applicable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>NearestNeighbors object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">LocallyLinearEmbedding</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1797, 64)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">LocallyLinearEmbedding</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_transformed</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_transformed</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 2)</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id6"><span class="brackets">1</span></dt>
+<dd><p>Roweis, S. &amp; Saul, L. Nonlinear dimensionality reduction
+by locally linear embedding.  Science 290:2323 (2000).</p>
+</dd>
+<dt class="label" id="id7"><span class="brackets">2</span></dt>
+<dd><p>Donoho, D. &amp; Grimes, C. Hessian eigenmaps: Locally
+linear embedding techniques for high-dimensional data.
+Proc Natl Acad Sci U S A.  100:5591 (2003).</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets">3</span></dt>
+<dd><p>Zhang, Z. &amp; Wang, J. MLLE: Modified Locally Linear
+Embedding Using Multiple Weights.
+<a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.70.382">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.70.382</a></p>
+</dd>
+<dt class="label" id="id9"><span class="brackets">4</span></dt>
+<dd><p>Zhang, Z. &amp; Zha, H. Principal manifolds and nonlinear
+dimensionality reduction via tangent space alignment.
+Journal of Shanghai Univ.  8:406 (2004)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.manifold.LocallyLinearEmbedding.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.LocallyLinearEmbedding.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the embedding vectors for data X</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – training set.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>returns an instance of self.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.manifold.LocallyLinearEmbedding.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.LocallyLinearEmbedding.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the embedding vectors for data X and transform X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – training set.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_new</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like, shape (n_samples, n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.manifold.LocallyLinearEmbedding.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.LocallyLinearEmbedding.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform new points into embedding space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_new</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array, shape = [n_samples, n_components]</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Because of scaling performed by this method, it is discouraged to use
+it together with methods that are not scale-invariant (like SVMs)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.manifold.MDS">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.manifold.</span></span><span class="sig-name descname"><span class="pre">MDS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dissimilarity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.MDS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Multidimensional scaling.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_components</strong> (<em>int</em><em>, </em><em>default=2</em>) – Number of dimensions in which to immerse the dissimilarities.</p></li>
+<li><p><strong>metric</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, perform metric MDS; otherwise, perform nonmetric MDS.</p></li>
+<li><p><strong>n_init</strong> (<em>int</em><em>, </em><em>default=4</em>) – Number of times the SMACOF algorithm will be run with different
+initializations. The final results will be the best output of the runs,
+determined by the run with the smallest final stress.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=300</em>) – Maximum number of iterations of the SMACOF algorithm for a single run.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>default=0</em>) – Level of verbosity.</p></li>
+<li><p><strong>eps</strong> (<em>float</em><em>, </em><em>default=1e-3</em>) – Relative tolerance with respect to stress at which to declare
+convergence.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>default=None</em>) – <p>The number of jobs to use for the computation. If multiple
+initializations are used (<code class="docutils literal notranslate"><span class="pre">n_init</span></code>), each run of the algorithm is
+computed in parallel.</p>
+<p><code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <span class="xref std std-term">Glossary</span>
+for more details.</p>
+</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines the random number generator used to initialize the centers.
+Pass an int for reproducible results across multiple function calls.
+See :term: <cite>Glossary &lt;random_state&gt;</cite>.</p></li>
+<li><p><strong>dissimilarity</strong> (<em>{'euclidean'</em><em>, </em><em>'precomputed'}</em><em>, </em><em>default='euclidean'</em>) – <p>Dissimilarity measure to use:</p>
+<ul>
+<li><dl class="simple">
+<dt>’euclidean’:</dt><dd><p>Pairwise Euclidean distances between points in the dataset.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>’precomputed’:</dt><dd><p>Pre-computed dissimilarities are passed directly to <code class="docutils literal notranslate"><span class="pre">fit</span></code> and
+<code class="docutils literal notranslate"><span class="pre">fit_transform</span></code>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.MDS.embedding_">
+<span class="sig-name descname"><span class="pre">embedding_</span></span><a class="headerlink" href="#sklearn.manifold.MDS.embedding_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the position of the dataset in the embedding space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples, n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.MDS.stress_">
+<span class="sig-name descname"><span class="pre">stress_</span></span><a class="headerlink" href="#sklearn.manifold.MDS.stress_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The final value of the stress (sum of squared distance of the
+disparities and the distances for all constrained points).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.MDS.dissimilarity_matrix_">
+<span class="sig-name descname"><span class="pre">dissimilarity_matrix_</span></span><a class="headerlink" href="#sklearn.manifold.MDS.dissimilarity_matrix_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pairwise dissimilarities between the points. Symmetric matrix that:</p>
+<ul class="simple">
+<li><p>either uses a custom dissimilarity matrix by setting <cite>dissimilarity</cite>
+to ‘precomputed’;</p></li>
+<li><p>or constructs a dissimilarity matrix from data using
+Euclidean distances.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples, n_samples)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.MDS.n_iter_">
+<span class="sig-name descname"><span class="pre">n_iter_</span></span><a class="headerlink" href="#sklearn.manifold.MDS.n_iter_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of iterations corresponding to the best stress.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">MDS</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1797, 64)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">MDS</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_transformed</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_transformed</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 2)</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<p>“Modern Multidimensional Scaling - Theory and Applications” Borg, I.;
+Groenen P. Springer Series in Statistics (1997)</p>
+<p>“Nonmetric multidimensional scaling: a numerical method” Kruskal, J.
+Psychometrika, 29 (1964)</p>
+<p>“Multidimensional scaling by optimizing goodness of fit to a nonmetric
+hypothesis” Kruskal, J. Psychometrika, 29, (1964)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.manifold.MDS.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.MDS.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the position of the points in the embedding space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>) or                 </em><em>(</em><em>n_samples</em><em>, </em><em>n_samples</em><em>)</em>) – Input data. If <code class="docutils literal notranslate"><span class="pre">dissimilarity=='precomputed'</span></code>, the input should
+be the dissimilarity matrix.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+<li><p><strong>init</strong> (<em>ndarray of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – Starting configuration of the embedding to initialize the SMACOF
+algorithm. By default, the algorithm is initialized with a randomly
+chosen array.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.manifold.MDS.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.MDS.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the data from X, and returns the embedded coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>) or                 </em><em>(</em><em>n_samples</em><em>, </em><em>n_samples</em><em>)</em>) – Input data. If <code class="docutils literal notranslate"><span class="pre">dissimilarity=='precomputed'</span></code>, the input should
+be the dissimilarity matrix.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+<li><p><strong>init</strong> (<em>ndarray of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – Starting configuration of the embedding to initialize the SMACOF
+algorithm. By default, the algorithm is initialized with a randomly
+chosen array.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.manifold.SpectralEmbedding">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.manifold.</span></span><span class="sig-name descname"><span class="pre">SpectralEmbedding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">affinity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest_neighbors'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigen_solver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.SpectralEmbedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Spectral embedding for non-linear dimensionality reduction.</p>
+<p>Forms an affinity matrix given by the specified function and
+applies spectral decomposition to the corresponding graph laplacian.
+The resulting transformation is given by the value of the
+eigenvectors for each data point.</p>
+<p>Note : Laplacian Eigenmaps is the actual algorithm implemented here.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_components</strong> (<em>int</em><em>, </em><em>default=2</em>) – The dimension of the projected subspace.</p></li>
+<li><p><strong>affinity</strong> (<em>{'nearest_neighbors'</em><em>, </em><em>'rbf'</em><em>, </em><em>'precomputed'</em><em>,                 </em><em>'precomputed_nearest_neighbors'}</em><em> or </em><em>callable</em><em>,                 </em><em>default='nearest_neighbors'</em>) – <dl class="simple">
+<dt>How to construct the affinity matrix.</dt><dd><ul>
+<li><p>’nearest_neighbors’ : construct the affinity matrix by computing a
+graph of nearest neighbors.</p></li>
+<li><p>’rbf’ : construct the affinity matrix by computing a radial basis
+function (RBF) kernel.</p></li>
+<li><p>’precomputed’ : interpret <code class="docutils literal notranslate"><span class="pre">X</span></code> as a precomputed affinity matrix.</p></li>
+<li><p>’precomputed_nearest_neighbors’ : interpret <code class="docutils literal notranslate"><span class="pre">X</span></code> as a sparse graph
+of precomputed nearest neighbors, and constructs the affinity matrix
+by selecting the <code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> nearest neighbors.</p></li>
+<li><p>callable : use passed in function as affinity
+the function takes in data matrix (n_samples, n_features)
+and return affinity matrix (n_samples, n_samples).</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>gamma</strong> (<em>float</em><em>, </em><em>default=None</em>) – Kernel coefficient for rbf kernel. If None, gamma will be set to
+1/n_features.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines the random number generator used for the initialization of
+the lobpcg eigenvectors when <code class="docutils literal notranslate"><span class="pre">solver</span></code> == ‘amg’.  Pass an int for
+reproducible results across multiple function calls.
+See :term: <cite>Glossary &lt;random_state&gt;</cite>.</p></li>
+<li><p><strong>eigen_solver</strong> (<em>{'arpack'</em><em>, </em><em>'lobpcg'</em><em>, </em><em>'amg'}</em><em>, </em><em>default=None</em>) – The eigenvalue decomposition strategy to use. AMG requires pyamg
+to be installed. It can be faster on very large, sparse problems.
+If None, then <code class="docutils literal notranslate"><span class="pre">'arpack'</span></code> is used.</p></li>
+<li><p><strong>n_neighbors</strong> (<em>int</em><em>, </em><em>default=None</em>) – Number of nearest neighbors for nearest_neighbors graph building.
+If None, n_neighbors will be set to max(n_samples/10, 1).</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>default=None</em>) – The number of parallel jobs to run.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <span class="xref std std-term">Glossary</span>
+for more details.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.SpectralEmbedding.embedding_">
+<span class="sig-name descname"><span class="pre">embedding_</span></span><a class="headerlink" href="#sklearn.manifold.SpectralEmbedding.embedding_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spectral embedding of the training matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples, n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.SpectralEmbedding.affinity_matrix_">
+<span class="sig-name descname"><span class="pre">affinity_matrix_</span></span><a class="headerlink" href="#sklearn.manifold.SpectralEmbedding.affinity_matrix_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Affinity_matrix constructed from samples or precomputed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples, n_samples)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.SpectralEmbedding.n_neighbors_">
+<span class="sig-name descname"><span class="pre">n_neighbors_</span></span><a class="headerlink" href="#sklearn.manifold.SpectralEmbedding.n_neighbors_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of nearest neighbors effectively used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">SpectralEmbedding</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1797, 64)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">embedding</span> <span class="o">=</span> <span class="n">SpectralEmbedding</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_transformed</span> <span class="o">=</span> <span class="n">embedding</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_transformed</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 2)</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p>A Tutorial on Spectral Clustering, 2007
+Ulrike von Luxburg
+<a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.165.9323">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.165.9323</a></p></li>
+<li><p>On Spectral Clustering: Analysis and an algorithm, 2001
+Andrew Y. Ng, Michael I. Jordan, Yair Weiss
+<a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.19.8100">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.19.8100</a></p></li>
+<li><p>Normalized cuts and image segmentation, 2000
+Jianbo Shi, Jitendra Malik
+<a class="reference external" href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.160.2324">http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.160.2324</a></p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.manifold.SpectralEmbedding.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.SpectralEmbedding.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the model from data in X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – <p>Training vector, where n_samples is the number of samples
+and n_features is the number of features.</p>
+<p>If affinity is “precomputed”
+X : {array-like, sparse matrix}, shape (n_samples, n_samples),
+Interpret X as precomputed adjacency graph computed from
+samples.</p>
+</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong> – Returns the instance itself.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.manifold.SpectralEmbedding.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.SpectralEmbedding.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the model from data in X and transform X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – <p>Training vector, where n_samples is the number of samples
+and n_features is the number of features.</p>
+<p>If affinity is “precomputed”
+X : {array-like, sparse matrix} of shape (n_samples, n_samples),
+Interpret X as precomputed adjacency graph computed from
+samples.</p>
+</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_new</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like of shape (n_samples, n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.manifold.TSNE">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.manifold.</span></span><span class="sig-name descname"><span class="pre">TSNE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perplexity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">early_exaggeration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter_without_progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_grad_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-07</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'barnes_hut'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">square_distances</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'legacy'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.TSNE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>t-distributed Stochastic Neighbor Embedding.</p>
+<p>t-SNE [1] is a tool to visualize high-dimensional data. It converts
+similarities between data points to joint probabilities and tries
+to minimize the Kullback-Leibler divergence between the joint
+probabilities of the low-dimensional embedding and the
+high-dimensional data. t-SNE has a cost function that is not convex,
+i.e. with different initializations we can get different results.</p>
+<p>It is highly recommended to use another dimensionality reduction
+method (e.g. PCA for dense data or TruncatedSVD for sparse data)
+to reduce the number of dimensions to a reasonable amount (e.g. 50)
+if the number of features is very high. This will suppress some
+noise and speed up the computation of pairwise distances between
+samples. For more tips see Laurens van der Maaten’s FAQ [2].</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_components</strong> (<em>int</em><em>, </em><em>default=2</em>) – Dimension of the embedded space.</p></li>
+<li><p><strong>perplexity</strong> (<em>float</em><em>, </em><em>default=30.0</em>) – The perplexity is related to the number of nearest neighbors that
+is used in other manifold learning algorithms. Larger datasets
+usually require a larger perplexity. Consider selecting a value
+between 5 and 50. Different values can result in significantly
+different results.</p></li>
+<li><p><strong>early_exaggeration</strong> (<em>float</em><em>, </em><em>default=12.0</em>) – Controls how tight natural clusters in the original space are in
+the embedded space and how much space will be between them. For
+larger values, the space between natural clusters will be larger
+in the embedded space. Again, the choice of this parameter is not
+very critical. If the cost function increases during initial
+optimization, the early exaggeration factor or the learning rate
+might be too high.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em><em>, </em><em>default=200.0</em>) – The learning rate for t-SNE is usually in the range [10.0, 1000.0]. If
+the learning rate is too high, the data may look like a ‘ball’ with any
+point approximately equidistant from its nearest neighbours. If the
+learning rate is too low, most points may look compressed in a dense
+cloud with few outliers. If the cost function gets stuck in a bad local
+minimum increasing the learning rate may help.</p></li>
+<li><p><strong>n_iter</strong> (<em>int</em><em>, </em><em>default=1000</em>) – Maximum number of iterations for the optimization. Should be at
+least 250.</p></li>
+<li><p><strong>n_iter_without_progress</strong> (<em>int</em><em>, </em><em>default=300</em>) – <p>Maximum number of iterations without progress before we abort the
+optimization, used after 250 initial iterations with early
+exaggeration. Note that progress is only checked every 50 iterations so
+this value is rounded to the next multiple of 50.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.17: </span>parameter <em>n_iter_without_progress</em> to control stopping criteria.</p>
+</div>
+</p></li>
+<li><p><strong>min_grad_norm</strong> (<em>float</em><em>, </em><em>default=1e-7</em>) – If the gradient norm is below this threshold, the optimization will
+be stopped.</p></li>
+<li><p><strong>metric</strong> (<em>str</em><em> or </em><em>callable</em><em>, </em><em>default='euclidean'</em>) – The metric to use when calculating distance between instances in a
+feature array. If metric is a string, it must be one of the options
+allowed by scipy.spatial.distance.pdist for its metric parameter, or
+a metric listed in pairwise.PAIRWISE_DISTANCE_FUNCTIONS.
+If metric is “precomputed”, X is assumed to be a distance matrix.
+Alternatively, if metric is a callable function, it is called on each
+pair of instances (rows) and the resulting value recorded. The callable
+should take two arrays from X as input and return a value indicating
+the distance between them. The default is “euclidean” which is
+interpreted as squared euclidean distance.</p></li>
+<li><p><strong>init</strong> (<em>{'random'</em><em>, </em><em>'pca'}</em><em> or </em><em>ndarray of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_components</em><em>)</em><em>,             </em><em>default='random'</em>) – Initialization of embedding. Possible options are ‘random’, ‘pca’,
+and a numpy array of shape (n_samples, n_components).
+PCA initialization cannot be used with precomputed distances and is
+usually more globally stable than random initialization.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>default=0</em>) – Verbosity level.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines the random number generator. Pass an int for reproducible
+results across multiple function calls. Note that different
+initializations might result in different local minima of the cost
+function. See :term: <cite>Glossary &lt;random_state&gt;</cite>.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>default='barnes_hut'</em>) – <p>By default the gradient calculation algorithm uses Barnes-Hut
+approximation running in O(NlogN) time. method=’exact’
+will run on the slower, but exact, algorithm in O(N^2) time. The
+exact algorithm should be used when nearest-neighbor errors need
+to be better than 3%. However, the exact method cannot scale to
+millions of examples.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.17: </span>Approximate optimization <em>method</em> via the Barnes-Hut.</p>
+</div>
+</p></li>
+<li><p><strong>angle</strong> (<em>float</em><em>, </em><em>default=0.5</em>) – Only used if method=’barnes_hut’
+This is the trade-off between speed and accuracy for Barnes-Hut T-SNE.
+‘angle’ is the angular size (referred to as theta in [3]) of a distant
+node as measured from a point. If this size is below ‘angle’ then it is
+used as a summary node of all points contained within it.
+This method is not very sensitive to changes in this parameter
+in the range of 0.2 - 0.8. Angle less than 0.2 has quickly increasing
+computation time and angle greater 0.8 has quickly increasing error.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>default=None</em>) – <p>The number of parallel jobs to run for neighbors search. This parameter
+has no impact when <code class="docutils literal notranslate"><span class="pre">metric=&quot;precomputed&quot;</span></code> or
+(<code class="docutils literal notranslate"><span class="pre">metric=&quot;euclidean&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">method=&quot;exact&quot;</span></code>).
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <span class="xref std std-term">Glossary</span>
+for more details.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.22.</span></p>
+</div>
+</p></li>
+<li><p><strong>square_distances</strong> (<em>True</em><em> or </em><em>'legacy'</em><em>, </em><em>default='legacy'</em>) – <p>Whether TSNE should square the distance values. <code class="docutils literal notranslate"><span class="pre">'legacy'</span></code> means
+that distance values are squared only when <code class="docutils literal notranslate"><span class="pre">metric=&quot;euclidean&quot;</span></code>.
+<code class="docutils literal notranslate"><span class="pre">True</span></code> means that distance values are squared for all metrics.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24: </span>Added to provide backward compatibility during deprecation of
+legacy squaring behavior.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.24: </span>Legacy squaring behavior was deprecated in 0.24. The <code class="docutils literal notranslate"><span class="pre">'legacy'</span></code>
+value will be removed in 1.1 (renaming of 0.26), at which point the
+default value will change to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.TSNE.embedding_">
+<span class="sig-name descname"><span class="pre">embedding_</span></span><a class="headerlink" href="#sklearn.manifold.TSNE.embedding_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the embedding vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_samples, n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.TSNE.kl_divergence_">
+<span class="sig-name descname"><span class="pre">kl_divergence_</span></span><a class="headerlink" href="#sklearn.manifold.TSNE.kl_divergence_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kullback-Leibler divergence after optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.manifold.TSNE.n_iter_">
+<span class="sig-name descname"><span class="pre">n_iter_</span></span><a class="headerlink" href="#sklearn.manifold.TSNE.n_iter_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of iterations run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_embedded</span> <span class="o">=</span> <span class="n">TSNE</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_embedded</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(4, 2)</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<dl class="simple">
+<dt>[1] van der Maaten, L.J.P.; Hinton, G.E. Visualizing High-Dimensional Data</dt><dd><p>Using t-SNE. Journal of Machine Learning Research 9:2579-2605, 2008.</p>
+</dd>
+<dt>[2] van der Maaten, L.J.P. t-Distributed Stochastic Neighbor Embedding</dt><dd><p><a class="reference external" href="https://lvdmaaten.github.io/tsne/">https://lvdmaaten.github.io/tsne/</a></p>
+</dd>
+<dt>[3] L.J.P. van der Maaten. Accelerating t-SNE using Tree-Based Algorithms.</dt><dd><p>Journal of Machine Learning Research 15(Oct):3221-3245, 2014.
+<a class="reference external" href="https://lvdmaaten.github.io/publications/papers/JMLR_2014.pdf">https://lvdmaaten.github.io/publications/papers/JMLR_2014.pdf</a></p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.manifold.TSNE.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.TSNE.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit X into an embedded space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>ndarray of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>) or </em><em>(</em><em>n_samples</em><em>, </em><em>n_samples</em><em>)</em>) – If the metric is ‘precomputed’ X must be a square distance
+matrix. Otherwise it contains a sample per row. If the method
+is ‘exact’, X may be a sparse matrix of type ‘csr’, ‘csc’
+or ‘coo’. If the method is ‘barnes_hut’ and the metric is
+‘precomputed’, X may be a precomputed sparse graph.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.manifold.TSNE.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.TSNE.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit X into an embedded space and return that transformed
+output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>ndarray of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>) or </em><em>(</em><em>n_samples</em><em>, </em><em>n_samples</em><em>)</em>) – If the metric is ‘precomputed’ X must be a square distance
+matrix. Otherwise it contains a sample per row. If the method
+is ‘exact’, X may be a sparse matrix of type ‘csr’, ‘csc’
+or ‘coo’. If the method is ‘barnes_hut’ and the metric is
+‘precomputed’, X may be a precomputed sparse graph.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>X_new</strong> – Embedding of the training data in low-dimensional space.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples, n_components)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.manifold.locally_linear_embedding">
+<span class="sig-prename descclassname"><span class="pre">sklearn.manifold.</span></span><span class="sig-name descname"><span class="pre">locally_linear_embedding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_neighbors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_components</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigen_solver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hessian_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modified_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.locally_linear_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a Locally Linear Embedding analysis on the data.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>NearestNeighbors}</em>) – Sample data, shape = (n_samples, n_features), in the form of a
+numpy array or a NearestNeighbors object.</p></li>
+<li><p><strong>n_neighbors</strong> (<em>int</em>) – number of neighbors to consider for each point.</p></li>
+<li><p><strong>n_components</strong> (<em>int</em>) – number of coordinates for the manifold.</p></li>
+<li><p><strong>reg</strong> (<em>float</em><em>, </em><em>default=1e-3</em>) – regularization constant, multiplies the trace of the local covariance
+matrix of the distances.</p></li>
+<li><p><strong>eigen_solver</strong> (<em>{'auto'</em><em>, </em><em>'arpack'</em><em>, </em><em>'dense'}</em><em>, </em><em>default='auto'</em>) – <p>auto : algorithm will attempt to choose the best method for input data</p>
+<dl class="simple">
+<dt>arpack<span class="classifier">use arnoldi iteration in shift-invert mode.</span></dt><dd><p>For this method, M may be a dense matrix, sparse matrix,
+or general linear operator.
+Warning: ARPACK can be unstable for some problems.  It is
+best to try several random seeds in order to check results.</p>
+</dd>
+<dt>dense<span class="classifier">use standard dense matrix operations for the eigenvalue</span></dt><dd><p>decomposition.  For this method, M must be an array
+or matrix type.  This method should be avoided for
+large problems.</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>default=1e-6</em>) – Tolerance for ‘arpack’ method
+Not used if eigen_solver==’dense’.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=100</em>) – maximum number of iterations for the arpack solver.</p></li>
+<li><p><strong>method</strong> (<em>{'standard'</em><em>, </em><em>'hessian'</em><em>, </em><em>'modified'</em><em>, </em><em>'ltsa'}</em><em>, </em><em>default='standard'</em>) – <dl class="simple">
+<dt>standard<span class="classifier">use the standard locally linear embedding algorithm.</span></dt><dd><p>see reference <a href="#id22"><span class="problematic" id="id10">[1]_</span></a></p>
+</dd>
+<dt>hessian<span class="classifier">use the Hessian eigenmap method.  This method requires</span></dt><dd><p>n_neighbors &gt; n_components * (1 + (n_components + 1) / 2.
+see reference <a href="#id23"><span class="problematic" id="id11">[2]_</span></a></p>
+</dd>
+<dt>modified<span class="classifier">use the modified locally linear embedding algorithm.</span></dt><dd><p>see reference <a href="#id24"><span class="problematic" id="id12">[3]_</span></a></p>
+</dd>
+<dt>ltsa<span class="classifier">use local tangent space alignment algorithm</span></dt><dd><p>see reference <a href="#id25"><span class="problematic" id="id13">[4]_</span></a></p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>hessian_tol</strong> (<em>float</em><em>, </em><em>default=1e-4</em>) – Tolerance for Hessian eigenmapping method.
+Only used if method == ‘hessian’</p></li>
+<li><p><strong>modified_tol</strong> (<em>float</em><em>, </em><em>default=1e-12</em>) – Tolerance for modified LLE method.
+Only used if method == ‘modified’</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em>, </em><em>default=None</em>) – Determines the random number generator when <code class="docutils literal notranslate"><span class="pre">solver</span></code> == ‘arpack’.
+Pass an int for reproducible results across multiple function calls.
+See :term: <cite>Glossary &lt;random_state&gt;</cite>.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – The number of parallel jobs to run for neighbors search.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <span class="xref std std-term">Glossary</span>
+for more details.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>Y</strong> (<em>array-like, shape [n_samples, n_components]</em>) – Embedding vectors.</p></li>
+<li><p><strong>squared_error</strong> (<em>float</em>) – Reconstruction error for the embedding vectors. Equivalent to
+<code class="docutils literal notranslate"><span class="pre">norm(Y</span> <span class="pre">-</span> <span class="pre">W</span> <span class="pre">Y,</span> <span class="pre">'fro')**2</span></code>, where W are the reconstruction weights.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id14"><span class="brackets">1</span></dt>
+<dd><p>Roweis, S. &amp; Saul, L. Nonlinear dimensionality reduction
+by locally linear embedding.  Science 290:2323 (2000).</p>
+</dd>
+<dt class="label" id="id15"><span class="brackets">2</span></dt>
+<dd><p>Donoho, D. &amp; Grimes, C. Hessian eigenmaps: Locally
+linear embedding techniques for high-dimensional data.
+Proc Natl Acad Sci U S A.  100:5591 (2003).</p>
+</dd>
+<dt class="label" id="id16"><span class="brackets">3</span></dt>
+<dd><p>Zhang, Z. &amp; Wang, J. MLLE: Modified Locally Linear
+Embedding Using Multiple Weights.
+<a class="reference external" href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.70.382">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.70.382</a></p>
+</dd>
+<dt class="label" id="id17"><span class="brackets">4</span></dt>
+<dd><p>Zhang, Z. &amp; Zha, H. Principal manifolds and nonlinear
+dimensionality reduction via tangent space alignment.
+Journal of Shanghai Univ.  8:406 (2004)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.manifold.smacof">
+<span class="sig-prename descclassname"><span class="pre">sklearn.manifold.</span></span><span class="sig-name descname"><span class="pre">smacof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dissimilarities</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.smacof" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes multidimensional scaling using the SMACOF algorithm.</p>
+<p>The SMACOF (Scaling by MAjorizing a COmplicated Function) algorithm is a
+multidimensional scaling algorithm which minimizes an objective function
+(the <em>stress</em>) using a majorization technique. Stress majorization, also
+known as the Guttman Transform, guarantees a monotone convergence of
+stress, and is more powerful than traditional techniques such as gradient
+descent.</p>
+<p>The SMACOF algorithm for metric MDS can summarized by the following steps:</p>
+<ol class="arabic simple">
+<li><p>Set an initial start configuration, randomly or not.</p></li>
+<li><p>Compute the stress</p></li>
+<li><p>Compute the Guttman Transform</p></li>
+<li><p>Iterate 2 and 3 until convergence.</p></li>
+</ol>
+<p>The nonmetric algorithm adds a monotonic regression step before computing
+the stress.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dissimilarities</strong> (<em>ndarray of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_samples</em><em>)</em>) – Pairwise dissimilarities between the points. Must be symmetric.</p></li>
+<li><p><strong>metric</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Compute metric or nonmetric SMACOF algorithm.</p></li>
+<li><p><strong>n_components</strong> (<em>int</em><em>, </em><em>default=2</em>) – Number of dimensions in which to immerse the dissimilarities. If an
+<code class="docutils literal notranslate"><span class="pre">init</span></code> array is provided, this option is overridden and the shape of
+<code class="docutils literal notranslate"><span class="pre">init</span></code> is used to determine the dimensionality of the embedding
+space.</p></li>
+<li><p><strong>init</strong> (<em>ndarray of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_components</em><em>)</em><em>, </em><em>default=None</em>) – Starting configuration of the embedding to initialize the algorithm. By
+default, the algorithm is initialized with a randomly chosen array.</p></li>
+<li><p><strong>n_init</strong> (<em>int</em><em>, </em><em>default=8</em>) – Number of times the SMACOF algorithm will be run with different
+initializations. The final results will be the best output of the runs,
+determined by the run with the smallest final stress. If <code class="docutils literal notranslate"><span class="pre">init</span></code> is
+provided, this option is overridden and a single run is performed.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>default=None</em>) – <p>The number of jobs to use for the computation. If multiple
+initializations are used (<code class="docutils literal notranslate"><span class="pre">n_init</span></code>), each run of the algorithm is
+computed in parallel.</p>
+<p><code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <span class="xref std std-term">Glossary</span>
+for more details.</p>
+</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>default=300</em>) – Maximum number of iterations of the SMACOF algorithm for a single run.</p></li>
+<li><p><strong>verbose</strong> (<em>int</em><em>, </em><em>default=0</em>) – Level of verbosity.</p></li>
+<li><p><strong>eps</strong> (<em>float</em><em>, </em><em>default=1e-3</em>) – Relative tolerance with respect to stress at which to declare
+convergence.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines the random number generator used to initialize the centers.
+Pass an int for reproducible results across multiple function calls.
+See :term: <cite>Glossary &lt;random_state&gt;</cite>.</p></li>
+<li><p><strong>return_n_iter</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Whether or not to return the number of iterations.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>X</strong> (<em>ndarray of shape (n_samples, n_components)</em>) – Coordinates of the points in a <code class="docutils literal notranslate"><span class="pre">n_components</span></code>-space.</p></li>
+<li><p><strong>stress</strong> (<em>float</em>) – The final value of the stress (sum of squared distance of the
+disparities and the distances for all constrained points).</p></li>
+<li><p><strong>n_iter</strong> (<em>int</em>) – The number of iterations corresponding to the best stress. Returned
+only if <code class="docutils literal notranslate"><span class="pre">return_n_iter</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>“Modern Multidimensional Scaling - Theory and Applications” Borg, I.;
+Groenen P. Springer Series in Statistics (1997)</p>
+<p>“Nonmetric multidimensional scaling: a numerical method” Kruskal, J.
+Psychometrika, 29 (1964)</p>
+<p>“Multidimensional scaling by optimizing goodness of fit to a nonmetric
+hypothesis” Kruskal, J. Psychometrika, 29, (1964)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.manifold.spectral_embedding">
+<span class="sig-prename descclassname"><span class="pre">sklearn.manifold.</span></span><span class="sig-name descname"><span class="pre">spectral_embedding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adjacency</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigen_solver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eigen_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_laplacian</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_first</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.spectral_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Project the sample on the first eigenvectors of the graph Laplacian.</p>
+<p>The adjacency matrix is used to compute a normalized graph Laplacian
+whose spectrum (especially the eigenvectors associated to the
+smallest eigenvalues) has an interpretation in terms of minimal
+number of cuts necessary to split the graph into comparably sized
+components.</p>
+<p>This embedding can also ‘work’ even if the <code class="docutils literal notranslate"><span class="pre">adjacency</span></code> variable is
+not strictly the adjacency matrix of a graph but more generally
+an affinity or similarity matrix between samples (for instance the
+heat kernel of a euclidean distance matrix or a k-NN matrix).</p>
+<p>However care must taken to always make the affinity matrix symmetric
+so that the eigenvector decomposition works as expected.</p>
+<p>Note : Laplacian Eigenmaps is the actual algorithm implemented here.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>adjacency</strong> (<em>{array-like</em><em>, </em><em>sparse graph} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_samples</em><em>)</em>) – The adjacency matrix of the graph to embed.</p></li>
+<li><p><strong>n_components</strong> (<em>int</em><em>, </em><em>default=8</em>) – The dimension of the projection subspace.</p></li>
+<li><p><strong>eigen_solver</strong> (<em>{'arpack'</em><em>, </em><em>'lobpcg'</em><em>, </em><em>'amg'}</em><em>, </em><em>default=None</em>) – The eigenvalue decomposition strategy to use. AMG requires pyamg
+to be installed. It can be faster on very large, sparse problems,
+but may also lead to instabilities. If None, then <code class="docutils literal notranslate"><span class="pre">'arpack'</span></code> is
+used.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines the random number generator used for the initialization of
+the lobpcg eigenvectors decomposition when <code class="docutils literal notranslate"><span class="pre">solver</span></code> == ‘amg’. Pass
+an int for reproducible results across multiple function calls.
+See :term: <cite>Glossary &lt;random_state&gt;</cite>.</p></li>
+<li><p><strong>eigen_tol</strong> (<em>float</em><em>, </em><em>default=0.0</em>) – Stopping criterion for eigendecomposition of the Laplacian matrix
+when using arpack eigen_solver.</p></li>
+<li><p><strong>norm_laplacian</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If True, then compute normalized Laplacian.</p></li>
+<li><p><strong>drop_first</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to drop the first eigenvector. For spectral embedding, this
+should be True as the first eigenvector should be constant vector for
+connected graph, but for spectral clustering, this should be kept as
+False to retain the first eigenvector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>embedding</strong> – The reduced samples.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples, n_components)</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Spectral Embedding (Laplacian Eigenmaps) is most useful when the graph
+has one connected component. If there graph has many components, the first
+few eigenvectors will simply uncover the connected components of the graph.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/LOBPCG">https://en.wikipedia.org/wiki/LOBPCG</a></p></li>
+<li><p>Toward the Optimal Preconditioned Eigensolver: Locally Optimal
+Block Preconditioned Conjugate Gradient Method
+Andrew V. Knyazev
+<a class="reference external" href="https://doi.org/10.1137%2FS1064827500366124">https://doi.org/10.1137%2FS1064827500366124</a></p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sklearn.manifold.trustworthiness">
+<span class="sig-prename descclassname"><span class="pre">sklearn.manifold.</span></span><span class="sig-name descname"><span class="pre">trustworthiness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_embedded</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_neighbors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.manifold.trustworthiness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expresses to what extent the local structure is retained.</p>
+<p>The trustworthiness is within [0, 1]. It is defined as</p>
+<div class="math notranslate nohighlight">
+\[T(k) = 1 - \frac{2}{nk (2n - 3k - 1)} \sum^n_{i=1}
+    \sum_{j \in \mathcal{N}_{i}^{k}} \max(0, (r(i, j) - k))\]</div>
+<p>where for each sample i, <span class="math notranslate nohighlight">\(\mathcal{N}_{i}^{k}\)</span> are its k nearest
+neighbors in the output space, and every sample j is its <span class="math notranslate nohighlight">\(r(i, j)\)</span>-th
+nearest neighbor in the input space. In other words, any unexpected nearest
+neighbors in the output space are penalised in proportion to their rank in
+the input space.</p>
+<ul class="simple">
+<li><p>“Neighborhood Preservation in Nonlinear Projection Methods: An
+Experimental Study”
+J. Venna, S. Kaski</p></li>
+<li><p>“Learning a Parametric Embedding by Preserving Local Structure”
+L.J.P. van der Maaten</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>ndarray of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>) or </em><em>(</em><em>n_samples</em><em>, </em><em>n_samples</em><em>)</em>) – If the metric is ‘precomputed’ X must be a square distance
+matrix. Otherwise it contains a sample per row.</p></li>
+<li><p><strong>X_embedded</strong> (<em>ndarray of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_components</em><em>)</em>) – Embedding of the training data in low-dimensional space.</p></li>
+<li><p><strong>n_neighbors</strong> (<em>int</em><em>, </em><em>default=5</em>) – Number of neighbors k that will be considered.</p></li>
+<li><p><strong>metric</strong> (<em>str</em><em> or </em><em>callable</em><em>, </em><em>default='euclidean'</em>) – <p>Which metric to use for computing pairwise distances between samples
+from the original input space. If metric is ‘precomputed’, X must be a
+matrix of pairwise distances or squared distances. Otherwise, see the
+documentation of argument metric in sklearn.pairwise.pairwise_distances
+for a list of available metrics.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.</span></p>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>trustworthiness</strong> – Trustworthiness of the low-dimensional embedding.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Tommaso
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

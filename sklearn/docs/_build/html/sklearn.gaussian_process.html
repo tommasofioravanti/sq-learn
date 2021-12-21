@@ -1,0 +1,2102 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sklearn.gaussian_process package &mdash; Qsklearn  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Qsklearn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">sklearn</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Qsklearn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>sklearn.gaussian_process package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sklearn.gaussian_process.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="sklearn-gaussian-process-package">
+<h1>sklearn.gaussian_process package<a class="headerlink" href="#sklearn-gaussian-process-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sklearn.gaussian_process.tests.html">sklearn.gaussian_process.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.gaussian_process.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.gaussian_process.tests.html#sklearn-gaussian-process-tests-test-gpc-module">sklearn.gaussian_process.tests.test_gpc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.gaussian_process.tests.html#sklearn-gaussian-process-tests-test-gpr-module">sklearn.gaussian_process.tests.test_gpr module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.gaussian_process.tests.html#sklearn-gaussian-process-tests-test-kernels-module">sklearn.gaussian_process.tests.test_kernels module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.gaussian_process.tests.html#module-sklearn.gaussian_process.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-sklearn.gaussian_process.kernels">
+<span id="sklearn-gaussian-process-kernels-module"></span><h2>sklearn.gaussian_process.kernels module<a class="headerlink" href="#module-sklearn.gaussian_process.kernels" title="Permalink to this headline">¶</a></h2>
+<p>Kernels for Gaussian process regression and classification.</p>
+<p>The kernels in this module allow kernel-engineering, i.e., they can be
+combined via the “+” and “*” operators or be exponentiated with a scalar
+via “**”. These sum and product expressions can also contain scalar values,
+which are automatically converted to a constant kernel.</p>
+<p>All kernels allow (analytic) gradient-based hyperparameter optimization.
+The space of hyperparameters can be specified by giving lower und upper
+boundaries for the value of each hyperparameter (the search space is thus
+rectangular). Instead of specifying bounds, hyperparameters can also be
+declared to be “fixed”, which causes these hyperparameters to be excluded from
+optimization.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.CompoundKernel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">CompoundKernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.CompoundKernel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.Kernel</span></code></a></p>
+<p>Kernel which is composed of a set of other kernels.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>kernels</strong> (<em>list of Kernels</em>) – The other kernels</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">WhiteKernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">RBF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">CompoundKernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">CompoundKernel</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">WhiteKernel</span><span class="p">(</span><span class="n">noise_level</span><span class="o">=</span><span class="mf">3.0</span><span class="p">),</span> <span class="n">RBF</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>
+<span class="go">[[-11.51292546  11.51292546]</span>
+<span class="go"> [-11.51292546  11.51292546]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">n_dims</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span>
+<span class="go">[1.09861229 0.69314718]</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.CompoundKernel.bounds">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">bounds</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.CompoundKernel.bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the log-transformed bounds on the theta.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>bounds</strong> – The log-transformed bounds on the kernel’s hyperparameters theta</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>array of shape (n_dims, 2)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.CompoundKernel.diag">
+<span class="sig-name descname"><span class="pre">diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.CompoundKernel.diag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the diagonal of the kernel k(X, X).</p>
+<p>The result of this method is identical to <cite>np.diag(self(X))</cite>; however,
+it can be evaluated more efficiently since only the diagonal is
+evaluated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples_X</em><em>, </em><em>n_features</em><em>) or </em><em>list of object</em>) – Argument to the kernel.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>K_diag</strong> – Diagonal of kernel k(X, X)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples_X, n_kernels)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.CompoundKernel.get_params">
+<span class="sig-name descname"><span class="pre">get_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.CompoundKernel.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters of this kernel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>deep</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>params</strong> – Parameter names mapped to their values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.CompoundKernel.is_stationary">
+<span class="sig-name descname"><span class="pre">is_stationary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.CompoundKernel.is_stationary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the kernel is stationary.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.CompoundKernel.requires_vector_input">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">requires_vector_input</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.CompoundKernel.requires_vector_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the kernel is defined on discrete structures.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.CompoundKernel.theta">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">theta</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.CompoundKernel.theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the (flattened, log-transformed) non-fixed hyperparameters.</p>
+<p>Note that theta are typically the log-transformed values of the
+kernel’s hyperparameters as this representation of the search space
+is more amenable for hyperparameter search, as hyperparameters like
+length-scales naturally live on a log-scale.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>theta</strong> – The non-fixed, log-transformed hyperparameters of the kernel</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ndarray of shape (n_dims,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.ConstantKernel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">ConstantKernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">constant_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constant_value_bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1e-05,</span> <span class="pre">100000.0)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.ConstantKernel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.StationaryKernelMixin" title="sklearn.gaussian_process.kernels.StationaryKernelMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.StationaryKernelMixin</span></code></a>, <a class="reference internal" href="#sklearn.gaussian_process.kernels.GenericKernelMixin" title="sklearn.gaussian_process.kernels.GenericKernelMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.GenericKernelMixin</span></code></a>, <a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.Kernel</span></code></a></p>
+<p>Constant kernel.</p>
+<p>Can be used as part of a product-kernel where it scales the magnitude of
+the other factor (kernel) or as part of a sum-kernel, where it modifies
+the mean of the Gaussian process.</p>
+<div class="math notranslate nohighlight">
+\[k(x_1, x_2) = constant\_value \;\forall\; x_1, x_2\]</div>
+<p>Adding a constant kernel is equivalent to adding a constant:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span> <span class="o">=</span> <span class="n">RBF</span><span class="p">()</span> <span class="o">+</span> <span class="n">ConstantKernel</span><span class="p">(</span><span class="n">constant_value</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>is the same as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kernel</span> <span class="o">=</span> <span class="n">RBF</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>constant_value</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – The constant value which defines the covariance:
+k(x_1, x_2) = constant_value</p></li>
+<li><p><strong>constant_value_bounds</strong> (<em>pair of floats &gt;= 0</em><em> or </em><em>&quot;fixed&quot;</em><em>, </em><em>default=</em><em>(</em><em>1e-5</em><em>, </em><em>1e5</em><em>)</em>) – The lower and upper bound on <cite>constant_value</cite>.
+If set to “fixed”, <cite>constant_value</cite> cannot be changed during
+hyperparameter tuning.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_friedman2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">RBF</span><span class="p">,</span> <span class="n">ConstantKernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_friedman2</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">RBF</span><span class="p">()</span> <span class="o">+</span> <span class="n">ConstantKernel</span><span class="p">(</span><span class="n">constant_value</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span> <span class="o">=</span> <span class="n">GaussianProcessRegressor</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">0.3696...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">1</span><span class="p">,:],</span> <span class="n">return_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">(array([606.1...]), array([0.24...]))</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.ConstantKernel.diag">
+<span class="sig-name descname"><span class="pre">diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.ConstantKernel.diag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the diagonal of the kernel k(X, X).</p>
+<p>The result of this method is identical to np.diag(self(X)); however,
+it can be evaluated more efficiently since only the diagonal is
+evaluated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples_X</em><em>, </em><em>n_features</em><em>) or </em><em>list of object</em>) – Argument to the kernel.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>K_diag</strong> – Diagonal of kernel k(X, X)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.ConstantKernel.hyperparameter_constant_value">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">hyperparameter_constant_value</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.ConstantKernel.hyperparameter_constant_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.DotProduct">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">DotProduct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigma_0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_0_bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1e-05,</span> <span class="pre">100000.0)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.DotProduct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.Kernel</span></code></a></p>
+<p>Dot-Product kernel.</p>
+<p>The DotProduct kernel is non-stationary and can be obtained from linear
+regression by putting <span class="math notranslate nohighlight">\(N(0, 1)\)</span> priors on the coefficients
+of <span class="math notranslate nohighlight">\(x_d (d = 1, . . . , D)\)</span> and a prior of <span class="math notranslate nohighlight">\(N(0, \sigma_0^2)\)</span>
+on the bias. The DotProduct kernel is invariant to a rotation of
+the coordinates about the origin, but not translations.
+It is parameterized by a parameter sigma_0 <span class="math notranslate nohighlight">\(\sigma\)</span>
+which controls the inhomogenity of the kernel. For <span class="math notranslate nohighlight">\(\sigma_0^2 =0\)</span>,
+the kernel is called the homogeneous linear kernel, otherwise
+it is inhomogeneous. The kernel is given by</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \sigma_0 ^ 2 + x_i \cdot x_j\]</div>
+<p>The DotProduct kernel is commonly combined with exponentiation.</p>
+<p>See <a href="#id14"><span class="problematic" id="id1">[1]_</span></a>, Chapter 4, Section 4.2, for further details regarding the
+DotProduct kernel.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sigma_0</strong> (<em>float &gt;= 0</em><em>, </em><em>default=1.0</em>) – Parameter controlling the inhomogenity of the kernel. If sigma_0=0,
+the kernel is homogenous.</p></li>
+<li><p><strong>sigma_0_bounds</strong> (<em>pair of floats &gt;= 0</em><em> or </em><em>&quot;fixed&quot;</em><em>, </em><em>default=</em><em>(</em><em>1e-5</em><em>, </em><em>1e5</em><em>)</em>) – The lower and upper bound on ‘sigma_0’.
+If set to “fixed”, ‘sigma_0’ cannot be changed during
+hyperparameter tuning.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="http://www.gaussianprocess.org/gpml/">Carl Edward Rasmussen, Christopher K. I. Williams (2006).
+“Gaussian Processes for Machine Learning”. The MIT Press.</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_friedman2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">DotProduct</span><span class="p">,</span> <span class="n">WhiteKernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_friedman2</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">DotProduct</span><span class="p">()</span> <span class="o">+</span> <span class="n">WhiteKernel</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span> <span class="o">=</span> <span class="n">GaussianProcessRegressor</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">0.3680...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:],</span> <span class="n">return_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">(array([653.0..., 592.1...]), array([316.6..., 316.6...]))</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.DotProduct.diag">
+<span class="sig-name descname"><span class="pre">diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.DotProduct.diag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the diagonal of the kernel k(X, X).</p>
+<p>The result of this method is identical to np.diag(self(X)); however,
+it can be evaluated more efficiently since only the diagonal is
+evaluated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>ndarray of shape</em><em> (</em><em>n_samples_X</em><em>, </em><em>n_features</em><em>)</em>) – Left argument of the returned kernel k(X, Y).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>K_diag</strong> – Diagonal of kernel k(X, X).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.DotProduct.hyperparameter_sigma_0">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">hyperparameter_sigma_0</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.DotProduct.hyperparameter_sigma_0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.DotProduct.is_stationary">
+<span class="sig-name descname"><span class="pre">is_stationary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.DotProduct.is_stationary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the kernel is stationary.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.ExpSineSquared">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">ExpSineSquared</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodicity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_scale_bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1e-05,</span> <span class="pre">100000.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodicity_bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1e-05,</span> <span class="pre">100000.0)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.ExpSineSquared" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.StationaryKernelMixin" title="sklearn.gaussian_process.kernels.StationaryKernelMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.StationaryKernelMixin</span></code></a>, <a class="reference internal" href="#sklearn.gaussian_process.kernels.NormalizedKernelMixin" title="sklearn.gaussian_process.kernels.NormalizedKernelMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.NormalizedKernelMixin</span></code></a>, <a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.Kernel</span></code></a></p>
+<p>Exp-Sine-Squared kernel (aka periodic kernel).</p>
+<p>The ExpSineSquared kernel allows one to model functions which repeat
+themselves exactly. It is parameterized by a length scale
+parameter <span class="math notranslate nohighlight">\(l&gt;0\)</span> and a periodicity parameter <span class="math notranslate nohighlight">\(p&gt;0\)</span>.
+Only the isotropic variant where <span class="math notranslate nohighlight">\(l\)</span> is a scalar is
+supported at the moment. The kernel is given by:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \text{exp}\left(-
+\frac{ 2\sin^2(\pi d(x_i, x_j)/p) }{ l^ 2} \right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(l\)</span> is the length scale of the kernel, <span class="math notranslate nohighlight">\(p\)</span> the
+periodicity of the kernel and <span class="math notranslate nohighlight">\(d(\\cdot,\\cdot)\)</span> is the
+Euclidean distance.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length_scale</strong> (<em>float &gt; 0</em><em>, </em><em>default=1.0</em>) – The length scale of the kernel.</p></li>
+<li><p><strong>periodicity</strong> (<em>float &gt; 0</em><em>, </em><em>default=1.0</em>) – The periodicity of the kernel.</p></li>
+<li><p><strong>length_scale_bounds</strong> (<em>pair of floats &gt;= 0</em><em> or </em><em>&quot;fixed&quot;</em><em>, </em><em>default=</em><em>(</em><em>1e-5</em><em>, </em><em>1e5</em><em>)</em>) – The lower and upper bound on ‘length_scale’.
+If set to “fixed”, ‘length_scale’ cannot be changed during
+hyperparameter tuning.</p></li>
+<li><p><strong>periodicity_bounds</strong> (<em>pair of floats &gt;= 0</em><em> or </em><em>&quot;fixed&quot;</em><em>, </em><em>default=</em><em>(</em><em>1e-5</em><em>, </em><em>1e5</em><em>)</em>) – The lower and upper bound on ‘periodicity’.
+If set to “fixed”, ‘periodicity’ cannot be changed during
+hyperparameter tuning.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_friedman2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">ExpSineSquared</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_friedman2</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">ExpSineSquared</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">periodicity</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span> <span class="o">=</span> <span class="n">GaussianProcessRegressor</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">0.0144...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:],</span> <span class="n">return_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">(array([425.6..., 457.5...]), array([0.3894..., 0.3467...]))</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.ExpSineSquared.hyperparameter_length_scale">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">hyperparameter_length_scale</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.ExpSineSquared.hyperparameter_length_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the length scale</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.ExpSineSquared.hyperparameter_periodicity">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">hyperparameter_periodicity</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.ExpSineSquared.hyperparameter_periodicity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Exponentiation">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">Exponentiation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exponent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Exponentiation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.Kernel</span></code></a></p>
+<p>The Exponentiation kernel takes one base kernel and a scalar parameter
+<span class="math notranslate nohighlight">\(p\)</span> and combines them via</p>
+<div class="math notranslate nohighlight">
+\[k_{exp}(X, Y) = k(X, Y) ^p\]</div>
+<p>Note that the <cite>__pow__</cite> magic method is overridden, so
+<cite>Exponentiation(RBF(), 2)</cite> is equivalent to using the ** operator
+with <cite>RBF() ** 2</cite>.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kernel</strong> (<a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><em>Kernel</em></a>) – The base kernel</p></li>
+<li><p><strong>exponent</strong> (<em>float</em>) – The exponent for the base kernel</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_friedman2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="p">(</span><span class="n">RationalQuadratic</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">Exponentiation</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_friedman2</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">Exponentiation</span><span class="p">(</span><span class="n">RationalQuadratic</span><span class="p">(),</span> <span class="n">exponent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span> <span class="o">=</span> <span class="n">GaussianProcessRegressor</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">0.419...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">1</span><span class="p">,:],</span> <span class="n">return_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">(array([635.5...]), array([0.559...]))</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Exponentiation.bounds">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">bounds</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Exponentiation.bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the log-transformed bounds on the theta.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>bounds</strong> – The log-transformed bounds on the kernel’s hyperparameters theta</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ndarray of shape (n_dims, 2)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Exponentiation.diag">
+<span class="sig-name descname"><span class="pre">diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Exponentiation.diag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the diagonal of the kernel k(X, X).</p>
+<p>The result of this method is identical to np.diag(self(X)); however,
+it can be evaluated more efficiently since only the diagonal is
+evaluated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples_X</em><em>, </em><em>n_features</em><em>) or </em><em>list of object</em>) – Argument to the kernel.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>K_diag</strong> – Diagonal of kernel k(X, X)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Exponentiation.get_params">
+<span class="sig-name descname"><span class="pre">get_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Exponentiation.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters of this kernel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>deep</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>params</strong> – Parameter names mapped to their values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Exponentiation.hyperparameters">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">hyperparameters</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Exponentiation.hyperparameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all hyperparameter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Exponentiation.is_stationary">
+<span class="sig-name descname"><span class="pre">is_stationary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Exponentiation.is_stationary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the kernel is stationary.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Exponentiation.requires_vector_input">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">requires_vector_input</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Exponentiation.requires_vector_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the kernel is defined on discrete structures.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Exponentiation.theta">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">theta</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Exponentiation.theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the (flattened, log-transformed) non-fixed hyperparameters.</p>
+<p>Note that theta are typically the log-transformed values of the
+kernel’s hyperparameters as this representation of the search space
+is more amenable for hyperparameter search, as hyperparameters like
+length-scales naturally live on a log-scale.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>theta</strong> – The non-fixed, log-transformed hyperparameters of the kernel</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ndarray of shape (n_dims,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.GenericKernelMixin">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">GenericKernelMixin</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.GenericKernelMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin for kernels which operate on generic objects such as variable-
+length sequences, trees, and graphs.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.22.</span></p>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.GenericKernelMixin.requires_vector_input">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">requires_vector_input</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.GenericKernelMixin.requires_vector_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the kernel works only on fixed-length feature vectors.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Hyperparameter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">Hyperparameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Hyperparameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.Hyperparameter" title="sklearn.gaussian_process.kernels.Hyperparameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.Hyperparameter</span></code></a></p>
+<p>A kernel hyperparameter’s specification in form of a namedtuple.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Hyperparameter.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Hyperparameter.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the hyperparameter. Note that a kernel using a
+hyperparameter with name “x” must have the attributes self.x and
+self.x_bounds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Hyperparameter.value_type">
+<span class="sig-name descname"><span class="pre">value_type</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Hyperparameter.value_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of the hyperparameter. Currently, only “numeric”
+hyperparameters are supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Hyperparameter.bounds">
+<span class="sig-name descname"><span class="pre">bounds</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Hyperparameter.bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>The lower and upper bound on the parameter. If n_elements&gt;1, a pair
+of 1d array with n_elements each may be given alternatively. If
+the string “fixed” is passed as bounds, the hyperparameter’s value
+cannot be changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>pair of floats &gt;= 0 or “fixed”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Hyperparameter.n_elements">
+<span class="sig-name descname"><span class="pre">n_elements</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Hyperparameter.n_elements" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of elements of the hyperparameter value. Defaults to 1,
+which corresponds to a scalar hyperparameter. n_elements &gt; 1
+corresponds to a hyperparameter which is vector-valued,
+such as, e.g., anisotropic length-scales.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, default=1</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Hyperparameter.fixed">
+<span class="sig-name descname"><span class="pre">fixed</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Hyperparameter.fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the value of this hyperparameter is fixed, i.e., cannot be
+changed during hyperparameter tuning. If None is passed, the “fixed” is
+derived based on the given bounds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, default=None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">ConstantKernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_friedman2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">Hyperparameter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_friedman2</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">ConstantKernel</span><span class="p">(</span><span class="n">constant_value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+<span class="gp">... </span>   <span class="n">constant_value_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>We can access each hyperparameter:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">hyperparameter</span> <span class="ow">in</span> <span class="n">kernel</span><span class="o">.</span><span class="n">hyperparameters</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">hyperparameter</span><span class="p">)</span>
+<span class="go">Hyperparameter(name=&#39;constant_value&#39;, value_type=&#39;numeric&#39;,</span>
+<span class="go">bounds=array([[ 0., 10.]]), n_elements=1, fixed=False)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">params</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">constant_value : 1.0</span>
+<span class="go">constant_value_bounds : (0.0, 10.0)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Kernel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">Kernel</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Kernel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for all kernels.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Kernel.bounds">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">bounds</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Kernel.bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the log-transformed bounds on the theta.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>bounds</strong> – The log-transformed bounds on the kernel’s hyperparameters theta</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ndarray of shape (n_dims, 2)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Kernel.clone_with_theta">
+<span class="sig-name descname"><span class="pre">clone_with_theta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Kernel.clone_with_theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a clone of self with given hyperparameters theta.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>theta</strong> (<em>ndarray of shape</em><em> (</em><em>n_dims</em><em>,</em><em>)</em>) – The hyperparameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Kernel.diag">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Kernel.diag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the diagonal of the kernel k(X, X).</p>
+<p>The result of this method is identical to np.diag(self(X)); however,
+it can be evaluated more efficiently since only the diagonal is
+evaluated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Left argument of the returned kernel k(X, Y)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>K_diag</strong> – Diagonal of kernel k(X, X)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Kernel.get_params">
+<span class="sig-name descname"><span class="pre">get_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Kernel.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters of this kernel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>deep</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>params</strong> – Parameter names mapped to their values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Kernel.hyperparameters">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">hyperparameters</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Kernel.hyperparameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all hyperparameter specifications.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Kernel.is_stationary">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">is_stationary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Kernel.is_stationary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the kernel is stationary.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Kernel.n_dims">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">n_dims</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Kernel.n_dims" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of non-fixed hyperparameters of the kernel.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Kernel.requires_vector_input">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">requires_vector_input</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Kernel.requires_vector_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the kernel is defined on fixed-length feature
+vectors or generic objects. Defaults to True for backward
+compatibility.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Kernel.set_params">
+<span class="sig-name descname"><span class="pre">set_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Kernel.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this kernel.</p>
+<p>The method works on simple kernels as well as on nested kernels.
+The latter have parameters of the form <code class="docutils literal notranslate"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code>
+so that it’s possible to update each component of a nested object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Kernel.theta">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">theta</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Kernel.theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the (flattened, log-transformed) non-fixed hyperparameters.</p>
+<p>Note that theta are typically the log-transformed values of the
+kernel’s hyperparameters as this representation of the search space
+is more amenable for hyperparameter search, as hyperparameters like
+length-scales naturally live on a log-scale.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>theta</strong> – The non-fixed, log-transformed hyperparameters of the kernel</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ndarray of shape (n_dims,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.KernelOperator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">KernelOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.KernelOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.Kernel</span></code></a></p>
+<p>Base class for all kernel operators.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.KernelOperator.bounds">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">bounds</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.KernelOperator.bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the log-transformed bounds on the theta.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>bounds</strong> – The log-transformed bounds on the kernel’s hyperparameters theta</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ndarray of shape (n_dims, 2)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.KernelOperator.get_params">
+<span class="sig-name descname"><span class="pre">get_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.KernelOperator.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters of this kernel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>deep</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>params</strong> – Parameter names mapped to their values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.KernelOperator.hyperparameters">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">hyperparameters</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.KernelOperator.hyperparameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all hyperparameter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.KernelOperator.is_stationary">
+<span class="sig-name descname"><span class="pre">is_stationary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.KernelOperator.is_stationary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the kernel is stationary.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.KernelOperator.requires_vector_input">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">requires_vector_input</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.KernelOperator.requires_vector_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the kernel is stationary.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.KernelOperator.theta">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">theta</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.KernelOperator.theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the (flattened, log-transformed) non-fixed hyperparameters.</p>
+<p>Note that theta are typically the log-transformed values of the
+kernel’s hyperparameters as this representation of the search space
+is more amenable for hyperparameter search, as hyperparameters like
+length-scales naturally live on a log-scale.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>theta</strong> – The non-fixed, log-transformed hyperparameters of the kernel</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ndarray of shape (n_dims,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Matern">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">Matern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_scale_bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1e-05,</span> <span class="pre">100000.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Matern" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.RBF" title="sklearn.gaussian_process.kernels.RBF"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.RBF</span></code></a></p>
+<p>Matern kernel.</p>
+<p>The class of Matern kernels is a generalization of the <a class="reference internal" href="#sklearn.gaussian_process.kernels.RBF" title="sklearn.gaussian_process.kernels.RBF"><code class="xref py py-class docutils literal notranslate"><span class="pre">RBF</span></code></a>.
+It has an additional parameter <span class="math notranslate nohighlight">\(\nu\)</span> which controls the
+smoothness of the resulting function. The smaller <span class="math notranslate nohighlight">\(\nu\)</span>,
+the less smooth the approximated function is.
+As <span class="math notranslate nohighlight">\(\nu\rightarrow\infty\)</span>, the kernel becomes equivalent to
+the <a class="reference internal" href="#sklearn.gaussian_process.kernels.RBF" title="sklearn.gaussian_process.kernels.RBF"><code class="xref py py-class docutils literal notranslate"><span class="pre">RBF</span></code></a> kernel. When <span class="math notranslate nohighlight">\(\nu = 1/2\)</span>, the Matérn kernel
+becomes identical to the absolute exponential kernel.
+Important intermediate values are
+<span class="math notranslate nohighlight">\(\nu=1.5\)</span> (once differentiable functions)
+and <span class="math notranslate nohighlight">\(\nu=2.5\)</span> (twice differentiable functions).</p>
+<p>The kernel is given by:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) =  \frac{1}{\Gamma(\nu)2^{\nu-1}}\Bigg(
+\frac{\sqrt{2\nu}}{l} d(x_i , x_j )
+\Bigg)^\nu K_\nu\Bigg(
+\frac{\sqrt{2\nu}}{l} d(x_i , x_j )\Bigg)\]</div>
+<p>where <span class="math notranslate nohighlight">\(d(\cdot,\cdot)\)</span> is the Euclidean distance,
+<span class="math notranslate nohighlight">\(K_{\nu}(\cdot)\)</span> is a modified Bessel function and
+<span class="math notranslate nohighlight">\(\Gamma(\cdot)\)</span> is the gamma function.
+See <a href="#id15"><span class="problematic" id="id3">[1]_</span></a>, Chapter 4, Section 4.2, for details regarding the different
+variants of the Matern kernel.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length_scale</strong> (<em>float</em><em> or </em><em>ndarray of shape</em><em> (</em><em>n_features</em><em>,</em><em>)</em><em>, </em><em>default=1.0</em>) – The length scale of the kernel. If a float, an isotropic kernel is
+used. If an array, an anisotropic kernel is used where each dimension
+of l defines the length-scale of the respective feature dimension.</p></li>
+<li><p><strong>length_scale_bounds</strong> (<em>pair of floats &gt;= 0</em><em> or </em><em>&quot;fixed&quot;</em><em>, </em><em>default=</em><em>(</em><em>1e-5</em><em>, </em><em>1e5</em><em>)</em>) – The lower and upper bound on ‘length_scale’.
+If set to “fixed”, ‘length_scale’ cannot be changed during
+hyperparameter tuning.</p></li>
+<li><p><strong>nu</strong> (<em>float</em><em>, </em><em>default=1.5</em>) – The parameter nu controlling the smoothness of the learned function.
+The smaller nu, the less smooth the approximated function is.
+For nu=inf, the kernel becomes equivalent to the RBF kernel and for
+nu=0.5 to the absolute exponential kernel. Important intermediate
+values are nu=1.5 (once differentiable functions) and nu=2.5
+(twice differentiable functions). Note that values of nu not in
+[0.5, 1.5, 2.5, inf] incur a considerably higher computational cost
+(appr. 10 times higher) since they require to evaluate the modified
+Bessel function. Furthermore, in contrast to l, nu is kept fixed to
+its initial value and not optimized.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id4"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="http://www.gaussianprocess.org/gpml/">Carl Edward Rasmussen, Christopher K. I. Williams (2006).
+“Gaussian Processes for Machine Learning”. The MIT Press.</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">Matern</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">Matern</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span> <span class="o">=</span> <span class="n">GaussianProcessClassifier</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">0.9866...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:])</span>
+<span class="go">array([[0.8513..., 0.0368..., 0.1117...],</span>
+<span class="go">        [0.8086..., 0.0693..., 0.1220...]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.NormalizedKernelMixin">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">NormalizedKernelMixin</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.NormalizedKernelMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin for kernels which are normalized: k(X, X)=1.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.NormalizedKernelMixin.diag">
+<span class="sig-name descname"><span class="pre">diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.NormalizedKernelMixin.diag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the diagonal of the kernel k(X, X).</p>
+<p>The result of this method is identical to np.diag(self(X)); however,
+it can be evaluated more efficiently since only the diagonal is
+evaluated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>ndarray of shape</em><em> (</em><em>n_samples_X</em><em>, </em><em>n_features</em><em>)</em>) – Left argument of the returned kernel k(X, Y)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>K_diag</strong> – Diagonal of kernel k(X, X)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.PairwiseKernel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">PairwiseKernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1e-05,</span> <span class="pre">100000.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pairwise_kernels_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.PairwiseKernel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.Kernel</span></code></a></p>
+<p>Wrapper for kernels in sklearn.metrics.pairwise.</p>
+<p>A thin wrapper around the functionality of the kernels in
+sklearn.metrics.pairwise.</p>
+<dl class="simple">
+<dt>Note: Evaluation of eval_gradient is not analytic but numeric and all</dt><dd><p>kernels support only isotropic distances. The parameter gamma is
+considered to be a hyperparameter and may be optimized. The other
+kernel parameters are set directly at initialization and are kept
+fixed.</p>
+</dd>
+</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gamma</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Parameter gamma of the pairwise kernel specified by metric. It should
+be positive.</p></li>
+<li><p><strong>gamma_bounds</strong> (<em>pair of floats &gt;= 0</em><em> or </em><em>&quot;fixed&quot;</em><em>, </em><em>default=</em><em>(</em><em>1e-5</em><em>, </em><em>1e5</em><em>)</em>) – The lower and upper bound on ‘gamma’.
+If set to “fixed”, ‘gamma’ cannot be changed during
+hyperparameter tuning.</p></li>
+<li><p><strong>metric</strong> (<em>{&quot;linear&quot;</em><em>, </em><em>&quot;additive_chi2&quot;</em><em>, </em><em>&quot;chi2&quot;</em><em>, </em><em>&quot;poly&quot;</em><em>, </em><em>&quot;polynomial&quot;</em><em>,               </em><em>&quot;rbf&quot;</em><em>, </em><em>&quot;laplacian&quot;</em><em>, </em><em>&quot;sigmoid&quot;</em><em>, </em><em>&quot;cosine&quot;}</em><em> or </em><em>callable</em><em>,               </em><em>default=&quot;linear&quot;</em>) – The metric to use when calculating kernel between instances in a
+feature array. If metric is a string, it must be one of the metrics
+in pairwise.PAIRWISE_KERNEL_FUNCTIONS.
+If metric is “precomputed”, X is assumed to be a kernel matrix.
+Alternatively, if metric is a callable function, it is called on each
+pair of instances (rows) and the resulting value recorded. The callable
+should take two arrays from X as input and return a value indicating
+the distance between them.</p></li>
+<li><p><strong>pairwise_kernels_kwargs</strong> (<em>dict</em><em>, </em><em>default=None</em>) – All entries of this dict (if any) are passed as keyword arguments to
+the pairwise kernel function.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">PairwiseKernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">PairwiseKernel</span><span class="p">(</span><span class="n">metric</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span> <span class="o">=</span> <span class="n">GaussianProcessClassifier</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">0.9733...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:])</span>
+<span class="go">array([[0.8880..., 0.05663..., 0.05532...],</span>
+<span class="go">       [0.8676..., 0.07073..., 0.06165...]])</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.PairwiseKernel.diag">
+<span class="sig-name descname"><span class="pre">diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.PairwiseKernel.diag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the diagonal of the kernel k(X, X).</p>
+<p>The result of this method is identical to np.diag(self(X)); however,
+it can be evaluated more efficiently since only the diagonal is
+evaluated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>ndarray of shape</em><em> (</em><em>n_samples_X</em><em>, </em><em>n_features</em><em>)</em>) – Left argument of the returned kernel k(X, Y)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>K_diag</strong> – Diagonal of kernel k(X, X)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.PairwiseKernel.hyperparameter_gamma">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">hyperparameter_gamma</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.PairwiseKernel.hyperparameter_gamma" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.PairwiseKernel.is_stationary">
+<span class="sig-name descname"><span class="pre">is_stationary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.PairwiseKernel.is_stationary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the kernel is stationary.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Product">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">Product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Product" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.KernelOperator" title="sklearn.gaussian_process.kernels.KernelOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.KernelOperator</span></code></a></p>
+<p>The <cite>Product</cite> kernel takes two kernels <span class="math notranslate nohighlight">\(k_1\)</span> and <span class="math notranslate nohighlight">\(k_2\)</span>
+and combines them via</p>
+<div class="math notranslate nohighlight">
+\[k_{prod}(X, Y) = k_1(X, Y) * k_2(X, Y)\]</div>
+<p>Note that the <cite>__mul__</cite> magic method is overridden, so
+<cite>Product(RBF(), RBF())</cite> is equivalent to using the * operator
+with <cite>RBF() * RBF()</cite>.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k1</strong> (<a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><em>Kernel</em></a>) – The first base-kernel of the product-kernel</p></li>
+<li><p><strong>k2</strong> (<a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><em>Kernel</em></a>) – The second base-kernel of the product-kernel</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_friedman2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="p">(</span><span class="n">RBF</span><span class="p">,</span> <span class="n">Product</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">ConstantKernel</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_friedman2</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="n">ConstantKernel</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">RBF</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span> <span class="o">=</span> <span class="n">GaussianProcessRegressor</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span>
+<span class="go">1.41**2 * RBF(length_scale=1)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Product.diag">
+<span class="sig-name descname"><span class="pre">diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Product.diag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the diagonal of the kernel k(X, X).</p>
+<p>The result of this method is identical to np.diag(self(X)); however,
+it can be evaluated more efficiently since only the diagonal is
+evaluated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples_X</em><em>, </em><em>n_features</em><em>) or </em><em>list of object</em>) – Argument to the kernel.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>K_diag</strong> – Diagonal of kernel k(X, X)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.RBF">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">RBF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_scale_bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1e-05,</span> <span class="pre">100000.0)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.RBF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.StationaryKernelMixin" title="sklearn.gaussian_process.kernels.StationaryKernelMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.StationaryKernelMixin</span></code></a>, <a class="reference internal" href="#sklearn.gaussian_process.kernels.NormalizedKernelMixin" title="sklearn.gaussian_process.kernels.NormalizedKernelMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.NormalizedKernelMixin</span></code></a>, <a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.Kernel</span></code></a></p>
+<p>Radial-basis function kernel (aka squared-exponential kernel).</p>
+<p>The RBF kernel is a stationary kernel. It is also known as the
+“squared exponential” kernel. It is parameterized by a length scale
+parameter <span class="math notranslate nohighlight">\(l&gt;0\)</span>, which can either be a scalar (isotropic variant
+of the kernel) or a vector with the same number of dimensions as the inputs
+X (anisotropic variant of the kernel). The kernel is given by:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \exp\left(- \frac{d(x_i, x_j)^2}{2l^2} \right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(l\)</span> is the length scale of the kernel and
+<span class="math notranslate nohighlight">\(d(\cdot,\cdot)\)</span> is the Euclidean distance.
+For advice on how to set the length scale parameter, see e.g. <a href="#id16"><span class="problematic" id="id6">[1]_</span></a>.</p>
+<p>This kernel is infinitely differentiable, which implies that GPs with this
+kernel as covariance function have mean square derivatives of all orders,
+and are thus very smooth.
+See <a class="footnote-reference brackets" href="#id9" id="id7">2</a>, Chapter 4, Section 4.2, for further details of the RBF kernel.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length_scale</strong> (<em>float</em><em> or </em><em>ndarray of shape</em><em> (</em><em>n_features</em><em>,</em><em>)</em><em>, </em><em>default=1.0</em>) – The length scale of the kernel. If a float, an isotropic kernel is
+used. If an array, an anisotropic kernel is used where each dimension
+of l defines the length-scale of the respective feature dimension.</p></li>
+<li><p><strong>length_scale_bounds</strong> (<em>pair of floats &gt;= 0</em><em> or </em><em>&quot;fixed&quot;</em><em>, </em><em>default=</em><em>(</em><em>1e-5</em><em>, </em><em>1e5</em><em>)</em>) – The lower and upper bound on ‘length_scale’.
+If set to “fixed”, ‘length_scale’ cannot be changed during
+hyperparameter tuning.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id8"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://www.cs.toronto.edu/~duvenaud/cookbook/">David Duvenaud (2014). “The Kernel Cookbook:
+Advice on Covariance functions”.</a></p>
+</dd>
+<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id7">2</a></span></dt>
+<dd><p><a class="reference external" href="http://www.gaussianprocess.org/gpml/">Carl Edward Rasmussen, Christopher K. I. Williams (2006).
+“Gaussian Processes for Machine Learning”. The MIT Press.</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">RBF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span> <span class="o">=</span> <span class="n">GaussianProcessClassifier</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">0.9866...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:])</span>
+<span class="go">array([[0.8354..., 0.03228..., 0.1322...],</span>
+<span class="go">       [0.7906..., 0.0652..., 0.1441...]])</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.RBF.anisotropic">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">anisotropic</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.RBF.anisotropic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.RBF.hyperparameter_length_scale">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">hyperparameter_length_scale</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.RBF.hyperparameter_length_scale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.RationalQuadratic">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">RationalQuadratic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_scale_bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1e-05,</span> <span class="pre">100000.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha_bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1e-05,</span> <span class="pre">100000.0)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.RationalQuadratic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.StationaryKernelMixin" title="sklearn.gaussian_process.kernels.StationaryKernelMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.StationaryKernelMixin</span></code></a>, <a class="reference internal" href="#sklearn.gaussian_process.kernels.NormalizedKernelMixin" title="sklearn.gaussian_process.kernels.NormalizedKernelMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.NormalizedKernelMixin</span></code></a>, <a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.Kernel</span></code></a></p>
+<p>Rational Quadratic kernel.</p>
+<p>The RationalQuadratic kernel can be seen as a scale mixture (an infinite
+sum) of RBF kernels with different characteristic length scales. It is
+parameterized by a length scale parameter <span class="math notranslate nohighlight">\(l&gt;0\)</span> and a scale
+mixture parameter <span class="math notranslate nohighlight">\(\alpha&gt;0\)</span>. Only the isotropic variant
+where length_scale <span class="math notranslate nohighlight">\(l\)</span> is a scalar is supported at the moment.
+The kernel is given by:</p>
+<div class="math notranslate nohighlight">
+\[k(x_i, x_j) = \left(
+1 + \frac{d(x_i, x_j)^2 }{ 2\alpha  l^2}\right)^{-\alpha}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is the scale mixture parameter, <span class="math notranslate nohighlight">\(l\)</span> is
+the length scale of the kernel and <span class="math notranslate nohighlight">\(d(\cdot,\cdot)\)</span> is the
+Euclidean distance.
+For advice on how to set the parameters, see e.g. <a href="#id17"><span class="problematic" id="id11">[1]_</span></a>.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length_scale</strong> (<em>float &gt; 0</em><em>, </em><em>default=1.0</em>) – The length scale of the kernel.</p></li>
+<li><p><strong>alpha</strong> (<em>float &gt; 0</em><em>, </em><em>default=1.0</em>) – Scale mixture parameter</p></li>
+<li><p><strong>length_scale_bounds</strong> (<em>pair of floats &gt;= 0</em><em> or </em><em>&quot;fixed&quot;</em><em>, </em><em>default=</em><em>(</em><em>1e-5</em><em>, </em><em>1e5</em><em>)</em>) – The lower and upper bound on ‘length_scale’.
+If set to “fixed”, ‘length_scale’ cannot be changed during
+hyperparameter tuning.</p></li>
+<li><p><strong>alpha_bounds</strong> (<em>pair of floats &gt;= 0</em><em> or </em><em>&quot;fixed&quot;</em><em>, </em><em>default=</em><em>(</em><em>1e-5</em><em>, </em><em>1e5</em><em>)</em>) – The lower and upper bound on ‘alpha’.
+If set to “fixed”, ‘alpha’ cannot be changed during
+hyperparameter tuning.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id12"><span class="brackets">1</span></dt>
+<dd><p><a class="reference external" href="https://www.cs.toronto.edu/~duvenaud/cookbook/">David Duvenaud (2014). “The Kernel Cookbook:
+Advice on Covariance functions”.</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">Matern</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">RationalQuadratic</span><span class="p">(</span><span class="n">length_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span> <span class="o">=</span> <span class="n">GaussianProcessClassifier</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">0.9733...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:])</span>
+<span class="go">array([[0.8881..., 0.0566..., 0.05518...],</span>
+<span class="go">        [0.8678..., 0.0707... , 0.0614...]])</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.RationalQuadratic.hyperparameter_alpha">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">hyperparameter_alpha</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.RationalQuadratic.hyperparameter_alpha" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.RationalQuadratic.hyperparameter_length_scale">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">hyperparameter_length_scale</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.RationalQuadratic.hyperparameter_length_scale" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.StationaryKernelMixin">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">StationaryKernelMixin</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.StationaryKernelMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Mixin for kernels which are stationary: k(X, Y)= f(X-Y).</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.StationaryKernelMixin.is_stationary">
+<span class="sig-name descname"><span class="pre">is_stationary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.StationaryKernelMixin.is_stationary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the kernel is stationary.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Sum">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">Sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.KernelOperator" title="sklearn.gaussian_process.kernels.KernelOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.KernelOperator</span></code></a></p>
+<p>The <cite>Sum</cite> kernel takes two kernels <span class="math notranslate nohighlight">\(k_1\)</span> and <span class="math notranslate nohighlight">\(k_2\)</span>
+and combines them via</p>
+<div class="math notranslate nohighlight">
+\[k_{sum}(X, Y) = k_1(X, Y) + k_2(X, Y)\]</div>
+<p>Note that the <cite>__add__</cite> magic method is overridden, so
+<cite>Sum(RBF(), RBF())</cite> is equivalent to using the + operator
+with <cite>RBF() + RBF()</cite>.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k1</strong> (<a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><em>Kernel</em></a>) – The first base-kernel of the sum-kernel</p></li>
+<li><p><strong>k2</strong> (<a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><em>Kernel</em></a>) – The second base-kernel of the sum-kernel</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_friedman2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">RBF</span><span class="p">,</span> <span class="n">Sum</span><span class="p">,</span> <span class="n">ConstantKernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_friedman2</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">Sum</span><span class="p">(</span><span class="n">ConstantKernel</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">RBF</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span> <span class="o">=</span> <span class="n">GaussianProcessRegressor</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span>
+<span class="go">1.41**2 + RBF(length_scale=1)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.Sum.diag">
+<span class="sig-name descname"><span class="pre">diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.Sum.diag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the diagonal of the kernel k(X, X).</p>
+<p>The result of this method is identical to <cite>np.diag(self(X))</cite>; however,
+it can be evaluated more efficiently since only the diagonal is
+evaluated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples_X</em><em>, </em><em>n_features</em><em>) or </em><em>list of object</em>) – Argument to the kernel.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>K_diag</strong> – Diagonal of kernel k(X, X)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.WhiteKernel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.kernels.</span></span><span class="sig-name descname"><span class="pre">WhiteKernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">noise_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_level_bounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(1e-05,</span> <span class="pre">100000.0)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.WhiteKernel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sklearn.gaussian_process.kernels.StationaryKernelMixin" title="sklearn.gaussian_process.kernels.StationaryKernelMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.StationaryKernelMixin</span></code></a>, <a class="reference internal" href="#sklearn.gaussian_process.kernels.GenericKernelMixin" title="sklearn.gaussian_process.kernels.GenericKernelMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.GenericKernelMixin</span></code></a>, <a class="reference internal" href="#sklearn.gaussian_process.kernels.Kernel" title="sklearn.gaussian_process.kernels.Kernel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.gaussian_process.kernels.Kernel</span></code></a></p>
+<p>White kernel.</p>
+<p>The main use-case of this kernel is as part of a sum-kernel where it
+explains the noise of the signal as independently and identically
+normally-distributed. The parameter noise_level equals the variance of this
+noise.</p>
+<div class="math notranslate nohighlight">
+\[k(x_1, x_2) = noise\_level \text{ if } x_i == x_j \text{ else } 0\]</div>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>noise_level</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – Parameter controlling the noise level (variance)</p></li>
+<li><p><strong>noise_level_bounds</strong> (<em>pair of floats &gt;= 0</em><em> or </em><em>&quot;fixed&quot;</em><em>, </em><em>default=</em><em>(</em><em>1e-5</em><em>, </em><em>1e5</em><em>)</em>) – The lower and upper bound on ‘noise_level’.
+If set to “fixed”, ‘noise_level’ cannot be changed during
+hyperparameter tuning.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_friedman2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">DotProduct</span><span class="p">,</span> <span class="n">WhiteKernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_friedman2</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">DotProduct</span><span class="p">()</span> <span class="o">+</span> <span class="n">WhiteKernel</span><span class="p">(</span><span class="n">noise_level</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span> <span class="o">=</span> <span class="n">GaussianProcessRegressor</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">0.3680...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:],</span> <span class="n">return_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">(array([653.0..., 592.1... ]), array([316.6..., 316.6...]))</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.WhiteKernel.diag">
+<span class="sig-name descname"><span class="pre">diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.kernels.WhiteKernel.diag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the diagonal of the kernel k(X, X).</p>
+<p>The result of this method is identical to np.diag(self(X)); however,
+it can be evaluated more efficiently since only the diagonal is
+evaluated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples_X</em><em>, </em><em>n_features</em><em>) or </em><em>list of object</em>) – Argument to the kernel.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>K_diag</strong> – Diagonal of kernel k(X, X)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples_X,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.kernels.WhiteKernel.hyperparameter_noise_level">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">hyperparameter_noise_level</span></span><a class="headerlink" href="#sklearn.gaussian_process.kernels.WhiteKernel.hyperparameter_noise_level" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-sklearn.gaussian_process">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.gaussian_process" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="#module-sklearn.gaussian_process" title="sklearn.gaussian_process"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.gaussian_process</span></code></a> module implements Gaussian Process
+based regression and classification.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessClassifier">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.</span></span><span class="sig-name descname"><span class="pre">GaussianProcessClassifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fmin_l_bfgs_b'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_restarts_optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter_predict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warm_start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_X_train</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'one_vs_rest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessClassifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.ClassifierMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Gaussian process classification (GPC) based on Laplace approximation.</p>
+<p>The implementation is based on Algorithm 3.1, 3.2, and 5.1 of
+Gaussian Processes for Machine Learning (GPML) by Rasmussen and
+Williams.</p>
+<p>Internally, the Laplace approximation is used for approximating the
+non-Gaussian posterior by a Gaussian.</p>
+<p>Currently, the implementation is restricted to using the logistic link
+function. For multi-class classification, several binary one-versus rest
+classifiers are fitted. Note that this class thus does not implement
+a true multi-class Laplace approximation.</p>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kernel</strong> (<em>kernel instance</em><em>, </em><em>default=None</em>) – The kernel specifying the covariance function of the GP. If None is
+passed, the kernel “1.0 * RBF(1.0)” is used as default. Note that
+the kernel’s hyperparameters are optimized during fitting.</p></li>
+<li><p><strong>optimizer</strong> (<em>'fmin_l_bfgs_b'</em><em> or </em><em>callable</em><em>, </em><em>default='fmin_l_bfgs_b'</em>) – <p>Can either be one of the internally supported optimizers for optimizing
+the kernel’s parameters, specified by a string, or an externally
+defined optimizer passed as a callable. If a callable is passed, it
+must have the  signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">optimizer</span><span class="p">(</span><span class="n">obj_func</span><span class="p">,</span> <span class="n">initial_theta</span><span class="p">,</span> <span class="n">bounds</span><span class="p">):</span>
+    <span class="c1"># * &#39;obj_func&#39; is the objective function to be maximized, which</span>
+    <span class="c1">#   takes the hyperparameters theta as parameter and an</span>
+    <span class="c1">#   optional flag eval_gradient, which determines if the</span>
+    <span class="c1">#   gradient is returned additionally to the function value</span>
+    <span class="c1"># * &#39;initial_theta&#39;: the initial value for theta, which can be</span>
+    <span class="c1">#   used by local optimizers</span>
+    <span class="c1"># * &#39;bounds&#39;: the bounds on the values of theta</span>
+    <span class="o">....</span>
+    <span class="c1"># Returned are the best found hyperparameters theta and</span>
+    <span class="c1"># the corresponding value of the target function.</span>
+    <span class="k">return</span> <span class="n">theta_opt</span><span class="p">,</span> <span class="n">func_min</span>
+</pre></div>
+</div>
+<p>Per default, the ‘L-BFGS-B’ algorithm from scipy.optimize.minimize
+is used. If None is passed, the kernel’s parameters are kept fixed.
+Available internal optimizers are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;fmin_l_bfgs_b&#39;</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>n_restarts_optimizer</strong> (<em>int</em><em>, </em><em>default=0</em>) – The number of restarts of the optimizer for finding the kernel’s
+parameters which maximize the log-marginal likelihood. The first run
+of the optimizer is performed from the kernel’s initial parameters,
+the remaining ones (if any) from thetas sampled log-uniform randomly
+from the space of allowed theta-values. If greater than 0, all bounds
+must be finite. Note that n_restarts_optimizer=0 implies that one
+run is performed.</p></li>
+<li><p><strong>max_iter_predict</strong> (<em>int</em><em>, </em><em>default=100</em>) – The maximum number of iterations in Newton’s method for approximating
+the posterior during predict. Smaller values will reduce computation
+time at the cost of worse results.</p></li>
+<li><p><strong>warm_start</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If warm-starts are enabled, the solution of the last Newton iteration
+on the Laplace approximation of the posterior mode is used as
+initialization for the next call of _posterior_mode(). This can speed
+up convergence when _posterior_mode is called several times on similar
+problems as in hyperparameter optimization. See <span class="xref std std-term">the Glossary</span>.</p></li>
+<li><p><strong>copy_X_train</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If True, a persistent copy of the training data is stored in the
+object. Otherwise, just a reference to the training data is stored,
+which might cause predictions to change if the data is modified
+externally.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines random number generation used to initialize the centers.
+Pass an int for reproducible results across multiple function calls.
+See :term: <cite>Glossary &lt;random_state&gt;</cite>.</p></li>
+<li><p><strong>multi_class</strong> (<em>{'one_vs_rest'</em><em>, </em><em>'one_vs_one'}</em><em>, </em><em>default='one_vs_rest'</em>) – Specifies how multi-class classification problems are handled.
+Supported are ‘one_vs_rest’ and ‘one_vs_one’. In ‘one_vs_rest’,
+one binary Gaussian process classifier is fitted for each class, which
+is trained to separate this class from the rest. In ‘one_vs_one’, one
+binary Gaussian process classifier is fitted for each pair of classes,
+which is trained to separate these two classes. The predictions of
+these binary predictors are combined into multi-class predictions.
+Note that ‘one_vs_one’ does not support predicting probability
+estimates.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>default=None</em>) – The number of jobs to use for the computation: the specified
+multiclass problems are computed in parallel.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> means 1 unless in a <code class="xref py py-obj docutils literal notranslate"><span class="pre">joblib.parallel_backend</span></code> context.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> means using all processors. See <span class="xref std std-term">Glossary</span>
+for more details.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessClassifier.base_estimator_">
+<span class="sig-name descname"><span class="pre">base_estimator_</span></span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessClassifier.base_estimator_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The estimator instance that defines the likelihood function
+using the observed data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Estimator</span></code> instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessClassifier.kernel_">
+<span class="sig-name descname"><span class="pre">kernel_</span></span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessClassifier.kernel_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The kernel used for prediction. In case of binary classification,
+the structure of the kernel is the same as the one passed as parameter
+but with optimized hyperparameters. In case of multi-class
+classification, a CompoundKernel is returned which consists of the
+different kernels used in the one-versus-rest classifiers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>kernel instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessClassifier.log_marginal_likelihood_value_">
+<span class="sig-name descname"><span class="pre">log_marginal_likelihood_value_</span></span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessClassifier.log_marginal_likelihood_value_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The log-marginal-likelihood of <code class="docutils literal notranslate"><span class="pre">self.kernel_.theta</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessClassifier.classes_">
+<span class="sig-name descname"><span class="pre">classes_</span></span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessClassifier.classes_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique class labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_classes,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessClassifier.n_classes_">
+<span class="sig-name descname"><span class="pre">n_classes_</span></span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessClassifier.n_classes_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of classes in the training data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessClassifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">RBF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">RBF</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span> <span class="o">=</span> <span class="n">GaussianProcessClassifier</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">0.9866...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpc</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:])</span>
+<span class="go">array([[0.83548752, 0.03228706, 0.13222543],</span>
+<span class="go">       [0.79064206, 0.06525643, 0.14410151]])</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessClassifier.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessClassifier.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit Gaussian process classification model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>) or </em><em>list of object</em>) – Feature vectors or other representations of training data.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em>) – Target values, must be binary</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>returns an instance of self.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">kernel_</span></span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessClassifier.log_marginal_likelihood">
+<span class="sig-name descname"><span class="pre">log_marginal_likelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_gradient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clone_kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessClassifier.log_marginal_likelihood" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns log-marginal likelihood of theta for training data.</p>
+<p>In the case of multi-class classification, the mean log-marginal
+likelihood of the one-versus-rest classifiers are returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>theta</strong> (<em>array-like of shape</em><em> (</em><em>n_kernel_params</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – Kernel hyperparameters for which the log-marginal likelihood is
+evaluated. In the case of multi-class classification, theta may
+be the  hyperparameters of the compound kernel or of an individual
+kernel. In the latter case, all individual kernel get assigned the
+same theta values. If None, the precomputed log_marginal_likelihood
+of <code class="docutils literal notranslate"><span class="pre">self.kernel_.theta</span></code> is returned.</p></li>
+<li><p><strong>eval_gradient</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, the gradient of the log-marginal likelihood with respect
+to the kernel hyperparameters at position theta is returned
+additionally. Note that gradient computation is not supported
+for non-binary classification. If True, theta must not be None.</p></li>
+<li><p><strong>clone_kernel</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If True, the kernel attribute is copied. If False, the kernel
+attribute is modified, but may result in a performance improvement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>log_likelihood</strong> (<em>float</em>) – Log-marginal likelihood of theta for training data.</p></li>
+<li><p><strong>log_likelihood_gradient</strong> (<em>ndarray of shape (n_kernel_params,), optional</em>) – Gradient of the log-marginal likelihood with respect to the kernel
+hyperparameters at position theta.
+Only returned when <cite>eval_gradient</cite> is True.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessClassifier.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessClassifier.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform classification on an array of test vectors X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>) or </em><em>list of object</em>) – Query points where the GP is evaluated for classification.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>C</strong> – Predicted target values for X, values are from <code class="docutils literal notranslate"><span class="pre">classes_</span></code></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessClassifier.predict_proba">
+<span class="sig-name descname"><span class="pre">predict_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessClassifier.predict_proba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return probability estimates for the test vector X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>) or </em><em>list of object</em>) – Query points where the GP is evaluated for classification.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>C</strong> – Returns the probability of the samples for each class in
+the model. The columns correspond to the classes in sorted
+order, as they appear in the attribute <span class="xref std std-term">classes_</span>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like of shape (n_samples, n_classes)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessRegressor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.gaussian_process.</span></span><span class="sig-name descname"><span class="pre">GaussianProcessRegressor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fmin_l_bfgs_b'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_restarts_optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_X_train</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.MultiOutputMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.RegressorMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
+<p>Gaussian process regression (GPR).</p>
+<p>The implementation is based on Algorithm 2.1 of Gaussian Processes
+for Machine Learning (GPML) by Rasmussen and Williams.</p>
+<p>In addition to standard scikit-learn estimator API,
+GaussianProcessRegressor:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>allows prediction without prior fitting (based on the GP prior)</p></li>
+<li><p>provides an additional method <cite>sample_y(X)</cite>, which evaluates samples
+drawn from the GPR (prior or posterior) at given inputs</p></li>
+<li><p>exposes a method <cite>log_marginal_likelihood(theta)</cite>, which can be used
+externally for other ways of selecting hyperparameters, e.g., via
+Markov chain Monte Carlo.</p></li>
+</ul>
+</div></blockquote>
+<p>Read more in the <span class="xref std std-ref">User Guide</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.</span></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kernel</strong> (<em>kernel instance</em><em>, </em><em>default=None</em>) – The kernel specifying the covariance function of the GP. If None is
+passed, the kernel <code class="docutils literal notranslate"><span class="pre">ConstantKernel(1.0,</span> <span class="pre">constant_value_bounds=&quot;fixed&quot;</span>
+<span class="pre">*</span> <span class="pre">RBF(1.0,</span> <span class="pre">length_scale_bounds=&quot;fixed&quot;)</span></code> is used as default. Note that
+the kernel hyperparameters are optimized during fitting unless the
+bounds are marked as “fixed”.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em> or </em><em>ndarray of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=1e-10</em>) – Value added to the diagonal of the kernel matrix during fitting.
+This can prevent a potential numerical issue during fitting, by
+ensuring that the calculated values form a positive definite matrix.
+It can also be interpreted as the variance of additional Gaussian
+measurement noise on the training observations. Note that this is
+different from using a <cite>WhiteKernel</cite>. If an array is passed, it must
+have the same number of entries as the data used for fitting and is
+used as datapoint-dependent noise level. Allowing to specify the
+noise level directly as a parameter is mainly for convenience and
+for consistency with Ridge.</p></li>
+<li><p><strong>optimizer</strong> (<em>&quot;fmin_l_bfgs_b&quot;</em><em> or </em><em>callable</em><em>, </em><em>default=&quot;fmin_l_bfgs_b&quot;</em>) – <p>Can either be one of the internally supported optimizers for optimizing
+the kernel’s parameters, specified by a string, or an externally
+defined optimizer passed as a callable. If a callable is passed, it
+must have the signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">optimizer</span><span class="p">(</span><span class="n">obj_func</span><span class="p">,</span> <span class="n">initial_theta</span><span class="p">,</span> <span class="n">bounds</span><span class="p">):</span>
+    <span class="c1"># * &#39;obj_func&#39;: the objective function to be minimized, which</span>
+    <span class="c1">#   takes the hyperparameters theta as a parameter and an</span>
+    <span class="c1">#   optional flag eval_gradient, which determines if the</span>
+    <span class="c1">#   gradient is returned additionally to the function value</span>
+    <span class="c1"># * &#39;initial_theta&#39;: the initial value for theta, which can be</span>
+    <span class="c1">#   used by local optimizers</span>
+    <span class="c1"># * &#39;bounds&#39;: the bounds on the values of theta</span>
+    <span class="o">....</span>
+    <span class="c1"># Returned are the best found hyperparameters theta and</span>
+    <span class="c1"># the corresponding value of the target function.</span>
+    <span class="k">return</span> <span class="n">theta_opt</span><span class="p">,</span> <span class="n">func_min</span>
+</pre></div>
+</div>
+<p>Per default, the ‘L-BFGS-B’ algorithm from scipy.optimize.minimize
+is used. If None is passed, the kernel’s parameters are kept fixed.
+Available internal optimizers are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;fmin_l_bfgs_b&#39;</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>n_restarts_optimizer</strong> (<em>int</em><em>, </em><em>default=0</em>) – The number of restarts of the optimizer for finding the kernel’s
+parameters which maximize the log-marginal likelihood. The first run
+of the optimizer is performed from the kernel’s initial parameters,
+the remaining ones (if any) from thetas sampled log-uniform randomly
+from the space of allowed theta-values. If greater than 0, all bounds
+must be finite. Note that n_restarts_optimizer == 0 implies that one
+run is performed.</p></li>
+<li><p><strong>normalize_y</strong> (<em>bool</em><em>, </em><em>default=False</em>) – <p>Whether the target values y are normalized, the mean and variance of
+the target values are set equal to 0 and 1 respectively. This is
+recommended for cases where zero-mean, unit-variance priors are used.
+Note that, in this implementation, the normalisation is reversed
+before the GP predictions are reported.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.23.</span></p>
+</div>
+</p></li>
+<li><p><strong>copy_X_train</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If True, a persistent copy of the training data is stored in the
+object. Otherwise, just a reference to the training data is stored,
+which might cause predictions to change if the data is modified
+externally.</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=None</em>) – Determines random number generation used to initialize the centers.
+Pass an int for reproducible results across multiple function calls.
+See <span class="xref std std-term">Glossary</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessRegressor.X_train_">
+<span class="sig-name descname"><span class="pre">X_train_</span></span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.X_train_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feature vectors or other representations of training data (also
+required for prediction).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_samples, n_features) or list of object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessRegressor.y_train_">
+<span class="sig-name descname"><span class="pre">y_train_</span></span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.y_train_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Target values in training data (also required for prediction)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_samples,) or (n_samples, n_targets)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessRegressor.kernel_">
+<span class="sig-name descname"><span class="pre">kernel_</span></span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.kernel_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The kernel used for prediction. The structure of the kernel is the
+same as the one passed as parameter but with optimized hyperparameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>kernel instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessRegressor.L_">
+<span class="sig-name descname"><span class="pre">L_</span></span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.L_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lower-triangular Cholesky decomposition of the kernel in <code class="docutils literal notranslate"><span class="pre">X_train_</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_samples, n_samples)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessRegressor.alpha_">
+<span class="sig-name descname"><span class="pre">alpha_</span></span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.alpha_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dual coefficients of training data points in kernel space</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array-like of shape (n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessRegressor.log_marginal_likelihood_value_">
+<span class="sig-name descname"><span class="pre">log_marginal_likelihood_value_</span></span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.log_marginal_likelihood_value_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The log-marginal-likelihood of <code class="docutils literal notranslate"><span class="pre">self.kernel_.theta</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_friedman2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">DotProduct</span><span class="p">,</span> <span class="n">WhiteKernel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_friedman2</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kernel</span> <span class="o">=</span> <span class="n">DotProduct</span><span class="p">()</span> <span class="o">+</span> <span class="n">WhiteKernel</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span> <span class="o">=</span> <span class="n">GaussianProcessRegressor</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">0.3680...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gpr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:],</span> <span class="n">return_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">(array([653.0..., 592.1...]), array([316.6..., 316.6...]))</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessRegressor.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit Gaussian process regression model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>) or </em><em>list of object</em>) – Feature vectors or other representations of training data.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>) or </em><em>(</em><em>n_samples</em><em>, </em><em>n_targets</em><em>)</em>) – Target values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>returns an instance of self.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessRegressor.log_marginal_likelihood">
+<span class="sig-name descname"><span class="pre">log_marginal_likelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_gradient</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clone_kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.log_marginal_likelihood" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns log-marginal likelihood of theta for training data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>theta</strong> (<em>array-like of shape</em><em> (</em><em>n_kernel_params</em><em>,</em><em>) </em><em>default=None</em>) – Kernel hyperparameters for which the log-marginal likelihood is
+evaluated. If None, the precomputed log_marginal_likelihood
+of <code class="docutils literal notranslate"><span class="pre">self.kernel_.theta</span></code> is returned.</p></li>
+<li><p><strong>eval_gradient</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, the gradient of the log-marginal likelihood with respect
+to the kernel hyperparameters at position theta is returned
+additionally. If True, theta must not be None.</p></li>
+<li><p><strong>clone_kernel</strong> (<em>bool</em><em>, </em><em>default=True</em>) – If True, the kernel attribute is copied. If False, the kernel
+attribute is modified, but may result in a performance improvement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>log_likelihood</strong> (<em>float</em>) – Log-marginal likelihood of theta for training data.</p></li>
+<li><p><strong>log_likelihood_gradient</strong> (<em>ndarray of shape (n_kernel_params,), optional</em>) – Gradient of the log-marginal likelihood with respect to the kernel
+hyperparameters at position theta.
+Only returned when eval_gradient is True.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessRegressor.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_std</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_cov</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict using the Gaussian process regression model</p>
+<p>We can also predict based on an unfitted model by using the GP prior.
+In addition to the mean of the predictive distribution, optionally also
+returns its standard deviation (<cite>return_std=True</cite>) or covariance
+(<cite>return_cov=True</cite>). Note that at most one of the two can be requested.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>) or </em><em>list of object</em>) – Query points where the GP is evaluated.</p></li>
+<li><p><strong>return_std</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, the standard-deviation of the predictive distribution at
+the query points is returned along with the mean.</p></li>
+<li><p><strong>return_cov</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, the covariance of the joint predictive distribution at
+the query points is returned along with the mean.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>y_mean</strong> (<em>ndarray of shape (n_samples,) or (n_samples, n_targets)</em>) – Mean of predictive distribution a query points.</p></li>
+<li><p><strong>y_std</strong> (<em>ndarray of shape (n_samples,), optional</em>) – Standard deviation of predictive distribution at query points.
+Only returned when <cite>return_std</cite> is True.</p></li>
+<li><p><strong>y_cov</strong> (<em>ndarray of shape (n_samples, n_samples), optional</em>) – Covariance of joint predictive distribution a query points.
+Only returned when <cite>return_cov</cite> is True.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.gaussian_process.GaussianProcessRegressor.sample_y">
+<span class="sig-name descname"><span class="pre">sample_y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.gaussian_process.GaussianProcessRegressor.sample_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw samples from Gaussian process and evaluate at X.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples_X</em><em>, </em><em>n_features</em><em>) or </em><em>list of object</em>) – Query points where the GP is evaluated.</p></li>
+<li><p><strong>n_samples</strong> (<em>int</em><em>, </em><em>default=1</em>) – Number of samples drawn from the Gaussian process per query point</p></li>
+<li><p><strong>random_state</strong> (<em>int</em><em>, </em><em>RandomState instance</em><em> or </em><em>None</em><em>, </em><em>default=0</em>) – Determines random number generation to randomly draw samples.
+Pass an int for reproducible results across multiple function
+calls.
+See <span class="xref std std-term">Glossary</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>y_samples</strong> – Values of n_samples samples drawn from Gaussian process and
+evaluated at query points.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray of shape (n_samples_X, n_samples), or             (n_samples_X, n_targets, n_samples)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Tommaso
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
