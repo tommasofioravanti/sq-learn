@@ -1,7 +1,8 @@
 """
 The :mod:`sklearn.decomposition` module includes matrix decomposition
 algorithms, including among others PCA, NMF or ICA. Most of the algorithms of
-this module can be regarded as dimensionality reduction techniques.
+this module can be regarded as dimensionality reduction techniques. This Qsklearn
+framework include also the quantum implementation of the PCA model.
 """
 
 
@@ -19,9 +20,10 @@ from ._factor_analysis import FactorAnalysis
 from ..utils.extmath import randomized_svd
 from ._lda import LatentDirichletAllocation
 from ._qPCA import qPCA
+__all__ = ['qPCA']
 
 
-__all__ = ['DictionaryLearning',
+'''__all__ = ['DictionaryLearning',
            'FastICA',
            'IncrementalPCA',
            'KernelPCA',
@@ -41,3 +43,4 @@ __all__ = ['DictionaryLearning',
            'FactorAnalysis',
            'TruncatedSVD',
            'LatentDirichletAllocation']
+'''

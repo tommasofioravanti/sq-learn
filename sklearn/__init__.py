@@ -2,14 +2,17 @@
 Machine learning module for Python
 ==================================
 
-sklearn is a Python module integrating classical machine
+Qsklearn is a Python module integrating classical machine
 learning algorithms in the tightly-knit world of scientific Python
-packages (numpy, scipy, matplotlib).
+packages (numpy, scipy, matplotlib) with the quantum world.
 
 It aims to provide simple and efficient solutions to learning problems
 that are accessible to everybody and reusable in various contexts:
 machine-learning as a versatile tool for science and engineering.
 
+It can be used to run either classical experiments or simulation of the quantum counterpart.
+
+Up to now in this framework only PCA and K-means algorithm can be simulated in their quantum counterpart.
 See http://scikit-learn.org for complete documentation.
 """
 import sys
@@ -81,9 +84,9 @@ else:
     from . import __check_build  # noqa: F401
     from .base import clone
     from .utils._show_versions import show_versions
-
-    __all__ = ['calibration', 'cluster', 'covariance', 'cross_decomposition',
-               'datasets', 'decomposition', 'dummy', 'ensemble', 'exceptions',
+    __all__ = ['decomposition']
+    '''__all__ = ['calibration', 'cluster', 'covariance', 'cross_decomposition',
+               'datasets', 'decomposition','dummy', 'ensemble', 'exceptions',
                'experimental', 'externals', 'feature_extraction',
                'feature_selection', 'gaussian_process', 'inspection',
                'isotonic', 'kernel_approximation', 'kernel_ridge',
@@ -94,7 +97,7 @@ else:
                'svm', 'tree', 'discriminant_analysis', 'impute', 'compose',
                # Non-modules:
                'clone', 'get_config', 'set_config', 'config_context',
-               'show_versions']
+               'show_versions']'''
 
 
 def setup_module(module):

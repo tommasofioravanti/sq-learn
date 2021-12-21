@@ -17,7 +17,10 @@ from ._bicluster import SpectralBiclustering, SpectralCoclustering
 from ._birch import Birch
 from ._dmeans import DMeans_
 
-__all__ = ['AffinityPropagation',
+__all__ = ['DMeans_',]
+
+
+'''__all__ = ['AffinityPropagation',
            'AgglomerativeClustering',
            'Birch',
            'DBSCAN',
@@ -43,3 +46,4 @@ __all__ = ['AffinityPropagation',
            'ward_tree',
            'SpectralBiclustering',
            'SpectralCoclustering']
+'''

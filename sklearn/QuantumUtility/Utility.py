@@ -86,22 +86,26 @@ def make_gaussian_est(vec, noise):
     return new_vec
 
 
-def tomography(A, noise, fake_tomography=False, stop_when_reached_accuracy=True, N=None, n_jobs=None):
+def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, N=None, n_jobs=None):
     """ Tomography function (real and fake).
             Parameters
             ----------
             A : array-like that has to be estimated.
 
-            N : int value. Number of measures of the quantum state. If None it is computed in the function itself.
+            N : int value, default=None.
+                Number of measures of the quantum state. If None it is computed in the function itself.
 
-            noise: float value. It represent the error that you want to introduce to estimate the representation of vector V.
+            noise: float value.
+                It represent the error that you want to introduce to estimate the representation of vector V.
 
-            fake_tomography: bool value. If True it computes the fake tomography using a Truncated Gaussian Noise.
-                                        If False it computes the real tomography.
+            true_tomography: bool, default=True.
+                If true means that the quantum estimations are are done with real tomography,
+                otherwise the estimations are approximated with a Truncated Gaussian Noise.
 
-            stop_when_reached_accuracy: bool value. If True it stops the execution of the tomography when the L2-norm of the
-                                                   difference between V and its estimation is less or equal then delta. Otherwise
-                                                   N measures are done (very memory intensive for large vectors).
+            stop_when_reached_accuracy: bool value, default=True.
+                If True it stops the execution of the tomography when the L2-norm of the
+                difference between V and its estimation is less or equal then delta. Otherwise
+                N measures are done (very memory intensive for large vectors).
             Returns
             -------
             A_est : array-like that was estimated.
@@ -117,7 +121,7 @@ def tomography(A, noise, fake_tomography=False, stop_when_reached_accuracy=True,
     if noise == 0:
         return A
 
-    if fake_tomography:
+    if true_tomography==False:
         if len(A.shape) == 2:
             vector_A = A.reshape(A.shape[0] * A.shape[1])
             vector_B = make_gaussian_est(vector_A, noise)
@@ -128,11 +132,11 @@ def tomography(A, noise, fake_tomography=False, stop_when_reached_accuracy=True,
     else:
         if len(A.shape) == 2:
             A_est = np.array([np.array(list(
-                L2_tomogrphy_Noparallel(A[idx], delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy,
+                L2_tomography(A[idx], delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy,
                                         N=N).values())[-1])
                               for idx in range(len(A))])
         else:
-            A_est = L2_tomogrphy_Noparallel(A, delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy, N=N)
+            A_est = L2_tomography(A, delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy, N=N)
 
     return A_est
 
@@ -192,7 +196,7 @@ def L2_tomogrphy_parallel(V, N=None, delta=None, stop_when_reached_accuracy=True
 
     if n_jobs == None:
         # Case not parallel
-        return L2_tomogrphy_Noparallel(V=V, delta=delta)
+        return L2_tomography(V=V, delta=delta)
     elif n_jobs == -1:
         n_cpu = cpu_count()
     else:
@@ -266,24 +270,28 @@ def L2_tomogrphy_parallel(V, N=None, delta=None, stop_when_reached_accuracy=True
     return dict_res
 
 
-def L2_tomogrphy_Noparallel(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2',
+def L2_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2',
                             sparsity_percentage=False):
     """ Official version of the tomography function.
         Parameters
         ----------
         V : array-like that has to be estimated.
 
-        N : int value. Number of measures of the quantum state. If None it is computed in the function itself.
+        N : int value, default=None.
+            Number of measures of the quantum state. If None it is computed in the function itself.
 
-        delta: float value. It represent the error that you want to introduce to estimate the representation of vector V.
+        delta: float value, default=None.
+             It represent the error that you want to introduce to estimate the representation of vector V.
 
-        stop_when_reached_accuracy: bool flag. If True it stops the execution of the tomography when the L2-norm of the
-                                               difference between V and its estimation is less or equal then delta. Otherwise
-                                               N measures are done (very memory intensive for large vectors).
-        sparsity_percentage: bool flag. If True it computes the sparsity percentage of the vector and it is used to
-                                        make bigger and bigger measures as you increase the non-sparsity of the vector.
-                                        If False it makes measures that increases always of a factor of 1000.
-                                        It is particulary useful in testing the tomography.
+        stop_when_reached_accuracy: bool, default=True.
+                                    If True it stops the execution of the tomography when the L2-norm of the
+                                    difference between V and its estimation is less or equal then delta. Otherwise
+                                    N measures are done (very memory intensive for large vectors).
+        sparsity_percentage: bool, default=False.
+                            If True it computes the sparsity percentage of the vector and it is used to
+                            make bigger and bigger measures as you increase the non-sparsity of the vector.
+                            If False it makes measures that increases always of a factor of 1000.
+                            It is particulary useful in testing the tomography.
         Returns
         -------
         dict_res : dictionary of shape {N_measure: vector_estimation}.
