@@ -91,7 +91,7 @@ def make_real_predicted_comparison(vector, delta):
     plt.show()
 
 
-def found_distribution(vector, n_measurements, delta, distribution_fitter=False):
+def found_distribution(vector, n_measurements, delta, distribution_fitter=False, distributions=None):
     samples = []
     if np.linalg.norm(vector) != 0.999 or np.linalg.norm(vector) != 1.0:
         vector = vector / np.linalg.norm(vector, ord=2)
@@ -109,12 +109,12 @@ def found_distribution(vector, n_measurements, delta, distribution_fitter=False)
     plt.ylabel("measurements")
 
     if distribution_fitter:
-        f = Fitter(samples, timeout=100)
+        f = Fitter(samples, distributions=distributions, timeout=100)
         f.fit()
         f.summary()
         print(f.get_best(method='sumsquare_error'))
     plt.show()
 
-# decreasing_error_plot(list_, delta)
+#decreasing_error_plot(list_, delta)
 #make_real_predicted_comparison(v_uni, delta)
 #found_distribution(vector=v_uni, n_measurements=1000, delta=.9,distribution_fitter=True)
