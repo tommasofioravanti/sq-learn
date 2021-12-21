@@ -31,7 +31,7 @@ def decreasing_error_plot(vector_list, delta):
     for e, vector in enumerate(vector_list):
         if np.linalg.norm(vector) != 0.999 or np.linalg.norm(vector) != 1.0:
             vector = vector / np.linalg.norm(vector, ord=2)
-        dictionary_estimates = L2_tomogrphy_Noparallel(vector, delta=delta, stop_when_reached_accuracy=False,
+        dictionary_estimates = L2_tomography(vector, delta=delta, stop_when_reached_accuracy=False,
                                                        sparsity_percentage=True)
         measure = list(dictionary_estimates.keys())
         samples = list(dictionary_estimates.values())
@@ -58,7 +58,7 @@ def decreasing_error_plot(vector_list, delta):
 def make_real_predicted_comparison(vector, delta):
     if np.linalg.norm(vector) != 0.999 or np.linalg.norm(vector) != 1.0:
         vector = vector / np.linalg.norm(vector, ord=2)
-    dictionary_estimates = L2_tomogrphy_Noparallel(vector, delta=delta, stop_when_reached_accuracy=False,
+    dictionary_estimates = L2_tomography(vector, delta=delta, stop_when_reached_accuracy=False,
                                                    sparsity_percentage=True)
     measure = list(dictionary_estimates.keys())
     samples = list(dictionary_estimates.values())
@@ -97,7 +97,7 @@ def found_distribution(vector, n_measurements, delta, distribution_fitter=False,
         vector = vector / np.linalg.norm(vector, ord=2)
 
     for i in range(n_measurements):
-        B = L2_tomogrphy_Noparallel(vector, delta=delta, stop_when_reached_accuracy=False)
+        B = L2_tomography(vector, delta=delta, stop_when_reached_accuracy=False)
         print(i)
         # Append the Frobenius norm of A-B to the samples
         B = np.array(list(B.values())[-1])
