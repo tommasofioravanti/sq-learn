@@ -86,7 +86,7 @@ def make_gaussian_est(vec, noise):
     return new_vec
 
 
-def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, N=None, n_jobs=None):
+def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, N=None, norm='L2'):
     """ Tomography function (real and fake).
             Parameters
             ----------
@@ -106,6 +106,12 @@ def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, 
                 If True it stops the execution of the tomography when the L2-norm of the
                 difference between V and its estimation is less or equal then delta. Otherwise
                 N measures are done (very memory intensive for large vectors).
+
+            norm: string value, default='L2'
+                If true_tomography is True:
+                    'L2': L2-tomography is computed
+                    'inf':L-inf tomography is computed
+
             Returns
             -------
             A_est : array-like that was estimated.
@@ -121,7 +127,7 @@ def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, 
     if noise == 0:
         return A
 
-    if true_tomography==False:
+    if true_tomography == False:
         if len(A.shape) == 2:
             vector_A = A.reshape(A.shape[0] * A.shape[1])
             vector_B = make_gaussian_est(vector_A, noise)
@@ -132,11 +138,12 @@ def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, 
     else:
         if len(A.shape) == 2:
             A_est = np.array([np.array(list(
-                L2_tomography(A[idx], delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy,
-                                        N=N).values())[-1])
+                real_tomography(A[idx], delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy,
+                                N=N, norm=norm).values())[-1])
                               for idx in range(len(A))])
         else:
-            A_est = L2_tomography(A, delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy, N=N)
+            A_est = np.array(list(real_tomography(A, delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy, N=N,
+                                    norm=norm).values())[-1])
 
     return A_est
 
@@ -196,7 +203,7 @@ def L2_tomogrphy_parallel(V, N=None, delta=None, stop_when_reached_accuracy=True
 
     if n_jobs == None:
         # Case not parallel
-        return L2_tomography(V=V, delta=delta)
+        return real_tomography(V=V, delta=delta)
     elif n_jobs == -1:
         n_cpu = cpu_count()
     else:
@@ -270,8 +277,7 @@ def L2_tomogrphy_parallel(V, N=None, delta=None, stop_when_reached_accuracy=True
     return dict_res
 
 
-def L2_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2',
-                            sparsity_percentage=False):
+def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2', sparsity_percentage=False):
     """ Official version of the tomography function.
         Parameters
         ----------
@@ -314,14 +320,17 @@ def L2_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='
     d = len(V)
     index = np.arange(0, d)
     if N is None:
-        N = int((36 * d * np.log(d)) / (delta ** 2))
+        if norm == 'L2':
+            N = int((36 * d * np.log(d)) / (delta ** 2))
+        elif norm == 'inf':
+            N = int((36 * np.log(d)) / (delta ** 2))
 
     q_state = QuantumState(amplitudes=V, registers=index)
     dict_res = {}
 
     measure_indexes = np.geomspace(1, N, num=100, dtype=np.int64)
 
-    measure_indexes = check_measure(measure_indexes, sparsity)
+    measure_indexes = check_measure(measure_indexes, sparsity,norm)
 
     for i in measure_indexes:
 
@@ -359,7 +368,7 @@ def L2_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='
         if stop_when_reached_accuracy:
             if norm == 'L2':
                 sample = np.linalg.norm(V - P_i, ord=2)
-            else:
+            elif norm == 'inf':
                 sample = np.linalg.norm(V - P_i, ord=np.inf)
             if sample > delta:
                 pass
@@ -377,11 +386,14 @@ def vectorize_aux_fun(dic, i):
     return np.sqrt(dic[i]) if i in dic else 0
 
 
-def check_measure(arr, sparsity):
+def check_measure(arr, sparsity,norm):
     if sparsity != None:
-        incr = (1 - sparsity) * 1000 * 0.3**2
+        incr = (1 - sparsity) * 1000 * 0.3 ** 2
     else:
         incr = 1000
+    if norm =='inf':
+        incr = 5
+
     for i in range(len(arr) - 1):
         if arr[i + 1] == arr[i]:
             arr[i + 1] += incr  # 1000
@@ -418,7 +430,7 @@ def amplitute_est_wrapper(a, epsilon, gamma, Q_mode='default'):
 
 
 def Amp_est_error(theta, epsilon, Q=1):
-    M = 2 ** (math.ceil((np.pi / (2 * epsilon)) * (1 + np.sqrt(1 + 4 * epsilon))))
+    M = (math.ceil((np.pi / (2 * epsilon)) * (1 + np.sqrt(1 + 4 * epsilon))))
     # M1 = 2**(n)
     p = []
     a_j = []
@@ -432,7 +444,6 @@ def Amp_est_error(theta, epsilon, Q=1):
             p_aj = np.abs(math.sin(M * distance) / (M * math.sin(distance))) ** 2
         else:
             pass
-
         p.append(p_aj)
     sum_at_one = np.sum(p)
     a_tilde = random.choices(a_j, weights=p, k=1)[0]
@@ -450,7 +461,7 @@ def AmplitudeAmpDist(w0, w1):
     return distance
 
 
-def Wrapper_AmpEst(argument, type):
+def Wrapper_AmpEst(argument, type='singular_values'):
     if type == 'singular_values':
         theta_i = 2 * math.acos(argument)
         return theta_i
