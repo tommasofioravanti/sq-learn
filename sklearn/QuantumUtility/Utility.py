@@ -142,8 +142,9 @@ def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, 
                                 N=N, norm=norm).values())[-1])
                               for idx in range(len(A))])
         else:
-            A_est = np.array(list(real_tomography(A, delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy, N=N,
-                                    norm=norm).values())[-1])
+            A_est = np.array(
+                list(real_tomography(A, delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy, N=N,
+                                     norm=norm).values())[-1])
 
     return A_est
 
@@ -330,7 +331,7 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
 
     measure_indexes = np.geomspace(1, N, num=100, dtype=np.int64)
 
-    measure_indexes = check_measure(measure_indexes, sparsity,norm)
+    measure_indexes = check_measure(measure_indexes, sparsity, norm)
 
     for i in measure_indexes:
 
@@ -386,19 +387,19 @@ def vectorize_aux_fun(dic, i):
     return np.sqrt(dic[i]) if i in dic else 0
 
 
-def check_measure(arr, sparsity,norm):
+def check_measure(arr, sparsity, norm):
     if sparsity != None:
         incr = (1 - sparsity) * 1000 * 0.3 ** 2
     else:
         incr = 1000
-    if norm =='inf':
+    if norm == 'inf':
         incr = 5
 
     for i in range(len(arr) - 1):
         if arr[i + 1] == arr[i]:
-            arr[i + 1] += incr  # 1000
+            arr[i + 1] += incr
         if arr[i + 1] <= arr[i]:
-            arr[i + 1] = arr[i] + incr  # 1000
+            arr[i + 1] = arr[i] + incr
     return arr
 
 
@@ -412,49 +413,31 @@ def check_division(v, n_jobs):
     return process_values
 
 
-def amplitute_est_wrapper(a, epsilon, gamma, Q_mode='default'):
-    if Q_mode == 'default':
-        Q = 3
-    elif Q_mode == 'compute':
-        z = np.log(1 / gamma) / (2 * (8 / np.pi ** 2 - 0.5) ** 2)
-
-        if math.ceil(z) % 2 == 0:
-            Q = math.ceil(z) + 1
-        else:
-            Q = math.ceil(z)
-    estimates = []
-    for i in range(Q):
-        estimates.append(Amp_est_error(a, epsilon))
-    estimate = statistics.median(estimates)
-    return estimate
-
-
 def Amp_est_error(theta, epsilon, Q=1):
     M = (math.ceil((np.pi / (2 * epsilon)) * (1 + np.sqrt(1 + 4 * epsilon))))
-    # M1 = 2**(n)
     p = []
     a_j = []
+    theta_j = []
 
-    for j in range(1, M + 1):
-        a_j_current = math.sin(np.pi * j / M) ** 2
-        a_j.append(a_j_current)
-        distance = AmplitudeAmpDist(a_j_current / M, theta / np.pi)
+    for j in range(0, M):
+        # a_j_current = math.sin(np.pi * j / M) ** 2
+        theta_est = np.pi * j / M
+        # a_j.append(a_j_current)
+        theta_j.append(theta_est)
+        distance = AmplitudeAmpDist(theta_est / np.pi, theta)
         if distance != 0:
-            # If j == M and theta = 0 -> distance = 0
-            p_aj = np.abs(math.sin(M * distance) / (M * math.sin(distance))) ** 2
+            p_aj = np.abs(math.sin(M * distance * np.pi) / (M * math.sin(distance * np.pi))) ** 2
         else:
-            pass
+            p_aj = 1
         p.append(p_aj)
     sum_at_one = np.sum(p)
-    a_tilde = random.choices(a_j, weights=p, k=1)[0]
-    # estimates = statistics.median(a_tilde)
+    theta_tilde = random.choices(theta_j, weights=p, k=1)[0] / np.pi
+    a_tilde = math.cos(theta_tilde * np.pi / 2)
+
     return a_tilde
 
 
 def AmplitudeAmpDist(w0, w1):
-    if w0 == w1:
-        raise ValueError("Attention, w1 and w0 are equal. Probably you have to change epsilon value to avoid a division"
-                         " by zero.")
     c = -np.ceil(w1 - w0)
     f = -np.floor(w1 - w0)
     distance = min(np.abs(c + w1 - w0), np.abs(f + w1 - w0))
@@ -465,3 +448,36 @@ def Wrapper_AmpEst(argument, type='singular_values'):
     if type == 'singular_values':
         theta_i = 2 * math.acos(argument)
         return theta_i
+
+
+def compute_n_from_epsilon(epsilon):
+    return
+
+
+def brassard_amp_est(omega, M):
+    # omega must be between [0,1]
+    p = []
+    a_j = []
+    theta_j = []
+
+    for j in range(0, M):
+        theta_est = np.pi * j / M
+        # a_j_current = (math.sin(theta_est)) ** 2
+        theta_j.append(theta_est)
+        # a_j.append(a_j_current)
+
+        # Se omega è tra [0,1] dividere theta_est per \pi
+        distance = AmplitudeAmpDist(theta_est / np.pi, omega)
+        if distance != 0:
+            # In NN manca il *np.pi dentro il sin
+            p_aj = np.abs((math.sin(M * distance * np.pi)) / (M * (math.sin(distance * np.pi)))) ** 2
+        else:
+            p_aj = 1
+        p.append(p_aj)
+    sum_at_one = np.sum(p)
+    theta_tilde = random.choices(theta_j, weights=p, k=1)[0] / np.pi
+
+    # a_tilde = (math.sin(theta_tilde)) ** 2
+
+    a_tilde = math.cos(theta_tilde * np.pi / 2)
+    return a_tilde
