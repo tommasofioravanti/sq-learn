@@ -433,6 +433,9 @@ def amplitude_estimation(theta, epsilon, M=None, nqubit=False, plot_distribution
         epsilon: float value.
             Error that you want to insert in the amplitude estimation procedure.
 
+        M: int value, default=None.
+            The number of iteration executes in the routine.
+
         nqubit: bool value, default=False.
             If True, the routine returns also the number of qubits to represent an estimate with the specified precision
             and the parameter M (see the amplitude estimation routine description for more details).
@@ -456,7 +459,12 @@ def amplitude_estimation(theta, epsilon, M=None, nqubit=False, plot_distribution
     """
     if M == None:
         M = (math.ceil((np.pi / (2 * epsilon)) * (1 + np.sqrt(1 + 4 * epsilon))))
+        n_qubits = np.ceil(np.log2(M))  # TODO: Check this value!
+        # M = int(2 ** n_qubits)  # If M is a power of 2. In Mosca book they said this.
     else:
+        # assert math.ceil(np.log2(M)) == math.floor(np.log2(M)), "Invalid M, it has to be a power of 2 value."
+        n_qubits = np.ceil(np.log2(M))
+        warnings.simplefilter('always', UserWarning)
         warnings.warn(
             "Attention! The value of M that will be considered is the one you passed. Epsilon in this case is "
             "useless")
@@ -476,8 +484,6 @@ def amplitude_estimation(theta, epsilon, M=None, nqubit=False, plot_distribution
     # sum_at_one = np.sum(p)
     theta_tilde = random.choices(theta_j, weights=p, k=1)[0]
 
-    n_qubits = np.log2(M)  # TODO: Check this value!
-
     if plot_distribution:
         plt.annotate((float('%.2f' % (theta_j[p.index(max(p))])), float('%.2f' % (max(p)))),
                      xy=(theta_j[p.index(max(p))], max(p)))
@@ -494,20 +500,40 @@ def amplitude_estimation(theta, epsilon, M=None, nqubit=False, plot_distribution
         plt.ylabel("probability")
 
         plt.show()
-
-    a_tilde = math.cos(theta_tilde * np.pi / 2)
     if nqubit:
-        return a_tilde, n_qubits, M
-    return a_tilde
+        return theta_tilde, n_qubits, M
+    # a_tilde = np.sin(theta_tilde*np.pi)**2
+    return theta_tilde
 
 
-def median_evaluation(func, Q=None):
-    # TODO
+def median_evaluation(func, *args, gamma, Q=None):
+    # TODO: Check args
+    """
+    Median evaluation.
+    Parameters
+    ----------
+    func: Callable. The function that you want to execute Q time.
+
+    args: tuple object. The arguments to pass to the func callable.
+
+    gamma: float value. The probability that the median estimation gives a value satisfying the error bounds.
+
+    Q: int value, default=None. Number of iterations to execute func.
+    Returns
+    -------
+    final_estimate : float value. Median estimation of the function passed as arguments.
+
+    Notes
+    -----
+    This procedure computes Q times the result of the function func passed, and extract the median to be more accurate
+    in the estimation.
+    """
     if Q == None:
-        #TODO:Formula of Q in NN
-        Q
-
-    estimates = [func for _ in Q]
+        z = np.log(1 / gamma) / (2 * (8 / np.pi ** 2 - 0.5) ** 2)
+        Q = np.ceil(z)
+        if Q % 2 == 0:
+            Q += 1
+    estimates = [func(args[0][0], args[0][1]) for _ in range(int(Q))]
     final_estimate = np.median(estimates)
 
     return final_estimate
@@ -524,20 +550,17 @@ def compute_n_from_epsilon(epsilon):
     return
 
 
-def brassard_amp_est(theta, M):
-    # omega must be between [0,1]
+def phase_estimation(omega, m):
+    # omega must be between [0,1]. The estimation must have shape of x/2^n
     p = []
-    a_j = []
     theta_j = []
-
-    for j in range(0, M):
+    M = 2 ** m
+    for j in range(M):
         theta_est = np.pi * j / M
-        # a_j_current = (math.sin(theta_est)) ** 2
         theta_j.append(theta_est / np.pi)
-        # a_j.append(a_j_current)
 
         # Se omega è tra [0,1] dividere theta_est per \pi
-        distance = AmplitudeAmpDist(theta_est / np.pi, theta)
+        distance = AmplitudeAmpDist(theta_est / np.pi, omega)
         if distance != 0:
             # In NN manca il *np.pi dentro il sin
             p_aj = np.abs((math.sin(M * distance * np.pi)) / (M * (math.sin(distance * np.pi)))) ** 2
@@ -550,18 +573,4 @@ def brassard_amp_est(theta, M):
     # a_tilde = (math.sin(theta_tilde)) ** 2
 
     a_tilde = math.cos(theta_tilde * np.pi / 2)
-
-    plt.annotate((float('%.2f' % (theta_j[p.index(max(p))])), float('%.2f' % (max(p)))),
-                 xy=(theta_j[p.index(max(p))], max(p)))
-    plt.bar(theta_j, p, 0.01)
-    plt.title(r'Probability distribution for the output of amplitude estimation for $\theta$ = ' + str(
-        float('%.2f' % (theta))),
-              fontdict={'family': 'serif',
-                        'color': 'darkblue',
-                        'weight': 'bold',
-                        'size': 10})
-    plt.xlabel(r'$\hat \theta$')
-    plt.ylabel("probability")
-
-    plt.show()
     return a_tilde
