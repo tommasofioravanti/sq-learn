@@ -1,3 +1,8 @@
+"""
+The :mod:`sklearn.QuantumUtility` module includes quantum routines like tomography, amplitude estimation and
+phase estimation
+"""
+
 from collections import Counter
 import math
 import random
@@ -9,6 +14,8 @@ import decimal
 from joblib import Parallel
 import statistics
 import warnings
+
+warnings.simplefilter('always', UserWarning)
 import matplotlib.pyplot as plt
 from multiprocessing import *
 import os
@@ -72,12 +79,12 @@ def coupon_collect(quantum_state):
 
 def make_gaussian_est(vec, noise):
     """This function is used to estimate vec with tomography or with Gaussian Noise Approximation.
+
     Parameters
     ----------
-    vec : array-like that has to be estimated.
+    vec: array-like that has to be estimated.
 
-    noise : float. It represent the error that you want to introduce to estimate the representation of vector V.
-
+    noise: float. It represent the error that you want to introduce to estimate the representation of vector V.
     """
     noise_per_component = noise / np.sqrt(len(vec))
     if noise_per_component != 0:
@@ -91,39 +98,40 @@ def make_gaussian_est(vec, noise):
 
 def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, N=None, norm='L2'):
     """ Tomography function (real and fake).
-            Parameters
-            ----------
-            A : array-like that has to be estimated.
 
-            N : int value, default=None.
-                Number of measures of the quantum state. If None it is computed in the function itself.
+    Parameters
+    ----------
+    A: array-like that has to be estimated.
 
-            noise: float value.
-                It represent the error that you want to introduce to estimate the representation of vector V.
+    N: int value, default=None.
+        Number of measures of the quantum state. If None it is computed in the function itself.
 
-            true_tomography: bool, default=True.
-                If true means that the quantum estimations are are done with real tomography,
-                otherwise the estimations are approximated with a Truncated Gaussian Noise.
+    noise: float value.
+        It represent the error that you want to introduce to estimate the representation of vector V.
 
-            stop_when_reached_accuracy: bool value, default=True.
-                If True it stops the execution of the tomography when the L2-norm of the
-                difference between V and its estimation is less or equal then delta. Otherwise
-                N measures are done (very memory intensive for large vectors).
+    true_tomography: bool, default=True.
+        If true means that the quantum estimations are are done with real tomography,
+        otherwise the estimations are approximated with a Truncated Gaussian Noise.
 
-            norm: string value, default='L2'
-                If true_tomography is True:
-                    'L2': L2-tomography is computed
-                    'inf':L-inf tomography is computed
+    stop_when_reached_accuracy: bool value, default=True.
+        If True it stops the execution of the tomography when the L2-norm of the
+        difference between V and its estimation is less or equal then delta. Otherwise
+        N measures are done (very memory intensive for large vectors).
 
-            Returns
-            -------
-            A_est : array-like that was estimated.
+    norm: string value, default='L2'
+        If true_tomography is True:
+            'L2': L2-tomography is computed
+            'inf':L-inf tomography is computed
 
-            Notes
-            -----
-            This method returns an estimation of the true array/matrix A using quantum tomography algorithm 4.1 proposed in
-            "A Quantum Interior Point Method for LPs and SDPs" paper, or using an approximation of the tomography.
-        """
+    Returns
+    -------
+    A_est: array-like that was estimated.
+
+    Notes
+    -----
+    This method returns an estimation of the true array/matrix A using quantum tomography algorithm 4.1 proposed in
+    "A Quantum Interior Point Method for LPs and SDPs" paper, or using an approximation of the tomography.
+    """
 
     assert noise >= 0
 
@@ -283,33 +291,34 @@ def L2_tomogrphy_parallel(V, N=None, delta=None, stop_when_reached_accuracy=True
 
 def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2', sparsity_percentage=False):
     """ Official version of the tomography function.
-        Parameters
-        ----------
-        V : array-like that has to be estimated.
 
-        N : int value, default=None.
-            Number of measures of the quantum state. If None it is computed in the function itself.
+    Parameters
+    ----------
+    V: array-like that has to be estimated.
 
-        delta: float value, default=None.
-             It represent the error that you want to introduce to estimate the representation of vector V.
+    N: int value, default=None.
+        Number of measures of the quantum state. If None it is computed in the function itself.
 
-        stop_when_reached_accuracy: bool, default=True.
-                                    If True it stops the execution of the tomography when the L2-norm of the
-                                    difference between V and its estimation is less or equal then delta. Otherwise
-                                    N measures are done (very memory intensive for large vectors).
-        sparsity_percentage: bool, default=False.
-                            If True it computes the sparsity percentage of the vector and it is used to
-                            make bigger and bigger measures as you increase the non-sparsity of the vector.
-                            If False it makes measures that increases always of a factor of 1000.
-                            It is particulary useful in testing the tomography.
-        Returns
-        -------
-        dict_res : dictionary of shape {N_measure: vector_estimation}.
+    delta: float value, default=None.
+         It represent the error that you want to introduce to estimate the representation of vector V.
 
-        Notes
-        -----
-        This method returns an estimation of the true array V using quantum tomography algorithm 4.1 proposed in
-        "A Quantum Interior Point Method for LPs and SDPs" paper.
+    stop_when_reached_accuracy: bool, default=True.
+                                If True it stops the execution of the tomography when the L2-norm of the
+                                difference between V and its estimation is less or equal then delta. Otherwise
+                                N measures are done (very memory intensive for large vectors).
+    sparsity_percentage: bool, default=False.
+                        If True it computes the sparsity percentage of the vector and it is used to
+                        make bigger and bigger measures as you increase the non-sparsity of the vector.
+                        If False it makes measures that increases always of a factor of 1000.
+                        It is particulary useful in testing the tomography.
+    Returns
+    -------
+    dict_res: dictionary of shape {N_measure: vector_estimation}.
+
+    Notes
+    -----
+    This method returns an estimation of the true array V using quantum tomography algorithm 4.1 proposed in
+    "A Quantum Interior Point Method for LPs and SDPs" paper.
 
     """
 
@@ -394,7 +403,7 @@ def check_measure(arr, sparsity, norm):
     if sparsity != None:
         incr = (1 - sparsity) * 1000 * 0.3 ** 2
     else:
-        incr = 1000
+        incr = 5
     if norm == 'inf':
         incr = 5
 
@@ -423,48 +432,51 @@ def AmplitudeAmpDist(w0, w1):
     return distance
 
 
+def phase_est_distance(k1, k2):
+    return np.abs(k1 - k2)
+
+
 def amplitude_estimation(theta, epsilon, M=None, nqubit=False, plot_distribution=False):
     """ Official version of the amplitude estimation function.
-        Parameters
-        ----------
-        theta: float or int value.
-             Value that has to be estimated by the amplitude estimation. It must be in the range of [0,1].
 
-        epsilon: float value.
-            Error that you want to insert in the amplitude estimation procedure.
+    Parameters
+    ----------
+    theta: float or int value.
+         Value that has to be estimated by the amplitude estimation. It must be in the range of [0,1].
 
-        M: int value, default=None.
-            The number of iteration executes in the routine.
+    epsilon: float value.
+        Error that you want to insert in the amplitude estimation procedure.
 
-        nqubit: bool value, default=False.
-            If True, the routine returns also the number of qubits to represent an estimate with the specified precision
-            and the parameter M (see the amplitude estimation routine description for more details).
+    M: int value, default=None.
+        The number of iteration executes in the routine.
 
-        plot_distribution: bool value, default=False.
-            If True, a plot of the probability distribution for the output of amplitude estimation is done.
+    nqubit: bool value, default=False.
+        If True, the routine returns also the number of qubits to represent an estimate with the specified precision
+        and the parameter M (see the amplitude estimation routine description for more details).
 
-
-        Returns
-        -------
-        theta_tilde : float value.
-            Estimation of the true theta.
-
-        Notes
-        -----
-        This method performs the amplitude estimation routine following the approach described in "Quantum Amplitude Amplification
-        and Estimation" paper. Amplitude estimation is the problem of estimating the probability that a measurements of
-        a quantum state yields a good state.
+    plot_distribution: bool value, default=False.
+        If True, a plot of the probability distribution for the output of amplitude estimation is done.
 
 
+    Returns
+    -------
+    a_tilde: float value.
+        Estimate of the probability of measure a "good" state.
+
+    Notes
+    -----
+    This method performs the amplitude estimation routine following the approach described in "Quantum Amplitude Amplification
+    and Estimation" paper. Amplitude estimation is the problem of estimating the probability that a measurements of
+    a quantum state yields a good state.
     """
     if M == None:
         M = (math.ceil((np.pi / (2 * epsilon)) * (1 + np.sqrt(1 + 4 * epsilon))))
-        n_qubits = np.ceil(np.log2(M))  # TODO: Check this value!
+        n_qubits = np.ceil(np.log2(M))
         # M = int(2 ** n_qubits)  # If M is a power of 2. In Mosca book they said this.
     else:
         # assert math.ceil(np.log2(M)) == math.floor(np.log2(M)), "Invalid M, it has to be a power of 2 value."
         n_qubits = np.ceil(np.log2(M))
-        warnings.simplefilter('always', UserWarning)
+
         warnings.warn(
             "Attention! The value of M that will be considered is the one you passed. Epsilon in this case is "
             "useless")
@@ -485,10 +497,12 @@ def amplitude_estimation(theta, epsilon, M=None, nqubit=False, plot_distribution
     theta_tilde = random.choices(theta_j, weights=p, k=1)[0]
 
     if plot_distribution:
+        relative_error = epsilon * max(theta, 1)
         plt.annotate((float('%.2f' % (theta_j[p.index(max(p))])), float('%.2f' % (max(p)))),
                      xy=(theta_j[p.index(max(p))], max(p)))
         plt.bar(theta_j, p, 0.001)
-
+        plt.axvline(theta - relative_error, c='red', ls='dashed')
+        plt.axvline(theta + relative_error, c='red', ls='dashed')
         plt.xlim(theta_j[p.index(max(p))] - 0.03, theta_j[p.index(max(p))] + 0.03)
         plt.title(r'Probability distribution for the output of amplitude estimation for $\theta$ = ' + str(
             float('%.2f' % (theta))) + r' with $\epsilon$ =' + str(epsilon) + r'$\rightarrow$ M=' + str(M),
@@ -502,75 +516,157 @@ def amplitude_estimation(theta, epsilon, M=None, nqubit=False, plot_distribution
         plt.show()
     if nqubit:
         return theta_tilde, n_qubits, M
-    # a_tilde = np.sin(theta_tilde*np.pi)**2
+    a_tilde = np.sin(theta_tilde * np.pi) ** 2
     return theta_tilde
 
 
-def median_evaluation(func, *args, gamma, Q=None):
-    # TODO: Check args
-    """
-    Median evaluation.
+def median_evaluation(func, gamma, Q=None, *args, **kwargs):
+    """Median evaluation.
+
     Parameters
     ----------
     func: Callable. The function that you want to execute Q time.
 
-    args: tuple object. The arguments to pass to the func callable.
-
     gamma: float value. The probability that the median estimation gives a value satisfying the error bounds.
 
     Q: int value, default=None. Number of iterations to execute func.
+
+    args: list of parameters values to pass to the callable function.
+
+    kwargs: arguments of type key->value to pass to the callable function.
+
     Returns
     -------
     final_estimate : float value. Median estimation of the function passed as arguments.
 
     Notes
     -----
-    This procedure computes Q times the result of the function func passed, and extract the median to be more accurate
-    in the estimation.
+    This procedure at high level computes Q times the result of the callable func passed, and extract the median
+    to be more accurate in the estimation. It is used to boost the probability and precision for the estimation.
     """
     if Q == None:
         z = np.log(1 / gamma) / (2 * (8 / np.pi ** 2 - 0.5) ** 2)
         Q = np.ceil(z)
         if Q % 2 == 0:
             Q += 1
-    estimates = [func(args[0][0], args[0][1]) for _ in range(int(Q))]
-    final_estimate = np.median(estimates)
 
+    estimates = [func(*args, **kwargs) for _ in range(int(Q))]
+    final_estimate = np.median(estimates)
     return final_estimate
 
 
-def Wrapper_AmpEst(argument, type='singular_values'):
-    if type == 'singular_values':
+def wrapper_phase_est_arguments(argument, type='sv'):
+    if type == 'sv':
         theta_i = 2 * math.acos(argument)
         return theta_i
 
 
-def compute_n_from_epsilon(epsilon):
-    # TODO
-    return
+def unwrap_phase_est_arguments(argument, type='sv'):
+    if type == 'sv':
+        return math.cos(argument * np.pi / 2)
 
 
-def phase_estimation(omega, m):
+def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distribution=False, nqubit=False):
+    """ Official version of the phase estimation function.
+
+        Parameters
+        ----------
+        omega: float or int value.
+             Value that has to be estimated by the phase estimation. It must be in the range of [0,1].
+
+        m: int value, default=None.
+            The number of qubits you want to use for the computation.
+
+        epsilon: float value, default=None.
+            Precision that you want to have in the phase estimation procedure. If not None, it's used to compute m.
+
+        nqubit: bool value, default=False.
+            If True, the routine returns the estimation of omega, the k_est and also the number of qubits to represent
+            an estimate with the specified precision and the parameter M.
+
+        success_prob: string value, default='QPE'.
+            If 'QPE' the m value is computed (with epsilon parameter) such that the absolute value of the difference
+            between the estimated omega and the true one is less that 1/2^(n+1) with probability at least of 4/np.pi^2.
+            Otherwise is computed such that the absolute value of the difference between the estimated omega and the
+             true one is less that 1/2^(n) with probability at least of 8/np.pi^2.
+
+        plot_distribution: bool value, default=False.
+            If True, a plot of the probability distribution for the output of phase estimation is done.
+
+        Returns
+        -------
+        omega_tilde: float value.
+            Estimate of the true omega value.
+
+        k_est: int value.
+            Int value such that k_est/2^m is the closest estimate value to the true omega.
+
+        Notes
+        -----
+        This method performs the phase estimation routine following the approach described in "An Introduction
+        to Quantum computing" book and "Quantum Algorithm for Unsupervised ML and NN" thesis.
+        Phase estimation is the problem of estimating the phase of the eigenvectors of a unitary U using m qubits of
+        precision. From this method is derived the :mod:`sklearn.QuantumUtility.Utility.amplitude_estimation` procedure.
+    """
     # omega must be between [0,1]. The estimation must have shape of x/2^n
-    p = []
-    theta_j = []
-    M = 2 ** m
-    for j in range(M):
-        theta_est = np.pi * j / M
-        theta_j.append(theta_est / np.pi)
-
-        # Se omega è tra [0,1] dividere theta_est per \pi
-        distance = AmplitudeAmpDist(theta_est / np.pi, omega)
-        if distance != 0:
-            # In NN manca il *np.pi dentro il sin
-            p_aj = np.abs((math.sin(M * distance * np.pi)) / (M * (math.sin(distance * np.pi)))) ** 2
+    assert m != None or epsilon != None, "Attention! You need to specify the number of qubits m or the precision epsilon."
+    if m != None and nqubit == True:
+        warnings.warn("Attention! You are specifying that you want to return also the number of qubits" \
+                      " used, but you are already specifying it with the m parameter.")
+    if epsilon != None:
+        warnings.warn('Attention! The m value is computed using the epsilon parameter passed.')
+        if success_prob == 'QPE':
+            # probability of success of 4/np.pi**2
+            m = int(np.ceil(np.log2(1 / epsilon) - 1))
         else:
-            p_aj = 1
-        p.append(p_aj)
-    sum_at_one = np.sum(p)
-    theta_tilde = random.choices(theta_j, weights=p, k=1)[0]
+            # probability of success 8/pi**2
+            m = int(np.ceil(np.log2(1 / epsilon)))
+    p = []
+    omega_k = []
+    M = 2 ** m  # in P.E., M is fixed in this way
+    for k in range(M):
+        omega_est = k / M
+        omega_k.append(omega_est)
+        # Landman
+        try:
+            p.append(np.abs((math.sin((M * omega - k) * np.pi)) / (M * (math.sin((omega - k / M) * np.pi)))) ** 2)
+        except:
+            # if the division is 0/0 -> case when M*omega is an integer.
+            p.append(1)
 
-    # a_tilde = (math.sin(theta_tilde)) ** 2
+    # sum_at_one = np.sum(p)
+    omega_tilde = random.choices(omega_k, weights=p, k=1)[0]
 
-    a_tilde = math.cos(theta_tilde * np.pi / 2)
-    return a_tilde
+    k_est = omega_tilde * M
+
+    if plot_distribution:
+        # relative_error = epsilon * max(theta, 1)
+        plt.annotate((float('%.2f' % (omega_k[p.index(max(p))])), float('%.2f' % (max(p)))),
+                     xy=(omega_k[p.index(max(p))], max(p)))
+        plt.bar(omega_k, p, 0.001)
+        # plt.axvline(theta - relative_error, c='red', ls='dashed')
+        # plt.axvline(theta + relative_error, c='red', ls='dashed')
+        plt.xlim(omega_k[p.index(max(p))] - 0.1, omega_k[p.index(max(p))] + 0.1)
+        if epsilon:
+            plt.title(r'Probability distribution for the output of phase estimation for $\theta$ = ' + str(
+                float('%.2f' % (omega))) + r' with $\epsilon$ =' + str(epsilon) + r'$\rightarrow$ M=' + str(M),
+                      fontdict={'family': 'serif',
+                                'color': 'darkblue',
+                                'weight': 'bold',
+                                'size': 8})
+        else:
+
+            plt.title(r'Probability distribution for the output of phase estimation for $\theta$ = ' + str(
+                float('%.2f' % (omega))) + r' with M=' + str(M),
+                      fontdict={'family': 'serif',
+                                'color': 'darkblue',
+                                'weight': 'bold',
+                                'size': 8})
+        plt.xlabel(r'$\hat \theta$')
+        plt.ylabel("probability")
+
+        plt.show()
+    if nqubit:
+        return omega_tilde, k_est, m, M
+
+    return omega_tilde

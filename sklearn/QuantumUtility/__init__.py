@@ -3,4 +3,4 @@ The :mod:`sklearn.QuantumUtility` module includes quantum routines like tomograp
 phase estimation
 """
 from .Utility import *
-__all__ = ['Utility']
+__all__ = ['Utility',]
