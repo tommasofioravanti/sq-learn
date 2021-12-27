@@ -830,7 +830,7 @@ class qPCA(_BasePCA):
     def compute_error(self, U, epsilon_delta, true_tomography):
         # error=epsilon+delta
 
-        if true_tomography ==False:
+        if true_tomography == False:
             epsilon_delta = np.sqrt(self.n_components_) * (epsilon_delta)
 
         A_sign = tomography(U, epsilon_delta, true_tomography=true_tomography)
@@ -862,13 +862,22 @@ class qPCA(_BasePCA):
             return Y_sign / f_norm
 
     # Theorem 7 New Qadra
-    def quantum_factor_score_ratio_estimation(self, gamma, ):
+    def quantum_factor_score_ratio_estimation(self, X, gamma, epsilon):
         # TODO
-        return
+        singular_values = self.scaled_singular_values[self.explained_variance_ratio_ > gamma]
+        theta_from_sv = np.array([wrapper_phase_est_arguments(sv) for sv in singular_values])
+        theta_estimations = [phase_estimation(theta, m=1, epsilon=epsilon) for theta in theta_from_sv]
+        singular_values_est = np.array([unwrap_phase_est_arguments(th) for th in theta_estimations])
+        factor_score_est = singular_values_est ** 2
+        factor_score_ratio_est = [fs / np.linalg.norm(X) ** 2 for fs in factor_score_est]
+        return singular_values_est, factor_score_est, factor_score_ratio_est
 
     # Theorem 9
     def Quantum_factor_score_ratio(self, eps, theta, true_tomography=False, eta=0):
-        est_selected_sing_values = tomography(self.scaled_singular_values, eps, true_tomography=true_tomography)
+        #est_selected_sing_values = tomography(self.scaled_singular_values, eps, true_tomography=true_tomography)
+        theta_from_sv = np.array([wrapper_phase_est_arguments(sv) for sv in self.scaled_singular_values])
+        theta_estimations = [phase_estimation(theta, m=1, epsilon=eps) for theta in theta_from_sv]
+        est_selected_sing_values = np.array([unwrap_phase_est_arguments(th) for th in theta_estimations])
         selected_sing_values = self.scaled_singular_values[est_selected_sing_values >= theta]
 
         pow2 = lambda x: x ** 2
@@ -933,7 +942,7 @@ class qPCA(_BasePCA):
                 "The quantum subroutine is cosidering only " + str(len(topk_singular_values)) + " components."
                                                                                                 "Restart the computation.")
         '''
-        print(topk_singular_values.shape)
+        # print(topk_singular_values.shape)
         topk_factor_score = self.explained_variance_[self.scaled_singular_values >= theta]
         topk_right_singular_vectors = self.components_[self.scaled_singular_values >= theta]
         topk_left_singular_vectors = self.left_sv[self.scaled_singular_values >= theta]
@@ -941,21 +950,17 @@ class qPCA(_BasePCA):
         left_singular_vectors_est = tomography(topk_left_singular_vectors, delta, true_tomography=true_tomography)
 
         ###
-        # theta_from_sv = np.array([Wrapper_AmpEst(sv, 'singular_values') for sv in topk_singular_values])
-        # singular_value_estimation_ = [Amp_est_error(th, eps) for th in theta_from_sv]
+        theta_from_sv = np.array([wrapper_phase_est_arguments(sv, 'sv') / np.pi for sv in topk_singular_values])
+        theta_estimations = [phase_estimation(omega=th, m=1, epsilon=eps)[0] for th in theta_from_sv]
+        singular_value_estimation = np.array([unwrap_phase_est_arguments(theta, 'sv') for theta in theta_estimations])
+        factor_score_estimation = singular_value_estimation ** 2
         ###
-        singular_value_estimation = tomography(topk_singular_values, eps, true_tomography=False)
+        # singular_value_estimation = tomography(topk_singular_values, eps, true_tomography=False)
         # factor_score_estimation = np.array([sv ** 2 for sv in singular_value_estimation])
-        factor_score_estimation = tomography(topk_factor_score, 2 * eps, true_tomography=False)
-        self.p = self.Quantum_factor_score_ratio(eps=eps, theta=theta)
-        '''
-        factor_score_estimation = np.array([element if element > 0 else 0 for element in factor_score_estimation])
-        index_ = factor_score_estimation.argsort()[::-1]
-        right_singular_vectors_est = right_singular_vectors_est[index_]
-        left_singular_vectors_est = left_singular_vectors_est[index_]
+        # factor_score_estimation = tomography(topk_factor_score, 2 * eps, true_tomography=False)
 
-        factor_score_estimation = np.array(sorted(factor_score_estimation, reverse=True))
-        '''
+        self.p = self.Quantum_factor_score_ratio(eps=eps, theta=theta)
+
         if error == False:
             return right_singular_vectors_est, left_singular_vectors_est, singular_value_estimation, factor_score_estimation
         else:
