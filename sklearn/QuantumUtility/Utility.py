@@ -289,7 +289,7 @@ def L2_tomogrphy_parallel(V, N=None, delta=None, stop_when_reached_accuracy=True
     return dict_res
 
 
-def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2', sparsity_percentage=False):
+def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2'):
     """ Official version of the tomography function.
 
     Parameters
@@ -306,11 +306,7 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
                                 If True it stops the execution of the tomography when the L2-norm of the
                                 difference between V and its estimation is less or equal then delta. Otherwise
                                 N measures are done (very memory intensive for large vectors).
-    sparsity_percentage: bool, default=False.
-                        If True it computes the sparsity percentage of the vector and it is used to
-                        make bigger and bigger measures as you increase the non-sparsity of the vector.
-                        If False it makes measures that increases always of a factor of 1000.
-                        It is particulary useful in testing the tomography.
+
     Returns
     -------
     dict_res: dictionary of shape {N_measure: vector_estimation}.
@@ -322,10 +318,6 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
 
     """
 
-    if sparsity_percentage:
-        sparsity = 1 - (np.count_nonzero(V) / float(V.size))
-    else:
-        sparsity = None
     if np.round(np.linalg.norm(V, ord=2)) == 1.0 or np.round(np.linalg.norm(V, ord=2)) == 0.9:
         pass
     else:
@@ -343,7 +335,7 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
 
     measure_indexes = np.geomspace(1, N, num=100, dtype=np.int64)
 
-    measure_indexes = check_measure(measure_indexes, sparsity, norm)
+    measure_indexes = check_measure(measure_indexes, norm)
 
     for i in measure_indexes:
 
@@ -399,13 +391,8 @@ def vectorize_aux_fun(dic, i):
     return np.sqrt(dic[i]) if i in dic else 0
 
 
-def check_measure(arr, sparsity, norm):
-    if sparsity != None:
-        incr = (1 - sparsity) * 1000 * 0.3 ** 2
-    else:
-        incr = 5
-    if norm == 'inf':
-        incr = 5
+def check_measure(arr, norm):
+    incr = 5
 
     for i in range(len(arr) - 1):
         if arr[i + 1] == arr[i]:
@@ -436,7 +423,7 @@ def phase_est_distance(k1, k2):
     return np.abs(k1 - k2)
 
 
-def amplitude_estimation(theta, epsilon, M=None, nqubit=False, plot_distribution=False):
+def amplitude_estimation(theta, epsilon=0.01, M=None, nqubit=False, plot_distribution=False):
     """ Official version of the amplitude estimation function.
 
     Parameters
@@ -444,7 +431,7 @@ def amplitude_estimation(theta, epsilon, M=None, nqubit=False, plot_distribution
     theta: float or int value.
          Value that has to be estimated by the amplitude estimation. It must be in the range of [0,1].
 
-    epsilon: float value.
+    epsilon: float value, default=0.01
         Error that you want to insert in the amplitude estimation procedure.
 
     M: int value, default=None.
@@ -481,13 +468,14 @@ def amplitude_estimation(theta, epsilon, M=None, nqubit=False, plot_distribution
             "Attention! The value of M that will be considered is the one you passed. Epsilon in this case is "
             "useless")
 
+    theta_a = math.asin(np.sqrt(theta))
     p = []
     theta_j = []
 
     for j in range(M):
         theta_est = np.pi * j / M
-        theta_j.append(theta_est / np.pi)
-        distance = AmplitudeAmpDist(theta_est / np.pi, theta)
+        theta_j.append(theta_est)
+        distance = AmplitudeAmpDist(theta_est / np.pi, theta_a / np.pi)
         if distance != 0:
             p_aj = np.abs(math.sin(M * distance * np.pi) / (M * math.sin(distance * np.pi))) ** 2
         else:
@@ -497,15 +485,15 @@ def amplitude_estimation(theta, epsilon, M=None, nqubit=False, plot_distribution
     theta_tilde = random.choices(theta_j, weights=p, k=1)[0]
 
     if plot_distribution:
-        relative_error = epsilon * max(theta, 1)
+        relative_error = epsilon * max(theta_a, 1)
         plt.annotate((float('%.2f' % (theta_j[p.index(max(p))])), float('%.2f' % (max(p)))),
                      xy=(theta_j[p.index(max(p))], max(p)))
         plt.bar(theta_j, p, 0.001)
-        plt.axvline(theta - relative_error, c='red', ls='dashed')
-        plt.axvline(theta + relative_error, c='red', ls='dashed')
+        plt.axvline(theta_a - relative_error, c='red', ls='dashed')
+        plt.axvline(theta_a + relative_error, c='red', ls='dashed')
         plt.xlim(theta_j[p.index(max(p))] - 0.03, theta_j[p.index(max(p))] + 0.03)
         plt.title(r'Probability distribution for the output of amplitude estimation for $\theta$ = ' + str(
-            float('%.2f' % (theta))) + r' with $\epsilon$ =' + str(epsilon) + r'$\rightarrow$ M=' + str(M),
+            float('%.2f' % (theta_a))) + r' with $\epsilon$ =' + str(epsilon) + r'$\rightarrow$ M=' + str(M),
                   fontdict={'family': 'serif',
                             'color': 'darkblue',
                             'weight': 'bold',
@@ -516,8 +504,8 @@ def amplitude_estimation(theta, epsilon, M=None, nqubit=False, plot_distribution
         plt.show()
     if nqubit:
         return theta_tilde, n_qubits, M
-    a_tilde = np.sin(theta_tilde * np.pi) ** 2
-    return theta_tilde
+    a_tilde = np.sin(theta_tilde) ** 2
+    return a_tilde
 
 
 def median_evaluation(func, gamma, Q=None, *args, **kwargs):
@@ -525,19 +513,25 @@ def median_evaluation(func, gamma, Q=None, *args, **kwargs):
 
     Parameters
     ----------
-    func: Callable. The function that you want to execute Q time.
+    func: Callable.
+        The function that you want to execute Q time.
 
-    gamma: float value. The probability that the median estimation gives a value satisfying the error bounds.
+    gamma: float value.
+        The probability that the median estimation gives a value satisfying the error bounds.
 
-    Q: int value, default=None. Number of iterations to execute func.
+    Q: int value, default=None.
+        Number of iterations to execute func.
 
-    args: list of parameters values to pass to the callable function.
+    args:
+        list of parameters values to pass to the callable function.
 
-    kwargs: arguments of type key->value to pass to the callable function.
+    kwargs:
+        arguments of type key->value to pass to the callable function.
 
     Returns
     -------
-    final_estimate : float value. Median estimation of the function passed as arguments.
+    final_estimate : float value.
+        Median estimation of the function passed as arguments.
 
     Notes
     -----
@@ -559,11 +553,16 @@ def wrapper_phase_est_arguments(argument, type='sv'):
     if type == 'sv':
         theta_i = 2 * math.acos(argument)
         return theta_i
+    if type == 'distance':
+        theta_i = math.asin(np.sqrt(argument))
+        return theta_i
 
 
 def unwrap_phase_est_arguments(argument, type='sv'):
     if type == 'sv':
         return math.cos(argument * np.pi / 2)
+    if type == 'distance':
+        return math.sin(argument * np.pi) ** 2
 
 
 def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distribution=False, nqubit=False):
@@ -572,7 +571,7 @@ def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distr
         Parameters
         ----------
         omega: float or int value.
-             Value that has to be estimated by the phase estimation. It must be in the range of [0,1].
+             Value that has to be estimated by the phase estimation. It must be in the range of [0,1).
 
         m: int value, default=None.
             The number of qubits you want to use for the computation.
@@ -585,10 +584,12 @@ def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distr
             an estimate with the specified precision and the parameter M.
 
         success_prob: string value, default='QPE'.
-            If 'QPE' the m value is computed (with epsilon parameter) such that the absolute value of the difference
-            between the estimated omega and the true one is less that 1/2^(n+1) with probability at least of 4/np.pi^2.
-            Otherwise is computed such that the absolute value of the difference between the estimated omega and the
-             true one is less that 1/2^(n) with probability at least of 8/np.pi^2.
+            If 'QPE':
+                the m value is computed (with epsilon parameter) such that the absolute value of the difference
+                between the estimated omega and the true one is less that 1/2^(n+1) with probability at least of 4/np.pi^2.
+            If 'QAE':
+                m is computed such that the absolute value of the difference between the estimated omega and the
+                true one is less that 1/2^(n) with probability at least of 8/np.pi^2.
 
         plot_distribution: bool value, default=False.
             If True, a plot of the probability distribution for the output of phase estimation is done.
@@ -608,7 +609,7 @@ def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distr
         Phase estimation is the problem of estimating the phase of the eigenvectors of a unitary U using m qubits of
         precision. From this method is derived the :mod:`sklearn.QuantumUtility.Utility.amplitude_estimation` procedure.
     """
-    # omega must be between [0,1]. The estimation must have shape of x/2^n
+    # omega must be between [0,1). The estimation must have shape of x/2^n
     assert m != None or epsilon != None, "Attention! You need to specify the number of qubits m or the precision epsilon."
     if m != None and nqubit == True:
         warnings.warn("Attention! You are specifying that you want to return also the number of qubits" \
@@ -635,6 +636,7 @@ def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distr
             p.append(1)
 
     # sum_at_one = np.sum(p)
+    # omega_tilde = omega_k[p.index(max(p))]
     omega_tilde = random.choices(omega_k, weights=p, k=1)[0]
 
     k_est = omega_tilde * M
@@ -655,7 +657,6 @@ def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distr
                                 'weight': 'bold',
                                 'size': 8})
         else:
-
             plt.title(r'Probability distribution for the output of phase estimation for $\theta$ = ' + str(
                 float('%.2f' % (omega))) + r' with M=' + str(M),
                       fontdict={'family': 'serif',
@@ -670,3 +671,42 @@ def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distr
         return omega_tilde, k_est, m, M
 
     return omega_tilde
+
+
+def ipe(x, y, epsilon):
+    """Official version of the Robust Inner Product Estimation Routine ((R)IPE).
+
+    Parameters
+    ----------
+    x: ndarray.
+        One of the two vector needed to compute the inner product.
+
+    y: ndarray.
+        The second vector needed to compute the inner product.
+
+    epsilon: float value, default=None.
+        Precision that you want to have in the inner product estimation procedure.
+
+    Returns
+    -------
+    s: float value.
+        Estimate of the inner product between x and y vectors.
+
+    Notes
+    -----
+    This method performs the Robust Inner Product Estimation as described in the supplemental material of
+    "Quantum algorithms for feedforward neural networks" paper. Implicitly it uses amplitude estimation routine
+     :mod:`sklearn.QuantumUtility.Utility.amplitude_estimation`.
+    """
+    a = (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2 - 2 * np.inner(x, y)) / (2 * (
+            np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2))
+
+    epsilon_a = epsilon * max(1, np.abs(np.inner(x, y))) / (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2)
+
+    a_tilde = amplitude_estimation(theta=a, epsilon=epsilon_a)
+
+    s = (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2) * (1 - 2 * a_tilde) / 2
+
+    assert np.abs(s - np.inner(x, y)) <= max(epsilon, epsilon * np.abs(np.inner(x, y)))
+
+    return s
