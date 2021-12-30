@@ -10,7 +10,7 @@
 #          Mathieu Blondel <mathieu@mblondel.org>
 #          Robert Layton <robertlayton@gmail.com>
 # License: BSD 3 clause
-
+import itertools
 import warnings
 
 import numpy as np
@@ -639,16 +639,11 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, true_
                                                    n_clusters, distances)
 
             else:
-                # eps3_eps4 = delta/2
-
-                # error = np.sqrt(eta) * eps3_eps4
                 error = delta / 2
 
                 centers = _centers_update(X, labels, error, intermediate_error=intermediate_err,
                                           true_tomography=true_tomography,
                                           stop_when_reached_accuracy=stop_when_reached_accuracy)
-
-                # print(i)
             if verbose:
                 print("Iteration %2d, inertia %.3f" % (i, inertia))
 
@@ -731,7 +726,7 @@ def _labels_inertia(X, centers, distances, delta, squared_distances, n_threads=N
         # _inertia = _inertia_dense
 
         labels, distances, inertia = labels_estimation(X, centers,
-                                                                delta, squared_distances)
+                                                       delta, squared_distances)
 
     return labels, distances, inertia
 
@@ -750,47 +745,37 @@ def labels_estimation(X, centers, delta, squared_distances):
 
         return mins_, mins, mins
 
-    def delta_means(distances_from_centroids, delta):
-
-        min = np.min(distances_from_centroids)
-        mins = np.where(distances_from_centroids <= min + delta)
-        mins = mins[0]  # Where returns a TUPLE with one element, just popping..
-
-        # pdb.set_trace()
-
-        if len(mins) > 1:
-            pass
-            # print("collision")
-        elif len(mins) == 1:
-            pass
-            # print("none")
-        else:
-            print("Error")
-
-        selected_label = random.choice(mins)
-
-        return int(selected_label), min, distances_from_centroids[selected_label]
-
-    # SI RITORNA la label assegnata al punto con distanza minima dai centri[[1 2 2],..] per esempio
-    # dice che il primo punto ha label 1 ed ha distanza minima 2 dai centri.
     if squared_distances == 1:
-        distances = np.square(distances)
+        # distances = np.square(distances)
 
-        labels, inertias, selected_inertias = delta_means1(distances, delta)
+        samples_center_combination = list(itertools.product(X, centers))
+
+        squared_X_norms = row_norms(X, squared=True)
+        squared_Y_norms = row_norms(centers, squared=True)
+        samples_center_squared_norm_combination = list(itertools.product(squared_X_norms, squared_Y_norms))
+
+        inner_prod_est = [ipe(i[0], i[1], delta / 2, 5) for i in samples_center_combination]
+
+        distances_squared_est = np.array([
+            np.linalg.norm(samples_center_squared_norm_combination[j][0]) + np.linalg.norm(samples_center_squared_norm_combination[j][1])
+            - 2 * inner_prod_est[j]
+            for j in range(len(samples_center_squared_norm_combination))]).reshape(distances.shape)
+
+        min = np.min(distances_squared_est, axis=1)
+        labels = [select_labels(np.where(i <= min[e])[0]) for e, i in enumerate(distances_squared_est)]
+        selected_inertias = min
+        # labels, inertias, selected_inertias = delta_means1(distances, delta)
 
         # results = np.apply_along_axis(delta_means, 1, distances, delta)
 
     # labels, inertias, selected_inertias = results[:, 0], results[:, 1], results[:, 2]
 
     if squared_distances == 1:
-        inertia = np.sum(inertias)
+        # inertia = np.sum(inertias)
         delta_inertia = np.sum(selected_inertias)
     else:  # we are doing inertia on non squared-distances, so we need to take the square..
-        inertia = np.sum(np.square(inertias))
+        # inertia = np.sum(np.square(inertias))
         delta_inertia = np.sum(np.square(selected_inertias))
-
-    # inertia = np.sum(np.square(inertias))
-    # selected_inertia = np.sum(np.square(selected_inertias))
 
     return labels, distances, delta_inertia
 
@@ -842,7 +827,8 @@ def _centers_update(X, labels, error, intermediate_error, true_tomography, stop_
 
     if intermediate_error:
         # print('OK, intermediate error')
-        centers = tomography(centers, error, true_tomography=true_tomography,stop_when_reached_accuracy=stop_when_reached_accuracy)
+        centers = tomography(centers, error, true_tomography=true_tomography,
+                             stop_when_reached_accuracy=stop_when_reached_accuracy)
 
     return centers
 
@@ -948,14 +934,16 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
 
     squared_distances : int value, default=1
             If 1, the squared distances of each sample to its closest center are computed.
-            Otherwise simple distances are computed.
+            Otherwise simple distances are computed. Be careful that for the quantum simulation, it is assumed to work
+            with squared distances (for more details see the paper "q-means: A quantum algorithm for unsupervised
+            machine learning").
 
     intermediate_error: bool, default=None.
         True to add delta/2 error in the centroid update step. If false the centroid estimation is done without adding
         any error. Set it to false if you want to reduce the execution time of the algorithm.
 
     true_tomography: bool, default=True.
-        True if you want to estimate the labels and the centroids update using the real tomography, otherwise
+        True if you want to estimate the centroids update using the real tomography, otherwise
         Truncated Gaussian Noise approximation is used.
 
     stop_when_reached_accuracy: bool, default=True.
@@ -1261,8 +1249,6 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
                                 order='C', copy=self.copy_x,
                                 accept_large_sparse=False)
 
-        # Define eta = max_i ||v_i||^2
-        # print(np.linalg.norm(X, axis=1))
         self.eta = max(np.linalg.norm(X, axis=1) ** 2)
 
         self._check_params(X)
@@ -1295,7 +1281,6 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
 
         best_inertia = None
 
-        # SI STIMANO I CENTROIDI INIZIALI CON KMEANS++
         for i in range(self._n_init):
             # Initialize centers
             centers_init = self._init_centroids(
