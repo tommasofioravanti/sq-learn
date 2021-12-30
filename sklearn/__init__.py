@@ -84,9 +84,8 @@ else:
     from . import __check_build  # noqa: F401
     from .base import clone
     from .utils._show_versions import show_versions
-    __all__ = ['decomposition']
-    '''__all__ = ['calibration', 'cluster', 'covariance', 'cross_decomposition',
-               'datasets', 'decomposition','dummy', 'ensemble', 'exceptions',
+    __all__ = ['calibration', 'cluster', 'covariance', 'cross_decomposition',
+               'datasets', 'decomposition','QuantumUtility','dummy', 'ensemble', 'exceptions',
                'experimental', 'externals', 'feature_extraction',
                'feature_selection', 'gaussian_process', 'inspection',
                'isotonic', 'kernel_approximation', 'kernel_ridge',
@@ -97,7 +96,7 @@ else:
                'svm', 'tree', 'discriminant_analysis', 'impute', 'compose',
                # Non-modules:
                'clone', 'get_config', 'set_config', 'config_context',
-               'show_versions']'''
+               'show_versions']
 
 
 def setup_module(module):
