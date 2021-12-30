@@ -508,7 +508,7 @@ def amplitude_estimation(theta, epsilon=0.01, M=None, nqubit=False, plot_distrib
     return a_tilde
 
 
-def median_evaluation(func, gamma, Q=None, *args, **kwargs):
+def median_evaluation(func, gamma=0.1, Q=None, *args, **kwargs):
     """Median evaluation.
 
     Parameters
@@ -516,7 +516,7 @@ def median_evaluation(func, gamma, Q=None, *args, **kwargs):
     func: Callable.
         The function that you want to execute Q time.
 
-    gamma: float value.
+    gamma: float value, default=0.1.
         The probability that the median estimation gives a value satisfying the error bounds.
 
     Q: int value, default=None.
@@ -673,7 +673,7 @@ def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distr
     return omega_tilde
 
 
-def ipe(x, y, epsilon):
+def ipe(x, y, epsilon, Q=1):
     """Official version of the Robust Inner Product Estimation Routine ((R)IPE).
 
     Parameters
@@ -687,6 +687,9 @@ def ipe(x, y, epsilon):
     epsilon: float value, default=None.
         Precision that you want to have in the inner product estimation procedure.
 
+    Q: int value, default=1.
+        Number of iteration for the median evaluation of implicit amplitude estimation output.
+
     Returns
     -------
     s: float value.
@@ -696,15 +699,16 @@ def ipe(x, y, epsilon):
     -----
     This method performs the Robust Inner Product Estimation as described in the supplemental material of
     "Quantum algorithms for feedforward neural networks" paper. Implicitly it uses amplitude estimation routine
-     :mod:`sklearn.QuantumUtility.Utility.amplitude_estimation`.
+     :mod:`sklearn.QuantumUtility.Utility.amplitude_estimation` and if the number of iteration Q are >1, implicitly it
+     uses also median evaluation to boost the amplitude estimation output.
     """
     a = (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2 - 2 * np.inner(x, y)) / (2 * (
             np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2))
 
     epsilon_a = epsilon * max(1, np.abs(np.inner(x, y))) / (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2)
 
-    a_tilde = amplitude_estimation(theta=a, epsilon=epsilon_a)
-
+    a_tilde_list = [amplitude_estimation(theta=a, epsilon=epsilon_a) for _ in range(Q)]
+    a_tilde = np.median(a_tilde_list)
     s = (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2) * (1 - 2 * a_tilde) / 2
 
     assert np.abs(s - np.inner(x, y)) <= max(epsilon, epsilon * np.abs(np.inner(x, y)))
