@@ -11,6 +11,7 @@ import time
 from scipy.stats import truncnorm
 import numpy as np
 import decimal
+from bisect import bisect
 from joblib import Parallel
 import statistics
 import warnings
@@ -21,7 +22,7 @@ from multiprocessing import *
 import os
 
 
-# random.seed(a=1234, version=2)
+# random.seed(a=31337)
 
 class QuantumState(object):
     """This class simulates a simple Quantum Register"""
@@ -289,7 +290,7 @@ def L2_tomogrphy_parallel(V, N=None, delta=None, stop_when_reached_accuracy=True
     return dict_res
 
 
-def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2'):
+def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2', incremental_measure=True):
     """ Official version of the tomography function.
 
     Parameters
@@ -300,12 +301,16 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
         Number of measures of the quantum state. If None it is computed in the function itself.
 
     delta: float value, default=None.
-         It represent the error that you want to introduce to estimate the representation of vector V.
+        It represent the error that you want to introduce to estimate the representation of vector V.
 
     stop_when_reached_accuracy: bool, default=True.
-                                If True it stops the execution of the tomography when the L2-norm of the
-                                difference between V and its estimation is less or equal then delta. Otherwise
-                                N measures are done (very memory intensive for large vectors).
+        If True it stops the execution of the tomography when the L2-norm of the
+        difference between V and its estimation is less or equal then delta. Otherwise
+        N measures are done (very memory intensive for large vectors).
+
+    incremental_measure: bool, default=True.
+        If True the tomography is computed incrementally up to N measures. If False, the routine is
+        performed once using N measures.
 
     Returns
     -------
@@ -332,14 +337,58 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
 
     q_state = QuantumState(amplitudes=V, registers=index)
     dict_res = {}
+    if incremental_measure:
 
-    measure_indexes = np.geomspace(1, N, num=100, dtype=np.int64)
+        measure_indexes = np.geomspace(1, N, num=100, dtype=np.int64)
 
-    measure_indexes = check_measure(measure_indexes, norm)
+        measure_indexes = check_measure(measure_indexes, norm)
 
-    for i in measure_indexes:
+        for i in measure_indexes:
 
-        P = estimate_wald(q_state.measure(n_times=int(i)))
+            P = estimate_wald(q_state.measure(n_times=int(i)))
+            P_i = np.zeros(d)
+            P_i[list(P.keys())] = np.sqrt(list(P.values()))
+
+            # Part2 of algorithm 4.1
+            max_index = max(index)
+            digits = len(str(max_index)) + 1
+            registers = [str(j).zfill(digits) for j in index] + [re.sub('0', '1', str(j).zfill(digits), 1) for j in
+                                                                 index]
+
+            amplitudes = np.asarray([V[k] + P_i[k] for k in range(len(V))] + [V[k] - P_i[k] for k in range(len(V))])
+
+            amplitudes *= 0.5
+
+            new_quantum_state = QuantumState(registers=registers, amplitudes=amplitudes)
+
+            measure = new_quantum_state.measure(n_times=int(i))
+
+            str_ = [str(ind).zfill(digits) for ind in index]
+            dictionary = dict(Counter(measure))
+
+            if len(dictionary) < len(registers):
+                keys = set(list(dictionary.keys()))
+                tot_keys = set(registers)
+                missing_keys = list(tot_keys - keys)
+                dictionary.update({l: 0 for l in missing_keys})
+
+            d_ = list(map(dictionary.get, str_))
+
+            P_i = [P_i[e] if x > 0.4 * P_i[e] ** 2 * i else P_i[e] * -1 for e, x in enumerate(d_)]
+
+            dict_res.update({i: P_i})
+            if stop_when_reached_accuracy:
+                if norm == 'L2':
+                    sample = np.linalg.norm(V - P_i, ord=2)
+                elif norm == 'inf':
+                    sample = np.linalg.norm(V - P_i, ord=np.inf)
+                if sample > delta:
+                    pass
+                else:
+                    break
+
+    else:
+        P = estimate_wald(q_state.measure(n_times=int(N)))
         P_i = np.zeros(d)
         P_i[list(P.keys())] = np.sqrt(list(P.values()))
 
@@ -354,7 +403,7 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
 
         new_quantum_state = QuantumState(registers=registers, amplitudes=amplitudes)
 
-        measure = new_quantum_state.measure(n_times=int(i))
+        measure = new_quantum_state.measure(n_times=int(N))
 
         str_ = [str(ind).zfill(digits) for ind in index]
         dictionary = dict(Counter(measure))
@@ -367,18 +416,10 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
 
         d_ = list(map(dictionary.get, str_))
 
-        P_i = [P_i[e] if x > 0.4 * P_i[e] ** 2 * i else P_i[e] * -1 for e, x in enumerate(d_)]
+        P_i = [P_i[e] if x > 0.4 * P_i[e] ** 2 * N else P_i[e] * -1 for e, x in enumerate(d_)]
 
-        dict_res.update({i: P_i})
-        if stop_when_reached_accuracy:
-            if norm == 'L2':
-                sample = np.linalg.norm(V - P_i, ord=2)
-            elif norm == 'inf':
-                sample = np.linalg.norm(V - P_i, ord=np.inf)
-            if sample > delta:
-                pass
-            else:
-                break
+        dict_res.update({N: P_i})
+
     return dict_res
 
 
@@ -461,7 +502,6 @@ def amplitude_estimation(theta, epsilon=0.01, M=None, nqubit=False, plot_distrib
         n_qubits = np.ceil(np.log2(M))
         # M = int(2 ** n_qubits)  # If M is a power of 2. In Mosca book they said this.
     else:
-        # assert math.ceil(np.log2(M)) == math.floor(np.log2(M)), "Invalid M, it has to be a power of 2 value."
         n_qubits = np.ceil(np.log2(M))
 
         warnings.warn(
@@ -599,9 +639,6 @@ def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distr
         omega_tilde: float value.
             Estimate of the true omega value.
 
-        k_est: int value.
-            Int value such that k_est/2^m is the closest estimate value to the true omega.
-
         Notes
         -----
         This method performs the phase estimation routine following the approach described in "An Introduction
@@ -636,7 +673,6 @@ def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distr
             p.append(1)
 
     # sum_at_one = np.sum(p)
-    # omega_tilde = omega_k[p.index(max(p))]
     omega_tilde = random.choices(omega_k, weights=p, k=1)[0]
 
     k_est = omega_tilde * M
@@ -711,6 +747,58 @@ def ipe(x, y, epsilon, Q=1):
     a_tilde = np.median(a_tilde_list)
     s = (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2) * (1 - 2 * a_tilde) / 2
 
-    assert np.abs(s - np.inner(x, y)) <= max(epsilon, epsilon * np.abs(np.inner(x, y)))
+    # assert np.abs(s - np.inner(x, y)) <= max(epsilon, epsilon * np.abs(np.inner(x, y)))
 
     return s
+
+
+def consistent_phase_estimation(epsilon, delta, omega, n=None):
+    """Official version of the Consistent Phase Estimation routine.
+
+    Parameters
+    ----------
+    epsilon: float value.
+        Probability error that you want to have.
+
+    delta: float value.
+        The accuracy value that you want to have in your estimations.
+
+    omega: float value.
+        Value that you want to estimate. It must be a value in the range of [0,1).
+
+    n: int value, default=None.
+        Number of qubits that you want to use in the routine. If None, this value is computed using the accuracy value
+        passed.
+
+    Returns
+    -------
+    estimate: float value.
+        Estimate of the omega value.
+
+    Notes
+    -----
+    This method performs the Consistent Phase Estimation as described in the "Inverting Well Conditioned Matrices in
+    Quantum Logspace" paper. Implicitly it uses normal phase estimation routine :mod:`sklearn.QuantumUtility.Utility.phase_estimation`.
+    It is useful because different from the normal phase estimation, this is consistent in the sense that it return almost
+    always the same result.
+    """
+    if n == None:
+        n = int(np.ceil(np.log2(1 / delta)))
+    C = epsilon / n
+    delta_prime = (delta * C) / 2
+    L = np.floor(2 / C)
+    # shift = random.randint(1, L)
+    shift = int(L / 2) + 1
+    intervals = np.arange(-1 - shift * delta_prime, 1 + delta - shift * delta_prime, delta)
+    intervals = np.append(intervals, 1 + delta - shift * delta_prime)
+    pe_estimate = phase_estimation(omega=omega, epsilon=delta_prime, success_prob='QAE')
+    index = bisect(intervals, pe_estimate)
+    section = (intervals[(index - 1)], intervals[(index)])
+    estimate = np.mean(section)
+
+    if estimate < 0:
+        estimate = 0
+
+    print('true_value:', omega, 'pe_estimate:', pe_estimate, 'consistent_pe_estimate:', estimate)
+    # assert estimate >= section[0] + delta_prime and estimate < section[1] - delta_prime
+    return estimate
