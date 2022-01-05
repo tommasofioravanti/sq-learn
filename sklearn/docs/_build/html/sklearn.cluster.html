@@ -90,6 +90,7 @@
 <li class="toctree-l3 current"><a class="reference internal" href="sklearn.html#subpackages">Subpackages</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">sklearn.cluster.Dmeans package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sklearn.decomposition.html">sklearn.decomposition.qPCA package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sklearn.QuantumUtility.html">sklearn.QuantumUtility package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="sklearn.html#module-sklearn">Module contents</a></li>
@@ -244,10 +245,12 @@ intensive due to the allocation of an extra array of shape
 (n_samples, n_clusters).</p></li>
 <li><p><strong>delta</strong> (<em>float</em><em>, </em><em>default=None</em>) – The error that you want to insert in the labels estimation and in the centroid updates.</p></li>
 <li><p><strong>squared_distances</strong> (<em>int value</em><em>, </em><em>default=1</em>) – If 1, the squared distances of each sample to its closest center are computed.
-Otherwise simple distances are computed.</p></li>
+Otherwise simple distances are computed. Be careful that for the quantum simulation, it is assumed to work
+with squared distances (for more details see the paper “q-means: A quantum algorithm for unsupervised
+machine learning”).</p></li>
 <li><p><strong>intermediate_error</strong> (<em>bool</em><em>, </em><em>default=None.</em>) – True to add delta/2 error in the centroid update step. If false the centroid estimation is done without adding
 any error. Set it to false if you want to reduce the execution time of the algorithm.</p></li>
-<li><p><strong>true_tomography</strong> (<em>bool</em><em>, </em><em>default=True.</em>) – True if you want to estimate the labels and the centroids update using the real tomography, otherwise
+<li><p><strong>true_tomography</strong> (<em>bool</em><em>, </em><em>default=True.</em>) – True if you want to estimate the centroids update using the real tomography, otherwise
 Truncated Gaussian Noise approximation is used.</p></li>
 <li><p><strong>stop_when_reached_accuracy</strong> – When True it stops the tomography when the L2-norm of the difference between the true and the estimated vector
 is less or equal than the tomography error, otherwise it computes the tomography using all the N measures of the
@@ -304,6 +307,8 @@ consistent with <code class="docutils literal notranslate"><span class="pre">lab
 <p class="rubric">Notes</p>
 <p>The k-means problem is solved using either Lloyd’s or Elkan’s algorithm.
 The d-means problem is solved using only Lloyd’s algorithm.</p>
+<p>Note that if the model is fitted with an error parameter delta equal to 0, all the procedure is equivalent to
+k-means algorithm.</p>
 <p>The average complexity is given by O(k n T), where n is the number of
 samples and T is the number of iteration.</p>
 <p>The worst case complexity is given by O(n^(k+2/p)) with

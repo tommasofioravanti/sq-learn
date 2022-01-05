@@ -5,15 +5,14 @@ Subpackages
 -----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
 
    sklearn.cluster
    sklearn.decomposition
+   sklearn.QuantumUtility
 
 Module contents
 ---------------
 
 .. automodule:: sklearn
-   :members:
-   :undoc-members:
-   :show-inheritance:
+
