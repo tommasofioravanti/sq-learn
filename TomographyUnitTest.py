@@ -17,7 +17,6 @@ v_sparse50 = np.load('sparse_arr_50.npy')
 list_ = [v_exp, v_uni, v_sparse20, v_sparse50]
 delta = 0.3
 
-
 # MAKE TOMOGRAPHY
 
 def decreasing_error_plot(vector_list, delta, norm='L2'):
@@ -37,7 +36,7 @@ def decreasing_error_plot(vector_list, delta, norm='L2'):
         if np.linalg.norm(vector) != 0.999 or np.linalg.norm(vector) != 1.0:
             vector = vector / np.linalg.norm(vector, ord=2)
         dictionary_estimates = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False,
-                                               sparsity_percentage=True, norm=norm)
+                                               norm=norm)
         measure = list(dictionary_estimates.keys())
         samples = list(dictionary_estimates.values())
         if norm == 'L2':
@@ -78,8 +77,7 @@ def make_real_predicted_comparison(vector, delta, norm='L2'):
 
     if norm != 'all':
 
-        dictionary_estimates = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False,
-                                               sparsity_percentage=True, norm=norm)
+        dictionary_estimates = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False, norm=norm)
         measure = list(dictionary_estimates.keys())
         samples = list(dictionary_estimates.values())
         if norm == 'L2':
@@ -112,9 +110,9 @@ def make_real_predicted_comparison(vector, delta, norm='L2'):
         plt.show()
     else:
         dictionary_estimatesL2 = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False,
-                                                 sparsity_percentage=True, norm='L2')
+                                                 norm='L2')
         dictionary_estimatesLinf = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False,
-                                                   sparsity_percentage=True, norm='inf')
+                                                   norm='inf')
         measureL2 = list(dictionary_estimatesL2.keys())
         measureLinf = list(dictionary_estimatesLinf.keys())
         samplesL2 = list(dictionary_estimatesL2.values())
@@ -158,13 +156,13 @@ def make_real_predicted_comparison(vector, delta, norm='L2'):
         plt.show()
 
 
-def found_distribution(vector, n_measurements, delta, distribution_fitter=False, distributions=None, norm='L2'):
+def found_distribution(vector, n_measurements, delta, N=None, distribution_fitter=False, distributions=None, norm='L2'):
     samples = []
     if np.linalg.norm(vector) != 0.999 or np.linalg.norm(vector) != 1.0:
         vector = vector / np.linalg.norm(vector, ord=2)
 
     for i in range(n_measurements):
-        B = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False, norm=norm)
+        B = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False, norm=norm, N=N)
         print(i)
         # Append the Frobenius norm of A-B to the samples
         B = np.array(list(B.values())[-1])
@@ -184,6 +182,14 @@ def found_distribution(vector, n_measurements, delta, distribution_fitter=False,
         print(f.get_best(method='sumsquare_error'))
     plt.show()
 
+    return samples
+
 # decreasing_error_plot(list_, delta,norm = 'inf')
 # make_real_predicted_comparison(v_uni, delta=0.3, norm='inf')
 # found_distribution(vector=v_uni, n_measurements=1000, delta=.9,distribution_fitter=True)
+# DELTA = 0.3
+# delta=0.3
+# found_distribution(vector=v_uni, n_measurements=1000, delta=delta)
+#v_uni_scaled=v_uni*10
+# Theory vs Real for uniform_vector
+#make_real_predicted_comparison(v_uni, delta=0.01)
