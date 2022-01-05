@@ -11,13 +11,20 @@
 #          Robert Layton <robertlayton@gmail.com>
 # License: BSD 3 clause
 import itertools
+import warnings
+
+import numpy as np
 import scipy.sparse as sp
 import scipy as sc
+import random
+
+random.seed(1234)
+import time
 from threadpoolctl import threadpool_limits
 from threadpoolctl import threadpool_info
 
+from ..QuantumUtility.Utility import *
 import random
-import multiprocessing
 
 # random.seed(1234)
 from ..base import BaseEstimator, ClusterMixin, TransformerMixin
@@ -612,9 +619,7 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, true_
     # nested parallelism (i.e. BLAS) to avoid oversubsciption.
     counter_iter = 0
     with threadpool_limits(limits=1, user_api="blas"):
-        #pool = multiprocessing.Pool()
         for i in range(max_iter):
-            print(i)
 
             counter_iter = counter_iter + 1
 
@@ -648,15 +653,14 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, true_
                 best_inertia = inertia
 
             center_shift_total = squared_norm(centers_old - centers)
-            # print(center_shift_total, tol)
+            print(center_shift_total, tol)
             if center_shift_total <= tol:
                 if verbose:
                     print("Converged at iteration %d: "
                           "center shift %e within tolerance %e"
                           % (i, center_shift_total, tol))
                 break
-        #pool.close()
-        #pool.join()
+
         if center_shift_total > 0:
             # rerun E-step in case of non-convergence so that predicted labels
             # match cluster centers
@@ -727,43 +731,50 @@ def _labels_inertia(X, centers, distances, delta, squared_distances, n_threads=N
     return labels, distances, inertia
 
 
-'''def wrapper(sample):
-    s = ipe(sample[0], sample[1], 0.5/ 2, 5)
-    return s'''
-
 def labels_estimation(X, centers, delta, squared_distances):
     """Compute label estimation assignment and inertia for a dense array
     Return the inertia (sum of squared distances to the centers).
     """
-
     distances = sc.spatial.distance.cdist(X, centers, "euclidean")
-    distances_shape = distances.shape
+
+    def delta_means1(distances_from_centroids, delta):
+
+        B = distances_from_centroids.tolist()
+        mins = np.min(B, axis=1)
+        mins_ = [select_labels(np.where(i <= mins[e] + delta)[0]) for e, i in enumerate(B)]
+
+        return mins_, mins, mins
 
     if squared_distances == 1:
-        distances = np.square(distances)
-        if delta > 0:
-            samples_center_combination = list(itertools.product(X, centers))
+        # distances = np.square(distances)
 
-            squared_X_norms = row_norms(X, squared=True)
-            squared_Y_norms = row_norms(centers, squared=True)
-            samples_center_squared_norm_combination = list(itertools.product(squared_X_norms, squared_Y_norms))
+        samples_center_combination = list(itertools.product(X, centers))
 
-            #inner_prod_est = list(pool.imap(wrapper, samples_center_combination,multiprocessing.cpu_count()))
-            inner_prod_est = [ipe(i[0], i[1], delta / 2, 5) for i in samples_center_combination]
+        squared_X_norms = row_norms(X, squared=True)
+        squared_Y_norms = row_norms(centers, squared=True)
+        samples_center_squared_norm_combination = list(itertools.product(squared_X_norms, squared_Y_norms))
 
-            distances = np.array([
-                np.linalg.norm(samples_center_squared_norm_combination[j][0]) + np.linalg.norm(
-                    samples_center_squared_norm_combination[j][1])
-                - 2 * inner_prod_est[j]
-                for j in range(len(samples_center_squared_norm_combination))]).reshape(distances_shape)
+        inner_prod_est = [ipe(i[0], i[1], delta / 2, 5) for i in samples_center_combination]
 
-        min = np.min(distances, axis=1)
-        labels = [select_labels(np.where(i <= min[e])[0]) for e, i in enumerate(distances)]
+        distances_squared_est = np.array([
+            np.linalg.norm(samples_center_squared_norm_combination[j][0]) + np.linalg.norm(samples_center_squared_norm_combination[j][1])
+            - 2 * inner_prod_est[j]
+            for j in range(len(samples_center_squared_norm_combination))]).reshape(distances.shape)
+
+        min = np.min(distances_squared_est, axis=1)
+        labels = [select_labels(np.where(i <= min[e])[0]) for e, i in enumerate(distances_squared_est)]
         selected_inertias = min
+        # labels, inertias, selected_inertias = delta_means1(distances, delta)
+
+        # results = np.apply_along_axis(delta_means, 1, distances, delta)
+
+    # labels, inertias, selected_inertias = results[:, 0], results[:, 1], results[:, 2]
 
     if squared_distances == 1:
+        # inertia = np.sum(inertias)
         delta_inertia = np.sum(selected_inertias)
     else:  # we are doing inertia on non squared-distances, so we need to take the square..
+        # inertia = np.sum(np.square(inertias))
         delta_inertia = np.sum(np.square(selected_inertias))
 
     return labels, distances, delta_inertia
@@ -949,7 +960,6 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
 
     Attributes
     ----------
-
     cluster_centers_ : ndarray of shape (n_clusters, n_features)
         Coordinates of cluster centers. If the algorithm stops before fully
         converging (see ``tol`` and ``max_iter``), these will not be
@@ -967,12 +977,8 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
 
     Notes
     -----
-
     The k-means problem is solved using either Lloyd's or Elkan's algorithm.
     The d-means problem is solved using only Lloyd's algorithm.
-
-    Note that if the model is fitted with an error parameter delta equal to 0, all the procedure is equivalent to
-    k-means algorithm.
 
     The average complexity is given by O(k n T), where n is the number of
     samples and T is the number of iteration.
@@ -1290,7 +1296,6 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
                 eta=self.eta, intermediate_err=self.intermediate_error,
                 true_tomography=self.true_tomography, stop_when_reached_accuracy=self.stop_when_reached_accuracy)
 
-            # print('labels:', labels, 'inertia:', inertia, 'centers:', centers, 'centers_init:', centers_init)
             # determine if these results are the best so far
             if best_inertia is None or inertia < best_inertia:
                 best_labels = labels
