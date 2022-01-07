@@ -620,6 +620,7 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, true_
     counter_iter = 0
     with threadpool_limits(limits=1, user_api="blas"):
         for i in range(max_iter):
+            print(i)
 
             counter_iter = counter_iter + 1
 
@@ -735,40 +736,29 @@ def labels_estimation(X, centers, delta, squared_distances):
     """Compute label estimation assignment and inertia for a dense array
     Return the inertia (sum of squared distances to the centers).
     """
-    distances = sc.spatial.distance.cdist(X, centers, "euclidean")
+    distances_ = sc.spatial.distance.cdist(X, centers, "euclidean")
+    distances = np.square(distances_)
+    if delta>0:
 
-    def delta_means1(distances_from_centroids, delta):
+        if squared_distances == 1:
 
-        B = distances_from_centroids.tolist()
-        mins = np.min(B, axis=1)
-        mins_ = [select_labels(np.where(i <= mins[e] + delta)[0]) for e, i in enumerate(B)]
+            samples_center_combination = list(itertools.product(X, centers))
 
-        return mins_, mins, mins
+            squared_X_norms = row_norms(X, squared=True)
+            squared_Y_norms = row_norms(centers, squared=True)
+            samples_center_squared_norm_combination = list(itertools.product(squared_X_norms, squared_Y_norms))
+            #inner_prod_est =
+            inner_prod_est = [ipe(i[0], i[1], delta / 2,5) for i in samples_center_combination]
 
-    if squared_distances == 1:
-        # distances = np.square(distances)
+            distances = np.array([
+                np.linalg.norm(samples_center_squared_norm_combination[j][0]) + np.linalg.norm(samples_center_squared_norm_combination[j][1])
+                - 2 * inner_prod_est[j]
+                for j in range(len(samples_center_squared_norm_combination))]).reshape(distances.shape)
 
-        samples_center_combination = list(itertools.product(X, centers))
+    min = np.min(distances, axis=1)
+    labels = [select_labels(np.where(i <= min[e])[0]) for e, i in enumerate(distances)]
+    selected_inertias = min
 
-        squared_X_norms = row_norms(X, squared=True)
-        squared_Y_norms = row_norms(centers, squared=True)
-        samples_center_squared_norm_combination = list(itertools.product(squared_X_norms, squared_Y_norms))
-
-        inner_prod_est = [ipe(i[0], i[1], delta / 2, 5) for i in samples_center_combination]
-
-        distances_squared_est = np.array([
-            np.linalg.norm(samples_center_squared_norm_combination[j][0]) + np.linalg.norm(samples_center_squared_norm_combination[j][1])
-            - 2 * inner_prod_est[j]
-            for j in range(len(samples_center_squared_norm_combination))]).reshape(distances.shape)
-
-        min = np.min(distances_squared_est, axis=1)
-        labels = [select_labels(np.where(i <= min[e])[0]) for e, i in enumerate(distances_squared_est)]
-        selected_inertias = min
-        # labels, inertias, selected_inertias = delta_means1(distances, delta)
-
-        # results = np.apply_along_axis(delta_means, 1, distances, delta)
-
-    # labels, inertias, selected_inertias = results[:, 0], results[:, 1], results[:, 2]
 
     if squared_distances == 1:
         # inertia = np.sum(inertias)
