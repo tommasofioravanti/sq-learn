@@ -1,4 +1,4 @@
-sklearn package
+qsklearn package
 ===============
 
 Subpackages

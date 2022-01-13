@@ -11,3 +11,4 @@ Welcome to Qsklearn's documentation!
    :caption: Contents:
 
    modules
+.. image:: _templates/Sklearn1.png

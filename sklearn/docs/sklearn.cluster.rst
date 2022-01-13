@@ -1,4 +1,4 @@
-sklearn.cluster.Dmeans package
+qsklearn.cluster.d_means package
 =======================
 
 

@@ -9,7 +9,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sklearn.cluster.Dmeans package &mdash; Qsklearn  documentation</title>
+  <title>qsklearn.cluster.d_means package &mdash; Qsklearn  documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="sklearn.decomposition.qPCA package" href="sklearn.decomposition.html" />
-    <link rel="prev" title="sklearn package" href="sklearn.html" /> 
+    <link rel="next" title="qsklearn.decomposition.q_pca package" href="sklearn.decomposition.html" />
+    <link rel="prev" title="qsklearn package" href="sklearn.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,12 +85,12 @@
             
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">sklearn</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="sklearn.html">sklearn package</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">qsklearn</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="sklearn.html">qsklearn package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="sklearn.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">sklearn.cluster.Dmeans package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="sklearn.decomposition.html">sklearn.decomposition.qPCA package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="sklearn.QuantumUtility.html">sklearn.QuantumUtility package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">qsklearn.cluster.d_means package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sklearn.decomposition.html">qsklearn.decomposition.q_pca package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sklearn.QuantumUtility.html">qsklearn.quantum_utility package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="sklearn.html#module-sklearn">Module contents</a></li>
@@ -143,11 +143,11 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-          <li><a href="modules.html">sklearn</a> &raquo;</li>
+          <li><a href="modules.html">qsklearn</a> &raquo;</li>
         
-          <li><a href="sklearn.html">sklearn package</a> &raquo;</li>
+          <li><a href="sklearn.html">qsklearn package</a> &raquo;</li>
         
-      <li>sklearn.cluster.Dmeans package</li>
+      <li>qsklearn.cluster.d_means package</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -166,15 +166,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="sklearn-cluster-dmeans-package">
-<h1>sklearn.cluster.Dmeans package<a class="headerlink" href="#sklearn-cluster-dmeans-package" title="Permalink to this headline">¶</a></h1>
+  <section id="qsklearn-cluster-d-means-package">
+<h1>qsklearn.cluster.d_means package<a class="headerlink" href="#qsklearn-cluster-d-means-package" title="Permalink to this headline">¶</a></h1>
 <section id="module-sklearn.cluster">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.cluster" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="#module-sklearn.cluster" title="sklearn.cluster"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a> module gathers popular unsupervised clustering
 algorithms.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sklearn.cluster.DMeans_">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.cluster.</span></span><span class="sig-name descname"><span class="pre">DMeans_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'k-means++'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precompute_distances</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squared_distances</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intermediate_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">true_tomography</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_when_reached_accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sklearn.cluster.</span></span><span class="sig-name descname"><span class="pre">DMeans_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'k-means++'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precompute_distances</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squared_distances</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intermediate_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">true_tomography</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_when_reached_accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiprocess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.ClusterMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
 <p>D-Means clustering.</p>
 <p>Read more in the <span class="xref std std-ref">User Guide</span> for the classical counterpart.</p>
@@ -307,8 +307,6 @@ consistent with <code class="docutils literal notranslate"><span class="pre">lab
 <p class="rubric">Notes</p>
 <p>The k-means problem is solved using either Lloyd’s or Elkan’s algorithm.
 The d-means problem is solved using only Lloyd’s algorithm.</p>
-<p>Note that if the model is fitted with an error parameter delta equal to 0, all the procedure is equivalent to
-k-means algorithm.</p>
 <p>The average complexity is given by O(k n T), where n is the number of
 samples and T is the number of iteration.</p>
 <p>The worst case complexity is given by O(n^(k+2/p)) with
@@ -381,49 +379,42 @@ are assigned equal weight.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sklearn.cluster.DMeans_.fit_predict">
 <span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.fit_predict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute cluster centers and predict cluster index for each sample.</p>
-<p>Convenience method; equivalent to calling fit(X) followed by
-predict(X).</p>
+<dd><p>Perform clustering on <cite>X</cite> and returns cluster labels.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – New data to transform.</p></li>
-<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present here for API consistency by convention.</p></li>
-<li><p><strong>sample_weight</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – The weights for each observation in X. If None, all observations
-are assigned equal weight.</p></li>
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Input data.</p></li>
+<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present for API consistency by convention.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>labels</strong> – Index of the cluster each sample belongs to.</p>
+<dd class="field-even"><p><strong>labels</strong> – Cluster labels.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
+<dd class="field-odd"><p>ndarray of shape (n_samples,), dtype=np.int64</p>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
-<p>This method is implemented only for the classical version of kmeans. To perform the same operation for quantum
-dmeans, you must perform first the fit() operation and then the predict() one.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sklearn.cluster.DMeans_.fit_transform">
 <span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.fit_transform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute clustering and transform X to cluster-distance space.</p>
-<p>Equivalent to fit(X).transform(X), but more efficiently implemented.</p>
+<dd><p>Fit to data, then transform it.</p>
+<p>Fits transformer to <cite>X</cite> and <cite>y</cite> with optional parameters <cite>fit_params</cite>
+and returns a transformed version of <cite>X</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – New data to transform.</p></li>
-<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present here for API consistency by convention.</p></li>
-<li><p><strong>sample_weight</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – The weights for each observation in X. If None, all observations
-are assigned equal weight.</p></li>
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>) or </em><em>(</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>)</em><em>,                 </em><em>default=None</em>) – Target values (None for unsupervised transformations).</p></li>
+<li><p><strong>**fit_params</strong> (<em>dict</em>) – Additional fit parameters.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>X_new</strong> – X transformed in the new space.</p>
+<dd class="field-even"><p><strong>X_new</strong> – Transformed array.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ndarray of shape (n_samples, n_clusters)</p>
+<dd class="field-odd"><p>ndarray array of shape (n_samples, n_features_new)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -455,48 +446,6 @@ Otherwise simple distances are computed.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.score">
-<span class="sig-name descname"><span class="pre">score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.score" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opposite of the value of X on the K-means objective.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – New data.</p></li>
-<li><p><strong>y</strong> (<em>Ignored</em>) – Not used, present here for API consistency by convention.</p></li>
-<li><p><strong>sample_weight</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>)</em><em>, </em><em>default=None</em>) – The weights for each observation in X. If None, all observations
-are assigned equal weight.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>score</strong> – Opposite of the value of X on the K-means objective.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.transform">
-<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.transform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transform X to a cluster-distance space.</p>
-<p>In the new space, each dimension is the distance to the cluster
-centers. Note that even if X is sparse, the array returned by
-<cite>transform</cite> will typically be dense.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>{array-like</em><em>, </em><em>sparse matrix} of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – New data to transform.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>X_new</strong> – X transformed in the new space.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ndarray of shape (n_samples, n_clusters)</p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </section>
@@ -510,10 +459,10 @@ centers. Note that even if X is sparse, the array returned by
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sklearn.decomposition.html" class="btn btn-neutral float-right" title="sklearn.decomposition.qPCA package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sklearn.decomposition.html" class="btn btn-neutral float-right" title="qsklearn.decomposition.q_pca package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sklearn.html" class="btn btn-neutral float-left" title="sklearn package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sklearn.html" class="btn btn-neutral float-left" title="qsklearn package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -522,7 +471,7 @@ centers. Note that even if X is sparse, the array returned by
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2021, Tommaso
+        &copy; Copyright 2021, Tommaso Fioravanti
 
     </p>
   </div>

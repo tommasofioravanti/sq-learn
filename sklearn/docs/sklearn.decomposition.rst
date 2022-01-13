@@ -1,4 +1,4 @@
-sklearn.decomposition.qPCA package
+qsklearn.decomposition.q_pca package
 =============================
 
 

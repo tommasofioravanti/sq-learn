@@ -9,7 +9,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sklearn.decomposition.qPCA package &mdash; Qsklearn  documentation</title>
+  <title>qsklearn.decomposition.q_pca package &mdash; Qsklearn  documentation</title>
   
 
   
@@ -38,8 +38,8 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="sklearn.QuantumUtility package" href="sklearn.QuantumUtility.html" />
-    <link rel="prev" title="sklearn.cluster.Dmeans package" href="sklearn.cluster.html" /> 
+    <link rel="next" title="qsklearn.quantum_utility package" href="sklearn.QuantumUtility.html" />
+    <link rel="prev" title="qsklearn.cluster.d_means package" href="sklearn.cluster.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,12 +85,12 @@
             
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">sklearn</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="sklearn.html">sklearn package</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">qsklearn</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="sklearn.html">qsklearn package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="sklearn.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="sklearn.cluster.html">sklearn.cluster.Dmeans package</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">sklearn.decomposition.qPCA package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="sklearn.QuantumUtility.html">sklearn.QuantumUtility package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sklearn.cluster.html">qsklearn.cluster.d_means package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">qsklearn.decomposition.q_pca package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sklearn.QuantumUtility.html">qsklearn.quantum_utility package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="sklearn.html#module-sklearn">Module contents</a></li>
@@ -143,11 +143,11 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-          <li><a href="modules.html">sklearn</a> &raquo;</li>
+          <li><a href="modules.html">qsklearn</a> &raquo;</li>
         
-          <li><a href="sklearn.html">sklearn package</a> &raquo;</li>
+          <li><a href="sklearn.html">qsklearn package</a> &raquo;</li>
         
-      <li>sklearn.decomposition.qPCA package</li>
+      <li>qsklearn.decomposition.q_pca package</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -166,8 +166,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="sklearn-decomposition-qpca-package">
-<h1>sklearn.decomposition.qPCA package<a class="headerlink" href="#sklearn-decomposition-qpca-package" title="Permalink to this headline">¶</a></h1>
+  <section id="qsklearn-decomposition-q-pca-package">
+<h1>qsklearn.decomposition.q_pca package<a class="headerlink" href="#qsklearn-decomposition-q-pca-package" title="Permalink to this headline">¶</a></h1>
 <section id="module-sklearn.decomposition">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.decomposition" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="#module-sklearn.decomposition" title="sklearn.decomposition"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.decomposition</span></code></a> module includes matrix decomposition
@@ -492,7 +492,7 @@ singular values and fator score with the correct ones.</p></li>
 <li><p><strong>true_tomography</strong> (<em>bool</em><em>, </em><em>default=True.</em>) – If true means that the quantum estimations are are done with real tomography,
 otherwise the estimations are approximated with a Truncated Gaussian Noise.</p></li>
 <li><p><strong>fs_ratio_estimation</strong> (<em>bool</em><em>, </em><em>default=False.</em>) – If true, it estimates the factor score ratio, starting from a first estimation of the singular values using
-phase estimation. The error bounds are those relative to Theorem 7 of QADRA.</p></li>
+phase estimation. The error bounds are those relative to Theorem 8 of QADRA.</p></li>
 <li><p><strong>gamma</strong> (<em>float</em><em>, </em><em>default=0.1.</em>) – Used in the factor score estimation, to select the singular values whose respective factor score ratio are
 greater than this value.</p></li>
 </ul>
@@ -509,25 +509,24 @@ greater than this value.</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="sklearn.decomposition.qPCA.fit_transform">
 <span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantum_retained_variance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_estimate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_computed_qcomponents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_theta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ret_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimate_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.decomposition.qPCA.fit_transform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fit the model with X and apply the dimensionality reduction on X.</p>
+<dd><p>Fit to data, then transform it.</p>
+<p>Fits transformer to <cite>X</cite> and <cite>y</cite> with optional parameters <cite>fit_params</cite>
+and returns a transformed version of <cite>X</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Training data, where n_samples is the number of samples
-and n_features is the number of features.</p></li>
-<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
+<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Input samples.</p></li>
+<li><p><strong>y</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>,</em><em>) or </em><em>(</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>)</em><em>,                 </em><em>default=None</em>) – Target values (None for unsupervised transformations).</p></li>
+<li><p><strong>**fit_params</strong> (<em>dict</em>) – Additional fit parameters.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>X_new</strong> – Transformed values.</p>
+<dd class="field-even"><p><strong>X_new</strong> – Transformed array.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ndarray of shape (n_samples, n_components)</p>
+<dd class="field-odd"><p>ndarray array of shape (n_samples, n_features_new)</p>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
-<p>This method returns a Fortran-ordered array. To convert it to a
-C-ordered array, use ‘np.ascontiguousarray’.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -553,49 +552,6 @@ and n_components is the number of components.</p></li>
 <p class="rubric">Notes</p>
 <p>If whitening is enabled, inverse_transform will compute the
 exact inverse operation, which includes reversing whitening.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.score">
-<span class="sig-name descname"><span class="pre">score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.decomposition.qPCA.score" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the average log-likelihood of all samples.</p>
-<p>See. “Pattern Recognition and Machine Learning”
-by C. Bishop, 12.2.1 p. 574
-or <a class="reference external" href="http://www.miketipping.com/papers/met-mppca.pdf">http://www.miketipping.com/papers/met-mppca.pdf</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The data.</p></li>
-<li><p><strong>y</strong> (<em>Ignored</em>) – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>ll</strong> – Average log-likelihood of the samples under the current model.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sklearn.decomposition.qPCA.score_samples">
-<span class="sig-name descname"><span class="pre">score_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.decomposition.qPCA.score_samples" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the log-likelihood of each sample.</p>
-<p>See. “Pattern Recognition and Machine Learning”
-by C. Bishop, 12.2.1 p. 574
-or <a class="reference external" href="http://www.miketipping.com/papers/met-mppca.pdf">http://www.miketipping.com/papers/met-mppca.pdf</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>array-like of shape</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – The data.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>ll</strong> – Log-likelihood of each sample under the current model.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ndarray of shape (n_samples,)</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -651,10 +607,10 @@ otherwise return a dictionary with all the result based on what you want to esti
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sklearn.QuantumUtility.html" class="btn btn-neutral float-right" title="sklearn.QuantumUtility package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sklearn.QuantumUtility.html" class="btn btn-neutral float-right" title="qsklearn.quantum_utility package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="sklearn.cluster.html" class="btn btn-neutral float-left" title="sklearn.cluster.Dmeans package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sklearn.cluster.html" class="btn btn-neutral float-left" title="qsklearn.cluster.d_means package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -663,7 +619,7 @@ otherwise return a dictionary with all the result based on what you want to esti
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2021, Tommaso
+        &copy; Copyright 2021, Tommaso Fioravanti
 
     </p>
   </div>
