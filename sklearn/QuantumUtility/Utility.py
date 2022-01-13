@@ -25,7 +25,17 @@ import os
 # random.seed(a=31337)
 
 class QuantumState(object):
-    """This class simulates a simple Quantum Register"""
+    """This class simulates a simple Quantum Register
+
+    Parameters
+    ----------
+
+    registers: list, ndarray.
+        List of values that represents the superposition of the states of the quantum state.
+
+    amplitudes: list, ndarray.
+        List of values that represents the amplitudes of each register.
+    """
 
     def __init__(self, registers, amplitudes):
         super(QuantumState, self).__init__()
@@ -121,8 +131,10 @@ def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, 
 
     norm: string value, default='L2'
         If true_tomography is True:
-            'L2': L2-tomography is computed
-            'inf':L-inf tomography is computed
+            'L2':
+                L2-tomography is computed
+            'inf':
+                L-inf tomography is computed
 
     Returns
     -------
@@ -390,7 +402,9 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
     else:
         P = estimate_wald(q_state.measure(n_times=int(N)))
         P_i = np.zeros(d)
+        # indexes = [list(q_state.registers).index(key) for key in list(P.keys())]
         P_i[list(P.keys())] = np.sqrt(list(P.values()))
+        # P_i[indexes] = np.sqrt(list(P.values()))
 
         # Part2 of algorithm 4.1
         max_index = max(index)
@@ -605,7 +619,7 @@ def unwrap_phase_est_arguments(argument, type='sv'):
         return math.sin(argument * np.pi) ** 2
 
 
-def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distribution=False, nqubit=False):
+def phase_estimation(omega, m=None, epsilon=None, delta=0.1, plot_distribution=False, nqubit=False):
     """ Official version of the phase estimation function.
 
         Parameters
@@ -623,13 +637,8 @@ def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distr
             If True, the routine returns the estimation of omega, the k_est and also the number of qubits to represent
             an estimate with the specified precision and the parameter M.
 
-        success_prob: string value, default='QPE'.
-            If 'QPE':
-                the m value is computed (with epsilon parameter) such that the absolute value of the difference
-                between the estimated omega and the true one is less that 1/2^(n+1) with probability at least of 4/np.pi^2.
-            If 'QAE':
-                m is computed such that the absolute value of the difference between the estimated omega and the
-                true one is less that 1/2^(n) with probability at least of 8/np.pi^2.
+        delta: float value, default=0.1.
+            It represent the probability of success of the routine.
 
         plot_distribution: bool value, default=False.
             If True, a plot of the probability distribution for the output of phase estimation is done.
@@ -653,12 +662,9 @@ def phase_estimation(omega, m=None, epsilon=None, success_prob='QPE', plot_distr
                       " used, but you are already specifying it with the m parameter.")
     if epsilon != None:
         warnings.warn('Attention! The m value is computed using the epsilon parameter passed.')
-        if success_prob == 'QPE':
-            # probability of success of 4/np.pi**2
-            m = int(np.ceil(np.log2(1 / epsilon) - 1))
-        else:
-            # probability of success 8/pi**2
-            m = int(np.ceil(np.log2(1 / epsilon)))
+        # From Nielsen and Chuang (eq. 5.35).
+        m = int(np.ceil(np.log2(1 / epsilon)) + np.ceil(np.log2(2 + 1 / (2 * delta))))
+
     p = []
     omega_k = []
     M = 2 ** m  # in P.E., M is fixed in this way
@@ -714,10 +720,10 @@ def ipe(x, y, epsilon, Q=1):
 
     Parameters
     ----------
-    x: ndarray.
+    x: ndarray of shape (n,).
         One of the two vector needed to compute the inner product.
 
-    y: ndarray.
+    y: ndarray of shape (n,).
         The second vector needed to compute the inner product.
 
     epsilon: float value, default=None.
@@ -735,20 +741,19 @@ def ipe(x, y, epsilon, Q=1):
     -----
     This method performs the Robust Inner Product Estimation as described in the supplemental material of
     "Quantum algorithms for feedforward neural networks" paper. Implicitly it uses amplitude estimation routine
-     :mod:`sklearn.QuantumUtility.Utility.amplitude_estimation` and if the number of iteration Q are >1, implicitly it
-     uses also median evaluation to boost the amplitude estimation output.
+    :mod:`sklearn.QuantumUtility.Utility.amplitude_estimation` and if the number of iteration Q are >1, implicitly it
+    uses also median evaluation to boost the amplitude estimation output.
     """
     a = (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2 - 2 * np.inner(x, y)) / (2 * (
             np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2))
 
     epsilon_a = epsilon * max(1, np.abs(np.inner(x, y))) / (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2)
-
+    if math.isclose(a, 0.0, abs_tol=1e-15):
+        a = 0
     a_tilde_list = [amplitude_estimation(theta=a, epsilon=epsilon_a) for _ in range(Q)]
     a_tilde = np.median(a_tilde_list)
     s = (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2) * (1 - 2 * a_tilde) / 2
-
     # assert np.abs(s - np.inner(x, y)) <= max(epsilon, epsilon * np.abs(np.inner(x, y)))
-
     return s
 
 
@@ -758,10 +763,10 @@ def consistent_phase_estimation(epsilon, delta, omega, n=None):
     Parameters
     ----------
     epsilon: float value.
-        Probability error that you want to have.
+        The accuracy value that you want to have in your estimations.
 
     delta: float value.
-        The accuracy value that you want to have in your estimations.
+        Probability error that you want to have.
 
     omega: float value.
         Value that you want to estimate. It must be a value in the range of [0,1).
@@ -783,15 +788,15 @@ def consistent_phase_estimation(epsilon, delta, omega, n=None):
     always the same result.
     """
     if n == None:
-        n = int(np.ceil(np.log2(1 / delta)))
-    C = epsilon / n
-    delta_prime = (delta * C) / 2
+        n = int(np.ceil(np.log2(1 / epsilon)) + np.ceil(np.log2(2 + 1 / (2 * delta))))
+    C = delta / n
+    delta_prime = (epsilon * C) / 2
     L = np.floor(2 / C)
     # shift = random.randint(1, L)
     shift = int(L / 2) + 1
-    intervals = np.arange(-1 - shift * delta_prime, 1 + delta - shift * delta_prime, delta)
-    intervals = np.append(intervals, 1 + delta - shift * delta_prime)
-    pe_estimate = phase_estimation(omega=omega, epsilon=delta_prime, success_prob='QAE')
+    intervals = np.arange(-1 - shift * delta_prime, 1 + epsilon - shift * delta_prime, epsilon)
+    intervals = np.append(intervals, 1 + epsilon - shift * delta_prime)
+    pe_estimate = phase_estimation(omega=omega, epsilon=delta_prime)
     index = bisect(intervals, pe_estimate)
     section = (intervals[(index - 1)], intervals[(index)])
     estimate = np.mean(section)
@@ -799,6 +804,5 @@ def consistent_phase_estimation(epsilon, delta, omega, n=None):
     if estimate < 0:
         estimate = 0
 
-    print('true_value:', omega, 'pe_estimate:', pe_estimate, 'consistent_pe_estimate:', estimate)
-    # assert estimate >= section[0] + delta_prime and estimate < section[1] - delta_prime
+    # print('true_value:', omega, 'pe_estimate:', pe_estimate, 'consistent_pe_estimate:', estimate)
     return estimate
