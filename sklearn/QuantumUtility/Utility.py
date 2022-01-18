@@ -51,7 +51,6 @@ class QuantumState(object):
         assert (abs(sum(self.probabilities) - 1) < 0.0000000001)
 
     def measure(self, n_times=1):
-        # TODO: evaluate if there is benefits to move to scipy sampling rountine
         # return random.choices(self.registers, weights=self.probabilities, k=n_times)
         LocalProcRandGen = np.random.RandomState()
         return LocalProcRandGen.choice(self.registers, p=self.probabilities, size=n_times)
@@ -100,7 +99,7 @@ def make_gaussian_est(vec, noise):
     noise_per_component = noise / np.sqrt(len(vec))
     if noise_per_component != 0:
         errors = truncnorm.rvs(-noise_per_component, noise_per_component, size=len(vec))
-        print('noise_per_comp:', noise_per_component, 'errors:', errors)
+        #print('noise_per_comp:', noise_per_component, 'errors:', errors)
         somma = lambda x, y: x + y
         # new_vec = np.array([vec[i] + errors[i] for i in range(len(vec))])
         new_vec = np.apply_along_axis(somma, 0, vec, errors)
@@ -668,6 +667,8 @@ def phase_estimation(omega, m=None, epsilon=None, delta=0.1, plot_distribution=F
     p = []
     omega_k = []
     M = 2 ** m  # in P.E., M is fixed in this way
+    if omega == 1:
+        return (M - 1) / M
     for k in range(M):
         omega_est = k / M
         omega_k.append(omega_est)
@@ -798,7 +799,7 @@ def consistent_phase_estimation(epsilon, delta, omega, n=None):
     intervals = np.append(intervals, 1 + epsilon - shift * delta_prime)
     pe_estimate = phase_estimation(omega=omega, epsilon=delta_prime)
     index = bisect(intervals, pe_estimate)
-    section = (intervals[(index - 1)], intervals[(index)])
+    section = (intervals[(index - 1)], intervals[index])
     estimate = np.mean(section)
 
     if estimate < 0:
