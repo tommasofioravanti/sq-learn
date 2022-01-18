@@ -11,6 +11,7 @@
 #          Robert Layton <robertlayton@gmail.com>
 # License: BSD 3 clause
 import itertools
+import multiprocessing
 import warnings
 
 import numpy as np
@@ -534,8 +535,7 @@ def _kmeans_single_elkan(X, sample_weight, centers_init, max_iter=300,
 
 
 def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, true_tomography, stop_when_reached_accuracy,
-                         max_iter=300,
-                         verbose=False, tol=1e-4, delta=None, eta=None, squared_distances=1):
+                         pool, true_distance_estimate, max_iter=300, verbose=False, tol=1e-4, delta=None):
     """A single run of d-means lloyd, assumes preparation completed prior.
 
     Parameters
@@ -620,15 +620,13 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, true_
     counter_iter = 0
     with threadpool_limits(limits=1, user_api="blas"):
         for i in range(max_iter):
-            print(i)
 
             counter_iter = counter_iter + 1
 
             centers_old = centers.copy()
 
-            labels, distance, inertia = _labels_inertia(X, centers,
-                                                        distances=distances, delta=delta,
-                                                        squared_distances=squared_distances)
+            labels, distance, inertia = _labels_inertia(X, centers,distances=distances, delta=delta,pool=pool,
+                                                        true_distance_estimate=true_distance_estimate)
 
             labels = [int(lb) for lb in labels]
 
@@ -667,7 +665,7 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, true_
             # match cluster centers
             best_labels, distances, best_inertia = \
                 _labels_inertia(X, best_centers,
-                                distances=distances, delta=delta, squared_distances=squared_distances)
+                                distances=distances, delta=delta, pool=pool,true_distance_estimate=true_distance_estimate)
         if verbose:
             if counter_iter == max_iter:
                 print("Reached {} iterations of d-means".format(counter_iter))
@@ -675,7 +673,7 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, true_
         return best_labels, best_inertia, best_centers, i + 1
 
 
-def _labels_inertia(X, centers, distances, delta, squared_distances, n_threads=None):
+def _labels_inertia(X, centers, distances, delta, pool, true_distance_estimate,n_threads=None):
     """E step of the D-means EM algorithm.
 
     Compute the labels and the inertia of the given samples and centers.
@@ -692,10 +690,6 @@ def _labels_inertia(X, centers, distances, delta, squared_distances, n_threads=N
 
     delta : float, default=None
         The error that you want to insert in the labels estimation and in the centroid updates.
-
-    squared_distances : int value, default=1
-            If 1, the squared distances of each sample to its closest center are computed.
-            Otherwise simple distances are computed.
 
     n_threads : int, default=None
         The number of OpenMP threads to use for the computation. Parallelism is
@@ -727,31 +721,52 @@ def _labels_inertia(X, centers, distances, delta, squared_distances, n_threads=N
         # _inertia = _inertia_dense
 
         labels, distances, inertia = labels_estimation(X, centers,
-                                                       delta, squared_distances)
+                                                       delta, pool, true_distance_estimate)
 
     return labels, distances, inertia
 
 
-def labels_estimation(X, centers, delta, squared_distances):
+def wrapper(sample):
+    s = ipe(x=sample[0], y=sample[1], epsilon=sample[2], Q=sample[3])
+    return s
+
+
+def labels_estimation(X, centers, delta, pool, true_distance_estimate):
     """Compute label estimation assignment and inertia for a dense array
     Return the inertia (sum of squared distances to the centers).
     """
     distances_ = sc.spatial.distance.cdist(X, centers, "euclidean")
     distances = np.square(distances_)
-    if delta>0:
+    if delta > 0:
 
-        if squared_distances == 1:
+        if not true_distance_estimate:
 
-            samples_center_combination = list(itertools.product(X, centers))
+            def delta_means1(distances_from_centroids, delta):
 
+                B = distances_from_centroids.tolist()
+                mins = np.min(B, axis=1)
+                mins_ = [select_labels(np.where(i <= mins[e] + delta)[0]) for e, i in enumerate(B)]
+
+                return mins_, mins, mins
+
+            labels, inertias, selected_inertias = delta_means1(distances, delta)
+            return labels, distances,np.sum(selected_inertias)
+        else:
+            samples_center_combination = list(itertools.product(X, centers, [delta / 2], [5]))
             squared_X_norms = row_norms(X, squared=True)
             squared_Y_norms = row_norms(centers, squared=True)
             samples_center_squared_norm_combination = list(itertools.product(squared_X_norms, squared_Y_norms))
-            #inner_prod_est =
-            inner_prod_est = [ipe(i[0], i[1], delta / 2,5) for i in samples_center_combination]
+            # inner_prod_est = list(pool.imap(wrapper, samples_center_combination))
+            # print(len(inner_prod_est))
+            if pool == None:
+                # inner_prod_est = list(map(wrapper, samples_center_combination))
+                inner_prod_est = [ipe(i[0], i[1], i[2], i[3]) for i in samples_center_combination]
+            else:
+                inner_prod_est = list(pool.map(wrapper, samples_center_combination))
 
             distances = np.array([
-                np.linalg.norm(samples_center_squared_norm_combination[j][0]) + np.linalg.norm(samples_center_squared_norm_combination[j][1])
+                np.linalg.norm(samples_center_squared_norm_combination[j][0]) + np.linalg.norm(
+                    samples_center_squared_norm_combination[j][1])
                 - 2 * inner_prod_est[j]
                 for j in range(len(samples_center_squared_norm_combination))]).reshape(distances.shape)
 
@@ -759,13 +774,7 @@ def labels_estimation(X, centers, delta, squared_distances):
     labels = [select_labels(np.where(i <= min[e])[0]) for e, i in enumerate(distances)]
     selected_inertias = min
 
-
-    if squared_distances == 1:
-        # inertia = np.sum(inertias)
-        delta_inertia = np.sum(selected_inertias)
-    else:  # we are doing inertia on non squared-distances, so we need to take the square..
-        # inertia = np.sum(np.square(inertias))
-        delta_inertia = np.sum(np.square(selected_inertias))
+    delta_inertia = np.sum(selected_inertias)
 
     return labels, distances, delta_inertia
 
@@ -801,8 +810,8 @@ def _centers_update(X, labels, error, intermediate_error, true_tomography, stop_
     centers : array, shape (n_clusters, n_features)
         The resulting centers
     """
-    ## TODO: add support for CSR input
-    ## TODO : re-add support for weighted delta means
+    # TODO: add support for CSR input
+    # TODO : re-add support for weighted delta means
 
     n_features = X.shape[1]
 
@@ -922,12 +931,6 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
     delta: float, default=None
         The error that you want to insert in the labels estimation and in the centroid updates.
 
-    squared_distances : int value, default=1
-            If 1, the squared distances of each sample to its closest center are computed.
-            Otherwise simple distances are computed. Be careful that for the quantum simulation, it is assumed to work
-            with squared distances (for more details see the paper "q-means: A quantum algorithm for unsupervised
-            machine learning").
-
     intermediate_error: bool, default=None.
         True to add delta/2 error in the centroid update step. If false the centroid estimation is done without adding
         any error. Set it to false if you want to reduce the execution time of the algorithm.
@@ -1018,8 +1021,9 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
     def __init__(self, n_clusters=8, *, init='k-means++', n_init=10,
                  max_iter=300, tol=1e-4, precompute_distances='deprecated',
                  verbose=0, random_state=None, copy_x=True,
-                 n_jobs='deprecated', algorithm='auto', delta=None, squared_distances=1,
-                 intermediate_error=False, true_tomography=True, stop_when_reached_accuracy=True):
+                 n_jobs='deprecated', algorithm='auto', delta=None,
+                 intermediate_error=False, true_tomography=True, stop_when_reached_accuracy=True, multiprocess=False,
+                 true_distance_estimate=True):
 
         self.n_clusters = n_clusters
         self.init = init
@@ -1033,10 +1037,11 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
         self.n_jobs = n_jobs
         self.algorithm = algorithm
         self.delta = delta
-        self.squared_distances = squared_distances
         self.intermediate_error = intermediate_error
         self.true_tomography = true_tomography
         self.stop_when_reached_accuracy = stop_when_reached_accuracy
+        self.multiprocess = multiprocess
+        self.true_distance_estimate = true_distance_estimate
 
     def _check_params(self, X):
         # precompute_distances
@@ -1241,6 +1246,11 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
 
         self.eta = max(np.linalg.norm(X, axis=1) ** 2)
 
+        if self.delta == 0:
+            warnings.warn("Attention! You are running classic version of kmeans!")
+            if self.intermediate_error:
+                raise ValueError("intermediate_error value cannot be True if delta is zero.")
+
         self._check_params(X)
         random_state = check_random_state(self.random_state)
         sample_weight = _check_sample_weight(sample_weight, X, dtype=X.dtype)
@@ -1270,7 +1280,10 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
             kmeans_single = _kmeans_single_elkan
 
         best_inertia = None
-
+        if self.multiprocess:
+            pool = multiprocessing.Pool()
+        else:
+            pool = None
         for i in range(self._n_init):
             # Initialize centers
             centers_init = self._init_centroids(
@@ -1283,8 +1296,9 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
             labels, inertia, centers, n_iter_ = kmeans_single(
                 X, sample_weight, centers_init, max_iter=self.max_iter,
                 verbose=self.verbose, tol=self._tol, delta=self.delta,
-                eta=self.eta, intermediate_err=self.intermediate_error,
-                true_tomography=self.true_tomography, stop_when_reached_accuracy=self.stop_when_reached_accuracy)
+                 intermediate_err=self.intermediate_error,
+                true_tomography=self.true_tomography, stop_when_reached_accuracy=self.stop_when_reached_accuracy,
+                pool=pool, true_distance_estimate=self.true_distance_estimate)
 
             # determine if these results are the best so far
             if best_inertia is None or inertia < best_inertia:
@@ -1313,58 +1327,12 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
         return self
 
     def fit_predict(self, X, y=None, sample_weight=None):
-        """Compute cluster centers and predict cluster index for each sample.
 
-        Convenience method; equivalent to calling fit(X) followed by
-        predict(X).
-
-        Parameters
-        ----------
-        X : {array-like, sparse matrix} of shape (n_samples, n_features)
-            New data to transform.
-
-        y : Ignored
-            Not used, present here for API consistency by convention.
-
-        sample_weight : array-like of shape (n_samples,), default=None
-            The weights for each observation in X. If None, all observations
-            are assigned equal weight.
-
-        Returns
-        -------
-        labels : ndarray of shape (n_samples,)
-            Index of the cluster each sample belongs to.
-
-        Notes
-        -------
-        This method is implemented only for the classical version of kmeans. To perform the same operation for quantum
-        dmeans, you must perform first the fit() operation and then the predict() one.
-        """
         warnings.warn('Attention! This computational path is purely classic.')
         return self.fit(X, sample_weight=sample_weight).labels_
 
     def fit_transform(self, X, y=None, sample_weight=None):
-        """Compute clustering and transform X to cluster-distance space.
 
-        Equivalent to fit(X).transform(X), but more efficiently implemented.
-
-        Parameters
-        ----------
-        X : {array-like, sparse matrix} of shape (n_samples, n_features)
-            New data to transform.
-
-        y : Ignored
-            Not used, present here for API consistency by convention.
-
-        sample_weight : array-like of shape (n_samples,), default=None
-            The weights for each observation in X. If None, all observations
-            are assigned equal weight.
-
-        Returns
-        -------
-        X_new : ndarray of shape (n_samples, n_clusters)
-            X transformed in the new space.
-        """
         # Currently, this just skips a copy of the data if it is not in
         # np.array or CSR format already.
         # XXX This skips _check_test_data, which may change the dtype;
@@ -1373,22 +1341,7 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
         return self.fit(X, sample_weight=sample_weight)._transform(X)
 
     def transform(self, X):
-        """Transform X to a cluster-distance space.
 
-        In the new space, each dimension is the distance to the cluster
-        centers. Note that even if X is sparse, the array returned by
-        `transform` will typically be dense.
-
-        Parameters
-        ----------
-        X : {array-like, sparse matrix} of shape (n_samples, n_features)
-            New data to transform.
-
-        Returns
-        -------
-        X_new : ndarray of shape (n_samples, n_clusters)
-            X transformed in the new space.
-        """
         warnings.warn("Attention! This computational part is purely classical.")
         check_is_fitted(self)
 
@@ -1399,7 +1352,7 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
         """Guts of transform method; no input validation."""
         return euclidean_distances(X, self.cluster_centers_)
 
-    def predict(self, X, sample_weight=None, delta=None, squared_distances=1):
+    def predict(self, X, sample_weight=None, delta=None):
         """Predict the closest cluster each sample in X belongs to.
 
         In the vector quantization literature, `cluster_centers_` is called
@@ -1418,11 +1371,6 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
         delta : float, default=None
             The error that you want to insert in the labels estimation and in the centroid updates.
 
-        squared_distances : int value, default=1
-            If 1, the squared distances of each sample to its closest center are computed.
-            Otherwise simple distances are computed.
-
-
         Returns
         -------
         labels : ndarray of shape (n_samples,)
@@ -1439,32 +1387,13 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
             delta = 0
 
         labels, distance, inertia = _labels_inertia(X, self.cluster_centers_,
-                                                    distances=distances, delta=delta,
-                                                    squared_distances=squared_distances)
+                                                    distances=distances, delta=delta)
 
         labels = [int(lb) for lb in labels]
         return labels
 
     def score(self, X, y=None, sample_weight=None):
-        """Opposite of the value of X on the K-means objective.
 
-        Parameters
-        ----------
-        X : {array-like, sparse matrix} of shape (n_samples, n_features)
-            New data.
-
-        y : Ignored
-            Not used, present here for API consistency by convention.
-
-        sample_weight : array-like of shape (n_samples,), default=None
-            The weights for each observation in X. If None, all observations
-            are assigned equal weight.
-
-        Returns
-        -------
-        score : float
-            Opposite of the value of X on the K-means objective.
-        """
         check_is_fitted(self)
 
         X = self._check_test_data(X)
