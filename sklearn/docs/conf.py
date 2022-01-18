@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('../../'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Qsklearn'
+project = 'sqlearn'
 copyright = '2021, Tommaso Fioravanti'
 author = 'Tommaso'
 
@@ -46,6 +46,8 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store','**/*tests*']
 #
 #html_theme = 'alabaster'
 html_theme = 'sphinx_rtd_theme'
+
+html_favicon = 'favicon.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

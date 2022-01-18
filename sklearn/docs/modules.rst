@@ -1,4 +1,4 @@
-qsklearn
+sqlearn
 =======
 
 .. toctree::
