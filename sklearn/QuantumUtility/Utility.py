@@ -10,17 +10,13 @@ import re
 import time
 from scipy.stats import truncnorm
 import numpy as np
-import decimal
 from bisect import bisect
-from joblib import Parallel
-import statistics
 import warnings
+#import gc
 
 warnings.simplefilter('always', UserWarning)
 import matplotlib.pyplot as plt
 from multiprocessing import *
-import os
-
 
 # random.seed(a=31337)
 
@@ -99,22 +95,20 @@ def make_gaussian_est(vec, noise):
     noise_per_component = noise / np.sqrt(len(vec))
     if noise_per_component != 0:
         errors = truncnorm.rvs(-noise_per_component, noise_per_component, size=len(vec))
-        #print('noise_per_comp:', noise_per_component, 'errors:', errors)
+        # print('noise_per_comp:', noise_per_component, 'errors:', errors)
         somma = lambda x, y: x + y
         # new_vec = np.array([vec[i] + errors[i] for i in range(len(vec))])
         new_vec = np.apply_along_axis(somma, 0, vec, errors)
     return new_vec
 
 
-def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, N=None, norm='L2'):
+def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, N=None, norm='L2',
+               incremental_measure=True):
     """ Tomography function (real and fake).
 
     Parameters
     ----------
     A: array-like that has to be estimated.
-
-    N: int value, default=None.
-        Number of measures of the quantum state. If None it is computed in the function itself.
 
     noise: float value.
         It represent the error that you want to introduce to estimate the representation of vector V.
@@ -128,12 +122,19 @@ def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, 
         difference between V and its estimation is less or equal then delta. Otherwise
         N measures are done (very memory intensive for large vectors).
 
+    N: int value, default=None.
+        Number of measures of the quantum state. If None it is computed in the function itself.
+
     norm: string value, default='L2'
         If true_tomography is True:
             'L2':
                 L2-tomography is computed
             'inf':
                 L-inf tomography is computed
+
+    incremental_measure: bool, default=True.
+        If True the tomography is computed incrementally up to N measures. If False, the routine is
+        performed once using N measures.
 
     Returns
     -------
@@ -162,12 +163,12 @@ def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, 
         if len(A.shape) == 2:
             A_est = np.array([np.array(list(
                 real_tomography(A[idx], delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy,
-                                N=N, norm=norm).values())[-1])
+                                N=N, norm=norm, incremental_measure=incremental_measure).values())[-1])
                               for idx in range(len(A))])
         else:
             A_est = np.array(
                 list(real_tomography(A, delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy, N=N,
-                                     norm=norm).values())[-1])
+                                     norm=norm, incremental_measure=incremental_measure).values())[-1])
 
     return A_est
 
@@ -183,6 +184,44 @@ def create_rand_vec(n_vec, len_vec, scale=None, type='uniform'):
         v.append(vv)
 
     return v
+
+
+def __mu(p, matrix):
+    def s(p, A):
+        if p == 0:
+            result = np.max([np.count_nonzero(A[i]) for i in range(len(A))])
+        else:
+            result = np.max([np.sum(np.power(abs(A[i]), [p] * len(A[i]))) for i in
+                             range(len(A))])  # np.max([pow(np.linalg.norm(A[i], ord=p), p) for i in range(len(A))])
+        #gc.collect()
+        return result
+
+    s1 = s(2 * p, matrix)
+    s2 = s(2 * (1 - p), matrix.T)
+    mu = np.sqrt(s1 * s2)
+
+    #gc.collect()
+    return mu
+
+
+def linear_search(matrix, start, step):
+    domain = [i for i in np.arange(start, 1.0, step)] + [1]
+    values = [__mu(i, matrix) for i in domain]
+    #domain = domain
+    best_p = domain[values.index(min(values))]
+    return best_p, min(values)
+
+
+def best_mu(matrix, start, step):
+    p, val = linear_search(matrix, start, step)
+    val_list = [val, np.linalg.norm(matrix)]  # , np.linalg.norm(A, ord=np.inf)]
+    index = val_list.index(min(val_list))
+    if index == 0:
+        best_norm = f"p={p}"
+    elif index == 1:
+        best_norm = "Frobenius"
+
+    return best_norm, val_list[index]
 
 
 def L2_tomogrphy_fakeSign(V, N=None, delta=None):
@@ -318,6 +357,12 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
         If True it stops the execution of the tomography when the L2-norm of the
         difference between V and its estimation is less or equal then delta. Otherwise
         N measures are done (very memory intensive for large vectors).
+
+    norm: string, default='L2'.
+        If 'L2':
+            perform L2-norm tomography.
+        If 'inf':
+            perform L-inf tomography.
 
     incremental_measure: bool, default=True.
         If True the tomography is computed incrementally up to N measures. If False, the routine is
@@ -466,15 +511,11 @@ def check_division(v, n_jobs):
     return process_values
 
 
-def AmplitudeAmpDist(w0, w1):
+def amplitude_est_dist(w0, w1):
     c = -np.ceil(w1 - w0)
     f = -np.floor(w1 - w0)
     distance = min(np.abs(c + w1 - w0), np.abs(f + w1 - w0))
     return distance
-
-
-def phase_est_distance(k1, k2):
-    return np.abs(k1 - k2)
 
 
 def amplitude_estimation(theta, epsilon=0.01, M=None, nqubit=False, plot_distribution=False):
@@ -528,7 +569,7 @@ def amplitude_estimation(theta, epsilon=0.01, M=None, nqubit=False, plot_distrib
     for j in range(M):
         theta_est = np.pi * j / M
         theta_j.append(theta_est)
-        distance = AmplitudeAmpDist(theta_est / np.pi, theta_a / np.pi)
+        distance = amplitude_est_dist(theta_est / np.pi, theta_a / np.pi)
         if distance != 0:
             p_aj = np.abs(math.sin(M * distance * np.pi) / (M * math.sin(distance * np.pi))) ** 2
         else:
@@ -804,6 +845,5 @@ def consistent_phase_estimation(epsilon, delta, omega, n=None):
 
     if estimate < 0:
         estimate = 0
-
     # print('true_value:', omega, 'pe_estimate:', pe_estimate, 'consistent_pe_estimate:', estimate)
     return estimate
