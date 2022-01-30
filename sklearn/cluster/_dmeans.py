@@ -13,7 +13,7 @@
 import itertools
 import multiprocessing
 import warnings
-
+import matlab.engine
 import numpy as np
 import scipy.sparse as sp
 import scipy as sc
@@ -23,9 +23,6 @@ random.seed(1234)
 import time
 from threadpoolctl import threadpool_limits
 from threadpoolctl import threadpool_info
-
-from ..QuantumUtility.Utility import *
-import random
 
 # random.seed(1234)
 from ..base import BaseEstimator, ClusterMixin, TransformerMixin
@@ -625,7 +622,7 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, true_
 
             centers_old = centers.copy()
 
-            labels, distance, inertia = _labels_inertia(X, centers,distances=distances, delta=delta,pool=pool,
+            labels, distance, inertia = _labels_inertia(X, centers, distances=distances, delta=delta, pool=pool,
                                                         true_distance_estimate=true_distance_estimate)
 
             labels = [int(lb) for lb in labels]
@@ -665,7 +662,8 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, true_
             # match cluster centers
             best_labels, distances, best_inertia = \
                 _labels_inertia(X, best_centers,
-                                distances=distances, delta=delta, pool=pool,true_distance_estimate=true_distance_estimate)
+                                distances=distances, delta=delta, pool=pool,
+                                true_distance_estimate=true_distance_estimate)
         if verbose:
             if counter_iter == max_iter:
                 print("Reached {} iterations of d-means".format(counter_iter))
@@ -673,7 +671,7 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, true_
         return best_labels, best_inertia, best_centers, i + 1
 
 
-def _labels_inertia(X, centers, distances, delta, pool, true_distance_estimate,n_threads=None):
+def _labels_inertia(X, centers, distances, delta, pool, true_distance_estimate, n_threads=None):
     """E step of the D-means EM algorithm.
 
     Compute the labels and the inertia of the given samples and centers.
@@ -750,7 +748,7 @@ def labels_estimation(X, centers, delta, pool, true_distance_estimate):
                 return mins_, mins, mins
 
             labels, inertias, selected_inertias = delta_means1(distances, delta)
-            return labels, distances,np.sum(selected_inertias)
+            return labels, distances, np.sum(selected_inertias)
         else:
             samples_center_combination = list(itertools.product(X, centers, [delta / 2], [5]))
             squared_X_norms = row_norms(X, squared=True)
@@ -944,12 +942,9 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
         is less or equal than the tomography error, otherwise it computes the tomography using all the N measures of the
         quantum state.
 
-
-        For now "auto" (kept for backward compatibiliy) chooses "elkan" but it
-        might change in the future for a better heuristic.
-
-        .. versionchanged:: 0.18
-            Added Elkan algorithm
+    true_distance_estimate: bool, default=True.
+        If True, the distance estimates are computed using the quantum IPE routine. Otherwise an approximation of this
+        routine is applied.
 
     Attributes
     ----------
@@ -1245,6 +1240,9 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
                                 accept_large_sparse=False)
 
         self.eta = max(np.linalg.norm(X, axis=1) ** 2)
+        best_norm, self.muA = best_mu(X, 0, 0.1)
+        U, S, Vt = np.linalg.svd(X, full_matrices=False)
+        self.condition_number = 1 / min(S)
 
         if self.delta == 0:
             warnings.warn("Attention! You are running classic version of kmeans!")
@@ -1296,7 +1294,7 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
             labels, inertia, centers, n_iter_ = kmeans_single(
                 X, sample_weight, centers_init, max_iter=self.max_iter,
                 verbose=self.verbose, tol=self._tol, delta=self.delta,
-                 intermediate_err=self.intermediate_error,
+                intermediate_err=self.intermediate_error,
                 true_tomography=self.true_tomography, stop_when_reached_accuracy=self.stop_when_reached_accuracy,
                 pool=pool, true_distance_estimate=self.true_distance_estimate)
 
@@ -1410,6 +1408,63 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
                     'zero sample_weight is not equivalent to removing samples',
             },
         }
+
+    def runtime_comparison(self, n_samples, n_features, saveas, well_clusterable='False'):
+        """Function that allows to compare classic vs quantum runtime of the algorithm executed.
+
+        Parameters
+        ----------
+        n_samples: int value.
+            The number of samples that you want to simulate in the runtime measurements.
+
+        n_features: int value.
+            The number of features that you want to simulate in the runtime measurements.
+
+        saveas: string value.
+            Name under which the image will be saved. Specify also the format, otherwise the image will be saved with
+            the .fig MATLAB format.
+
+        Returns
+        -------
+        This functions doesn't return anything, it just save the runtime comparison plot.
+
+        Notes
+        -------
+        This function use the MATLAB engine. This because the MATLAB plots are more visible and clear.
+        The quantum runtime is compared with the classical version of K-means O(nmk) for each iteration.
+        """
+
+        n, m = np.meshgrid(np.linspace(0, n_samples, dtype=np.int64, num=100),
+                           np.linspace(0, n_features, dtype=np.int64, num=100))
+
+        c_runtime = n * m * self.n_clusters * self.n_init
+
+        if not well_clusterable:
+            q_runtime = (self.n_clusters * m * self.eta * self.condition_number * (
+                    self.muA + self.n_clusters * self.eta / self.delta) / (self.delta ** 2)) + \
+                        ((self.n_clusters ** 2) * (self.eta ** 1.5) * self.condition_number * self.muA) / (
+                                    self.delta ** 2)
+        else:
+            q_runtime = ((self.n_clusters ** 2) * m * (self.eta ** 2.5) / (self.delta ** 3)) + \
+                        (self.n_clusters ** 2.5) * (self.eta ** 2) / (self.delta ** 3)
+
+        eng = matlab.engine.start_matlab()
+        c_runtime_matlab = matlab.double(c_runtime.tolist())
+        q_runtime_matlab = matlab.double(q_runtime.tolist())
+        n_matlab = matlab.double(n.tolist())
+        m_matlab = matlab.double(m.tolist())
+
+        fig = eng.figure()
+        eng.plot3(n_matlab, m_matlab, q_runtime_matlab, '-b', 'DisplayName', 'quantumRuntime', nargout=0)
+        eng.hold("on", nargout=0)
+        eng.plot3(n_matlab, m_matlab, c_runtime_matlab, '-g', 'DisplayName', 'classicRuntime', nargout=0)
+        eng.hold("off", nargout=0)
+        eng.legend('{\color{green}classicRuntime}', '{\color{blue}quantumRuntime}', nargout=0)
+        eng.ylabel('nFeatures', nargout=0)
+        eng.xlabel('nSamples', nargout=0)
+        eng.title('k_means VS q_means', nargout=0)
+        eng.saveas(fig, saveas, nargout=0)
+        eng.quit()
 
 
 def _labels_inertia_predict(X, sample_weight, x_squared_norms, centers,
