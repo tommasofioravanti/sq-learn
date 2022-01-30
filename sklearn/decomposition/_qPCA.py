@@ -354,10 +354,10 @@ class qPCA(_BasePCA):
             random.seed(random_state)
         self.quantum_runtime_container = []
 
-    def fit(self, X, y=None, quantum_retained_variance=False, eps=0, theta=0,
+    def fit(self, X, y=None, classic_ret_variance_components=None, quantum_retained_variance=False, eps=0, theta=0,
             eta=0, theta_estimate=False, use_computed_qcomponents=False, eps_theta=0, p=0, estimate_all=False, delta=0,
             true_tomography=True, fs_ratio_estimation=False, gamma=0.1, norm='L2', stop_when_reached_accuracy=False,
-            incremental_measure=True):
+            incremental_measure=False, faster_measure_increment=0, check_sv_uniform_distribution=False,spectral_norm_est=False):
         """Fit the model with X.
 
         Parameters
@@ -437,12 +437,14 @@ class qPCA(_BasePCA):
             if p <= 0 and not isinstance(self.n_components, int):
                 raise ValueError("p must be > 0")
 
-        self._fit(X,
+        self._fit(X, classic_ret_variance_components=classic_ret_variance_components,
                   quantum_retained_variance=quantum_retained_variance, eps=eps, theta=theta, eta=eta,
                   theta_estimate=theta_estimate, use_computed_qcomponents=use_computed_qcomponents, eps_theta=eps_theta,
                   ret_var=p, estimate_all=estimate_all, delta=delta, true_tomography=true_tomography,
                   fs_ratio_estimation=fs_ratio_estimation, gamma=gamma, norm=norm,
-                  stop_when_reached_accuracy=stop_when_reached_accuracy, incremental_measure=incremental_measure)
+                  stop_when_reached_accuracy=stop_when_reached_accuracy, incremental_measure=incremental_measure,
+                  faster_measure_increment=faster_measure_increment,
+                  check_sv_uniform_distribution=check_sv_uniform_distribution,spectral_norm_est=spectral_norm_est)
         return self
 
     def fit_transform(self, X, y=None, quantum_retained_variance=False, eps=0, theta=0, eta=0, theta_estimate=False,
@@ -464,13 +466,15 @@ class qPCA(_BasePCA):
 
         return U / self.spectral_norm
 
-    def _fit(self, X, quantum_retained_variance, eps, theta, eta, theta_estimate,
+    def _fit(self, X, classic_ret_variance_components, quantum_retained_variance, eps, theta, eta, theta_estimate,
              use_computed_qcomponents,
              eps_theta, ret_var, estimate_all, delta, true_tomography, fs_ratio_estimation, gamma, norm,
-             stop_when_reached_accuracy, incremental_measure):
+             stop_when_reached_accuracy, incremental_measure, faster_measure_increment, check_sv_uniform_distribution,
+             spectral_norm_est):
         """Dispatch to the right submethod depending on the chosen solver."""
         self.delta = delta
         self.eps_theta = eps_theta
+        self.classic_ret_variance_components = classic_ret_variance_components
         self.eps = eps
         self.theta_estimate = theta_estimate
         self.estimate_all = estimate_all
@@ -484,6 +488,9 @@ class qPCA(_BasePCA):
         self.true_tomography = true_tomography
         self.stop_when_reached_accuracy = stop_when_reached_accuracy
         self.incremental_measure = incremental_measure
+        self.faster_measure_increment = faster_measure_increment
+        self.check_sv_uniform_distribution = check_sv_uniform_distribution
+        self.spectral_norm_est = spectral_norm_est
         # Raise an error for sparse input.
         # This is more informative than the generic one raised by check_array.
         if issparse(X):
@@ -588,28 +595,26 @@ class qPCA(_BasePCA):
         self.explained_variance_ratio_ = \
             explained_variance_ratio_[:n_components]
         self.singular_values_ = singular_values_[:n_components]
+        # TODO: mettere in & anche il fatto se ret_var >1.
+        if isinstance(self.ret_var, int):
+            self.ret_var = np.sum(self.explained_variance_ratio_[:self.ret_var])
 
-        if isinstance(self.n_components, int):
-            ret_var = np.sum(self.explained_variance_ratio_)
-
+        if self.classic_ret_variance_components != None:
+            self.components_retained_ = self.ret_variance(self.classic_ret_variance_components)
         # Scaled singular values for assumptions purposes
         self.left_sv = left_sv[:n_components]
         self.spectral_norm = self.singular_values_[0]
-        self.scaled_singular_values = self.singular_values_ / self.spectral_norm
-        self.spectral_norm_scaled = self.scaled_singular_values[0]
-        self.explained_variance_scaled = (self.scaled_singular_values ** 2)
-        self.explained_variance_ratio_scaled = self.explained_variance_scaled / self.explained_variance_scaled.sum()
+        self.frob_norm = np.linalg.norm(X)
+        self.norm_muA, self.muA = best_mu(matrix=X, start=0, step=0.1)
+        self.components_retained_ = self.ret_variance(self.ret_var)
+        # self.quantum_components = self.q_ret_variance(1000, self.ret_var)
 
-        norm, self.muA = best_mu(matrix=X, start=0, step=0.1)
-
-        self.components_retained_ = self.RetainedVariance(self.ret_var)
-        self.quantum_components = self.QRetainedVariance(1000, self.ret_var)
+        if self.spectral_norm_est:
+            est_spectral_norm = self.spectral_norm_estimation(epsilon=self.eps,delta=self.delta)
 
         if self.fs_ratio_estimation:
             self.estimate_fs_ratio, self.estimate_fs, self.estimate_s_values = self.quantum_factor_score_ratio_estimation(
                 X, self.gamma, self.eps)
-
-        # THEOREM 9, 10 ,11 in fit function
         if self.theta_estimate:
             self.est_theta = self.estimate_theta(epsilon=self.eps_theta, eta=self.eta, p=self.ret_var)
             # self.est_theta = self.singular_values_threshold(eps_theta=eps_theta, p=ret_var,use_computed_qcomponents=use_computed_qcomponents)
@@ -623,9 +628,9 @@ class qPCA(_BasePCA):
                                         true_tomography=self.true_tomography,
                                         norm=self.tomography_norm,
                                         stop_when_reached_accuracy=self.stop_when_reached_accuracy,
-                                        incremental_measure=self.incremental_measure)
-
-            # self.estimate_fs_ratio = self.estimate_fs / self.estimate_fs.sum()
+                                        incremental_measure=self.incremental_measure,
+                                        faster_measure_increment=self.faster_measure_increment,
+                                        check_sv_uniform_distribution=self.check_sv_uniform_distribution)
 
         return U, S, Vt
 
@@ -833,16 +838,43 @@ class qPCA(_BasePCA):
             f_norm = np.linalg.norm(Y_sign)
             return Y_sign / f_norm
 
+    def spectral_norm_estimation(self, epsilon, delta):
+        l = 0
+        u = 1
+        n_iterations = int(np.ceil((np.log(self.frob_norm / epsilon))))
+        tau = (l + u) / 2
+        for i in range(n_iterations):
+            theta_from_sv = np.array(
+                [wrapper_phase_est_arguments(sv) / np.pi for sv in self.singular_values_ / self.frob_norm])
+            theta_estimations = [consistent_phase_estimation(omega=theta_, epsilon=epsilon / self.frob_norm,
+                                                             delta=1 - 1 / self.n_features_) for
+                                 theta_ in
+                                 theta_from_sv]
+            est_sing_values = np.array([unwrap_phase_est_arguments(th) for th in theta_estimations])
+            selected_sing_values = self.singular_values_[est_sing_values >= tau]
+            eta = np.sum(np.square(selected_sing_values)) / (self.frob_norm ** 2)
+            eta_est = amplitude_estimation(theta=eta, epsilon=delta)
+            if eta_est <= eta:
+                u = tau
+            else:
+                l = tau
+            tau = (u + l) / 2
+        return tau*self.frob_norm
+
     # Theorem 8 New Qadra
     def quantum_factor_score_ratio_estimation(self, X, gamma, epsilon):
 
         singular_values = self.singular_values_[self.explained_variance_ratio_ > gamma] / self.muA
         theta_from_sv = np.array([wrapper_phase_est_arguments(sv) / np.pi for sv in singular_values])
-        theta_estimations = [phase_estimation(theta, epsilon=epsilon) for theta in theta_from_sv]
+        theta_estimations = [
+            consistent_phase_estimation(epsilon / self.muA, delta=1 - 1 / self.n_features_, omega=theta) for theta in
+            theta_from_sv]
         singular_values_est = np.array([unwrap_phase_est_arguments(th) for th in theta_estimations])
+
         factor_score_est = singular_values_est ** 2
         factor_score_ratio_est = np.array([fs / (np.linalg.norm(X) ** 2) for fs in factor_score_est])
-
+        q = QuantumState(registers=singular_values_est, amplitudes=factor_score_ratio_est)
+        cc = coupon_collect(q)
         return factor_score_ratio_est, (
                 singular_values_est / self.spectral_norm) ** 2, singular_values_est / self.spectral_norm
 
@@ -872,13 +904,14 @@ class qPCA(_BasePCA):
         u = 1
 
         if np.abs(l - p) <= eta:
-            return 0
-        if np.abs(u - p) <= eta:
             return self.muA
+        if np.abs(u - p) <= eta:
+            return 0
         n_iterations = int(np.ceil((np.log(self.muA / epsilon))))
         tau = (l + u) / 2
         for i in range(n_iterations):
             p_est = self.quantum_factor_score_ratio_sum(eps=epsilon / self.muA, theta=tau, eta=eta / 2)
+            print(tau, p_est - p)
             if np.abs(p_est - p) <= eta / 2:
                 return tau * self.muA
             if p_est < p:
@@ -921,50 +954,46 @@ class qPCA(_BasePCA):
 
     # Theorem 11
     def topk_sv_extractors(self, X, delta, eps, theta, true_tomography, norm, stop_when_reached_accuracy,
-                           incremental_measure):
-        # p = self.Quantum_factor_score_ratio(eps, theta)
+                           incremental_measure, faster_measure_increment, check_sv_uniform_distribution):
+
         if theta == 0:
-            if self.est_theta != 0:
-                theta = self.est_theta
+            theta = self.est_theta
 
-            else:
-                raise ValueError("Theta must be defined to extract top k sv")
+        theta_from_sv = np.array([wrapper_phase_est_arguments(sv) / np.pi for sv in self.singular_values_ / self.muA])
+        theta_estimations = [
+            consistent_phase_estimation(omega=theta_, epsilon=eps / self.muA, delta=1 - 1 / self.n_features_) for
+            theta_ in
+            theta_from_sv]
+        est_selected_sing_values = np.array([unwrap_phase_est_arguments(th) * self.muA for th in theta_estimations])
+        self.top_k_true_singular_value = self.singular_values_[est_selected_sing_values >= theta]
+        singular_value_estimation = est_selected_sing_values[est_selected_sing_values >= theta]
 
-        topk_singular_values = self.singular_values_[self.singular_values_ >= theta]
+        if check_sv_uniform_distribution:
+            distribution_k = self.top_k_true_singular_value / est_selected_sing_values
+            plt.plot(distribution_k)
+            plt.show()
 
-        self.topk = len(topk_singular_values)
+        self.topk = len(singular_value_estimation)
 
-        '''
-        if len(topk_singular_values) < 2:
-            raise ValueError(
-                "The quantum subroutine is cosidering only " + str(len(topk_singular_values)) + " components."
-                                                                                                "Restart the computation.")
-        '''
-        # print(topk_singular_values.shape)
-        # topk_factor_score = self.explained_variance_[self.scaled_singular_values >= theta]
-        topk_right_singular_vectors = self.components_[self.singular_values_ >= theta]
-        topk_left_singular_vectors = self.left_sv[self.singular_values_ >= theta]
-        right_singular_vectors_est = tomography(topk_right_singular_vectors, delta, true_tomography=true_tomography,
+        self.topk_right_singular_vectors = self.components_[est_selected_sing_values >= theta]
+        self.topk_left_singular_vectors = self.left_sv[est_selected_sing_values >= theta]
+
+        right_singular_vectors_est = tomography(self.topk_right_singular_vectors, delta,
+                                                true_tomography=true_tomography,
                                                 norm=norm,
                                                 stop_when_reached_accuracy=stop_when_reached_accuracy,
-                                                incremental_measure=incremental_measure)
-        left_singular_vectors_est = tomography(topk_left_singular_vectors, delta, true_tomography=true_tomography,
+                                                incremental_measure=incremental_measure,
+                                                faster_measure_increment=faster_measure_increment)
+        left_singular_vectors_est = tomography(self.topk_left_singular_vectors, delta, true_tomography=true_tomography,
                                                norm=norm,
                                                stop_when_reached_accuracy=stop_when_reached_accuracy,
-                                               incremental_measure=incremental_measure)
-
-        theta_from_sv = np.array(
-            [wrapper_phase_est_arguments(sv, 'sv') / np.pi for sv in topk_singular_values / self.muA])
-        theta_estimations = [
-            consistent_phase_estimation(omega=th, epsilon=eps / self.muA, delta=1 - 1 / self.n_features_) for
-            th in theta_from_sv]
-        singular_value_estimation = np.array(
-            [unwrap_phase_est_arguments(theta, 'sv') * self.muA for theta in theta_estimations])
+                                               incremental_measure=incremental_measure,
+                                               faster_measure_increment=faster_measure_increment)
         factor_score_estimation = singular_value_estimation ** 2
         factor_score_ratio_est = np.array([fs / (np.linalg.norm(X) ** 2) for fs in factor_score_estimation])
 
-        return right_singular_vectors_est, left_singular_vectors_est, singular_value_estimation / self.spectral_norm, \
-               (singular_value_estimation / self.spectral_norm) ** 2, factor_score_ratio_est
+        return right_singular_vectors_est, left_singular_vectors_est, singular_value_estimation, \
+               (singular_value_estimation ** 2) / (self.n_samples_ - 1), factor_score_ratio_est
 
     def accumulate_q_runtime(self, n_samples, n_features, estimate_components='all'):
         if self.theta == 0:
@@ -980,10 +1009,13 @@ class qPCA(_BasePCA):
                 cost_right_sv = (self.spectral_norm * self.muA * self.topk *
                                  n_features) / (self.theta * self.eps * self.delta ** 2)
             else:
-                cost_left_sv = (self.spectral_norm * self.muA * self.topk) / (
-                        self.theta * self.eps * self.delta ** 2)
-                cost_right_sv = (self.spectral_norm * self.muA * self.topk) / (
-                        self.theta * self.eps * self.delta ** 2)
+                cost_left_sv = np.full(shape=n_samples.shape,
+                                       fill_value=((self.spectral_norm * self.muA * self.topk) / (
+                                               self.theta * self.eps * self.delta ** 2)))
+
+                cost_right_sv = np.full(shape=n_features.shape,
+                                        fill_value=((self.spectral_norm * self.muA * self.topk) / (
+                                                self.theta * self.eps * self.delta ** 2)))
 
             if estimate_components == 'all':
                 self.quantum_runtime_container.append(cost_left_sv + cost_right_sv +
@@ -1002,7 +1034,7 @@ class qPCA(_BasePCA):
             self.quantum_runtime_container.append(self.muA / (self.eps * self.gamma ** 2))
         return self.quantum_runtime_container
 
-    def QRetainedVariance(self, measurements, variance):
+    def q_ret_variance(self, measurements, variance):
         if isinstance(self.n_components, int):
             return self.n_components
         else:
@@ -1020,7 +1052,7 @@ class qPCA(_BasePCA):
             k = i
             return k
 
-    def RetainedVariance(self, variance):
+    def ret_variance(self, variance):
         ratio_cumsum = stable_cumsum(self.explained_variance_ratio_)
         n_components = np.searchsorted(ratio_cumsum, variance,
                                        side='right') + 1
@@ -1028,7 +1060,7 @@ class qPCA(_BasePCA):
         return n_components
 
     def runtime_comparison(self, n_samples, n_features, saveas, estimate_components='all', classic_runtime='classic'):
-        r"""Function that allows to compare classic vs quantum runtime of the algorithm executed.
+        """Function that allows to compare classic vs quantum runtime of the algorithm executed.
 
         Parameters
         ----------
@@ -1055,9 +1087,12 @@ class qPCA(_BasePCA):
 
         classic_runtime: string value, default='classic'.
             If 'classic':
-                It means that you want compare the quantum runtime with the classic runtime version of PCA.
+                It means that you want compare the quantum runtime with the classic runtime version of PCA, that is
+                O(nm^2) where n are the number of samples and m the number of features.
             If 'rand':
-                It means that you want compare the quantum runtime with the randomized runtime version of PCA.
+                It means that you want compare the quantum runtime with the randomized runtime version of PCA, that is
+                O(nmk*log(m*eps/eps)) where k are the components retained and eps is an approximation error related to
+                the relative spectral gap between eigenvalues.
 
         Returns
         -------
@@ -1066,19 +1101,26 @@ class qPCA(_BasePCA):
         Notes
         -------
         This function use the MATLAB engine. This because the MATLAB plots are more visible and clear.
-
         """
+
         n, m = np.meshgrid(np.linspace(0, n_samples, dtype=np.int64, num=100),
                            np.linspace(0, n_features, dtype=np.int64, num=100))
 
         if classic_runtime == 'rand':
+            eps = self.explained_variance_[self.components_retained_ - 1] - self.explained_variance_[
+                self.components_retained_]
             c_runtime = n * m * self.components_retained_ * np.log(
-                m / self.eps) / np.sqrt(self.eps)
+                m / eps) / np.sqrt(eps)
         elif classic_runtime == 'classic':
             c_runtime = n * m ** 2
 
-        q_runtime = np.sum(self.accumulate_q_runtime(n_samples=n, n_features=m,
-                                                     estimate_components=estimate_components))
+        q_runtime = self.accumulate_q_runtime(n_samples=n, n_features=m,
+                                              estimate_components=estimate_components)
+        if len(q_runtime) > 1:
+            q_runtime = np.sum(self.accumulate_q_runtime(n_samples=n, n_features=m,
+                                                         estimate_components=estimate_components))
+        else:
+            q_runtime = q_runtime[0]
         # print(q_runtime)
 
         eng = matlab.engine.start_matlab()
@@ -1093,8 +1135,8 @@ class qPCA(_BasePCA):
         eng.plot3(n_matlab, m_matlab, c_runtime_matlab, '-g', 'DisplayName', 'classicRuntime', nargout=0)
         eng.hold("off", nargout=0)
         eng.legend('{\color{green}classicRuntime}', '{\color{blue}quantumRuntime}', nargout=0)
-        eng.xlabel('nFeatures', nargout=0)
-        eng.ylabel('nSamples', nargout=0)
+        eng.ylabel('nFeatures', nargout=0)
+        eng.xlabel('nSamples', nargout=0)
         eng.title('PCA VS qPCA', nargout=0)
         eng.saveas(fig, saveas, nargout=0)
         eng.quit()
