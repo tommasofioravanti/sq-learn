@@ -12,11 +12,13 @@ from scipy.stats import truncnorm
 import numpy as np
 from bisect import bisect
 import warnings
-#import gc
+
+# import gc
 
 warnings.simplefilter('always', UserWarning)
 import matplotlib.pyplot as plt
 from multiprocessing import *
+
 
 # random.seed(a=31337)
 
@@ -103,8 +105,8 @@ def make_gaussian_est(vec, noise):
 
 
 def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, N=None, norm='L2',
-               incremental_measure=True):
-    """ Tomography function (real and fake).
+               incremental_measure=True, faster_measure_increment=0):
+    """ Tomography function (real and approximate).
 
     Parameters
     ----------
@@ -118,7 +120,7 @@ def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, 
         otherwise the estimations are approximated with a Truncated Gaussian Noise.
 
     stop_when_reached_accuracy: bool value, default=True.
-        If True it stops the execution of the tomography when the L2-norm of the
+        If True it stops the execution of the tomography when the L2(or Linf)-norm of the
         difference between V and its estimation is less or equal then delta. Otherwise
         N measures are done (very memory intensive for large vectors).
 
@@ -136,6 +138,9 @@ def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, 
         If True the tomography is computed incrementally up to N measures. If False, the routine is
         performed once using N measures.
 
+    faster_measure_increment: int, default=0.
+        It speeds up the tomography increasing the number of measurements in the incremental way.
+
     Returns
     -------
     A_est: array-like that was estimated.
@@ -143,7 +148,7 @@ def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, 
     Notes
     -----
     This method returns an estimation of the true array/matrix A using quantum tomography algorithm 4.1 proposed in
-    "A Quantum Interior Point Method for LPs and SDPs" paper, or using an approximation of the tomography.
+    "A Quantum Interior Point Method for LPs and SDPs" paper, or using an approximation of the tomography computation.
     """
 
     assert noise >= 0
@@ -163,12 +168,14 @@ def tomography(A, noise, true_tomography=True, stop_when_reached_accuracy=True, 
         if len(A.shape) == 2:
             A_est = np.array([np.array(list(
                 real_tomography(A[idx], delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy,
-                                N=N, norm=norm, incremental_measure=incremental_measure).values())[-1])
-                              for idx in range(len(A))])
+                                N=N, norm=norm, incremental_measure=incremental_measure,
+                                faster_measure_increment=faster_measure_increment).values())[-1]) for idx in
+                              range(len(A))])
         else:
             A_est = np.array(
                 list(real_tomography(A, delta=noise, stop_when_reached_accuracy=stop_when_reached_accuracy, N=N,
-                                     norm=norm, incremental_measure=incremental_measure).values())[-1])
+                                     norm=norm, incremental_measure=incremental_measure,
+                                     faster_measure_increment=faster_measure_increment).values())[-1])
 
     return A_est
 
@@ -191,30 +198,30 @@ def __mu(p, matrix):
         if p == 0:
             result = np.max([np.count_nonzero(A[i]) for i in range(len(A))])
         else:
-            result = np.max([np.sum(np.power(abs(A[i]), [p] * len(A[i]))) for i in
-                             range(len(A))])  # np.max([pow(np.linalg.norm(A[i], ord=p), p) for i in range(len(A))])
-        #gc.collect()
+            norms = np.sum(np.power(np.abs(A), p), axis=1)
+            result = max(norms)
+            del norms
+        # gc.collect()
         return result
 
     s1 = s(2 * p, matrix)
     s2 = s(2 * (1 - p), matrix.T)
     mu = np.sqrt(s1 * s2)
 
-    #gc.collect()
+    # gc.collect()
     return mu
 
 
-def linear_search(matrix, start, step):
-    domain = [i for i in np.arange(start, 1.0, step)] + [1]
+def linear_search(matrix, start=0.0, end=1.0, step=0.05):
+    domain = [i for i in np.arange(start, end, step)] + [end]
     values = [__mu(i, matrix) for i in domain]
-    #domain = domain
     best_p = domain[values.index(min(values))]
     return best_p, min(values)
 
 
-def best_mu(matrix, start, step):
-    p, val = linear_search(matrix, start, step)
-    val_list = [val, np.linalg.norm(matrix)]  # , np.linalg.norm(A, ord=np.inf)]
+def best_mu(matrix, start=0.0, end=1.0, step=0.05):
+    p, val = linear_search(matrix, start=start, end=end, step=step)
+    val_list = [val, np.linalg.norm(matrix)]
     index = val_list.index(min(val_list))
     if index == 0:
         best_norm = f"p={p}"
@@ -249,98 +256,8 @@ def L2_tomogrphy_fakeSign(V, N=None, delta=None):
     return x_sign
 
 
-def L2_tomogrphy_parallel(V, N=None, delta=None, stop_when_reached_accuracy=True, n_jobs=-1):
-    if np.round(np.linalg.norm(V, ord=2)) == 1.0 or np.round(np.linalg.norm(V, ord=2)) == 0.9:
-        pass
-    else:
-
-        V = V / np.linalg.norm(V, ord=2)
-
-    d = len(V)
-    index = np.arange(0, d)
-    if N is None:
-        N = int((36 * d * np.log(d)) / (delta ** 2))
-
-    q_state = QuantumState(amplitudes=V, registers=index)
-    dict_res = {}
-
-    if n_jobs == None:
-        # Case not parallel
-        return real_tomography(V=V, delta=delta)
-    elif n_jobs == -1:
-        n_cpu = cpu_count()
-    else:
-        n_cpu = n_jobs
-        assert (cpu_count() >= n_cpu)
-    measure_indexes = np.geomspace(1, N, num=100, dtype=np.int64)
-
-    measure_indexes = check_measure(measure_indexes)
-
-    for i in measure_indexes:
-        print(i)
-        start = time.time()
-        if i < n_cpu:
-            P = estimate_wald(q_state.measure(n_times=int(i)))
-        else:
-            ll = check_division(i, n_cpu)
-            with Pool(n_cpu) as prc:
-                measure_lists = prc.starmap(auxiliary_fun, list(zip([q_state] * n_cpu, ll)))
-                P_ = prc.map(estimate_wald, measure_lists)
-            P_ = [Counter(c) for c in P_]
-            P = sum(P_, Counter())
-            P = {x: P[x] / n_cpu for x in P}
-        P_i = np.zeros(d)
-
-        P_i[list(P.keys())] = np.sqrt(list(P.values()))
-        # Part2 of algorithm 4.1
-        max_index = max(index)
-        digits = len(str(max_index)) + 1
-        registers = [str(j).zfill(digits) for j in index] + [re.sub('0', '1', str(j).zfill(digits), 1) for j in index]
-
-        amplitudes = np.asarray([V[k] + P_i[k] for k in range(len(V))] + [V[k] - P_i[k] for k in range(len(V))])
-
-        amplitudes *= 0.5
-
-        new_quantum_state = QuantumState(registers=registers, amplitudes=amplitudes)
-        if i < n_cpu:
-            measure = new_quantum_state.measure(n_times=int(i))
-        else:
-
-            with Pool(n_cpu) as proc:
-                measure = proc.starmap(auxiliary_fun, list(zip([new_quantum_state] * n_cpu, ll)))
-                # measure = new_quantum_state.measure(int(i))  # ritorna una lista tipo ['01','02','02',...] lunga N
-                measure = np.concatenate(measure)
-
-        str_ = [str(ind).zfill(digits) for ind in index]
-        dictionary = dict(Counter(measure))
-
-        if len(dictionary) < len(registers):
-            keys = set(list(dictionary.keys()))
-            tot_keys = set(registers)
-            missing_keys = list(tot_keys - keys)
-            dictionary.update({l: 0 for l in missing_keys})
-
-        d_ = list(map(dictionary.get, str_))
-
-        P_i = [P_i[e] if x > 0.4 * P_i[e] ** 2 * i else P_i[e] * -1 for e, x in enumerate(d_)]
-        # print(i)
-        # print(i, np.linalg.norm(P_i,ord=2))
-        end = time.time()
-        print('time:', end - start)
-        dict_res.update({i: P_i})
-        if stop_when_reached_accuracy:
-
-            sample = np.linalg.norm(V - P_i, ord=2)
-            # print(sample, i)
-            if sample > delta:
-                pass
-            else:
-                break
-
-    return dict_res
-
-
-def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2', incremental_measure=True):
+def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm='L2', incremental_measure=True,
+                    faster_measure_increment=0):
     """ Official version of the tomography function.
 
     Parameters
@@ -368,6 +285,9 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
         If True the tomography is computed incrementally up to N measures. If False, the routine is
         performed once using N measures.
 
+    faster_measure_increment: int, default=0.
+        It speeds up the tomography increasing the number of measurements in the incremental way.
+
     Returns
     -------
     dict_res: dictionary of shape {N_measure: vector_estimation}.
@@ -378,9 +298,12 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
     "A Quantum Interior Point Method for LPs and SDPs" paper.
 
     """
-
-    if np.round(np.linalg.norm(V, ord=2)) == 1.0 or np.round(np.linalg.norm(V, ord=2)) == 0.9:
+    #if np.linalg.norm(vector) != 0.999 or np.linalg.norm(vector) != 1.0:
+    #if np.round(np.linalg.norm(V, ord=2)) == 1.0 or np.round(np.linalg.norm(V, ord=2)) == 0.9:
+    #
+    if np.isclose(np.linalg.norm(V), 1, rtol=1e-2):
         pass
+
     else:
         V = V / np.linalg.norm(V, ord=2)
     d = len(V)
@@ -397,7 +320,7 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
 
         measure_indexes = np.geomspace(1, N, num=100, dtype=np.int64)
 
-        measure_indexes = check_measure(measure_indexes, norm)
+        measure_indexes = check_measure(measure_indexes, faster_measure_increment=faster_measure_increment)
 
         for i in measure_indexes:
 
@@ -478,6 +401,8 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
 
         dict_res.update({N: P_i})
 
+        print('error_tomography:',np.linalg.norm(V - P_i, ord=2))
+
     return dict_res
 
 
@@ -490,8 +415,8 @@ def vectorize_aux_fun(dic, i):
     return np.sqrt(dic[i]) if i in dic else 0
 
 
-def check_measure(arr, norm):
-    incr = 5
+def check_measure(arr, faster_measure_increment):
+    incr = 5 + faster_measure_increment
 
     for i in range(len(arr) - 1):
         if arr[i + 1] == arr[i]:
@@ -708,7 +633,7 @@ def phase_estimation(omega, m=None, epsilon=None, delta=0.1, plot_distribution=F
     p = []
     omega_k = []
     M = 2 ** m  # in P.E., M is fixed in this way
-    if omega == 1:
+    if omega == 1 or np.isclose(omega, 1):
         return (M - 1) / M
     for k in range(M):
         omega_est = k / M
@@ -758,7 +683,7 @@ def phase_estimation(omega, m=None, epsilon=None, delta=0.1, plot_distribution=F
 
 
 def ipe(x, y, epsilon, Q=1):
-    """Official version of the Robust Inner Product Estimation Routine ((R)IPE).
+    r"""Official version of the Robust Inner Product Estimation Routine ((R)IPE).
 
     Parameters
     ----------
@@ -799,7 +724,7 @@ def ipe(x, y, epsilon, Q=1):
     return s
 
 
-def consistent_phase_estimation(epsilon, delta, omega, n=None):
+def consistent_phase_estimation(epsilon, delta, omega, n=None, shift=None):
     """Official version of the Consistent Phase Estimation routine.
 
     Parameters
@@ -817,6 +742,9 @@ def consistent_phase_estimation(epsilon, delta, omega, n=None):
         Number of qubits that you want to use in the routine. If None, this value is computed using the accuracy value
         passed.
 
+    shift: int value, default=None.
+        If not None, this fix the shift of the algorithm, otherwise it is computed inside the function.
+
     Returns
     -------
     estimate: float value.
@@ -831,14 +759,16 @@ def consistent_phase_estimation(epsilon, delta, omega, n=None):
     """
     if n == None:
         n = int(np.ceil(np.log2(1 / epsilon)) + np.ceil(np.log2(2 + 1 / (2 * delta))))
+
     C = delta / n
     delta_prime = (epsilon * C) / 2
     L = np.floor(2 / C)
     # shift = random.randint(1, L)
-    shift = int(L / 2) + 1
+    if shift == None:
+        shift = int(L / 2) + 1
     intervals = np.arange(-1 - shift * delta_prime, 1 + epsilon - shift * delta_prime, epsilon)
     intervals = np.append(intervals, 1 + epsilon - shift * delta_prime)
-    pe_estimate = phase_estimation(omega=omega, epsilon=delta_prime)
+    pe_estimate = phase_estimation(omega=omega, epsilon=delta_prime, delta=delta)
     index = bisect(intervals, pe_estimate)
     section = (intervals[(index - 1)], intervals[index])
     estimate = np.mean(section)
