@@ -11,8 +11,4 @@ Subpackages
    sklearn.decomposition
    sklearn.QuantumUtility
 
-Module contents
----------------
-
-.. automodule:: sklearn
 

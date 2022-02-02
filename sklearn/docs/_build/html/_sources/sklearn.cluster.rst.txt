@@ -1,4 +1,4 @@
-sqlearn.cluster.d_means package
+d_means
 =======================
 
 
