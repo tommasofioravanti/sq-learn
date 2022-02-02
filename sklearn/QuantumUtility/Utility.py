@@ -60,9 +60,6 @@ class QuantumState(object):
 
 def estimate_wald(measurements):
     counter = Counter(measurements)
-    # keys = list(counter.keys())
-    # values = list(np.asarray(list(counter.values()))/len(measurements))
-    # estimate = dict(zip(keys,values))
     estimate = {x: counter[x] / len(measurements) for x in counter}
     return estimate
 
@@ -298,12 +295,8 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
     "A Quantum Interior Point Method for LPs and SDPs" paper.
 
     """
-    #if np.linalg.norm(vector) != 0.999 or np.linalg.norm(vector) != 1.0:
-    #if np.round(np.linalg.norm(V, ord=2)) == 1.0 or np.round(np.linalg.norm(V, ord=2)) == 0.9:
-    #
     if np.isclose(np.linalg.norm(V), 1, rtol=1e-2):
         pass
-
     else:
         V = V / np.linalg.norm(V, ord=2)
     d = len(V)
