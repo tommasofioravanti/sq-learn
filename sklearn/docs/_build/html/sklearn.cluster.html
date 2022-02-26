@@ -446,6 +446,31 @@ are assigned equal weight.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.runtime_comparison">
+<span class="sig-name descname"><span class="pre">runtime_comparison</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saveas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">well_clusterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'False'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.runtime_comparison" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that allows to compare classic vs quantum runtime of the algorithm executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_samples</strong> (<em>int value.</em>) – The number of samples that you want to simulate in the runtime measurements.</p></li>
+<li><p><strong>n_features</strong> (<em>int value.</em>) – The number of features that you want to simulate in the runtime measurements.</p></li>
+<li><p><strong>saveas</strong> (<em>string value.</em>) – Name under which the image will be saved. Specify also the format, otherwise the image will be saved with
+the .fig MATLAB format.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>This functions doesn’t return anything, it just save the runtime comparison plot.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function use the MATLAB engine. This because the MATLAB plots are more visible and clear.
+The quantum runtime is compared with the classical version of K-means O(nmk) for each iteration.</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>

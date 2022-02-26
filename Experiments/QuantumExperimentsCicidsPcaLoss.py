@@ -50,19 +50,23 @@ test = x[LEN_TRAIN + LEN_VALIDATION:]
 # Score on Test set
 
 qpca = qPCA(svd_solver="full")
-delta = [0.1]
+delta = [0.9]
 for d_ in delta:
     print(d_)
 
     n_c = 100
-    while n_c > 32:
-        qPca_fitted = qpca.fit(train, theta_estimate=True, eps_theta=.35, p=n_components,
-                               estimate_all=True, delta=d_, eps=3, true_tomography=True,
-                               eta=0.0007, norm='L2')
-        np.save('bad_tomography_array',qPca_fitted.topk_left_singular_vectors[30])
-        np.save('bad_tomography_array1',qPca_fitted.topk_left_singular_vectors[31])
-        n_c = qPca_fitted.topk
-        print(n_c)
+    while True:
+        try:
+
+            qPca_fitted = qpca.fit(train, theta_estimate=True, eps_theta=.3, p=n_components,
+                                   estimate_all=True, delta=d_, eps=2, true_tomography=True,
+                                   eta=0.00075, norm='L2', condition_number_est=False)
+            n_c = qPca_fitted.topk
+            print(n_c)
+            if n_c <= 32:
+                break
+        except:
+            pass
 
     print('quantum_components_retained:', qPca_fitted.topk)
     print('classic_components_retained:', qPca_fitted.components_retained_)
@@ -97,5 +101,5 @@ for d_ in delta:
     accuracy = (TP + TN) / (TP + TN + FP + FN)
     print('f1:', 2 / ((1 / p) + (1 / r)), 'precision:', p, 'recall:', r, 'accuracy:', accuracy)
     if d_ == 0.1:
-        qPca_fitted.runtime_comparison(10000, 10, 'CICIDSLoss0_1z1.pdf', estimate_components='right_sv',
+        qPca_fitted.runtime_comparison(10000, 20, 'CICIDSLoss.pdf', estimate_components='right_sv',
                                        classic_runtime='rand')

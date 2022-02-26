@@ -570,9 +570,9 @@ def wrapper_phase_est_arguments(argument, type='sv'):
         return theta_i
 
 
-def unwrap_phase_est_arguments(argument, type='sv'):
+def unwrap_phase_est_arguments(argument, eps, type='sv'):
     if type == 'sv':
-        return math.cos(argument * np.pi / 2)
+        return math.cos(argument * (eps+np.pi) / 2)
     if type == 'distance':
         return math.sin(argument * np.pi) ** 2
 
@@ -644,29 +644,37 @@ def phase_estimation(omega, m=None, epsilon=None, delta=0.1, plot_distribution=F
     k_est = omega_tilde * M
 
     if plot_distribution:
-        # relative_error = epsilon * max(theta, 1)
-        plt.annotate((float('%.2f' % (omega_k[p.index(max(p))])), float('%.2f' % (max(p)))),
+        #rel_error = epsilon * max(omega, 1)
+        rel_error = epsilon*omega
+        plt.annotate((float('%.4f' % (omega_k[p.index(max(p))])), float('%.2f' % (max(p)))),
                      xy=(omega_k[p.index(max(p))], max(p)))
-        plt.bar(omega_k, p, 0.001)
-        # plt.axvline(theta - relative_error, c='red', ls='dashed')
-        # plt.axvline(theta + relative_error, c='red', ls='dashed')
-        plt.xlim(omega_k[p.index(max(p))] - 0.1, omega_k[p.index(max(p))] + 0.1)
+        plt.bar(omega_k, p, 0.0001)
+
+        plt.axvline(omega - rel_error, c='red', ls='dashed')
+        plt.axvline(omega + rel_error, c='red', ls='dashed')
+        plt.axvline(omega, c='yellow', ls='dashed',label=r'$\omega$='+str(omega))
+
+        mask=(np.array(omega_k)>=(omega-rel_error)) & (np.array(omega_k)<=omega+rel_error)
+        print(np.array(omega_k)[mask],len(omega_k),omega+rel_error,omega-rel_error)
+        print(len(np.array(omega_k)[mask])*100/len(omega_k))
+        plt.xlim(omega_k[p.index(max(p))] - 0.006, omega_k[p.index(max(p))] + 0.006)
         if epsilon:
-            plt.title(r'Probability distribution for the output of phase estimation for $\theta$ = ' + str(
+            '''plt.title(r'Probability distribution for the output of phase estimation for $\theta$ = ' + str(
                 float('%.2f' % (omega))) + r' with $\epsilon$ =' + str(epsilon) + r'$\rightarrow$ M=' + str(M),
                       fontdict={'family': 'serif',
                                 'color': 'darkblue',
                                 'weight': 'bold',
-                                'size': 8})
+                                'size': 8})'''
         else:
-            plt.title(r'Probability distribution for the output of phase estimation for $\theta$ = ' + str(
+            '''plt.title(r'Probability distribution for the output of phase estimation for $\theta$ = ' + str(
                 float('%.2f' % (omega))) + r' with M=' + str(M),
                       fontdict={'family': 'serif',
                                 'color': 'darkblue',
                                 'weight': 'bold',
-                                'size': 8})
-        plt.xlabel(r'$\hat \theta$')
+                                'size': 8})'''
+        plt.xlabel(r'$\hat \omega$')
         plt.ylabel("probability")
+        plt.legend()
 
         plt.show()
     if nqubit:
@@ -768,5 +776,5 @@ def consistent_phase_estimation(epsilon, delta, omega, n=None, shift=None):
 
     if estimate < 0:
         estimate = 0
-    # print('true_value:', omega, 'pe_estimate:', pe_estimate, 'consistent_pe_estimate:', estimate)
+    #print('true_value:', omega, 'pe_estimate:', pe_estimate, 'consistent_pe_estimate:', estimate)
     return estimate

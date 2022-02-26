@@ -13,22 +13,21 @@ cwd = os.getcwd()
 tr = []
 test = []
 te = []
-for filename in os.listdir(os.path.join(cwd, '../CICIDS2017/SavedTrainTest1')):
+for filename in os.listdir(os.path.join(cwd, '../CICIDS2017/FinalTrainTest')):
     if filename.startswith('train'):
-        tr.append(pd.read_csv(os.path.join(cwd, '../CICIDS2017/SavedTrainTest1', filename)))
+        tr.append(pd.read_csv(os.path.join(cwd, '../CICIDS2017/FinalTrainTest', filename)))
     elif filename.startswith('test'):
-        test.append(pd.read_csv(os.path.join(cwd, '../CICIDS2017/SavedTrainTest1', filename)))
+        test.append(pd.read_csv(os.path.join(cwd, '../CICIDS2017/FinalTrainTest', filename)))
     else:
-        te.append(pd.read_csv(os.path.join(cwd, '../CICIDS2017/SavedTrainTest1', filename)))
+        te.append(pd.read_csv(os.path.join(cwd, '../CICIDS2017/FinalTrainTest', filename)))
 labels = []
 for i in range(5):
     labels.append(test[i]['Label'])
 
 for i in range(5):
-    te[i] = te[i][:-50000]
+    # te[i] = te[i][:-50000]
     labels[i] = labels[i][:-50000]
 
-#alpha = [0.01, 0.02, 0.04, 0.06, 0.08, 0.10]
 alpha = [0.01, 0.05, 0.07, 0.09, 0.1, 0.20]
 quantils = []
 for i in alpha:
@@ -36,26 +35,28 @@ for i in alpha:
     quantile = 1 - np.round(np.roots(eq)[1], decimals=4)
     quantils.append(quantile)
 
-qpca30 = qPCA(svd_solver='full', name='qpca30').fit(tr[0], theta_estimate=False,
+qpca30 = qPCA(svd_solver='full', name='qpca30').fit(tr[0], theta_estimate=True, p=0.30, eps_theta=1,
                                                     estimate_all=True,
                                                     delta=0.1, eps=3, true_tomography=True,
-                                                    stop_when_reached_accuracy=False,
-                                                    theta=1)
+                                                    stop_when_reached_accuracy=False, eta=0.2,
+                                                    theta_minor=np.sqrt(0.20 * tr[0].shape[0]), estimate_least_k=True)
+
 print('PCA30 done', 'n_components', qpca30.topk)
 
-qpca40 = qPCA(svd_solver='full', name='qpca40').fit(tr[1], theta_estimate=False,
+qpca40 = qPCA(svd_solver='full', name='qpca40').fit(tr[1], theta_estimate=True, p=0.40, eps_theta=1,
                                                     estimate_all=True,
                                                     delta=0.1, eps=3, true_tomography=True,
-                                                    stop_when_reached_accuracy=False,
-                                                    theta=1)
+                                                    stop_when_reached_accuracy=False, eta=0.2,
+                                                    theta_minor=np.sqrt(0.20 * tr[1].shape[0]), estimate_least_k=True)
 print('PCA40 done', 'n_components', qpca40.topk)
 while True:
     try:
-        qpca50 = qPCA(svd_solver='full', name='qpca50').fit(tr[2], theta_estimate=False,
+        qpca50 = qPCA(svd_solver='full', name='qpca50').fit(tr[2], theta_estimate=True, p=0.50, eps_theta=1,
                                                             estimate_all=True,
                                                             delta=0.1, eps=3, true_tomography=True,
-                                                            stop_when_reached_accuracy=False,
-                                                            theta=1)
+                                                            stop_when_reached_accuracy=False, eta=0.1,
+                                                            theta_minor=np.sqrt(0.20 * tr[2].shape[0]),
+                                                            estimate_least_k=True)
     except:
         pass
     else:
@@ -66,11 +67,12 @@ print('PCA50 done', 'n_components', qpca50.topk)
 while True:
     try:
 
-        qpca60 = qPCA(svd_solver='full', name='qpca60').fit(tr[3], theta_estimate=False,
+        qpca60 = qPCA(svd_solver='full', name='qpca60').fit(tr[3], theta_estimate=True, p=0.60, eps_theta=1,
                                                             estimate_all=True,
                                                             delta=0.1, eps=3, true_tomography=True,
-                                                            stop_when_reached_accuracy=False,
-                                                            theta=1)
+                                                            stop_when_reached_accuracy=False, eta=0.1,
+                                                            theta_minor=np.sqrt(0.20 * tr[3].shape[0]),
+                                                            estimate_least_k=True)
     except:
         pass
     else:
@@ -78,19 +80,20 @@ while True:
 print('PCA60 done', 'n_components', qpca60.topk)
 while True:
     try:
-        qpca70 = qPCA(svd_solver='full', name='qpca70').fit(tr[4], theta_estimate=False,
+        qpca70 = qPCA(svd_solver='full', name='qpca70').fit(tr[4], theta_estimate=True, p=0.70, eps_theta=1,
                                                             estimate_all=True,
                                                             delta=0.1, eps=3, true_tomography=True,
-                                                            stop_when_reached_accuracy=False, theta=1)
+                                                            stop_when_reached_accuracy=False, eta=0.1,
+                                                            theta_minor=np.sqrt(0.20 * tr[4].shape[0]),
+                                                            estimate_least_k=True)
     except:
         pass
     else:
         break
 print('PCA70 done', 'n_components', qpca70.topk)
 QPCAs = [qpca30, qpca40, qpca50, qpca60, qpca70]
-#QPCAs = [qpca70]
 
-qmodel = Model(QPCAs, quantils, quantum=True).fit(tr, minor_sv_variance=0.20, only_dot_product=False,experiment=1)
+qmodel = Model(QPCAs, quantils, quantum=True).fit(tr, minor_sv_variance=0.20, only_dot_product=False, experiment=1)
 
 recall1, precision1, accuracy1, f1_score1 = qmodel.predict(te, labels, name_negative_class='BENIGN',
                                                            only_dot_product=False, experiment=1)
@@ -257,5 +260,5 @@ else:
     print(tabulate([one_perc_acc, two_perc_acc, four_perc_acc, six_perc_acc, ten_perc_acc, thir_perc_acc],
                    headers=headers))
 
-#qpca70.runtime_comparison(1000000, 8000, 'CICIDSExp1.pdf', estimate_components='right_sv', classic_runtime='classic')
-#qpca70.runtime_comparison(10000, 100, 'CICIDSExp1_zoom.pdf', estimate_components='right_sv', classic_runtime='classic')
+# qpca70.runtime_comparison(1000000, 8000, 'CICIDSExp1.pdf', estimate_components='right_sv', classic_runtime='classic')
+# qpca70.runtime_comparison(10000, 100, 'CICIDSExp1_zoom.pdf', estimate_components='right_sv', classic_runtime='classic')

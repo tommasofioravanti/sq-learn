@@ -27,8 +27,10 @@ author = 'Tommaso'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'sphinx.ext.mathjax'
+    'sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'sphinx.ext.mathjax','rst2pdf.pdfbuilder'
 ]
+
+pdf_documents = [('index', u'rst2pdf', u'Sample rst2pdf doc', u'Your Name'),]
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 

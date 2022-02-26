@@ -94,90 +94,165 @@ recall1, precision1, accuracy1, f1_score1 = qmodel.predict(tests, labels, name_n
                                                            only_dot_product=True, experiment=1)
 
 components = [i for i in recall1]
-headers = ['FAR', 'PCC']
-one_perc = [recall1[i][0] for i in components]
-two_perc = [recall1[i][1] for i in components]
-four_perc = [recall1[i][2] for i in components]
-six_perc = [recall1[i][3] for i in components]
-eight_perc = [recall1[i][4] for i in components]
-ten_perc = [recall1[i][5] for i in components]
+exp=1
+if exp==0:
 
-one_perc_avg = np.mean(one_perc)
-one_perc_std = np.std(one_perc)
+    headers = ['FAR', 'PCC']
+    one_perc = [recall1[i][0] for i in components]
+    two_perc = [recall1[i][1] for i in components]
+    four_perc = [recall1[i][2] for i in components]
+    six_perc = [recall1[i][3] for i in components]
+    eight_perc = [recall1[i][4] for i in components]
+    ten_perc = [recall1[i][5] for i in components]
 
-two_perc_avg = np.mean(two_perc)
-two_perc_std = np.std(two_perc)
+    one_perc_avg = np.mean(one_perc)
+    one_perc_std = np.std(one_perc)
 
-four_perc_avg = np.mean(four_perc)
-four_perc_std = np.std(four_perc)
+    two_perc_avg = np.mean(two_perc)
+    two_perc_std = np.std(two_perc)
 
-six_perc_avg = np.mean(six_perc)
-six_perc_std = np.std(six_perc)
+    four_perc_avg = np.mean(four_perc)
+    four_perc_std = np.std(four_perc)
 
-eight_perc_avg = np.mean(eight_perc)
-eight_perc_std = np.std(eight_perc)
+    six_perc_avg = np.mean(six_perc)
+    six_perc_std = np.std(six_perc)
 
-ten_perc_avg = np.mean(ten_perc)
-ten_perc_std = np.std(ten_perc)
+    eight_perc_avg = np.mean(eight_perc)
+    eight_perc_std = np.std(eight_perc)
 
-one_str = [str(one_perc_avg) + ' +/- ' + str(one_perc_std)]
-two_str = [str(two_perc_avg) + ' +/- ' + str(two_perc_std)]
-four_str = [str(four_perc_avg) + ' +/- ' + str(four_perc_std)]
-six_str = [str(six_perc_avg) + ' +/- ' + str(six_perc_std)]
-eight_str = [str(eight_perc_avg) + ' +/- ' + str(eight_perc_std)]
-ten_str = [str(ten_perc_avg) + ' +/- ' + str(ten_perc_std)]
+    ten_perc_avg = np.mean(ten_perc)
+    ten_perc_std = np.std(ten_perc)
 
-one_str.insert(0, '1%')
-two_str.insert(0, '2%')
-four_str.insert(0, '4%')
-six_str.insert(0, '6%')
-eight_str.insert(0, '8%')
-ten_str.insert(0, '10%')
+    one_str = [str(one_perc_avg) + ' +/- ' + str(one_perc_std)]
+    two_str = [str(two_perc_avg) + ' +/- ' + str(two_perc_std)]
+    four_str = [str(four_perc_avg) + ' +/- ' + str(four_perc_std)]
+    six_str = [str(six_perc_avg) + ' +/- ' + str(six_perc_std)]
+    eight_str = [str(eight_perc_avg) + ' +/- ' + str(eight_perc_std)]
+    ten_str = [str(ten_perc_avg) + ' +/- ' + str(ten_perc_std)]
 
-one_perc_p = [precision1[i][0] for i in components]
-two_perc_p = [precision1[i][1] for i in components]
-four_perc_p = [precision1[i][2] for i in components]
-six_perc_p = [precision1[i][3] for i in components]
-eight_perc_p = [precision1[i][4] for i in components]
-ten_perc_p = [precision1[i][5] for i in components]
+    one_str.insert(0, '1%')
+    two_str.insert(0, '2%')
+    four_str.insert(0, '4%')
+    six_str.insert(0, '6%')
+    eight_str.insert(0, '8%')
+    ten_str.insert(0, '10%')
 
-one_perc_avg_p = np.mean(one_perc_p)
-one_perc_std_p = np.std(one_perc_p)
+    one_perc_p = [precision1[i][0] for i in components]
+    two_perc_p = [precision1[i][1] for i in components]
+    four_perc_p = [precision1[i][2] for i in components]
+    six_perc_p = [precision1[i][3] for i in components]
+    eight_perc_p = [precision1[i][4] for i in components]
+    ten_perc_p = [precision1[i][5] for i in components]
 
-two_perc_avg_p = np.mean(two_perc_p)
-two_perc_std_p = np.std(two_perc_p)
+    one_perc_avg_p = np.mean(one_perc_p)
+    one_perc_std_p = np.std(one_perc_p)
 
-four_perc_avg_p = np.mean(four_perc_p)
-four_perc_std_p = np.std(four_perc_p)
+    two_perc_avg_p = np.mean(two_perc_p)
+    two_perc_std_p = np.std(two_perc_p)
 
-six_perc_avg_p = np.mean(six_perc_p)
-six_perc_std_p = np.std(six_perc_p)
+    four_perc_avg_p = np.mean(four_perc_p)
+    four_perc_std_p = np.std(four_perc_p)
 
-eight_perc_avg_p = np.mean(eight_perc_p)
-eight_perc_std_p = np.std(eight_perc_p)
+    six_perc_avg_p = np.mean(six_perc_p)
+    six_perc_std_p = np.std(six_perc_p)
 
-ten_perc_avg_p = np.mean(ten_perc_p)
-ten_perc_std_p = np.std(ten_perc_p)
+    eight_perc_avg_p = np.mean(eight_perc_p)
+    eight_perc_std_p = np.std(eight_perc_p)
 
-one_str_p = [str(one_perc_avg_p) + ' +/- ' + str(one_perc_std_p)]
-two_str_p = [str(two_perc_avg_p) + ' +/- ' + str(two_perc_std_p)]
-four_str_p = [str(four_perc_avg_p) + ' +/- ' + str(four_perc_std_p)]
-six_str_p = [str(six_perc_avg_p) + ' +/- ' + str(six_perc_std_p)]
-eight_str_p = [str(eight_perc_avg_p) + ' +/- ' + str(eight_perc_std_p)]
-ten_str_p = [str(ten_perc_avg_p) + ' +/- ' + str(ten_perc_std_p)]
+    ten_perc_avg_p = np.mean(ten_perc_p)
+    ten_perc_std_p = np.std(ten_perc_p)
 
-one_str_p.insert(0, '1%')
-two_str_p.insert(0, '2%')
-four_str_p.insert(0, '4%')
-six_str_p.insert(0, '6%')
-eight_str_p.insert(0, '8%')
-ten_str_p.insert(0, '10%')
+    one_str_p = [str(one_perc_avg_p) + ' +/- ' + str(one_perc_std_p)]
+    two_str_p = [str(two_perc_avg_p) + ' +/- ' + str(two_perc_std_p)]
+    four_str_p = [str(four_perc_avg_p) + ' +/- ' + str(four_perc_std_p)]
+    six_str_p = [str(six_perc_avg_p) + ' +/- ' + str(six_perc_std_p)]
+    eight_str_p = [str(eight_perc_avg_p) + ' +/- ' + str(eight_perc_std_p)]
+    ten_str_p = [str(ten_perc_avg_p) + ' +/- ' + str(ten_perc_std_p)]
 
-print('Detection Rate')
-print(tabulate([one_str, two_str, four_str, six_str, eight_str, ten_str], headers=headers))
-print("\n \n ")
-print('Precision')
-print(tabulate([one_str_p, two_str_p, four_str_p, six_str_p, eight_str_p, ten_str_p], headers=headers))
+    one_str_p.insert(0, '1%')
+    two_str_p.insert(0, '2%')
+    four_str_p.insert(0, '4%')
+    six_str_p.insert(0, '6%')
+    eight_str_p.insert(0, '8%')
+    ten_str_p.insert(0, '10%')
 
-#qpca70.runtime_comparison(100000, 5000, 'KDDCUPExp1.pdf', estimate_components='right_sv', classic_runtime='classic')
-qpca70.runtime_comparison(10000, 10, 'KDDCUPExp1zoom.pdf', estimate_components='right_sv', classic_runtime='classic')
+    print('Detection Rate')
+    print(tabulate([one_str, two_str, four_str, six_str, eight_str, ten_str], headers=headers))
+    print("\n \n ")
+    print('Precision')
+    print(tabulate([one_str_p, two_str_p, four_str_p, six_str_p, eight_str_p, ten_str_p], headers=headers))
+else:
+    headers = ['FAR', 'PCA30', 'PCA40', 'PCA50', 'PCA60', 'PCA70']
+    one_perc = [recall1[i][0] for i in components]
+    two_perc = [recall1[i][1] for i in components]
+    four_perc = [recall1[i][2] for i in components]
+    six_perc = [recall1[i][3] for i in components]
+    ten_perc = [recall1[i][4] for i in components]
+    thirty_perc = [recall1[i][5] for i in components]
+
+    two_perc_prec = [precision1[i][1] for i in components]
+    one_perc_prec = [precision1[i][0] for i in components]
+    four_perc_prec = [precision1[i][2] for i in components]
+    six_perc_prec = [precision1[i][3] for i in components]
+    ten_perc_prec = [precision1[i][4] for i in components]
+    thir_perc_prec = [precision1[i][5] for i in components]
+
+    one_perc_prec.insert(0, '1%')
+    two_perc_prec.insert(0, '2%')
+    four_perc_prec.insert(0, '4%')
+    six_perc_prec.insert(0, '6%')
+    ten_perc_prec.insert(0, '8%')
+    thir_perc_prec.insert(0, '10%')
+
+    one_perc.insert(0, '1%')
+    two_perc.insert(0, '2%')
+    four_perc.insert(0, '4%')
+    six_perc.insert(0, '6%')
+    ten_perc.insert(0, '8%')
+    thirty_perc.insert(0, '10%')
+
+    ######
+    one_perc_f1 = [f1_score1[i][0] for i in components]
+    two_perc_f1 = [f1_score1[i][1] for i in components]
+    four_perc_f1 = [f1_score1[i][2] for i in components]
+    six_perc_f1 = [f1_score1[i][3] for i in components]
+    ten_perc_f1 = [f1_score1[i][4] for i in components]
+    thir_perc_f1 = [f1_score1[i][5] for i in components]
+
+    one_perc_f1.insert(0, '1%')
+    two_perc_f1.insert(0, '2%')
+    four_perc_f1.insert(0, '4%')
+    six_perc_f1.insert(0, '6%')
+    ten_perc_f1.insert(0, '8%')
+    thir_perc_f1.insert(0, '10%')
+
+    one_perc_acc = [accuracy1[i][0] for i in components]
+    two_perc_acc = [accuracy1[i][1] for i in components]
+    four_perc_acc = [accuracy1[i][2] for i in components]
+    six_perc_acc = [accuracy1[i][3] for i in components]
+    ten_perc_acc = [accuracy1[i][4] for i in components]
+    thir_perc_acc = [accuracy1[i][5] for i in components]
+
+    one_perc_acc.insert(0, '1%')
+    two_perc_acc.insert(0, '2%')
+    four_perc_acc.insert(0, '4%')
+    six_perc_acc.insert(0, '6%')
+    ten_perc_acc.insert(0, '8%')
+    thir_perc_acc.insert(0, '10%')
+
+    print('Detection Rate')
+    print(tabulate([one_perc, two_perc, four_perc, six_perc, ten_perc, thirty_perc], headers=headers))
+    print("\n \n ")
+    print('Precision')
+    print(tabulate([one_perc_prec, two_perc_prec, four_perc_prec, six_perc_prec, ten_perc_prec, thir_perc_prec],
+                   headers=headers))
+    print("\n \n ")
+    print('F1_Score')
+    print(tabulate([one_perc_f1, two_perc_f1, four_perc_f1, six_perc_f1, ten_perc_f1, thir_perc_f1], headers=headers))
+    print("\n \n ")
+    print('Accuracy')
+    print(tabulate([one_perc_acc, two_perc_acc, four_perc_acc, six_perc_acc, ten_perc_acc, thir_perc_acc],
+                   headers=headers))
+
+qpca70.runtime_comparison(100000, 5000, 'KDDCUPExp1.pdf', estimate_components='right_sv', classic_runtime='classic')
+#qpca70.runtime_comparison(10000, 10, 'KDDCUPExp1zoom.pdf', estimate_components='right_sv', classic_runtime='classic')
