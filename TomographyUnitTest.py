@@ -3,9 +3,11 @@ import matplotlib.pyplot as plt
 from sklearn.QuantumUtility.Utility import *
 import warnings
 from fitter import *
+from scipy.stats import shapiro
 
 warnings.filterwarnings("ignore")
 # LOAD ARRAY
+v_longer = create_rand_vec(1, 2000)[0]
 
 v_exp = np.load('array784_exp.npy')
 v_uni = np.load('array784.npy')
@@ -14,12 +16,15 @@ v_sparse50 = np.load('sparse_arr_50.npy')
 
 # CREATE NEW ARRAY
 # new_vec = np.array(create_rand_vec(1, 100))
+
 list_ = [v_exp, v_uni, v_sparse20, v_sparse50]
-delta = 0.3
+delta = 0.03
+
 
 # MAKE TOMOGRAPHY
 
 def decreasing_error_plot(vector_list, delta, norm='L2'):
+    name=['v_exp','v_uni','v_sparse80','v_sparse50']
     if len(vector_list) > 1:
         it = iter(vector_list)
         the_len = len(next(it))
@@ -33,10 +38,11 @@ def decreasing_error_plot(vector_list, delta, norm='L2'):
     fig = plt.figure()
 
     for e, vector in enumerate(vector_list):
-        if np.linalg.norm(vector) != 0.999 or np.linalg.norm(vector) != 1.0:
+        if np.isclose(np.linalg.norm(vector), 1, rtol=1e-2):
+            pass
+        else:
             vector = vector / np.linalg.norm(vector, ord=2)
-        dictionary_estimates = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False,
-                                               norm=norm)
+        dictionary_estimates = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False, norm=norm)
         measure = list(dictionary_estimates.keys())
         samples = list(dictionary_estimates.values())
         if norm == 'L2':
@@ -48,18 +54,23 @@ def decreasing_error_plot(vector_list, delta, norm='L2'):
             np.diff(np.sign(np.full(shape=len(samples_), fill_value=delta) - samples_))).flatten()
 
         plt.plot(measure[idx[0]], delta, 'ro')
-        plt.plot(measure, samples_, label='vector' + str(e) + str((measure[idx[0]], delta)))
+        plt.plot(measure, samples_, label=name[e]+str((measure[idx[0]], delta)))
+        plt.axvline(x=measure[idx[0]], ymax=0.2, color='black', linestyle='--')
 
-    plt.axhline(y=delta, color='k', linestyle='--', label='delta=' + str(delta))
-    plt.axvline(x=N, color='k', linestyle='dotted', label='N =' + str(N))
+    plt.axhline(y=delta, color='k', linestyle='--', label=r'$\epsilon$=' + str(delta))
+    plt.axvline(x=N, color='yellow', linestyle=':', label='N =' + str(N))
+    plt.xlabel('number of measurements')
+    plt.ylabel('error')
     plt.xscale('log')
-    plt.title("Error decrease for vectors of length" + str(len(vector_list[0])),
+    '''plt.title("Error decrease for vectors of length" + str(len(vector_list[0])),
               fontdict={'family': 'serif',
                         'color': 'darkblue',
                         'weight': 'bold',
-                        'size': 18})
+                        'size': 18})'''
     plt.legend()
+    #plt.savefig('tomo_executive03.pdf')
     plt.show()
+
 
 
 def make_real_predicted_comparison(vector, delta, norm='L2'):
@@ -77,7 +88,8 @@ def make_real_predicted_comparison(vector, delta, norm='L2'):
 
     if norm != 'all':
 
-        dictionary_estimates = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False, norm=norm)
+        dictionary_estimates = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False,
+                                               norm=norm)
         measure = list(dictionary_estimates.keys())
         samples = list(dictionary_estimates.values())
         if norm == 'L2':
@@ -94,20 +106,23 @@ def make_real_predicted_comparison(vector, delta, norm='L2'):
 
         plt.plot(measure[idx[0]], delta, 'ro')
         plt.plot(N, delta, 'ro')
-        plt.title("Comparison between real and predicted measurements",
+        '''plt.title("Comparison between real and predicted measurements",
                   fontdict={'family': 'serif',
                             'color': 'darkblue',
                             'weight': 'bold',
-                            'size': 18})
+                            'size': 18})'''
         predicted_points = [compute_predicted_measure(len(vector), i, norm=norm) for i in samples_]
 
-        plt.axhline(y=delta, color='k', linestyle='--', label='delta=' + str(delta))
-        plt.axvline(x=N, color='k', linestyle='dotted', label='N=' + str(N))
+        plt.axhline(y=delta, color='k', linestyle='--', label=r'$\epsilon$=' + str(delta))
+        plt.axvline(x=N, color='yellow', linestyle='dotted', label='N=' + str(N))
         plt.xscale('log')
+        plt.ylabel('error')
+        plt.xlabel('number of measurements')
         plt.plot(predicted_points, samples_, label="theory" + str((N, delta)))
         plt.plot(measure, samples_, label="real" + str((measure[idx[0]], delta)))
         plt.legend()
         plt.show()
+        #plt.savefig('real_theory.pdf')
     else:
         dictionary_estimatesL2 = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False,
                                                  norm='L2')
@@ -153,16 +168,22 @@ def make_real_predicted_comparison(vector, delta, norm='L2'):
         plt.plot(measureL2, samples_L2_, label="real_L2" + str((measureL2[idx_L2[0]], delta)))
         plt.plot(measureLinf, samples_Linf_, label="real_Linf" + str((measureLinf[idx_Linf[0]], delta)))
         plt.legend()
+        #plt.savefig('real_theory_comparison.pdf')
         plt.show()
 
 
-def found_distribution(vector, n_measurements, delta, N=None, distribution_fitter=False, distributions=None, norm='L2'):
+def found_distribution(vector, n_measurements, delta, distribution_fitter=False, distributions=None, norm='L2',
+                       incremental_measure=False, N=None):
     samples = []
-    if np.linalg.norm(vector) != 0.999 or np.linalg.norm(vector) != 1.0:
+    if np.isclose(np.linalg.norm(vector), 1, rtol=1e-2):
+        pass
+    else:
+
         vector = vector / np.linalg.norm(vector, ord=2)
 
     for i in range(n_measurements):
-        B = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False, norm=norm, N=N)
+        B = real_tomography(vector, delta=delta, stop_when_reached_accuracy=False, norm=norm,
+                            incremental_measure=incremental_measure, N=N)
         print(i)
         # Append the Frobenius norm of A-B to the samples
         B = np.array(list(B.values())[-1])
@@ -172,24 +193,17 @@ def found_distribution(vector, n_measurements, delta, N=None, distribution_fitte
             samples.append(np.linalg.norm(vector - B, ord=np.inf))
     # Plot the samples
     plt.hist(samples, bins=50, color="darkblue")
-    plt.xlabel(r"$||\mathbf{v} - \overline{\mathbf{v}}||_F$")
+    plt.xlabel(r"$||\mathbf{v} - \overline{\mathbf{v}}||_2$")
     plt.ylabel("measurements")
 
     if distribution_fitter:
         f = Fitter(samples, distributions=distributions, timeout=100)
         f.fit()
         f.summary()
+        plt.xlabel(r"$||\mathbf{v_{uni}} - \overline{\mathbf{v_{uni}}}||_2$")
+        plt.ylabel("measurements")
         print(f.get_best(method='sumsquare_error'))
+    #plt.savefig('distribution.pdf')
     plt.show()
-
     return samples
 
-# decreasing_error_plot(list_, delta,norm = 'inf')
-# make_real_predicted_comparison(v_uni, delta=0.3, norm='inf')
-# found_distribution(vector=v_uni, n_measurements=1000, delta=.9,distribution_fitter=True)
-# DELTA = 0.3
-# delta=0.3
-# found_distribution(vector=v_uni, n_measurements=1000, delta=delta)
-#v_uni_scaled=v_uni*10
-# Theory vs Real for uniform_vector
-#make_real_predicted_comparison(v_uni, delta=0.01)
