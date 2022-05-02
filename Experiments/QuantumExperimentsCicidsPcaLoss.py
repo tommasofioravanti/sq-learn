@@ -10,7 +10,7 @@ warnings.filterwarnings("ignore")
 # df_new -> LEN TRAIN 50000, LEN_VALIDATION 226966, thr=0.4259394035517815, n_q=751,n_c=12
 # df_Ddos -> LEN_TRAIN 50000, LEN_VALIDATION 90000
 # df_DdoSPaper -> LEN_TRAIN 158022, LEN_VALIDATION 60000, th=0.06632108379654125, n_q=24,n_c=32
-df_new = pd.read_csv('../df_DDoSPaper.csv')
+df_new = pd.read_csv('../df_new.csv')
 
 df_new.replace('Infinity', -1, inplace=True)
 df_new[["Flow Bytes/s", "Flow Packets/s"]] = df_new[["Flow Bytes/s", "Flow Packets/s"]].apply(pd.to_numeric)
@@ -36,11 +36,15 @@ columns_to_drop_train = categorical_columns_train + constant_columns
 
 columns_to_drop_test = categorical_columns_test + constant_columns
 df_new = df_new.drop(columns=columns_to_drop_test)
-LEN_TRAIN = 158022  # 158022#50000
-LEN_VALIDATION = 60000  # 60000#226966#60000##226966
-n_quantils = 24
-threshold = .06632108379654125
-n_components = 32
+
+LEN_TRAIN = 50000
+LEN_VALIDATION = 226966
+
+#Hyperparamters found with Optuna
+
+n_quantils = 751
+threshold = 0.4259394035517815
+n_components = 12
 qt = QuantileTransformer(n_quantiles=n_quantils, random_state=0)
 x = qt.fit_transform(df_new.drop(columns='Label'))
 
@@ -48,9 +52,8 @@ train = x[:LEN_TRAIN]
 test = x[LEN_TRAIN + LEN_VALIDATION:]
 
 # Score on Test set
-
-qpca = qPCA(svd_solver="full")
-delta = [0.9]
+qpca = qPCA(svd_solver="full", name='PCA')
+delta = [0.01, 0.1, 0.9, 2]
 for d_ in delta:
     print(d_)
 
@@ -58,12 +61,12 @@ for d_ in delta:
     while True:
         try:
 
-            qPca_fitted = qpca.fit(train, theta_estimate=True, eps_theta=.3, p=n_components,
-                                   estimate_all=True, delta=d_, eps=2, true_tomography=True,
-                                   eta=0.00075, norm='L2', condition_number_est=False)
+            qPca_fitted = qpca.fit(train, theta_estimate=False, eps_theta=3, p=n_components,
+                                   estimate_all=True, delta=0, eps=0, true_tomography=True,
+                                   eta=0.04, norm='L2', condition_number_est=False, spectral_norm_est=False)
             n_c = qPca_fitted.topk
             print(n_c)
-            if n_c <= 32:
+            if n_c <= 12:
                 break
         except:
             pass
@@ -95,11 +98,10 @@ for d_ in delta:
         TN = 0
         FN = 0
 
-    # Delta = 0.01, eps_theta = 0.0005
     p = TP / (TP + FP)
     r = TP / (TP + FN)
     accuracy = (TP + TN) / (TP + TN + FP + FN)
     print('f1:', 2 / ((1 / p) + (1 / r)), 'precision:', p, 'recall:', r, 'accuracy:', accuracy)
-    if d_ == 0.1:
-        qPca_fitted.runtime_comparison(10000, 20, 'CICIDSLoss.pdf', estimate_components='right_sv',
-                                       classic_runtime='rand')
+    # if d_ == 0.1:
+    #    qPca_fitted.runtime_comparison(1000000000, 5000, 'CICIDSLoss0_1Zoom.pdf', estimate_components='right_sv',
+    #                                   classic_runtime='rand')
