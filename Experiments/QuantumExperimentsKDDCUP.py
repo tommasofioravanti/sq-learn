@@ -15,6 +15,7 @@ trains_without_labels = []
 tests = []
 labels = []
 test = []
+#Load data
 for i in range(5):
     trains.append(pd.read_csv('../KDDCUP/Trains/trains' + str(i)).drop(columns='Unnamed: 0'))
     tests.append(pd.read_csv('../KDDCUP/Tests/tests' + str(i)).set_index('Unnamed: 0'))
@@ -25,7 +26,7 @@ for i in range(5):
     labels.append(df1.loc[x][41])
     trains_without_labels.append(trains[i].drop(columns='41'))
 
-# Compute Quantile---> 1-\alpha1
+# Compute quantiles
 alpha = [0.01, 0.02, 0.04, 0.06, 0.08, 0.10]
 quantils = []
 for i in alpha:
@@ -33,6 +34,7 @@ for i in alpha:
     quantile = 1 - np.round(np.roots(eq)[1], decimals=4)
     quantils.append(quantile)
 
+#Fit PCA models
 while True:
     try:
         qpca30 = qPCA(svd_solver='full', name='qpca30').fit(trains[0].drop(columns='41'), theta_estimate=True,
@@ -40,68 +42,69 @@ while True:
                                                             theta_minor=np.sqrt(0.20*trains[0].shape[0]),
                                                             estimate_all=True,
                                                             delta=0.9, eps=3, true_tomography=True,
-                                                            eta=0.2,
-                                                            estimate_least_k=True)
+                                                            eta=0.2, spectral_norm_est=False,
+                                                            estimate_least_k=False)
     except:
         pass
     else:
         break
 print('PCA30 done', 'n_components', qpca30.topk)
-
 while True:
     try:
         qpca40 = qPCA(svd_solver='full', name='qpca40').fit(trains[1].drop(columns='41'), theta_estimate=True,
                                                             eps_theta=1,
                                                             p=0.40,
                                                             estimate_all=True,
-                                                            delta=0.1, eps=3, true_tomography=True, eta=0.1,
+                                                            delta=0.9, eps=3, true_tomography=True, eta=0.16,
                                                             theta_minor=np.sqrt(0.20*trains[1].shape[0]),
-                                                            estimate_least_k=True)
+                                                            estimate_least_k=False)
     except:
         pass
     else:
         break
 print('PCA40 done', 'n_components', qpca40.topk)
+
 while True:
     try:
-        qpca50 = qPCA(svd_solver='full', name='qpca50').fit(trains[2].drop(columns='41'), theta_estimate=True,
+        qpca50 = qPCA(svd_solver='full', name='PCA50').fit(trains[2].drop(columns='41'), theta_estimate=True,
                                                             eps_theta=1,
                                                             p=0.50,
                                                             estimate_all=True,
-                                                            delta=0.1, eps=3, true_tomography=True, eta=0.1,
+                                                            delta=0.9, eps=3, true_tomography=True, eta=0.1,
                                                             theta_minor=np.sqrt(0.20 * trains[2].shape[0]),
-                                                            estimate_least_k=True
-                                                            )
+                                                            estimate_least_k=False,spectral_norm_est=True)
     except:
         pass
     else:
         break
 print('PCA50 done', 'n_components', qpca50.topk)
+
 while True:
     try:
         qpca60 = qPCA(svd_solver='full', name='qpca60').fit(trains[3].drop(columns='41'), theta_estimate=True,
                                                             eps_theta=1,
                                                             p=0.60,
                                                             estimate_all=True,
-                                                            delta=0.1, eps=3, true_tomography=True, eta=0.1,
+                                                            delta=0.9, eps=50, true_tomography=True, eta=0.1,
                                                             theta_minor=np.sqrt(0.20 * trains[3].shape[0]),
-                                                            estimate_least_k=True
+                                                            estimate_least_k=False
+                                                            ,spectral_norm_est=True
                                                             )
     except:
         pass
     else:
         break
 print('PCA60 done', 'n_components', qpca60.topk)
+
 while True:
     try:
-        qpca70 = qPCA(svd_solver='full', name='qpca70').fit(trains[4].drop(columns='41'), theta_estimate=True,
+        qpca70 = qPCA(svd_solver='full', name='PCA70').fit(trains[4].drop(columns='41'), theta_estimate=True,
                                                             eps_theta=1,
                                                             p=0.70,
                                                             estimate_all=True,
-                                                            delta=0.1, eps=3, true_tomography=True, eta=0.1,
+                                                            delta=0.5, eps=3, true_tomography=True, eta=0.1,
                                                             theta_minor=np.sqrt(0.20 * trains[4].shape[0]),
-                                                            estimate_least_k=True
-                                                            )
+                                                            spectral_norm_est=True, estimate_least_k=False)
     except:
         pass
     else:
@@ -109,12 +112,16 @@ while True:
 print('PCA70 done', 'n_components', qpca70.topk)
 
 QPCAs = [qpca30, qpca40, qpca50, qpca60, qpca70]
-#QPCAs = [qpca30]
-
+# Make prediction. Set quantum=True for quantum experiment and False for the classical counterparts.
+# With experiment=0, we mean the PCA model with only major components. Experiment=1 refers to PCA model with major and
+# minor components.
+# Only_dot_product=True refers to the experiments where we consider only the dot product in the computations of the model.
+# Only_dot_product=False instead refers to the ensemble model.
+# name_negative_class-> is the name of the normal label.
 qmodel = Model(QPCAs, quantils, quantum=True).fit(trains_without_labels, minor_sv_variance=0.20, only_dot_product=True,
-                                                  experiment=1)
+                                                  experiment=0)
 recall_dot, precision_dot, accuracy_dot, f1_score_dot = qmodel.predict(tests, labels, name_negative_class='normal.',
-                                                                       only_dot_product=True, experiment=1)
+                                                                       only_dot_product=True, experiment=0)
 
 components = [i for i in recall_dot]
 headers = ['FAR', 'PCA30', 'PCA40', 'PCA50', 'PCA60', 'PCA70']
@@ -188,88 +195,13 @@ print(tabulate([one_perc_f1, two_perc_f1, four_perc_f1, six_perc_f1, ten_perc_f1
 print("\n \n ")
 print('Accuracy')
 print(tabulate([one_perc_acc, two_perc_acc, four_perc_acc, six_perc_acc, ten_perc_acc, thir_perc_acc], headers=headers))
-# qpca70.runtime_comparison(10000, 10, 'KDDUCUP0.pdf', estimate_components='right_sv', classic_runtime='rand')
-'''dictionary_major = {}
-dictionary_minor = {}
-for e, pca in enumerate(QPCAs):
 
-    out_threshold_list_major = []
-    out_threshold_list_minor = []
-    emp_distribution_major = []
+# Runtime_comparison plot the comparison between classical and quantum model's fitting. The first two parameters are the
+# maximum number of samples and features respectively.
+# estimate_components='right_sv' means that in the top-k singular vectors extraction, we extract only the right singular
+# vectors.
+# classic_runtime='rand'-> randomized classical running time. Otherwise, 'classic' refers to the full SVD complexity.
 
-    for j in range(len(trains[e].drop(columns='41'))):
-        sample = np.array(trains[e].drop(columns='41').iloc[j])
-        y = np.dot(sample, pca.estimate_right_sv.T)
-        s_major = np.sum(y ** 2 / pca.estimate_fs)
+#qpca50.runtime_comparison(5000000, 500, 'KDDUCUP01.pdf', estimate_components='right_sv', classic_runtime='rand')
+qpca70.runtime_comparison(10000000, 50, 'KDDUCUP1.pdf', estimate_components='right_sv', classic_runtime='rand')
 
-        emp_distribution_major.append(s_major)
-
-    for q in quantils:
-        n_major = len(emp_distribution_major)
-
-        sort_major = sorted(emp_distribution_major)
-
-        out_threshold_major = sort_major[int(n_major * q)]
-
-        out_threshold_list_major.append(out_threshold_major)
-
-    dictionary_major.update({pca: out_threshold_list_major})
-    # dictionary_minor.update({pca.components_retained_:out_threshold_list_minor})
-
-classification_res = {}
-for e, pca in enumerate(QPCAs):
-
-    acc_list = []
-    for threshold_major in dictionary_major[pca]:
-        print(threshold_major)
-        TP = []
-        FP = []
-        TN = []
-        FN = []
-
-        for j in range(len(tests[e])):
-            sample = np.array(tests[e].iloc[j])
-
-            y = np.dot(sample, pca.estimate_right_sv.T)
-
-            sum_major = np.sum(y ** 2 / pca.estimate_fs)
-
-            if sum_major > threshold_major:
-                if test[e].iloc[j][41] == 'attack':
-                    TP.append(j)
-                else:
-                    FP.append(j)
-            else:
-                if sum_major <= threshold_major:
-
-                    if test[e].iloc[j][41] == 'attack':
-                        FN.append(j)
-                    else:
-                        TN.append(j)
-
-        accuracy = (len(TP)) / (len(TP) + len(FN))
-        print(accuracy)
-        acc_list.append(accuracy)
-
-    classification_res.update({pca: acc_list})
-# First experiment
-components = [i for i in classification_res]
-
-
-headers = ['FAR','PCA30','PCA40','PCA50','PCA60','PCA70']
-one_perc = [classification_res[i][0] for i in components]
-two_perc = [classification_res[i][1] for i in components]
-four_perc = [classification_res[i][2] for i in components]
-six_perc = [classification_res[i][3] for i in components]
-eight_perc = [classification_res[i][4] for i in components]
-ten_perc = [classification_res[i][5] for i in components]
-
-
-one_perc.insert(0,'1%')
-two_perc.insert(0,'2%')
-four_perc.insert(0,'4%')
-six_perc.insert(0,'6%')
-eight_perc.insert(0,'8%')
-ten_perc.insert(0,'10%')
-
-print(tabulate([one_perc, two_perc, four_perc, six_perc, eight_perc, ten_perc], headers=headers))'''
