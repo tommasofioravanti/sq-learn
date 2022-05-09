@@ -9,7 +9,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>d_means &mdash; sqlearn  documentation</title>
+  <title>q_means &mdash; sqlearn  documentation</title>
   
 
   
@@ -90,7 +90,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">Getting started</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="sklearn.html">sqlearn package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="sklearn.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">d_means</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">q_means</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sklearn.decomposition.html">q_Pca</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sklearn.QuantumUtility.html">q_utilities</a></li>
 </ul>
@@ -149,7 +149,7 @@
         
           <li><a href="sklearn.html">sqlearn package</a> &raquo;</li>
         
-      <li>d_means</li>
+      <li>q_means</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -170,17 +170,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="d-means">
-<h1>d_means<a class="headerlink" href="#d-means" title="Permalink to this headline">¶</a></h1>
+  <section id="q-means">
+<h1>q_means<a class="headerlink" href="#q-means" title="Permalink to this headline">¶</a></h1>
 <section id="module-sklearn.cluster">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sklearn.cluster" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="#module-sklearn.cluster" title="sklearn.cluster"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a> module gathers popular unsupervised clustering
 algorithms.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="sklearn.cluster.DMeans_">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">DMeans_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'k-means++'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precompute_distances</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intermediate_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">true_tomography</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_when_reached_accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiprocess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">true_distance_estimate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sklearn.cluster.qMeans_">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">qMeans_</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'k-means++'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precompute_distances</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intermediate_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">true_tomography</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_when_reached_accuracy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiprocess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">true_distance_estimate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.qMeans_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.TransformerMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.ClusterMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">sklearn.base.BaseEstimator</span></code></p>
-<p>D-Means clustering.</p>
+<p>q-Means clustering.</p>
 <p>Read more in the <span class="xref std std-ref">User Guide</span> for the classical counterpart.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -261,8 +261,8 @@ routine is applied.</p></li>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.cluster_centers_">
-<span class="sig-name descname"><span class="pre">cluster_centers_</span></span><a class="headerlink" href="#sklearn.cluster.DMeans_.cluster_centers_" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sklearn.cluster.qMeans_.cluster_centers_">
+<span class="sig-name descname"><span class="pre">cluster_centers_</span></span><a class="headerlink" href="#sklearn.cluster.qMeans_.cluster_centers_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Coordinates of cluster centers. If the algorithm stops before fully
 converging (see <code class="docutils literal notranslate"><span class="pre">tol</span></code> and <code class="docutils literal notranslate"><span class="pre">max_iter</span></code>), these will not be
 consistent with <code class="docutils literal notranslate"><span class="pre">labels_</span></code>.</p>
@@ -274,8 +274,8 @@ consistent with <code class="docutils literal notranslate"><span class="pre">lab
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.labels_">
-<span class="sig-name descname"><span class="pre">labels_</span></span><a class="headerlink" href="#sklearn.cluster.DMeans_.labels_" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sklearn.cluster.qMeans_.labels_">
+<span class="sig-name descname"><span class="pre">labels_</span></span><a class="headerlink" href="#sklearn.cluster.qMeans_.labels_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Labels of each point</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -285,8 +285,8 @@ consistent with <code class="docutils literal notranslate"><span class="pre">lab
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.inertia_">
-<span class="sig-name descname"><span class="pre">inertia_</span></span><a class="headerlink" href="#sklearn.cluster.DMeans_.inertia_" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sklearn.cluster.qMeans_.inertia_">
+<span class="sig-name descname"><span class="pre">inertia_</span></span><a class="headerlink" href="#sklearn.cluster.qMeans_.inertia_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sum of squared distances of samples to their closest cluster center.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -296,8 +296,8 @@ consistent with <code class="docutils literal notranslate"><span class="pre">lab
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.n_iter_">
-<span class="sig-name descname"><span class="pre">n_iter_</span></span><a class="headerlink" href="#sklearn.cluster.DMeans_.n_iter_" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sklearn.cluster.qMeans_.n_iter_">
+<span class="sig-name descname"><span class="pre">n_iter_</span></span><a class="headerlink" href="#sklearn.cluster.qMeans_.n_iter_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of iterations run.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -308,7 +308,7 @@ consistent with <code class="docutils literal notranslate"><span class="pre">lab
 
 <p class="rubric">Notes</p>
 <p>The k-means problem is solved using either Lloyd’s or Elkan’s algorithm.
-The d-means problem is solved using only Lloyd’s algorithm.</p>
+The q-means problem is solved using only Lloyd’s algorithm.</p>
 <p>The average complexity is given by O(k n T), where n is the number of
 samples and T is the number of iteration.</p>
 <p>The worst case complexity is given by O(n^(k+2/p)) with
@@ -338,20 +338,20 @@ set.</p>
 <span class="go">       [ 1.,  2.]])</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dmeans</span> <span class="o">=</span> <span class="n">DMeans_</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dmeans</span><span class="o">.</span><span class="n">labels_</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qmeans</span> <span class="o">=</span> <span class="n">qMeans_</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qmeans</span><span class="o">.</span><span class="n">labels_</span>
 <span class="go">array([0, 0, 0, 1, 1, 1], dtype=int32)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dmeans</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qmeans</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
 <span class="go">array([0,1],dtype=int32)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qmeans</span><span class="o">.</span><span class="n">cluster_centers_</span>
 <span class="go">array([[ 1.  2.]</span>
 <span class="go">    [10.  2.]])</span>
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.fit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute d-means clustering.</p>
+<dt class="sig sig-object py" id="sklearn.cluster.qMeans_.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.qMeans_.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute q-means clustering.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -379,8 +379,8 @@ are assigned equal weight.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.fit_predict">
-<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.fit_predict" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sklearn.cluster.qMeans_.fit_predict">
+<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.qMeans_.fit_predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform clustering on <cite>X</cite> and returns cluster labels.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -399,8 +399,8 @@ are assigned equal weight.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.fit_transform">
-<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sklearn.cluster.qMeans_.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.qMeans_.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit to data, then transform it.</p>
 <p>Fits transformer to <cite>X</cite> and <cite>y</cite> with optional parameters <cite>fit_params</cite>
 and returns a transformed version of <cite>X</cite>.</p>
@@ -422,8 +422,8 @@ and returns a transformed version of <cite>X</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.predict">
-<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.predict" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sklearn.cluster.qMeans_.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.qMeans_.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict the closest cluster each sample in X belongs to.</p>
 <p>In the vector quantization literature, <cite>cluster_centers_</cite> is called
 the code book and each value returned by <cite>predict</cite> is the index of
@@ -447,8 +447,8 @@ are assigned equal weight.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sklearn.cluster.DMeans_.runtime_comparison">
-<span class="sig-name descname"><span class="pre">runtime_comparison</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saveas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">well_clusterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'False'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.DMeans_.runtime_comparison" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sklearn.cluster.qMeans_.runtime_comparison">
+<span class="sig-name descname"><span class="pre">runtime_comparison</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saveas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">well_clusterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sklearn.cluster.qMeans_.runtime_comparison" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function that allows to compare classic vs quantum runtime of the algorithm executed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

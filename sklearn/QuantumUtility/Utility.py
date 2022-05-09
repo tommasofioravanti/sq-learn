@@ -436,12 +436,12 @@ def amplitude_est_dist(w0, w1):
     return distance
 
 
-def amplitude_estimation(theta, epsilon=0.01, gamma=None, M=None, nqubit=False, plot_distribution=False):
+def amplitude_estimation(a, epsilon=0.01, gamma=None, M=None, nqubit=False, plot_distribution=False):
     """ Official version of the amplitude estimation function.
 
     Parameters
     ----------
-    theta: float or int value.
+    a: float or int value.
          Value that has to be estimated by the amplitude estimation. It must be in the range of [0,1].
 
     epsilon: float value, default=0.01
@@ -450,6 +450,7 @@ def amplitude_estimation(theta, epsilon=0.01, gamma=None, M=None, nqubit=False, 
     gamma: float value, default=None.
         It represent the probability of failure of amplitude estimation. If specified, median evaluation is performed
         to boost the probability of success of this routine.
+
     M: int value, default=None.
         The number of iteration executes in the routine.
 
@@ -473,7 +474,7 @@ def amplitude_estimation(theta, epsilon=0.01, gamma=None, M=None, nqubit=False, 
     a quantum state yields a good state.
     """
     if gamma:
-        return median_evaluation(amplitude_estimation, gamma=gamma, Q=None, theta=theta, epsilon=epsilon, M=M,
+        return median_evaluation(amplitude_estimation, gamma=gamma, Q=None, a=a, epsilon=epsilon, M=M,
                                  nqubit=False, plot_distribution=plot_distribution)
 
     if M == None:
@@ -487,7 +488,7 @@ def amplitude_estimation(theta, epsilon=0.01, gamma=None, M=None, nqubit=False, 
             "Attention! The value of M that will be considered is the one you passed. Epsilon in this case is "
             "useless")
 
-    theta_a = math.asin(np.sqrt(theta))
+    theta_a = math.asin(np.sqrt(a))
     p = []
     theta_j = []
 
@@ -517,7 +518,7 @@ def amplitude_estimation(theta, epsilon=0.01, gamma=None, M=None, nqubit=False, 
                             'color': 'darkblue',
                             'weight': 'bold',
                             'size': 8})
-        plt.xlabel(r'$\hat \theta$')
+        plt.xlabel(r'$\hat a$')
         plt.ylabel("probability")
 
         plt.show()
@@ -728,7 +729,7 @@ def ipe(x, y, epsilon, Q=1, gamma=0.1):
     epsilon_a = epsilon * max(1, np.abs(np.inner(x, y))) / (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2)
     if math.isclose(a, 0.0, abs_tol=1e-15):
         a = 0
-    a_tilde = amplitude_estimation(theta=a, gamma=gamma, epsilon=epsilon_a)
+    a_tilde = amplitude_estimation(a=a, gamma=gamma, epsilon=epsilon_a)
     s = (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2) * (1 - 2 * a_tilde) / 2
     return s
 
@@ -769,7 +770,7 @@ def consistent_phase_estimation(omega, epsilon, gamma, n=None, shift=None):
     if n == None:
         n = int(np.ceil(np.log2(1 / epsilon)) + np.ceil(np.log2(2 + 1 / (2 * gamma))))
 
-    C = delta / n
+    C = gamma / n
     delta_prime = (epsilon * C) / 2
     L = np.floor(2 / C)
     # shift = random.randint(1, L)
