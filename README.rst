@@ -37,8 +37,8 @@
 .. |SeabornMinVersion| replace:: 0.9.0
 .. |PytestMinVersion| replace:: 5.0.1
 
-
-![Alt text](Sklearn1.png?raw=true "Optional Title")
+.. image:: sklearn/docs/Image/Sklearn1.png
+   :alt: Alternative text
 
 **sq-learn** is a Python framework integrating classical machine learning algorithms in the tightly-knit world of scientific Python packages (numpy, scipy, matplotlib) with the quantum world.
 
