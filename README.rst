@@ -30,6 +30,3 @@ It aims to provide simple and efficient solutions to learning problems that are 
 It can be used to run either classical or quantum machine learning experiments.
 
 Up to now only PCA and K-means algorithm can be simulated in their quantum counterpart.
-
-=======
-The framework rests on the QuantumUtility.py module in which all the main quantum routines are implemented. It is important to be aware that the quantum machine learning algorithms that we use can be consider as randomized approximation algorithm. They are formalized in theorems where the approximation erro
