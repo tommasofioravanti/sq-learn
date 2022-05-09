@@ -39,7 +39,7 @@
 
 # Sqlearn-experiments
 
-![Alt text](/Images/Sklearn1.png?raw=true "Optional Title")
+![Alt text](/sklearn/docs/_templates/Sklearn1.png?raw=true "Optional Title")
 
 **sq-learn** is a Python framework integrating classical machine learning algorithms in the tightly-knit world of scientific Python packages (numpy, scipy, matplotlib) with the quantum world.
 
