@@ -2,7 +2,7 @@
 Machine learning module for Python
 ==================================
 
-Qsklearn is a Python module integrating classical machine
+sqlearn is a Python module integrating classical machine
 learning algorithms in the tightly-knit world of scientific Python
 packages (numpy, scipy, matplotlib) with the quantum world.
 

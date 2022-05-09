@@ -394,7 +394,7 @@ def real_tomography(V, N=None, delta=None, stop_when_reached_accuracy=True, norm
 
         dict_res.update({N: P_i})
 
-        print('error_tomography:',np.linalg.norm(V - P_i, ord=2))
+        # print('error_tomography:',np.linalg.norm(V - P_i, ord=2))
 
     return dict_res
 
@@ -436,7 +436,7 @@ def amplitude_est_dist(w0, w1):
     return distance
 
 
-def amplitude_estimation(theta, epsilon=0.01, M=None, nqubit=False, plot_distribution=False):
+def amplitude_estimation(theta, epsilon=0.01, gamma=None, M=None, nqubit=False, plot_distribution=False):
     """ Official version of the amplitude estimation function.
 
     Parameters
@@ -445,8 +445,11 @@ def amplitude_estimation(theta, epsilon=0.01, M=None, nqubit=False, plot_distrib
          Value that has to be estimated by the amplitude estimation. It must be in the range of [0,1].
 
     epsilon: float value, default=0.01
-        Error that you want to insert in the amplitude estimation procedure.
+        Error that you want to tolerate in the estimate of amplitude estimation.
 
+    gamma: float value, default=None.
+        It represent the probability of failure of amplitude estimation. If specified, median evaluation is performed
+        to boost the probability of success of this routine.
     M: int value, default=None.
         The number of iteration executes in the routine.
 
@@ -469,6 +472,10 @@ def amplitude_estimation(theta, epsilon=0.01, M=None, nqubit=False, plot_distrib
     and Estimation" paper. Amplitude estimation is the problem of estimating the probability that a measurements of
     a quantum state yields a good state.
     """
+    if gamma:
+        return median_evaluation(amplitude_estimation, gamma=gamma, Q=None, theta=theta, epsilon=epsilon, M=M,
+                                 nqubit=False, plot_distribution=plot_distribution)
+
     if M == None:
         M = (math.ceil((np.pi / (2 * epsilon)) * (1 + np.sqrt(1 + 4 * epsilon))))
         n_qubits = np.ceil(np.log2(M))
@@ -572,12 +579,12 @@ def wrapper_phase_est_arguments(argument, type='sv'):
 
 def unwrap_phase_est_arguments(argument, eps, type='sv'):
     if type == 'sv':
-        return math.cos(argument * (eps+np.pi) / 2)
+        return math.cos(argument * (eps + np.pi) / 2)
     if type == 'distance':
         return math.sin(argument * np.pi) ** 2
 
 
-def phase_estimation(omega, m=None, epsilon=None, delta=0.1, plot_distribution=False, nqubit=False):
+def phase_estimation(omega, m=None, epsilon=None, gamma=0.1, plot_distribution=False, nqubit=False):
     """ Official version of the phase estimation function.
 
         Parameters
@@ -595,7 +602,7 @@ def phase_estimation(omega, m=None, epsilon=None, delta=0.1, plot_distribution=F
             If True, the routine returns the estimation of omega, the k_est and also the number of qubits to represent
             an estimate with the specified precision and the parameter M.
 
-        delta: float value, default=0.1.
+        gamma: float value, default=0.1.
             It represent the probability of success of the routine.
 
         plot_distribution: bool value, default=False.
@@ -621,7 +628,7 @@ def phase_estimation(omega, m=None, epsilon=None, delta=0.1, plot_distribution=F
     if epsilon != None:
         warnings.warn('Attention! The m value is computed using the epsilon parameter passed.')
         # From Nielsen and Chuang (eq. 5.35).
-        m = int(np.ceil(np.log2(1 / epsilon)) + np.ceil(np.log2(2 + 1 / (2 * delta))))
+        m = int(np.ceil(np.log2(1 / epsilon)) + np.ceil(np.log2(2 + 1 / (2 * gamma))))
 
     p = []
     omega_k = []
@@ -644,19 +651,19 @@ def phase_estimation(omega, m=None, epsilon=None, delta=0.1, plot_distribution=F
     k_est = omega_tilde * M
 
     if plot_distribution:
-        #rel_error = epsilon * max(omega, 1)
-        rel_error = epsilon*omega
+        # rel_error = epsilon * max(omega, 1)
+        rel_error = epsilon * omega
         plt.annotate((float('%.4f' % (omega_k[p.index(max(p))])), float('%.2f' % (max(p)))),
                      xy=(omega_k[p.index(max(p))], max(p)))
         plt.bar(omega_k, p, 0.0001)
 
         plt.axvline(omega - rel_error, c='red', ls='dashed')
         plt.axvline(omega + rel_error, c='red', ls='dashed')
-        plt.axvline(omega, c='yellow', ls='dashed',label=r'$\omega$='+str(omega))
+        plt.axvline(omega, c='yellow', ls='dashed', label=r'$\omega$=' + str(omega))
 
-        mask=(np.array(omega_k)>=(omega-rel_error)) & (np.array(omega_k)<=omega+rel_error)
-        print(np.array(omega_k)[mask],len(omega_k),omega+rel_error,omega-rel_error)
-        print(len(np.array(omega_k)[mask])*100/len(omega_k))
+        mask = (np.array(omega_k) >= (omega - rel_error)) & (np.array(omega_k) <= omega + rel_error)
+        print(np.array(omega_k)[mask], len(omega_k), omega + rel_error, omega - rel_error)
+        print(len(np.array(omega_k)[mask]) * 100 / len(omega_k))
         plt.xlim(omega_k[p.index(max(p))] - 0.006, omega_k[p.index(max(p))] + 0.006)
         if epsilon:
             '''plt.title(r'Probability distribution for the output of phase estimation for $\theta$ = ' + str(
@@ -683,8 +690,8 @@ def phase_estimation(omega, m=None, epsilon=None, delta=0.1, plot_distribution=F
     return omega_tilde
 
 
-def ipe(x, y, epsilon, Q=1):
-    r"""Official version of the Robust Inner Product Estimation Routine ((R)IPE).
+def ipe(x, y, epsilon, Q=1, gamma=0.1):
+    """Official version of the Robust Inner Product Estimation Routine ((R)IPE).
 
     Parameters
     ----------
@@ -699,6 +706,9 @@ def ipe(x, y, epsilon, Q=1):
 
     Q: int value, default=1.
         Number of iteration for the median evaluation of implicit amplitude estimation output.
+
+    gamma: float value, default=0.1.
+        Probability of success to insert in median evaluation.
 
     Returns
     -------
@@ -718,26 +728,24 @@ def ipe(x, y, epsilon, Q=1):
     epsilon_a = epsilon * max(1, np.abs(np.inner(x, y))) / (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2)
     if math.isclose(a, 0.0, abs_tol=1e-15):
         a = 0
-    a_tilde_list = [amplitude_estimation(theta=a, epsilon=epsilon_a) for _ in range(Q)]
-    a_tilde = np.median(a_tilde_list)
+    a_tilde = amplitude_estimation(theta=a, gamma=gamma, epsilon=epsilon_a)
     s = (np.linalg.norm(x) ** 2 + np.linalg.norm(y) ** 2) * (1 - 2 * a_tilde) / 2
-    # assert np.abs(s - np.inner(x, y)) <= max(epsilon, epsilon * np.abs(np.inner(x, y)))
     return s
 
 
-def consistent_phase_estimation(epsilon, delta, omega, n=None, shift=None):
+def consistent_phase_estimation(omega, epsilon, gamma, n=None, shift=None):
     """Official version of the Consistent Phase Estimation routine.
 
     Parameters
     ----------
+    omega: float value.
+        Value that you want to estimate. It must be a value in the range of [0,1).
+
     epsilon: float value.
         The accuracy value that you want to have in your estimations.
 
-    delta: float value.
+    gamma: float value.
         Probability error that you want to have.
-
-    omega: float value.
-        Value that you want to estimate. It must be a value in the range of [0,1).
 
     n: int value, default=None.
         Number of qubits that you want to use in the routine. If None, this value is computed using the accuracy value
@@ -759,7 +767,7 @@ def consistent_phase_estimation(epsilon, delta, omega, n=None, shift=None):
     always the same result.
     """
     if n == None:
-        n = int(np.ceil(np.log2(1 / epsilon)) + np.ceil(np.log2(2 + 1 / (2 * delta))))
+        n = int(np.ceil(np.log2(1 / epsilon)) + np.ceil(np.log2(2 + 1 / (2 * gamma))))
 
     C = delta / n
     delta_prime = (epsilon * C) / 2
@@ -769,12 +777,12 @@ def consistent_phase_estimation(epsilon, delta, omega, n=None, shift=None):
         shift = int(L / 2) + 1
     intervals = np.arange(-1 - shift * delta_prime, 1 + epsilon - shift * delta_prime, epsilon)
     intervals = np.append(intervals, 1 + epsilon - shift * delta_prime)
-    pe_estimate = phase_estimation(omega=omega, epsilon=delta_prime, delta=delta)
+    pe_estimate = phase_estimation(omega=omega, epsilon=delta_prime, gamma=gamma)
     index = bisect(intervals, pe_estimate)
     section = (intervals[(index - 1)], intervals[index])
     estimate = np.mean(section)
 
     if estimate < 0:
         estimate = 0
-    #print('true_value:', omega, 'pe_estimate:', pe_estimate, 'consistent_pe_estimate:', estimate)
+    # print('true_value:', omega, 'pe_estimate:', pe_estimate, 'consistent_pe_estimate:', estimate)
     return estimate
