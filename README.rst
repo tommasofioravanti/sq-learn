@@ -23,13 +23,14 @@
 .. image:: sklearn/docs/Image/Sklearn1.png
    :alt: Alternative text
 
-**sq-learn** is a Python framework integrating classical machine learning algorithms in the tightly-knit world of scientific Python packages (numpy, scipy, matplotlib) with the quantum world.
+**sq-learn** is a Python framework integrating quantum routines with classical machine learning algorithms such that we can simulate their quantum counterpart.
 
-It aims to provide simple and efficient solutions to learning problems that are accessible to everybody and reusable in various contexts: machine-learning as a versatile tool for science and engineering.
+It aims to provide simple and efficient solutions to learning problems that are accessible to everybody and reusable in various contexts: quantum machine-learning as a versatile tool for science and engineering.
 
-It can be used to run either classical experiments or simulation of the quantum counterpart.
+It can be used to run either classical or quantum machine learning experiments.
 
-Up to now in this framework only PCA and K-means algorithm can be simulated in their quantum counterpart.
+Up to now only PCA and K-means algorithm can be simulated in their quantum counterpart.
 
 =======
+The framework rests on the QuantumUtility.py module in which all the main quantum routines are implemented. It is important to be aware that the quantum machine learning algorithms that we use can be consider as randomized approximation algorithm. They are formalized in theorems where the approximation error $\alpha$ 
 
