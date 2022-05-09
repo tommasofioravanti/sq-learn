@@ -34,4 +34,7 @@ Up to now only PCA and K-means algorithm can be simulated in their quantum count
 
 =======
 
-The
+The framework rests on the QuantumUtility.py module in which all the main quantum routines are implemented.
+It is important to be aware that the quantum machine learning algorithms that we use can be consider as randomized approximation algorithm. They are formalized in theorems 
+
+
