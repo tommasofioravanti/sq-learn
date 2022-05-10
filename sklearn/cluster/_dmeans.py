@@ -389,7 +389,7 @@ def k_means(X, n_clusters, *, sample_weight=None, init='k-means++',
         Number of iterations corresponding to the best results.
         Returned only if `return_n_iter` is set to True.
     """
-    est = DMeans_(
+    est = qMeans_(
         n_clusters=n_clusters, init=init, n_init=n_init, max_iter=max_iter,
         verbose=verbose, precompute_distances=precompute_distances, tol=tol,
         random_state=random_state, copy_x=copy_x, n_jobs=n_jobs,
@@ -533,7 +533,7 @@ def _kmeans_single_elkan(X, sample_weight, centers_init, max_iter=300,
 
 def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, true_tomography, stop_when_reached_accuracy,
                          pool, true_distance_estimate, max_iter=300, verbose=False, tol=1e-4, delta=None):
-    """A single run of d-means lloyd, assumes preparation completed prior.
+    """A single run of q-means lloyd, assumes preparation completed prior.
 
     Parameters
     ----------
@@ -666,13 +666,13 @@ def _kmeans_single_lloyd(X, sample_weight, centers_init, intermediate_err, true_
                                 true_distance_estimate=true_distance_estimate)
         if verbose:
             if counter_iter == max_iter:
-                print("Reached {} iterations of d-means".format(counter_iter))
+                print("Reached {} iterations of q-means".format(counter_iter))
         # print(i)
         return best_labels, best_inertia, best_centers, i + 1
 
 
 def _labels_inertia(X, centers, distances, delta, pool, true_distance_estimate, n_threads=None):
-    """E step of the D-means EM algorithm.
+    """E step of the q-means EM algorithm.
 
     Compute the labels and the inertia of the given samples and centers.
 
@@ -830,8 +830,8 @@ def _centers_update(X, labels, error, intermediate_error, true_tomography, stop_
     return centers
 
 
-class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
-    """D-Means clustering.
+class qMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
+    """q-Means clustering.
 
     Read more in the :ref:`User Guide <k_means>` for the classical counterpart.
 
@@ -966,7 +966,7 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
     Notes
     -----
     The k-means problem is solved using either Lloyd's or Elkan's algorithm.
-    The d-means problem is solved using only Lloyd's algorithm.
+    The q-means problem is solved using only Lloyd's algorithm.
 
     The average complexity is given by O(k n T), where n is the number of
     samples and T is the number of iteration.
@@ -1002,12 +1002,12 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
     array([[10.,  2.],
            [ 1.,  2.]])
 
-    >>> dmeans = DMeans_(n_clusters=2, delta=0.1, algorithm='full').fit(X)
-    >>> dmeans.labels_
+    >>> qmeans = qMeans_(n_clusters=2, delta=0.1, algorithm='full').fit(X)
+    >>> qmeans.labels_
     array([0, 0, 0, 1, 1, 1], dtype=int32)
-    >>> dmeans.predict([[0,0],[12,3]])
+    >>> qmeans.predict([[0,0],[12,3]])
     array([0,1],dtype=int32)
-    >>> dmeans.cluster_centers_
+    >>> qmeans.cluster_centers_
     array([[ 1.  2.]
         [10.  2.]])
     """
@@ -1209,7 +1209,7 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
         return centers
 
     def fit(self, X, y=None, sample_weight=None):
-        """Compute d-means clustering.
+        """Compute q-means clustering.
 
         Parameters
         ----------
@@ -1409,7 +1409,7 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
             },
         }
 
-    def runtime_comparison(self, n_samples, n_features, saveas, well_clusterable='False'):
+    def runtime_comparison(self, n_samples, n_features, saveas, well_clusterable=False,plot=False):
         """Function that allows to compare classic vs quantum runtime of the algorithm executed.
 
         Parameters
@@ -1448,23 +1448,25 @@ class DMeans_(TransformerMixin, ClusterMixin, BaseEstimator):
             q_runtime = ((self.n_clusters ** 2) * m * (self.eta ** 2.5) / (self.delta ** 3)) + \
                         (self.n_clusters ** 2.5) * (self.eta ** 2) / (self.delta ** 3)
 
-        eng = matlab.engine.start_matlab()
-        c_runtime_matlab = matlab.double(c_runtime.tolist())
-        q_runtime_matlab = matlab.double(q_runtime.tolist())
-        n_matlab = matlab.double(n.tolist())
-        m_matlab = matlab.double(m.tolist())
+        if plot:
+            eng = matlab.engine.start_matlab()
+            c_runtime_matlab = matlab.double(c_runtime.tolist())
+            q_runtime_matlab = matlab.double(q_runtime.tolist())
+            n_matlab = matlab.double(n.tolist())
+            m_matlab = matlab.double(m.tolist())
 
-        fig = eng.figure()
-        eng.plot3(n_matlab, m_matlab, q_runtime_matlab, '-b', 'DisplayName', 'quantumRuntime', nargout=0)
-        eng.hold("on", nargout=0)
-        eng.plot3(n_matlab, m_matlab, c_runtime_matlab, '-g', 'DisplayName', 'classicRuntime', nargout=0)
-        eng.hold("off", nargout=0)
-        eng.legend('{\color{green}classicRuntime}', '{\color{blue}quantumRuntime}', nargout=0)
-        eng.ylabel('nFeatures', nargout=0)
-        eng.xlabel('nSamples', nargout=0)
-        eng.title('k_means VS q_means', nargout=0)
-        eng.saveas(fig, saveas, nargout=0)
-        eng.quit()
+            fig = eng.figure()
+            eng.plot3(n_matlab, m_matlab, q_runtime_matlab, '-b', 'DisplayName', 'quantumRuntime', nargout=0)
+            eng.hold("on", nargout=0)
+            eng.plot3(n_matlab, m_matlab, c_runtime_matlab, '-g', 'DisplayName', 'classicRuntime', nargout=0)
+            eng.hold("off", nargout=0)
+            eng.legend('{\color{green}classicRuntime}', '{\color{blue}quantumRuntime}', nargout=0)
+            eng.ylabel('nFeatures', nargout=0)
+            eng.xlabel('nSamples', nargout=0)
+            eng.title('k_means VS q_means', nargout=0)
+            eng.saveas(fig, saveas, nargout=0)
+            eng.quit()
+        return q_runtime,c_runtime
 
 
 def _labels_inertia_predict(X, sample_weight, x_squared_norms, centers,
@@ -1724,7 +1726,7 @@ def _mini_batch_convergence(model, iteration_idx, n_iter, tol,
     return False
 
 
-class MiniBatchKMeans(DMeans_):
+class MiniBatchKMeans(qMeans_):
     """
     Mini-Batch K-Means clustering.
 
