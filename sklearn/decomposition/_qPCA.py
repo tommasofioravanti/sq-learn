@@ -621,6 +621,9 @@ class qPCA(_BasePCA):
             self.components_retained_ = n_components
         self.components_ = components_[:n_components]
         self.n_components_ = n_components
+        self.all_components=components_
+        self.explained_variance_all=explained_variance_
+        self.explained_variance_ratio_all=explained_variance_ratio_
         self.explained_variance_ = explained_variance_[:n_components]
         self.explained_variance_ratio_ = \
             explained_variance_ratio_[:n_components]
